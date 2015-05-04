@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 
-. common_variables.sh
+. ./common_variables.sh
 
 webcam_watermark_text="Fiobbio di Albino, `date +\"%d-%m-%Y  %T (%Z)\"`"
 
