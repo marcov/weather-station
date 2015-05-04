@@ -16,5 +16,7 @@ convert -pointsize 16 \
         -gravity northwest \
         -draw "text 0,0 \"${webcam_watermark_text}\"" \
         ${wview_html_dir}/${wview_webcam_px_nowm_name} \
-        ${wview_html_dir}/${wview_webcam_px_name} 
+        ${wview_html_dir}/${wview_webcam_px_name}  || exit $?
+
+exit 0
 
