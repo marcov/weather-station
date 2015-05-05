@@ -1,0 +1,17 @@
+#!/bin/sh
+
+#
+#  Attention! Do not edit this script unless u know what u are doing!
+#  This script is deleting folders recursively and may accidentaly delete things that shouldnt
+#
+
+CURDATE=$(/bin/date +%Y%m%d)
+FTP_PICTURE_PATH="/srv/ftp/upload/"
+
+#for i in $(find $FTP_PICTURE_PATH -mindepth 1 -maxdepth 1 -type d | grep -v $CURDATE) 
+for i in $(find $FTP_PICTURE_PATH -mindepth 1 -maxdepth 1 -type f -name "*.jpg" | grep -v $CURDATE) 
+do
+	echo "Removing $i..."
+	/bin/rm -rf $i
+done
+exit 0
