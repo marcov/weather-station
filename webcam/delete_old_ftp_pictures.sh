@@ -5,13 +5,29 @@
 #  This script is deleting folders recursively and may accidentaly delete things that shouldnt
 #
 
-CURDATE=$(/bin/date +%Y%m%d)
-FTP_PICTURE_PATH="/srv/ftp/upload/"
+. ./common_variables.sh
 
-#for i in $(find $FTP_PICTURE_PATH -mindepth 1 -maxdepth 1 -type d | grep -v $CURDATE) 
-for i in $(find $FTP_PICTURE_PATH -mindepth 1 -maxdepth 1 -type f -name "*.jpg" | grep -v $CURDATE) 
+CURDATE=$(/bin/date +%Y%m%d)
+
+echo "Checking for empty path..."
+[ "${ftp_upload_dir}" != "" ] || exit $?
+echo "OK"
+
+echo "Checking for root path..."
+[ "${ftp_upload_dir}" != "/" ] || exit $?
+echo "OK"
+
+echo "Checking for existing FTP directory..."
+[ -e "${ftp_upload_dir}" ] || exit $?
+echo "OK"
+
+echo "Sanity check ok...!"
+
+#for i in $(find $ftp_upload_dir -mindepth 1 -maxdepth 1 -type d | grep -v $CURDATE) 
+for i in $(find $ftp_upload_dir -mindepth 1 -maxdepth 1 -type f -name "*.jpg" | grep -v $CURDATE) 
 do
 	echo "Removing $i..."
-	/bin/rm -rf $i
+    /bin/rm -rf $i || exit $?
 done
+
 exit 0
