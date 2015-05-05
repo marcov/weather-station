@@ -1,0 +1,2 @@
+cp /etc/cron.daily/delete_ftp_pictures deployment/
+cp /etc/wview/pre-generate.sh deployment/
