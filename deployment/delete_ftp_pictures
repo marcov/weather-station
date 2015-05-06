@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 # Esegue lo script dal repository weather_station.
 #
@@ -9,5 +9,7 @@ cd /home/pi/weather_station/webcam || exit $?
 echo "Executing delete_old_ftp_pictures.sh..."
 ./delete_old_ftp_pictures.sh || exit $?
 echo "OK"
+
+cd -
 
 exit 0
