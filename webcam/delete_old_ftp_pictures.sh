@@ -5,7 +5,7 @@
 #  This script is deleting folders recursively and may accidentaly delete things that shouldnt
 #
 
-. ./common_variables.sh
+. ../common_variables.sh
 
 CURDATE=$(/bin/date +%Y%m%d)
 
