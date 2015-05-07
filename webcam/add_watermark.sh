@@ -18,5 +18,9 @@ convert -pointsize 16 \
         ${wview_html_dir}/${wview_webcam_px_nowm_name} \
         ${wview_html_dir}/${wview_webcam_px_name}  || exit $?
 
+echo "Creating resized image for faster loading..."
+
+convert ${wview_html_dir}/${wview_webcam_px_name}  -resize 800x600 ${wview_html_dir}/${wview_webcam_small_px_name}
+
 exit 0
 

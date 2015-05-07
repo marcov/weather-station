@@ -130,7 +130,7 @@ function openURL(urlname)
 <!-- CSS for menu -->
 <style>
 #menu {
-	background: #ffa500; 
+	background-color: rgba(255,165,0,0.4); 
 	color:      #000000; 
 	height:     auto; 
 	line-height:30px;
@@ -139,12 +139,15 @@ function openURL(urlname)
 	position:fixed;
 	right: 10px;
 	font-family: Arial, Helvetica, sans-serif;
-	padding: 10px;
+	padding: 5px;
 	text-align: right;
 }
 #misc {
 	width:100%;
 	margin-bottom: 20px;
+}
+font.text {
+	font-family: Arial, Helvetica, sans-serif;
 }
 </style>
 
@@ -152,24 +155,14 @@ function openURL(urlname)
 
 <body bgcolor="#E6E6FA">
 
-<div id="menu">
-Nuovo link meteo Monte Misma: <a href="http://fiobbio.blogdns.net/misma">http://fiobbio.blogdns.net/misma</a> 
-<br>
-Contattaci <a href="mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com">via email</a>
-</div>
+	<div id="menu">
+	Nuovo link meteo Monte Misma: <a href="http://fiobbio.blogdns.net/misma">http://fiobbio.blogdns.net/misma</a> 
+	<br>
+	Contattaci <a href="mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com">via email</a>
+	</div>
 
-<!-- Histats.com  START  (standard)-->
-<script type="text/javascript">document.write(unescape("%3Cscript src=%27http://s10.histats.com/js15.js%27 type=%27text/javascript%27%3E%3C/script%3E"));</script>
-<a href="http://www.histats.com" target="_blank" title="contatore per sito" ><script  type="text/javascript" >
-try {Histats.start(1,1781036,4,422,112,75,"00011111");
-Histats.track_hits();} catch(err){};
-</script></a>
-<noscript><a href="http://www.histats.com" target="_blank"><img  src="http://sstatic1.histats.com/0.gif?1781036&101" alt="contatore per sito" border="0"></a></noscript>
-<!-- Histats.com  END  -->
+        <div style="height:70px;"></div>
 
-
-
-</script>
 <form method="post">
 <div align="center">
 
@@ -180,33 +173,10 @@ Histats.track_hits();} catch(err){};
       <table cellspacing="1" cellpadding="0" width="100%" align="center" border="0">
       <tbody>
         <tr>
-          <td width="35%" valign="top">
-            <font color="#008000">
-            <table cellspacing="1" cellpadding="0" width="100%" align="left" border="0">
-            <tbody>
 
-<div>
-  <a href="webcam.jpg">
-	<img id="misc" src="webcam.jpg" border="1">
-  </a>
+        <!-- LEFT START --> 
 
-  <img class="immagineRadar" src="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" alt="Radar Piemonte" border="0">
-
-</div>
-              <tr>
-                <td align="center">
-                  <!--include readings.inc-->
-                </td>
-             
-
-
-</html>
-              </tr>
-            </tbody>
-            </table>
-          </font>
-        </td>
-        <td width="65%" valign="top">
+        <td width="55%" valign="top">
           <table cellpadding="2" cellspacing="2" border="0" width="100%" align="center">
           <tbody>
             <tr>
@@ -350,9 +320,7 @@ Histats.track_hits();} catch(err){};
                 <tbody>
                   <tr>
                     <td width="100%" align="center" valign="middle">
-                      <font face="Tw Cen MT" color="#FF0000">
-                      CLIMATOLOGICAL SUMMARIES:&nbsp;
-                      </font>
+                      <font class="text"> CLIMATOLOGICAL SUMMARIES:&nbsp; </font>
                       <script language="JavaScript">
                        createMonthlySelect("month");
                        createYearlySelect("year");
@@ -366,9 +334,7 @@ Histats.track_hits();} catch(err){};
                   </tr>
                   <tr>
                     <td width="100%" align="center" valign="middle">
-                      <font face="Tw Cen MT" color="#FF0000">
-                      BROWSE ARCHIVE RECORDS:&nbsp;
-                      </font>
+                      <font class="text"> BROWSE ARCHIVE RECORDS:&nbsp; </font>
                       <script language="JavaScript">
                        createDaySelect("day");
                        createMonthlySelect("month1");
@@ -376,10 +342,23 @@ Histats.track_hits();} catch(err){};
                       </script>
                       <input type="button" value="Browse Day Records"
                       onclick="openARCFile(this.form.day.value, this.form.month1.value, this.form.year1.value)">
-            
-
                     </td>
                   </tr>
+
+	          <tr>
+                    <td width="100%" align="center" valign="middle">
+			<!-- Histats.com  START  (standard)-->
+			<script type="text/javascript">document.write(unescape("%3Cscript src=%27http://s10.histats.com/js15.js%27 type=%27text/javascript%27%3E%3C/script%3E"));</script>
+			<a href="http://www.histats.com" target="_blank" title="contatore per sito" ><script  type="text/javascript" >
+			try {Histats.start(1,1781036,4,422,112,75,"00011111");
+			Histats.track_hits();} catch(err){};
+			</script></a>
+			<noscript><a href="http://www.histats.com" target="_blank"><img  src="http://sstatic1.histats.com/0.gif?1781036&101" alt="contatore per sito" border="0"></a></noscript>
+			</script>
+			<!-- Histats.com  END  -->
+                   </td>
+                  </tr>
+
                 </tbody>
                 </table>
               </td>
@@ -387,6 +366,33 @@ Histats.track_hits();} catch(err){};
           </tbody>
           </table>
         </td>
+
+	<!-- LEFT END -->
+
+	<!-- RIGHT START -->
+
+ 
+          <td width="45%" valign="top">
+            <font color="#008000">
+            <table cellspacing="1" cellpadding="0" width="100%" align="left" border="0">
+            <tbody>
+		<div>
+		  <a href="webcam.jpg"> <img id="misc" src="webcam_small.jpg" border="1"> </a>
+		  <img class="immagineRadar" src="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" alt="Radar Piemonte" border="0">
+		</div>
+              <tr>
+                <td align="center">
+                  <!--include readings.inc-->
+                </td>
+              </tr>
+            </tbody>
+            </table>
+            </font>
+          </td>
+
+
+	<!-- RIGHT END -->
+
       </tr>
     </tbody>
     </table>
