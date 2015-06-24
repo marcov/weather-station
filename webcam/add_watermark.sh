@@ -10,9 +10,9 @@ do
 
 	if [ "${pix}" == "${misma_webcam_px_nowm_name}" ] 
 	then
-		webcam_watermark_text="Fiobbio di Albino"
-	else
 		webcam_watermark_text="Monte Misma (Fiobbio)"
+	else
+		webcam_watermark_text="Fiobbio di Albino"
 	fi
 
 	webcam_watermark_text="${webcam_watermark_text}, `date +\"%d-%m-%Y  %T (%Z)\"`"
