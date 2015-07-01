@@ -8,6 +8,7 @@ wview_webcam_px_name=webcam.jpg
 wview_webcam_small_px_name=webcam_small.jpg
 #
 #
+misma_ftp_upload_dir=${misma_ftp_upload_dir}/misma
 misma_webcam_px_nowm_name=webcampx_nowm.jpg
 misma_webcam_px_name=webcampx.jpg
 misma_webcam_small_px_name=webcampx_small.jpg

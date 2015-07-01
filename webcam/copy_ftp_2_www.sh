@@ -14,7 +14,7 @@ do
 
 	if [ "${pix}" == "${misma_webcam_px_nowm_name}" ] 
 	then
-		last_webcam_px=$(ls -rt ${ftp_upload_dir}/webcampx* | tail -n 1) 
+		last_webcam_px=$(ls -rt ${misma_ftp_upload_dir}/*/IMG*/IMG_* | tail -n 1) 
 	else
 		last_webcam_px=$(ls -rt ${ftp_upload_dir}/2* | tail -n 1) 
 	fi
