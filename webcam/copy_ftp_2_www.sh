@@ -17,11 +17,13 @@ do
 	if [ "${pix}" == "${misma_webcam_px_nowm_name}" ] 
 	then
                 _lookup_path=${misma_ftp_upload_dir}
+                _file_pattern="*jpg"
 	else
                 _lookup_path=${ftp_upload_dir}
+                _file_pattern="*-alarm.jpg"
 	fi
 	
-        last_webcam_px=$(find ${_lookup_path} -type f -name "*jpg" | tail -n 1) 
+        last_webcam_px=$(find ${_lookup_path} -type f -name "${_file_pattern}" | sort | tail -n 1) 
 
 	echo "Checking for existence of: ${last_webcam_px}"
 	[ -e "${last_webcam_px}" ] || exit $?
