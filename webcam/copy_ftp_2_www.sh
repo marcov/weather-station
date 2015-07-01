@@ -18,7 +18,7 @@ do
 	else
 		last_webcam_px=$(ls -rt ${ftp_upload_dir}/2* | tail -n 1) 
 	fi
-	[ -e "${last_webcam_px}" ] || exit $?
+	[ -e "${last_webcam_px}" ] || echo "Could not find last webcam px"; exit $?
 	echo "Detected last webcam px is: ${last_webcam_px}"
 	echo "Copying and chmoding pix..."
 	/bin/cp ${last_webcam_px} \
