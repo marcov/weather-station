@@ -11,14 +11,20 @@
 
 for pix in ${wview_webcam_px_nowm_name} ${misma_webcam_px_nowm_name}
 do
+	
+	echo "Locating last webcam pix..."
 
 	if [ "${pix}" == "${misma_webcam_px_nowm_name}" ] 
 	then
-		last_webcam_px=$(ls -rt ${misma_ftp_upload_dir}/*/IMG*/IMG_* | tail -n 1) 
+                _lookup_path=${misma_ftp_upload_dir}
 	else
-		last_webcam_px=$(ls -rt ${ftp_upload_dir}/2* | tail -n 1) 
+                _lookup_path=${ftp_upload_dir}
 	fi
-	[ -e "${last_webcam_px}" ] || echo "Could not find last webcam px"; exit $?
+	
+        last_webcam_px=$(find ${_lookup_path} -type f -name "*jpg" | tail -n 1) 
+
+	echo "Checking for existence of: ${last_webcam_px}"
+	[ -e "${last_webcam_px}" ] || exit $?
 	echo "Detected last webcam px is: ${last_webcam_px}"
 	echo "Copying and chmoding pix..."
 	/bin/cp ${last_webcam_px} \
