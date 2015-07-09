@@ -23,8 +23,7 @@ echo "OK"
 
 echo "Sanity check ok...!"
 
-#for i in $(find $ftp_upload_dir -mindepth 1 -maxdepth 1 -type d | grep -v $CURDATE) 
-for i in $(find $ftp_upload_dir -mindepth 1 -maxdepth 1 -type f -name "*.jpg" | grep -v $CURDATE) 
+for i in $(find $ftp_upload_dir -mindepth 1 -maxdepth 3 -type f -name "*.jpg" | grep -v $CURDATE) 
 do
 	echo "Removing $i..."
     /bin/rm -rf $i || exit $?
