@@ -33,7 +33,7 @@
 <h1><a name="top" id="top"><!--stationName--> - <!--stationCity-->, <!--stationState--></a></h1>
 		<h2 class="title">		
 		<a href="http://goo.gl/maps/Zlghi">
-			Posizione geografica: <!45.8°>, <!9.8°>. Altitudine: <!1020m> 
+			Posizione geografica: <!--stationLatitude--> - <!--stationLongitude-->
 		</a>
 		</h2>
 <p id="domtabprintview"></p>
