@@ -262,7 +262,7 @@
 		
 		<h2 class="blockdisplay">Mappa dei fulmini</h2>			
 		<ul class="blockdisplay">
-		<a href="http://www.astrogeo.va.it/fulmini/fulmini.jpg" title="Large image">
+		<a href="http://www.astrogeo.va.it/fulmini/fulmini.jpg" title="Large image" data-featherlight="image">
 		<img class="satellite" src="http://www.astrogeo.va.it/fulmini/fulmini.jpg" title="Small image" />
 		</a>
 		</li>
@@ -331,5 +331,8 @@ hs.src = ('http://s10.histats.com/js15_as.js');
 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="http://cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+     $.featherlight.defaults.loading = "Caricamento immagine in corso...";
+    </script>
 </body>
 </html>
