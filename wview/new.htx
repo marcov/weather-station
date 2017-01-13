@@ -225,15 +225,15 @@ h3{
 
 
             <tr>
-              <ul class="blockdisplay">
-               <li>
-		        <a href="webcam.jpg" data-featherlight="image"> <img class="satellite" src="webcam_small.jpg" border="1"> </a>
-               </li>
-
+            <td>
+            <ul class="blockdisplay">
+            <li>
+		      <a href="webcam.jpg" data-featherlight="image"> <img class="satellite" src="webcam_small.jpg" border="1"> </a>
+            </li>
 
             <li>
 			<!-- ----------------------------------------------------------------- -->
-			<table class="tablevalues" style="width=50%;">
+			<table class="tablevalues" style="width: 50%;">
 			<thead>
 				<tr> <th>Temperatura </th> <th>Min oggi</th> <th>Valore </th> <th>Max oggi</th> </tr>
 			</thead>
@@ -316,7 +316,8 @@ h3{
 			</table>
 			<!-- ----------------------------------------------------------------- -->
             </li>                
-              </ul>
+            </ul>
+            </td>
             </tr>
 
 
