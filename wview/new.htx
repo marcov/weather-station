@@ -162,7 +162,7 @@ body{
     font-family:Verdana,Arial,Sans-Serif;
     font-size:90%;
     background:#333;
-    color: whitesmoke;
+    color: #ccc;
     list-style:none;
     padding: 1em 1em 1em 1em;
 }
@@ -288,6 +288,106 @@ background:#fff
                 <!--include header.inc-->
               </td>
             </tr>
+
+
+
+            <tr>
+		     <a href="webcam.jpg" data-featherlight="image"> <img id="misc" src="webcam_small.jpg" border="1"> </a>
+            </tr>
+
+
+
+            <tr>
+			<!-- ----------------------------------------------------------------- -->
+			<table class="tablevalues">
+			<thead>
+				<tr> <th>Temperatura </th> <th>Min oggi</th> <th>Valore </th> <th>Max oggi</th> </tr>
+			</thead>
+			<tbody>
+			<tr class="even"> 
+				 <td class="title">Attuale</td>       
+				 <td class="min"><!--lowOutsideTemp--><!--tempUnit--><br><!--lowOutsideTempTime--></td>
+				 <td class="now"><!--outsideTemp--><!--tempUnit--></td>
+				 <td class="max"><!--hiOutsideTemp--><!--tempUnit--><br><!--hiOutsideTempTime--></td> 
+			</tr >
+			<tr class="odd"> 
+				 <td class="title">Percepita</td>       
+				 <td> </td>
+				 <td class="now"><!--apparentTemp--><!--tempUnit--></td> 
+				 <td> </td> 
+			</tr >
+			<thead>
+				<tr> <th>Vento</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
+			</thead>
+			<tr class="even"> 
+				 <td class="title">Attuale</td>       
+				 <td class="now"><!--windSpeed--><!--windUnit--> <br><!--windDirection--></td>
+				 <td> </td>
+				 <td> </td> 
+			</tr >
+			<tr class="even"> 
+				 <td class="title">Raffica</td>  
+				 <td class="now"><!--windGustSpeed--><!--windUnit--><br> <!--windGustDirectionDegrees--> gradi</td> 
+				 <td class="max"><!--hiWindSpeed--><!--windUnit--><br><!--hiWindSpeedTime--></td> 
+			     <td> </td> 
+			</tr>
+			<tr class="even"> 
+				 <td class="title">Media 10 minuti</td>       
+				 <td class="now"><!--tenMinuteAvgWindSpeed--><!--windUnit--></td>
+				 <td> </td> 
+				 <td> </td> 
+			</tr >
+			<tr class="even"> 
+				 <td class="title">Scala di Beaufort</td>       
+				 <td class="now"><!--windBeaufortScale--></td>
+				 <td> </td> 
+				 <td> </td> 
+			</tr >			
+			
+			<thead>
+				<tr> <th>Umidita'</th> <th>Min oggi</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
+			</thead>
+			<tr class="even"> 
+				 <td class="title">Attuale</td>       
+				 <td class="min"><!--lowHumidity--><!--humUnit--> <br><!--lowHumTime--></td>
+				 <td class="now"><!--outsideHumidity--><!--humUnit--></td>
+				 <td class="max"><!--hiHumidity--><!--humUnit--> <br><!--hiHumTime--></td>
+			</tr >
+			<thead>
+			     <tr> <th>Pressione</th> <th>Min oggi</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
+			</thead>
+			<tr class="even"> 
+				 <td class="title">Attuale</td>  
+				 <td class="min"><!--lowBarometer--><!--barUnit--> <br><!--lowBarometerTime--></td>
+				 <td class="now"><!--barometer--><!--barUnit--></td>
+				 <td class="max"><!--hiBarometer--><!--barUnit--> <br><!--hiBarometerTime--></td>
+			</tr>
+			<tr class="even"> 
+				 <td class="title">Trend</td>  
+				 <td class="min"></td>
+				 <td class="now"><!--baromtrend--></td>
+				 <td class="max"></td>
+			</tr>
+			<thead>
+			     <tr> <th>Pioggia</th><th>Frequenza</th> <th>Totale 24h</th> <th>Evento piovoso</th> <th> </th> </tr>
+			</thead>
+			<tr class="even"> 
+				 <td class="title">Attuale</td>  
+				 <td class="now"><!--rainRate--><!--rateUnit--></td>
+				 <td class="now"><!--dailyRain--><!--rainUnit--></td>
+				 <td class="now"><!--stormRain--><!--rainUnit--></td>	
+		    </tr>
+					
+			</tbody>
+			</table>
+			<!-- ----------------------------------------------------------------- -->
+                
+            </tr>
+
+
+
+
+
             <tr>
               <td>
                 <table cellpadding="2" cellspacing="2" border="0" width="100%" align="center">
@@ -477,20 +577,6 @@ background:#fff
 
  
           <td width="45%" valign="top">
-            <font color="#008000">
-            <table class="tablevalues" cellspacing="1" cellpadding="0" width="100%" align="left" border="0">
-            <tbody>
-		<div>
-		  <a href="webcam.jpg" data-featherlight="image"> <img id="misc" src="webcam_small.jpg" border="1"> </a>
-		</div>
-              <tr>
-                <td align="center">
-                  <!--include readings.inc-->
-                </td>
-              </tr>
-            </tbody>
-            </table>
-            </font>
           </td>
 
 
@@ -511,6 +597,17 @@ background:#fff
       <tbody>
         
 
+  <h4> Tutti i dati </h4>
+
+<table class="tablevalues" cellspacing="1" cellpadding="0" width="100%" align="left" border="0">
+<tbody>
+  <tr>
+    <td align="center">
+      <!--include readings.inc-->
+    </td>
+  </tr>
+</tbody>
+</table>
 
         
   <h3> ALTRE STAZIONI </h3>
