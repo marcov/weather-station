@@ -162,7 +162,7 @@ body{
     font-family:Verdana,Arial,Sans-Serif;
     font-size:90%;
     background:#333;
-    color:#ccc;
+    color: whitesmoke;
     list-style:none;
     padding: 1em 1em 1em 1em;
 }
@@ -179,6 +179,74 @@ h3{
     padding-top:    2em;
     padding-bottom: 1em;
 }
+/************ Start of table values ************/
+
+.tablevalues 
+{
+	margin:0;
+	padding:0;
+	/*border:1px solid #C9C9C9; */
+	/* debug */
+	color: #003300;
+	list-style:none;
+	padding: 2em 0 0 0;
+    /* Make table as large as the div container */
+    width: 100%;
+}
+
+table.tablevalues th.text{
+	/*min-width: 10em;*/
+}
+
+.tablevalues thead tr
+{
+	font-weight:bold;
+	background:#333;
+	color:#fff;
+}
+
+.tablevalues tbody .even
+{
+background:#fff
+}
+
+.tablevalues tbody .odd
+{
+	background:#FFFFE6
+}
+
+.tablevalues tr td
+{
+    padding: .3em;
+	font-size:  99%;
+}
+
+.tablevalues tr td.title
+{
+    padding: .3em;
+	font-size:  95%;
+}
+
+.tablevalues .now,
+.tablevalues .min,
+.tablevalues .max
+{
+    font-weight:bold;
+	text-align:  center;
+}
+
+
+.tablevalues .min
+{
+	color: blue;
+}
+
+.tablevalues .max
+{
+	color: red;
+}
+/************ End of table values ************/
+
 </style>
 
 <style type="text/css">
@@ -410,7 +478,7 @@ h3{
  
           <td width="45%" valign="top">
             <font color="#008000">
-            <table cellspacing="1" cellpadding="0" width="100%" align="left" border="0">
+            <table class="tablevalues" cellspacing="1" cellpadding="0" width="100%" align="left" border="0">
             <tbody>
 		<div>
 		  <a href="webcam.jpg" data-featherlight="image"> <img id="misc" src="webcam_small.jpg" border="1"> </a>
