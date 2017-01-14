@@ -288,7 +288,7 @@ function openURL(urlname)
 <div class="rightcolumn" style="display:block;">
 
  <ul>
- 
+
   <li>
     <a href="webcam.jpg" data-featherlight="image"> <img src="webcam_small.jpg"> </a>
   </li>
@@ -466,8 +466,9 @@ function openURL(urlname)
 <div style="display: block;">
   <h4> Tutti i dati </h4>
 
-  <!--include readings.inc-->
-
+  <p class="tablevalues">
+    <!--include readings.inc-->
+  </p>
 
   <h3> ALTRE STAZIONI </h3>
   <ul class="blockdisplay">

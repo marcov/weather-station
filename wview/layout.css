@@ -213,9 +213,8 @@ h4
 	list-style:none;
 	padding: 2em 0 0 0;
     /* Make table as large as the div container */
-    width: 100%;
+    min-width: 100%;
     font-size:  90%;
-
 }
 
 table.tablevalues th.text{
