@@ -152,7 +152,7 @@ function openURL(urlname)
    <div class="leftcolumn" style="display:block;">
 
      <!-- HEADER START -->
-     <ul>
+     <ul class="blockdisplay">
       <li>
         <!--include header.inc-->
 
@@ -287,7 +287,8 @@ function openURL(urlname)
 <!-- RIGHT COLUMN START -->
 <div class="rightcolumn" style="display:block;">
 
- <ul>
+ <ul class="blockdisplay">
+
 
   <li>
     <a href="webcam.jpg" data-featherlight="image"> <img src="webcam_small.jpg"> </a>
@@ -336,20 +337,21 @@ function openURL(urlname)
             <table cellpadding="2" cellspacing="2" border="0" width="100%" align="center">
               <tbody>
 
-                <tr>
-                  <td align="center">
+                <ul class="blockdisplay">
+
+                  <li>
                     <img src="windroseday.png"
                     style="background: url(dial_bg.png) no-repeat center">
-                  </td>
-                  <td align="center">
+                  </li>
+                  <li>
                     <img src="windroseweek.png"
                     style="background: url(dial_bg.png) no-repeat center">
-                  </td>
-                  <td align="center">
+                  </li>
+                  <li>
                     <img src="windroseyear.png"
                     style="background: url(dial_bg.png) no-repeat center">
-                  </td>
-                </tr>
+                  </li>
+                </ul>
 
                 <tr>
                   <td>
