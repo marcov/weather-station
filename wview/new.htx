@@ -135,165 +135,176 @@ function openURL(urlname)
 
 
 <body>
-  <div class="centercolumn">
+  <div class="centercolumn section_0">
 
    <div id="menu">
      <p>
-       <a href="http://fiobbio.blogdns.net/misma">Nuovo link meteo Monte Misma</a>
-       <br>
-       <a href="mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com">Contattaci via email</a>
-     </p>
-   </div>
+      <h4>Menu</h4>
+      <form>
+        <input class="internlink" type="button" id="button_0" value="Inizio Pagina" />
+        <input class="internlink" type="button" id="button_1" value="Tutti i dati" />
+        <input class="internlink" type="button" id="button_2" value="Stazioni Limitrofe" />
+        <input class="internlink" type="button" id="button_3" value="Meteo" />
+        <input class="internlink" type="button" id="button_4" value="Immagini Satellitari" />
+      </form>
+      <h4>Links</h4>
+      <form>
+        <input class="externlink" type="button" onClick="openURL('http://fiobbio.blogdns.net/misma')"  value="Vai a Stazione Mt. Misma" />
+        <input class="externlink" type="button" onClick="openURL('mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com')"  value="Contattaci via email" />
+   </form>
 
-   <!-- LEFT COLUMNT START -->
-   <div class="leftcolumn" style="display:block;">
+    </p>
+  </div>
 
-     <!-- HEADER START -->
-     <ul class="blockdisplay">
-      <li>
-        <!-- XXXinclude header.inc-->
+  <!-- LEFT COLUMNT START -->
+  <div class="leftcolumn" style="display:block;">
 
-        <table cellpadding="1" cellspacing="1" border="0" width="95%" align="center">
-          <tbody>
-            <tr>
-              <td>
-                <table cellpadding="2" cellspacing="2" border="0" width="100%" align="center">
-                  <tbody>
+   <!-- HEADER START -->
+   <ul class="blockdisplay">
+    <li>
+      <!-- XXXinclude header.inc-->
+
+      <table cellpadding="1" cellspacing="1" border="0" width="95%" align="center">
+        <tbody>
+          <tr>
+            <td>
+              <table cellpadding="2" cellspacing="2" border="0" width="100%" align="center">
+                <tbody>
+                  <tr>
+                    <td width="100%" align="center" valign="top">
+                      <big><b><font size="6" face="Arial, Helvetica, sans-serif" >
+                        Stazione Meteo di <!--stationCity-->, <!--stationState--></font></b></big>
+                      </td>
+                    </tr>
                     <tr>
                       <td width="100%" align="center" valign="top">
-                        <big><b><font size="6" face="Arial, Helvetica, sans-serif" >
-                          Stazione Meteo di <!--stationCity-->, <!--stationState--></font></b></big>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td width="100%" align="center" valign="top">
-                          <font size="2" face="Arial, Helvetica, sans-serif" >
-                            <b><!--stationLatitude--> - <!--stationLongitude--> -
-                              <!--stationElevation--></b></font>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td valign="top" align="center">
-                              <font size="4" face="Arial, Helvetica, sans-serif" >
-                                <!--stationDate--> <!--stationTime-->
-                              </font>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td width="100%" align="center" valign="top">
-                              <font>
-                                Sunrise:<!--sunriseTime-->
-                                - Sunset:<!--sunsetTime-->
-                                - Moon:<!--moonPhase-->
-                              </font>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </li>
-            <!-- HEADER END -->
+                        <font size="2" face="Arial, Helvetica, sans-serif" >
+                          <b><!--stationLatitude--> - <!--stationLongitude--> -
+                            <!--stationElevation--></b></font>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td valign="top" align="center">
+                            <font size="4" face="Arial, Helvetica, sans-serif" >
+                              <!--stationDate--> <!--stationTime-->
+                            </font>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td width="100%" align="center" valign="top">
+                            <font>
+                              Sunrise:<!--sunriseTime-->
+                              - Sunset:<!--sunsetTime-->
+                              - Moon:<!--moonPhase-->
+                            </font>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+          <!-- HEADER END -->
 
-            <li>
-             <!-- NEW TABLE START -->
-             <table class="tablevalues" style="width: 50%;">
-               <thead>
-                <tr> <th>Temperatura </th> <th>Min oggi</th> <th>Valore </th> <th>Max oggi</th> </tr>
-              </thead>
-              <tbody>
-               <tr class="even">
-                 <td class="title">Attuale</td>
-                 <td class="min"><!--lowOutsideTemp--><!--tempUnit--><br><!--lowOutsideTempTime--></td>
-                 <td class="now"><!--outsideTemp--><!--tempUnit--></td>
-                 <td class="max"><!--hiOutsideTemp--><!--tempUnit--><br><!--hiOutsideTempTime--></td>
-               </tr >
-               <tr class="odd">
-                 <td class="title">Percepita</td>
-                 <td> </td>
-                 <td class="now"><!--apparentTemp--><!--tempUnit--></td>
-                 <td> </td>
-               </tr >
-               <thead>
-                <tr> <th>Vento</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
-              </thead>
-              <tr class="even">
-               <td class="title">Attuale</td>
-               <td> </td>
-               <td class="now"><!--windSpeed--><!--windUnit--> <br><!--windDirection--></td>
-               <td> </td>
-             </tr >
-             <tr class="odd">
-               <td class="title">Raffica</td>
-               <td> </td>
-               <td class="now"><!--windGustSpeed--><!--windUnit--><br> <!--windGustDirectionDegrees--> gradi</td>
-               <td class="max"><!--hiWindSpeed--><!--windUnit--><br><!--hiWindSpeedTime--></td>
-             </tr>
-             <tr class="even">
-               <td class="title">Media 10 minuti</td>
-               <td> </td>
-               <td class="now"><!--tenMinuteAvgWindSpeed--><!--windUnit--></td>
-               <td> </td>
-             </tr >
-             <tr class="odd">
-               <td class="title">Scala di Beaufort</td>
-               <td> </td>
-               <td class="now"><!--windBeaufortScale--></td>
-               <td> </td>
-             </tr >
-
+          <li>
+           <!-- NEW TABLE START -->
+           <table class="tablevalues" style="width: 50%;">
              <thead>
-              <tr> <th>Umidita'</th> <th>Min oggi</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
+              <tr> <th>Temperatura </th> <th>Min oggi</th> <th>Valore </th> <th>Max oggi</th> </tr>
+            </thead>
+            <tbody>
+             <tr class="even">
+               <td class="title">Attuale</td>
+               <td class="min"><!--lowOutsideTemp--><!--tempUnit--><br><!--lowOutsideTempTime--></td>
+               <td class="now"><!--outsideTemp--><!--tempUnit--></td>
+               <td class="max"><!--hiOutsideTemp--><!--tempUnit--><br><!--hiOutsideTempTime--></td>
+             </tr >
+             <tr class="odd">
+               <td class="title">Percepita</td>
+               <td> </td>
+               <td class="now"><!--apparentTemp--><!--tempUnit--></td>
+               <td> </td>
+             </tr >
+             <thead>
+              <tr> <th>Vento</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
             </thead>
             <tr class="even">
              <td class="title">Attuale</td>
-             <td class="min"><!--lowHumidity--><!--humUnit--> <br><!--lowHumTime--></td>
-             <td class="now"><!--outsideHumidity--><!--humUnit--></td>
-             <td class="max"><!--hiHumidity--><!--humUnit--> <br><!--hiHumTime--></td>
+             <td> </td>
+             <td class="now"><!--windSpeed--><!--windUnit--> <br><!--windDirection--></td>
+             <td> </td>
            </tr >
+           <tr class="odd">
+             <td class="title">Raffica</td>
+             <td> </td>
+             <td class="now"><!--windGustSpeed--><!--windUnit--><br> <!--windGustDirectionDegrees--> gradi</td>
+             <td class="max"><!--hiWindSpeed--><!--windUnit--><br><!--hiWindSpeedTime--></td>
+           </tr>
+           <tr class="even">
+             <td class="title">Media 10 minuti</td>
+             <td> </td>
+             <td class="now"><!--tenMinuteAvgWindSpeed--><!--windUnit--></td>
+             <td> </td>
+           </tr >
+           <tr class="odd">
+             <td class="title">Scala di Beaufort</td>
+             <td> </td>
+             <td class="now"><!--windBeaufortScale--></td>
+             <td> </td>
+           </tr >
+
            <thead>
-            <tr> <th>Pressione</th> <th>Min oggi</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
+            <tr> <th>Umidita'</th> <th>Min oggi</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
           </thead>
           <tr class="even">
-            <td class="title">Attuale</td>
-            <td class="min"><!--lowBarometer--><!--barUnit--> <br><!--lowBarometerTime--></td>
-            <td class="now"><!--barometer--><!--barUnit--></td>
-            <td class="max"><!--hiBarometer--><!--barUnit--> <br><!--hiBarometerTime--></td>
-          </tr>
-          <tr class="even">
-            <td class="title">Trend</td>
-            <td class="min"></td>
-            <td class="now"><!--baromtrend--></td>
-            <td class="max"></td>
-          </tr>
-          <thead>
-            <tr> <th>Pioggia</th><th>Frequenza</th> <th>Totale 24h</th> <th>Evento piovoso</th> <th> </th> </tr>
-          </thead>
-          <tr class="even">
-            <td class="title">Attuale</td>
-            <td class="now"><!--rainRate--><!--rateUnit--></td>
-            <td class="now"><!--dailyRain--><!--rainUnit--></td>
-            <td class="now"><!--stormRain--><!--rainUnit--></td>
-          </tr>
+           <td class="title">Attuale</td>
+           <td class="min"><!--lowHumidity--><!--humUnit--> <br><!--lowHumTime--></td>
+           <td class="now"><!--outsideHumidity--><!--humUnit--></td>
+           <td class="max"><!--hiHumidity--><!--humUnit--> <br><!--hiHumTime--></td>
+         </tr >
+         <thead>
+          <tr> <th>Pressione</th> <th>Min oggi</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
+        </thead>
+        <tr class="even">
+          <td class="title">Attuale</td>
+          <td class="min"><!--lowBarometer--><!--barUnit--> <br><!--lowBarometerTime--></td>
+          <td class="now"><!--barometer--><!--barUnit--></td>
+          <td class="max"><!--hiBarometer--><!--barUnit--> <br><!--hiBarometerTime--></td>
+        </tr>
+        <tr class="even">
+          <td class="title">Trend</td>
+          <td class="min"></td>
+          <td class="now"><!--baromtrend--></td>
+          <td class="max"></td>
+        </tr>
+        <thead>
+          <tr> <th>Pioggia</th><th>Frequenza</th> <th>Totale 24h</th> <th>Evento piovoso</th> <th> </th> </tr>
+        </thead>
+        <tr class="even">
+          <td class="title">Attuale</td>
+          <td class="now"><!--rainRate--><!--rateUnit--></td>
+          <td class="now"><!--dailyRain--><!--rainUnit--></td>
+          <td class="now"><!--stormRain--><!--rainUnit--></td>
+        </tr>
 
-        </tbody>
-      </table>
-      <!--  NEW TABLE END -->
+      </tbody>
+    </table>
+    <!--  NEW TABLE END -->
 
-    </li>
+  </li>
 
-    <!-- WEATHER IMAGES START -->
-    <li style="padding-top: 2em;">
-      <p align="center">
-        <img src="radiationDay.png "
-        style="background: url(chart_bg.png) no-repeat center">
-      </p>
-    </li>
+  <!-- WEATHER IMAGES START -->
+  <li style="padding-top: 2em;">
+    <p align="center">
+      <img src="radiationDay.png "
+      style="background: url(chart_bg.png) no-repeat center">
+    </p>
+  </li>
 
-    <!-- WEATHER IMAGES END -->
-  </ul>
+  <!-- WEATHER IMAGES END -->
+</ul>
 
 </div>
 <!-- LEFT COLUMN END -->
@@ -417,12 +428,12 @@ function openURL(urlname)
 </div>
 <!-- FOOTER END -->
 
-<div class="blockdisplay" align="center" style="max-width: 66%">
+<div class="blockdisplay section_1" style="max-width: 66%">
   <h3>Tutti i dati </h3>
   <!--include readings-nostyle.inc-->
 </div>
 
-<div style="display: block;">
+<div class="section_2" style="display: block;">
   <h3>Stazioni limitrofe</h3>
   <ul class="blockdisplay">
     <li>
@@ -431,6 +442,23 @@ function openURL(urlname)
 
     <li>
       <object width="290" height="130"><param name="movie" value="http://www.wunderground.com/swf/pws_mini_rf_nc.swf?station=ILOMBARD333&freq=&units=metric&lang=IT" /><embed src="http://www.wunderground.com/swf/pws_mini_rf_nc.swf?station=ILOMBARD333&freq=&units=metric&lang=IT" type="application/x-shockwave-flash" width="290" height="130" /></object>
+    </li>
+  </ul>
+</div>
+
+
+<div class="section_3" style="display: block;">
+  <h3>Meteo</h3>
+  <p>
+    <a href="https://www.meteoblue.com/it/italia/tempo-albino" title="Tempo Albino - meteoblue" target="_blank">Link Meteo Albino</a>
+  </p>
+  <ul class="blockdisplay">
+    <li style="padding-top: 1em;">
+      <img src="http://www.yr.no/place/Italy/Lombardia/Albino/avansert_meteogram.png" />
+    </li>
+
+    <li style="padding-top: 1em;">
+      <iframe src="https://www.meteoblue.com/it/italia/tempo-albino/widget?days=7&pictoicon=1&maxtemperature=1&mintemperature=1&windspeed=1&windgust=1&winddirection=1&uv=1&humidity=1&pressure=1&precipitation=1&precipitationprobability=1&spot=1&v=2" style="background-color: white;" height="427" width="376" frameborder="0" scrolling="NO"></iframe>
     </li>
   </ul>
 </div>
@@ -447,22 +475,18 @@ function openURL(urlname)
 </div>
 
 <div style="display: block;">
-  <h3>Meteo</h3>
-      <p>
-      <a href="https://www.meteoblue.com/it/italia/tempo-albino" title="Tempo Albino - meteoblue" target="_blank">Link Meteo Albino</a>
-</p>
+  <h3>Meteogramma</h3>
   <ul class="blockdisplay">
-    <li style="padding-top: 1em;">
-      <img src="http://www.yr.no/place/Italy/Lombardia/Albino/avansert_meteogram.png" />
-    </li>
-
-    <li style="padding-top: 1em;">
-      <iframe src="https://www.meteoblue.com/it/italia/tempo-albino/widget?days=7&pictoicon=1&maxtemperature=1&mintemperature=1&windspeed=1&windgust=1&winddirection=1&uv=1&humidity=1&pressure=1&precipitation=1&precipitationprobability=1&spot=1&v=2" style="background-color: white;" height="427" width="376" frameborder="0" scrolling="NO"></iframe>
+    <li>
+      <a href="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&amp;ext=1&amp;y=&amp;run=6&amp;lat=45,8&amp;lon=9,8&amp;runpara=0" title="Large image" data-featherlight="image">
+        <img class="satellite" src="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&amp;ext=1&amp;y=&amp;run=6&amp;lat=45,8&amp;lon=9,8&amp;runpara=0" id="image" name="image" alt="Diagramme GEFS" title="Diagramme GEFS" />
+      </a>
     </li>
   </ul>
 </div>
 
-<div style="display: block;">
+
+<div class="section_4" style="display: block;">
   <h3>Immagini satellitari</h3>
   <h4>Cliccare le immagini per vederle ingrandite. </p> </h4>
 
@@ -485,16 +509,6 @@ function openURL(urlname)
   </ul>
 </div>
 
-<div style="display: block;">
-  <h3>Meteogramma</h3>
-  <ul class="blockdisplay">
-    <li>
-      <a href="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&amp;ext=1&amp;y=&amp;run=6&amp;lat=45,8&amp;lon=9,8&amp;runpara=0" title="Large image" data-featherlight="image">
-        <img class="satellite" src="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&amp;ext=1&amp;y=&amp;run=6&amp;lat=45,8&amp;lon=9,8&amp;runpara=0" id="image" name="image" alt="Diagramme GEFS" title="Diagramme GEFS" />
-      </a>
-    </li>
-  </ul>
-</div>
 
 <div style="display: block;">
   <h3>Fulmini</h3>
@@ -549,6 +563,37 @@ function openURL(urlname)
 <script src="http://cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
  $.featherlight.defaults.loading = "Caricamento immagine in corso...";
+
+ $("#button_0").click(function() {
+  $('html,body').animate({
+    scrollTop: $(".section_0").offset().top},
+    'slow');
+});
+
+ $("#button_1").click(function() {
+  $('html,body').animate({
+    scrollTop: $(".section_1").offset().top},
+    'slow');
+});
+
+ $("#button_2").click(function() {
+  $('html,body').animate({
+    scrollTop: $(".section_2").offset().top},
+    'slow');
+});
+
+ $("#button_3").click(function() {
+  $('html,body').animate({
+    scrollTop: $(".section_3").offset().top},
+    'slow');
+});
+
+ $("#button_4").click(function() {
+  $('html,body').animate({
+    scrollTop: $(".section_4").offset().top},
+    'slow');
+});
+
 </script>
 
 </body>
