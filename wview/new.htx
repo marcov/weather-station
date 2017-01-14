@@ -197,12 +197,10 @@ function openURL(urlname)
                         </td>
                       </tr>
                       <tr>
-                        <td width="100%" align="center" valign="top">
-                          <font>
-                            Sunrise:<!--sunriseTime-->
-                            - Sunset:<!--sunsetTime-->
-                            - Moon:<!--moonPhase-->
-                          </font>
+                        <td width="100%" align="left" valign="top">
+                            Alba:<!--sunriseTime--><br>
+                            Tramonto:<!--sunsetTime--><br>
+                            Fase lunare:<!--moonPhase-->
                         </td>
                       </tr>
                     </tbody>
@@ -213,6 +211,13 @@ function openURL(urlname)
           </table>
         </li>
         <!-- HEADER END -->
+
+        <!-- WEATHER IMAGES START -->
+        <li style="padding-top: 1em; width:100%">
+          <img src="tempdaycomp.png"
+          style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+
+        </li>
 
         <li>
          <!-- NEW TABLE START -->
@@ -301,12 +306,6 @@ function openURL(urlname)
 
   </li>
 
-  <!-- WEATHER IMAGES START -->
-  <li style="padding-top: 2em; width:100%">
-      <img src="radiationDay.png "
-      style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-  </li>
-
   <!-- WEATHER IMAGES END -->
 </ul>
 
@@ -316,16 +315,15 @@ function openURL(urlname)
 
 <!-- RIGHT COLUMN START -->
 <div class="rightcolumn" style="display:block;">
-
   <div class="blockdisplay">
     <a href="webcam.jpg" data-featherlight="image"> <img src="webcam_small.jpg"></a>
   </div>
 
   <!-- WEATHER GEN IMAGES START -->
   <div class="leftcolumn" style="width:50%;">
-    <img src="tempdaycomp.png"
-    style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
     <img src="wspeeddaycomp.png"
+    style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+    <img src="radiationDay.png "
     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
   </div>
 
