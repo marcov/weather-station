@@ -417,11 +417,9 @@ function openURL(urlname)
 </div>
 <!-- FOOTER END -->
 
-<div style="display: block;">
+<div class="blockdisplay" align="center" style="max-width: 66%">
   <h3>Tutti i dati </h3>
-  <p align="center" width="66%">
-    <!--include readings-nostyle.inc-->
-  </p>
+  <!--include readings-nostyle.inc-->
 </div>
 
 <div style="display: block;">
