@@ -48,7 +48,6 @@ Description...
 
 img.round
 {
-	display: block;
 	margin-top: 1em;
 	margin-left: auto;
 	margin-right: auto;
@@ -300,11 +299,7 @@ table.tablevalues th.text{
 	background-color: rgba(0,0,0,0.3); 
 	color:      #000000; 
 	height:     auto; 
-	line-height:30px;
-	letter-spacing:1px; 
-	width:auto;
-	position:fixed;
-	right: 5px;
+	/*position:fixed; */
 	font-family: Arial, Helvetica, sans-serif;
 	text-align: right;
 }
@@ -322,7 +317,7 @@ body{
 	font-family:Verdana,Arial,Sans-Serif;
 	font-size:90%;
 	background:#333;
-	color: #ccc;
+	color: whitesmoke;
 	list-style:none;
 	padding: 1em 1em 1em 1em;
 }

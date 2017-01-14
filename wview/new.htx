@@ -234,82 +234,80 @@ function openURL(urlname)
              <td> </td>
            </tr >
            <thead>
-            <tr> <th>Vento</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
+             <tr>  <th>Vento</th> <th> </th><th>Valore</th> <th>Max oggi</th> </tr>
+           </thead>
+           <tr class="even">
+             <td class="title">Attuale</td>
+             <td> </td>
+             <td class="now"><!--windSpeed--><!--windUnit--> <br><!--windDirection--></td>
+             <td> </td>
+           </tr >
+           <tr class="odd">
+             <td class="title">Raffica</td>
+             <td> </td>
+             <td class="now"><!--windGustSpeed--><!--windUnit--><br> <!--windGustDirectionDegrees--> gradi</td>
+             <td class="max"><!--hiWindSpeed--><!--windUnit--><br><!--hiWindSpeedTime--></td>
+           </tr>
+           <tr class="even">
+             <td class="title">Media 10 minuti</td>
+             <td> </td>
+             <td class="now"><!--tenMinuteAvgWindSpeed--><!--windUnit--></td>
+             <td> </td>
+           </tr >
+           <tr class="odd">
+             <td class="title">Scala di Beaufort</td>
+             <td> </td>
+             <td class="now"><!--windBeaufortScale--></td>
+             <td> </td>
+           </tr >
+
+           <thead>
+            <tr> <th>Umidita'</th> <th>Min oggi</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
           </thead>
           <tr class="even">
            <td class="title">Attuale</td>
-           <td> </td>
-           <td class="now"><!--windSpeed--><!--windUnit--> <br><!--windDirection--></td>
-           <td> </td>
+           <td class="min"><!--lowHumidity--><!--humUnit--> <br><!--lowHumTime--></td>
+           <td class="now"><!--outsideHumidity--><!--humUnit--></td>
+           <td class="max"><!--hiHumidity--><!--humUnit--> <br><!--hiHumTime--></td>
          </tr >
-         <tr class="odd">
-           <td class="title">Raffica</td>
-           <td> </td>
-           <td class="now"><!--windGustSpeed--><!--windUnit--><br> <!--windGustDirectionDegrees--> gradi</td>
-           <td class="max"><!--hiWindSpeed--><!--windUnit--><br><!--hiWindSpeedTime--></td>
-         </tr>
-         <tr class="even">
-           <td class="title">Media 10 minuti</td>
-           <td> </td>
-           <td class="now"><!--tenMinuteAvgWindSpeed--><!--windUnit--></td>
-           <td> </td>
-         </tr >
-         <tr class="odd">
-           <td class="title">Scala di Beaufort</td>
-           <td> </td>
-           <td class="now"><!--windBeaufortScale--></td>
-           <td> </td>
-         </tr >
-
          <thead>
-          <tr> <th>Umidita'</th> <th>Min oggi</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
+          <tr> <th>Pressione</th> <th>Min oggi</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
         </thead>
         <tr class="even">
-         <td class="title">Attuale</td>
-         <td class="min"><!--lowHumidity--><!--humUnit--> <br><!--lowHumTime--></td>
-         <td class="now"><!--outsideHumidity--><!--humUnit--></td>
-         <td class="max"><!--hiHumidity--><!--humUnit--> <br><!--hiHumTime--></td>
-       </tr >
-       <thead>
-        <tr> <th>Pressione</th> <th>Min oggi</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
-      </thead>
-      <tr class="even">
-        <td class="title">Attuale</td>
-        <td class="min"><!--lowBarometer--><!--barUnit--> <br><!--lowBarometerTime--></td>
-        <td class="now"><!--barometer--><!--barUnit--></td>
-        <td class="max"><!--hiBarometer--><!--barUnit--> <br><!--hiBarometerTime--></td>
-      </tr>
-      <tr class="even">
-        <td class="title">Trend</td>
-        <td class="min"></td>
-        <td class="now"><!--baromtrend--></td>
-        <td class="max"></td>
-      </tr>
-      <thead>
-        <tr> <th>Pioggia</th><th>Frequenza</th> <th>Totale 24h</th> <th>Evento piovoso</th> <th> </th> </tr>
-      </thead>
-      <tr class="even">
-        <td class="title">Attuale</td>
-        <td class="now"><!--rainRate--><!--rateUnit--></td>
-        <td class="now"><!--dailyRain--><!--rainUnit--></td>
-        <td class="now"><!--stormRain--><!--rainUnit--></td>
-      </tr>
+          <td class="title">Attuale</td>
+          <td class="min"><!--lowBarometer--><!--barUnit--> <br><!--lowBarometerTime--></td>
+          <td class="now"><!--barometer--><!--barUnit--></td>
+          <td class="max"><!--hiBarometer--><!--barUnit--> <br><!--hiBarometerTime--></td>
+        </tr>
+        <tr class="even">
+          <td class="title">Trend</td>
+          <td class="min"></td>
+          <td class="now"><!--baromtrend--></td>
+          <td class="max"></td>
+        </tr>
+        <thead>
+          <tr> <th>Pioggia</th><th>Frequenza</th> <th>Totale 24h</th> <th>Evento piovoso</th> <th> </th> </tr>
+        </thead>
+        <tr class="even">
+          <td class="title">Attuale</td>
+          <td class="now"><!--rainRate--><!--rateUnit--></td>
+          <td class="now"><!--dailyRain--><!--rainUnit--></td>
+          <td class="now"><!--stormRain--><!--rainUnit--></td>
+        </tr>
 
-    </tbody>
-  </table>
-  <!--  NEW TABLE END -->
+      </tbody>
+    </table>
+    <!--  NEW TABLE END -->
 
-</li>
+  </li>
 
-<!-- WEATHER IMAGES START -->
-<li style="padding-top: 2em;">
-  <p align="center">
-    <img src="radiationDay.png "
-    style="background: url(chart_bg.png) no-repeat center">
-  </p>
-</li>
+  <!-- WEATHER IMAGES START -->
+  <li style="padding-top: 2em; width:100%">
+      <img src="radiationDay.png "
+      style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+  </li>
 
-<!-- WEATHER IMAGES END -->
+  <!-- WEATHER IMAGES END -->
 </ul>
 
 </div>
@@ -319,25 +317,25 @@ function openURL(urlname)
 <!-- RIGHT COLUMN START -->
 <div class="rightcolumn" style="display:block;">
 
- <ul class="blockdisplay">
-  <li>
+  <div class="blockdisplay">
     <a href="webcam.jpg" data-featherlight="image"> <img src="webcam_small.jpg"></a>
-  </li>
+  </div>
 
   <!-- WEATHER GEN IMAGES START -->
-  <li style="padding-top: 2em;">
+  <div class="leftcolumn" style="width:50%;">
     <img src="tempdaycomp.png"
-    style="background: url(chart_bg.png) no-repeat center">
+    style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
     <img src="wspeeddaycomp.png"
-    style="background: url(chart_bg.png) no-repeat center">
+    style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+  </div>
 
+  <div class="rightcolumn" style="width:50%;">
     <img src="rainday.png"
-    style="background: url(chart_bg.png) no-repeat center">
+    style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
     <img src="baromday.png"
-    style="background: url(chart_bg.png) no-repeat center">
-  </li>
+    style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+  </div>
   <!-- WEATHER GEN IMAGES END -->
-</ul>
 </div>
 <!-- RIGHT COLUMN END -->
 
@@ -350,34 +348,34 @@ function openURL(urlname)
       <li>
         <p align="center">
           <img src="radiation.png"
-          style="background: url(bucket_bg.png) no-repeat center">
+          style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
 
 
           <img src="dayrain.png"
-          style="background: url(bucket_bg.png) no-repeat center">
+          style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
 
           <img src="stormrain.png"
-          style="background: url(bucket_bg.png) no-repeat center">
+          style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
 
           <img src="rainrate.png"
-          style="background: url(bucket_bg.png) no-repeat center">
+          style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
 
           <img src="monthrain.png"
-          style="background: url(bucket_bg.png) no-repeat center">
+          style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
 
           <img src="yearrain.png"
-          style="background: url(bucket_bg.png) no-repeat center">
+          style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
         </p>
       </li>
 
       <li>
         <p>
-          <img src="windroseday.png"
-          style="background: url(dial_bg.png) no-repeat center">
-          <img src="windroseweek.png"
-          style="background: url(dial_bg.png) no-repeat center">
-          <img src="windroseyear.png"
-          style="background: url(dial_bg.png) no-repeat center">
+          <img class="round" src="windroseday.png"
+          style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+          <img class="round" src="windroseweek.png"
+          style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+          <img class="round" src="windroseyear.png"
+          style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
         </p>
       </li>
     </ul>
