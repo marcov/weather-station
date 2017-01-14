@@ -145,7 +145,7 @@ function openURL(urlname)
         <input class="internlink" type="button" id="button_1" value="Tutti i dati" />
         <input class="internlink" type="button" id="button_2" value="Stazioni Limitrofe" />
         <input class="internlink" type="button" id="button_3" value="Meteo" />
-        <input class="internlink" type="button" id="button_4" value="Immagini Satellitari" />
+        <input class="internlink" type="button" id="button_4" value="Satellite/Mappe" />
       </form>
       <h4>Links</h4>
       <form>
