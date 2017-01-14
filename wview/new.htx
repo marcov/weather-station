@@ -1,8 +1,8 @@
 <html>
 <head>
-  <title>Stazione Meteo di <!--stationCity-->,<!--stationState--></title>
+  <title>Stazione Meteo di <!--stationCity-->, <!--stationState--></title>
   <meta http-equiv="refresh" content="150" ;="">
-  <link rel="alternate" type="application/rss+xml" title="Stazione Meteo di <!--stationCity-->,<!--stationState-->" href="wxrss.xml">
+  <link rel="alternate" type="application/rss+xml" title="Stazione Meteo di <!--stationCity-->, <!--stationState-->" href="wxrss.xml">
 
   <script language="JavaScript">
     function createDaySelect(name)
@@ -162,7 +162,7 @@ function openURL(urlname)
                     <tr>
                       <td width="100%" align="center" valign="top">
                         <big><b><font size="6" face="Arial, Helvetica, sans-serif" >
-                          Stazione Meteo di <!--stationCity-->,<!--stationState--></font></b></big>
+                          Stazione Meteo di <!--stationCity-->, <!--stationState--></font></b></big>
                         </td>
                       </tr>
                       <tr>
@@ -221,26 +221,26 @@ function openURL(urlname)
               </thead>
               <tr class="even">
                <td class="title">Attuale</td>
+               <td> </td>
                <td class="now"><!--windSpeed--><!--windUnit--> <br><!--windDirection--></td>
                <td> </td>
-               <td> </td>
              </tr >
-             <tr class="even">
+             <tr class="odd">
                <td class="title">Raffica</td>
+               <td> </td>
                <td class="now"><!--windGustSpeed--><!--windUnit--><br> <!--windGustDirectionDegrees--> gradi</td>
                <td class="max"><!--hiWindSpeed--><!--windUnit--><br><!--hiWindSpeedTime--></td>
-               <td> </td>
              </tr>
              <tr class="even">
                <td class="title">Media 10 minuti</td>
+               <td> </td>
                <td class="now"><!--tenMinuteAvgWindSpeed--><!--windUnit--></td>
                <td> </td>
-               <td> </td>
              </tr >
-             <tr class="even">
+             <tr class="odd">
                <td class="title">Scala di Beaufort</td>
-               <td class="now"><!--windBeaufortScale--></td>
                <td> </td>
+               <td class="now"><!--windBeaufortScale--></td>
                <td> </td>
              </tr >
 
@@ -285,7 +285,7 @@ function openURL(urlname)
     </li>
 
     <!-- WEATHER IMAGES START -->
-    <li>
+    <li style="padding-top: 2em;">
       <p align="center">
         <img src="radiationDay.png "
         style="background: url(chart_bg.png) no-repeat center">
@@ -308,7 +308,7 @@ function openURL(urlname)
   </li>
 
   <!-- WEATHER GEN IMAGES START -->
-  <li>
+  <li style="padding-top: 2em;">
     <img src="tempdaycomp.png"
     style="background: url(chart_bg.png) no-repeat center">
     <img src="wspeeddaycomp.png"
@@ -325,7 +325,7 @@ function openURL(urlname)
 <!-- RIGHT COLUMN END -->
 
 <!-- FOOTER START -->
-<div class="footer" style="display: block;">
+<div class="footer">
 
   <!-- WEATHER IMAGES START -->
   <div style="margin: auto;" align="center">
@@ -428,14 +428,13 @@ function openURL(urlname)
   <h3> ALTRE STAZIONI </h3>
   <ul class="blockdisplay">
     <li>
-      <object width="290" height="130"><param name="movie" value="http://www.wunderground.com/swf/pws_mini_rf_nc.swf?station=ILOMBARD333&freq=&units=metric&lang=IT" /><embed src="http://www.wunderground.com/swf/pws_mini_rf_nc.swf?station=ILOMBARD333&freq=&units=metric&lang=IT" type="application/x-shockwave-flash" width="290" height="130" /></object>
-    </li>
-  </ul>
-
-  <ul class="blockdisplay">
-    <li>
       <a alt="Stazione meteo di Albino" href="http://my.meteonetwork.it/station/lmb257" target="_blank"><img style="border:none;" src="http://my.meteonetwork.it/station/lmb257/sticker-oriz1" /></a>
     </li>
+
+    <li>
+      <object width="290" height="130"><param name="movie" value="http://www.wunderground.com/swf/pws_mini_rf_nc.swf?station=ILOMBARD333&freq=&units=metric&lang=IT" /><embed src="http://www.wunderground.com/swf/pws_mini_rf_nc.swf?station=ILOMBARD333&freq=&units=metric&lang=IT" type="application/x-shockwave-flash" width="290" height="130" /></object>
+    </li>
+
   </ul>
 
   <h3> RADAR </h3>
@@ -536,7 +535,8 @@ function openURL(urlname)
 <div class="footer" style="display: block;">
  <!-- Histats.com  START  (standard)-->
  <script type="text/javascript">document.write(unescape("%3Cscript src=%27http://s10.histats.com/js15.js%27 type=%27text/javascript%27%3E%3C/script%3E"));</script>
- <a href="http://www.histats.com" target="_blank" title="contatore per sito" ><script  type="text/javascript" >
+
+ <a href="http://www.histats.com" target="_blank" title="contatore per sito" ><script  type="text/javascript">
    try {Histats.start(1,1781036,4,422,112,75,"00011111");
    Histats.track_hits();} catch(err){};
  </script></a>

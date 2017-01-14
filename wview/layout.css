@@ -42,6 +42,8 @@ Description...
 	/* Avoid div overlapping */
 	clear: both;
 	width: 90%;
+	display: block; 
+	padding-top: 2em;
 }
 
 img.round
@@ -272,10 +274,6 @@ table.tablevalues th.text{
 }
 /************ End of table values ************/
 
-
-
-
-
 *{
 	margin:0;
 	padding:0;
@@ -318,6 +316,7 @@ body{
 li {
 	padding: 0em 1em;
 }
+
 h3{
 	font-size:1.8em;
 	/*color:#ff4; */
@@ -325,6 +324,6 @@ h3{
 	color: whitesmoke;
 	text-transform:uppercase;
 	font-family:"Trebuchet MS",Arial,Sans-Serif;
-	padding-top:    2em;
+	padding-top:    1em;
 	padding-bottom: 1em;
 }
