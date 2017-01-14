@@ -183,16 +183,8 @@ function openURL(urlname)
                             </td>
                           </tr>
                           <tr>
-                            <td
-                            width="100%"
-                            align="center"
-                            valign="top">
-                            <font
-                            size="2"
-                            face="Arial,
-                            Helvetica,
-                            sans-serif"
-                            color="#000000">
+                            <td width="100%" align="center" valign="top">
+                            <font>
                             Sunrise:<!--sunriseTime-->
                             - Sunset:<!--sunsetTime-->
                             - Moon:<!--moonPhase-->
