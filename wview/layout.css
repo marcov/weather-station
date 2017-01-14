@@ -67,7 +67,7 @@ img.round
 .rightcolumn
 {
 	float: center;	
-	width: 50%; 
+	width: 60%; 
 }
 
 .leftcolumn
@@ -281,7 +281,7 @@ table.tablevalues th.text{
 	border:none;
 }
 
-#menu {
+#menubottom {
 	background-color: rgba(0,0,0,0.3); 
 	color:      #000000; 
 	height:     auto; 
@@ -289,10 +289,24 @@ table.tablevalues th.text{
 	letter-spacing:1px; 
 	width:15%;
 	position:fixed;
-	right: 10px;
+	bottom: 5px;
+	right: 5px;
 	font-family: Arial, Helvetica, sans-serif;
 	padding: 5px;
 	text-align: left;
+}
+
+#menutop {
+	background-color: rgba(0,0,0,0.3); 
+	color:      #000000; 
+	height:     auto; 
+	line-height:30px;
+	letter-spacing:1px; 
+	width:auto;
+	position:fixed;
+	right: 5px;
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: right;
 }
 
 #misc {
@@ -332,12 +346,17 @@ a,p,h4,button {
 	font-family:"Trebuchet MS",Arial,Sans-Serif;
 }
 
-.internlink, .externlink {
+.internlink {
 	width: 90%;
 	margin-left: 1em;
 	margin-right: 1em;
 }
 
 .externlink {
+	width: 40%;
+}
+.externlink {
+	width: auto;
+	padding: 0.1em;
 	background-color: #990033;
 }
