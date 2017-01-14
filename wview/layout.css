@@ -322,8 +322,12 @@ h3{
 	/*color:#ff4; */
 	/* Changed inside tab Title color from yellowish*/
 	color: whitesmoke;
-	text-transform:uppercase;
 	font-family:"Trebuchet MS",Arial,Sans-Serif;
 	padding-top:    1em;
 	padding-bottom: 1em;
+}
+
+a {
+	color: whitesmoke;
+	font-family:"Trebuchet MS",Arial,Sans-Serif;
 }

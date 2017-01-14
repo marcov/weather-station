@@ -417,15 +417,15 @@ function openURL(urlname)
 </div>
 <!-- FOOTER END -->
 
-
 <div style="display: block;">
-  <h3> Tutti i dati </h3>
-
+  <h3>Tutti i dati </h3>
   <p align="center" width="66%">
     <!--include readings-nostyle.inc-->
   </p>
+</div>
 
-  <h3> ALTRE STAZIONI </h3>
+<div style="display: block;">
+  <h3>Stazioni limitrofe</h3>
   <ul class="blockdisplay">
     <li>
       <a alt="Stazione meteo di Albino" href="http://my.meteonetwork.it/station/lmb257" target="_blank"><img style="border:none;" src="http://my.meteonetwork.it/station/lmb257/sticker-oriz1" /></a>
@@ -434,10 +434,11 @@ function openURL(urlname)
     <li>
       <object width="290" height="130"><param name="movie" value="http://www.wunderground.com/swf/pws_mini_rf_nc.swf?station=ILOMBARD333&freq=&units=metric&lang=IT" /><embed src="http://www.wunderground.com/swf/pws_mini_rf_nc.swf?station=ILOMBARD333&freq=&units=metric&lang=IT" type="application/x-shockwave-flash" width="290" height="130" /></object>
     </li>
-
   </ul>
+</div>
 
-  <h3> RADAR </h3>
+<div style="display: block;">
+  <h3>Radar</h3>
   <ul class="blockdisplay">
     <li>
       <a href="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" title="Large image" data-featherlight="image">
@@ -445,28 +446,25 @@ function openURL(urlname)
       </a>
     </li>
   </ul>
+</div>
+
+<div style="display: block;">
   <h3>Meteo</h3>
+      <p>
+      <a href="https://www.meteoblue.com/it/italia/tempo-albino" title="Tempo Albino - meteoblue" target="_blank">Link Meteo Albino</a>
+</p>
   <ul class="blockdisplay">
-    <li>
+    <li style="padding-top: 1em;">
       <img src="http://www.yr.no/place/Italy/Lombardia/Albino/avansert_meteogram.png" />
     </li>
-  </ul>
 
-  <ul class="blockdisplay">
-    <li>
+    <li style="padding-top: 1em;">
       <iframe src="https://www.meteoblue.com/it/italia/tempo-albino/widget?days=7&pictoicon=1&maxtemperature=1&mintemperature=1&windspeed=1&windgust=1&winddirection=1&uv=1&humidity=1&pressure=1&precipitation=1&precipitationprobability=1&spot=1&v=2" style="background-color: white;" height="427" width="376" frameborder="0" scrolling="NO"></iframe>
-
     </li>
   </ul>
+</div>
 
-  <ul class="blockdisplay">
-    <li>
-      <a href="https://www.meteoblue.com/it/italia/tempo-albino" title="Tempo Albino - meteoblue" target="_blank"> meteoblue.com </a>
-    </li>
-  </ul>
-  <div>
-  </div>
-
+<div style="display: block;">
   <h3>Immagini satellitari</h3>
   <h4>Cliccare le immagini per vederle ingrandite. </p> </h4>
 
@@ -487,10 +485,10 @@ function openURL(urlname)
       </a>
     </li>
   </ul>
+</div>
 
-
-
-  <h3>METEOGRAMMA ALBINO </h3>
+<div style="display: block;">
+  <h3>Meteogramma</h3>
   <ul class="blockdisplay">
     <li>
       <a href="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&amp;ext=1&amp;y=&amp;run=6&amp;lat=45,8&amp;lon=9,8&amp;runpara=0" title="Large image" data-featherlight="image">
@@ -498,9 +496,10 @@ function openURL(urlname)
       </a>
     </li>
   </ul>
+</div>
 
-
-  <h3> MAPPA FULMINI </h3>
+<div style="display: block;">
+  <h3>Fulmini</h3>
   <ul class="blockdisplay">
     <li>
       <a href="http://www.astrogeo.va.it/fulmini/fulmini.jpg" title="Large image" data-featherlight="image">
@@ -508,8 +507,10 @@ function openURL(urlname)
       </a>
     </li>
   </ul>
+</div>
 
-  <h3>MAPPE EMCWF / GFS </h3>
+<div style="display: block;">
+  <h3>Mappe EMCWF / GFS</h3>
   <ul class="blockdisplay">
     <li>
       <a href="http://www.wetterzentrale.de/pics/ecmpanel1.gif" title="Large image" data-featherlight="image">
@@ -527,12 +528,10 @@ function openURL(urlname)
       </a>
     </li>
   </ul>
-</tr>
-
-
 </div>
 
-<div class="footer" style="display: block;">
+
+<div style="display: block;" align="center">
  <!-- Histats.com  START  (standard)-->
  <script type="text/javascript">document.write(unescape("%3Cscript src=%27http://s10.histats.com/js15.js%27 type=%27text/javascript%27%3E%3C/script%3E"));</script>
 
@@ -545,9 +544,7 @@ function openURL(urlname)
 <!-- Histats.com  END  -->
 </div>
 
-</div>
-<!-- CENTERCLASS END -->
-
+</div>  <!-- div class centercolumn END -->
 
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -555,6 +552,7 @@ function openURL(urlname)
 <script type="text/javascript">
  $.featherlight.defaults.loading = "Caricamento immagine in corso...";
 </script>
+
 </body>
 </html>
 
