@@ -39,6 +39,8 @@ Description...
 
 .footer 
 {
+	/* Avoid div overlapping */
+    clear: both;
 	width: 90%;
 }
 

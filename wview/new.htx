@@ -317,47 +317,30 @@ function openURL(urlname)
 
  <ul class="blockdisplay">
 
-
   <li>
     <a href="webcam.jpg" data-featherlight="image"> <img src="webcam_small.jpg"> </a>
   </li>
 
   <li>
     <!-- WEATHER GEN IMAGES START -->
-
-    <table cellpadding="2" cellspacing="2" border="0" width="100%" align="center">
-      <tbody>
-        <tr>
-          <td align="center">
-            <img src="tempdaycomp.png"
-            style="background: url(chart_bg.png) no-repeat center">
-          </td>
-          <td align="center">
-            <img src="wspeeddaycomp.png"
-            style="background: url(chart_bg.png) no-repeat center">
-          </td>
-          <td align="center">
-            <img src="radiationDay.png "
-            style="background: url(chart_bg.png) no-repeat center">
-          </td>
-        </tr>
-
-        <tr>
-          <td align="center">
-            <img src="rainday.png"
-            style="background: url(chart_bg.png) no-repeat center">
-          </td>
-          <td align="center">
-            <img src="baromday.png"
-            style="background: url(chart_bg.png) no-repeat center">
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <li>
+      <img src="tempdaycomp.png"
+      style="background: url(chart_bg.png) no-repeat center">
+      <img src="wspeeddaycomp.png"
+      style="background: url(chart_bg.png) no-repeat center">
+      <img src="radiationDay.png "
+      style="background: url(chart_bg.png) no-repeat center">
+    </li>
+    <li>
+      <img src="rainday.png"
+      style="background: url(chart_bg.png) no-repeat center">
+      <img src="baromday.png"
+      style="background: url(chart_bg.png) no-repeat center">
+    </li>
 
     <!-- WEATHER GEN IMAGES END -->
-  </li>
-</ul>
+
+  </ul>
 
 </div>
 <!-- RIGHT COLUMN END -->
@@ -366,82 +349,75 @@ function openURL(urlname)
 <div class="footer" style="display: block;">
 
   <div style="margin: auto;" align="center">
-   <ul>
-
-    <li>
+    <p>
       <img src="windroseday.png"
       style="background: url(dial_bg.png) no-repeat center">
-    </li>
-    <li>
       <img src="windroseweek.png"
       style="background: url(dial_bg.png) no-repeat center">
-    </li>
-    <li>
       <img src="windroseyear.png"
       style="background: url(dial_bg.png) no-repeat center">
-    </li>
-  </ul>
-</div>
-<table cellpadding="2" cellspacing="2" border="0" width="100%" height="40" align="center">
-  <tbody>
-    <tr>
-      <td width="15%" align="center" valign="top"> <input name="button2" type="button"
-        onClick="openURL('almanac.htm')" value="     Almanac    "></td>
+    </p>
+  </div>
+  <table cellpadding="2" cellspacing="2" border="0" width="100%" height="40" align="center">
+    <tbody>
+      <tr>
         <td width="15%" align="center" valign="top"> <input name="button2" type="button"
-          onClick="openURL('Daily.htm')" value=" Last 24 Hours "></td>
+          onClick="openURL('almanac.htm')" value="     Almanac    "></td>
           <td width="15%" align="center" valign="top"> <input name="button2" type="button"
-            onClick="openURL('Weekly.htm')" value="  Last 7 Days  "></td>
-            <td width="15%" align="center" valign="top">
-              <input type="button" value=" Last 28 Days "
-              onclick="openURL('Monthly.htm')">
-            </td>
-            <td width="15%" align="center" valign="top">
-              <input name="button" type="button"
-              onClick="openURL('Yearly.htm')" value=" Last 365 Days ">
-            </td>
-            <td width="15%" align="center" valign="top">
-              <input type="button" value="    Forecast     "
-              onClick="openURL('<!--localForecastURL-->')">
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <table cellpadding="2" cellspacing="2" border="0" width="100%" height="30" align="center">
-        <tbody>
-          <tr>
-            <td width="100%" align="center" valign="middle">
-              <font class="text"> CLIMATOLOGICAL SUMMARIES:&nbsp; </font>
-              <script language="JavaScript">
-               createMonthlySelect("month");
-               createYearlySelect("year");
-             </script>
+            onClick="openURL('Daily.htm')" value=" Last 24 Hours "></td>
+            <td width="15%" align="center" valign="top"> <input name="button2" type="button"
+              onClick="openURL('Weekly.htm')" value="  Last 7 Days  "></td>
+              <td width="15%" align="center" valign="top">
+                <input type="button" value=" Last 28 Days "
+                onclick="openURL('Monthly.htm')">
+              </td>
+              <td width="15%" align="center" valign="top">
+                <input name="button" type="button"
+                onClick="openURL('Yearly.htm')" value=" Last 365 Days ">
+              </td>
+              <td width="15%" align="center" valign="top">
+                <input type="button" value="    Forecast     "
+                onClick="openURL('<!--localForecastURL-->')">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <table cellpadding="2" cellspacing="2" border="0" width="100%" height="30" align="center">
+          <tbody>
+            <tr>
+              <td width="100%" align="center" valign="middle">
+                <font class="text"> CLIMATOLOGICAL SUMMARIES:&nbsp; </font>
+                <script language="JavaScript">
+                 createMonthlySelect("month");
+                 createYearlySelect("year");
+               </script>
 
-             <input type="button" value="Monthly Report"
-             onclick="openNoaaFile(this.form.month.value, this.form.year.value)">
-             <input type="button" value="Yearly Report "
-             onclick="openNoaaFile('',this.form.year.value)">
+               <input type="button" value="Monthly Report"
+               onclick="openNoaaFile(this.form.month.value, this.form.year.value)">
+               <input type="button" value="Yearly Report "
+               onclick="openNoaaFile('',this.form.year.value)">
+             </td>
+           </tr>
+           <tr>
+            <td width="100%" align="center" valign="middle">
+              <font class="text"> BROWSE ARCHIVE RECORDS:&nbsp; </font>
+              <script language="JavaScript">
+               createDaySelect("day");
+               createMonthlySelect("month1");
+               createYearlySelect("year1");
+             </script>
+             <input type="button" value="Browse Day Records"
+             onclick="openARCFile(this.form.day.value, this.form.month1.value, this.form.year1.value)">
            </td>
          </tr>
-         <tr>
-          <td width="100%" align="center" valign="middle">
-            <font class="text"> BROWSE ARCHIVE RECORDS:&nbsp; </font>
-            <script language="JavaScript">
-             createDaySelect("day");
-             createMonthlySelect("month1");
-             createYearlySelect("year1");
-           </script>
-           <input type="button" value="Browse Day Records"
-           onclick="openARCFile(this.form.day.value, this.form.month1.value, this.form.year1.value)">
-         </td>
-       </tr>
-     </tbody>
-   </table>
- </td>
-</tr>
+       </tbody>
+     </table>
+   </td>
+ </tr>
 </tbody>
 </table>
 
