@@ -277,29 +277,11 @@ function openURL(urlname)
 
     </li>
 
-
     <!-- WEATHER IMAGES START -->
     <li>
       <p align=center>
-        <img src="radiation.png"
-        style="background: url(bucket_bg.png) no-repeat center">
-
-
-        <img src="dayrain.png"
-        style="background: url(bucket_bg.png) no-repeat center">
-
-        <img src="stormrain.png"
-        style="background: url(bucket_bg.png) no-repeat center">
-
-        <img src="rainrate.png"
-        style="background: url(bucket_bg.png) no-repeat center">
-
-        <img src="monthrain.png"
-        style="background: url(bucket_bg.png) no-repeat center">
-
-        <img src="yearrain.png"
-        style="background: url(bucket_bg.png) no-repeat center">
-
+        <img src="radiationDay.png "
+        style="background: url(chart_bg.png) no-repeat center">
       </p>
     </li>
 
@@ -310,38 +292,28 @@ function openURL(urlname)
 <!-- LEFT COLUMN END -->
 
 
-
-
 <!-- RIGHT COLUMN START -->
 <div class="rightcolumn" style="display:block;">
 
  <ul class="blockdisplay">
-
   <li>
-    <a href="webcam.jpg" data-featherlight="image"> <img src="webcam_small.jpg"> </a>
+  <a href="webcam.jpg" data-featherlight="image"> <img src="webcam_small.jpg"></a>
   </li>
 
+  <!-- WEATHER GEN IMAGES START -->
   <li>
-    <!-- WEATHER GEN IMAGES START -->
-    <li>
-      <img src="tempdaycomp.png"
-      style="background: url(chart_bg.png) no-repeat center">
-      <img src="wspeeddaycomp.png"
-      style="background: url(chart_bg.png) no-repeat center">
-      <img src="radiationDay.png "
-      style="background: url(chart_bg.png) no-repeat center">
-    </li>
-    <li>
-      <img src="rainday.png"
-      style="background: url(chart_bg.png) no-repeat center">
-      <img src="baromday.png"
-      style="background: url(chart_bg.png) no-repeat center">
-    </li>
+    <img src="tempdaycomp.png"
+    style="background: url(chart_bg.png) no-repeat center">
+    <img src="wspeeddaycomp.png"
+    style="background: url(chart_bg.png) no-repeat center">
 
-    <!-- WEATHER GEN IMAGES END -->
-
-  </ul>
-
+    <img src="rainday.png"
+    style="background: url(chart_bg.png) no-repeat center">
+    <img src="baromday.png"
+    style="background: url(chart_bg.png) no-repeat center">
+  </li>
+  <!-- WEATHER GEN IMAGES END -->
+</ul>
 </div>
 <!-- RIGHT COLUMN END -->
 
@@ -349,14 +321,42 @@ function openURL(urlname)
 <div class="footer" style="display: block;">
 
   <div style="margin: auto;" align="center">
-    <p>
-      <img src="windroseday.png"
-      style="background: url(dial_bg.png) no-repeat center">
-      <img src="windroseweek.png"
-      style="background: url(dial_bg.png) no-repeat center">
-      <img src="windroseyear.png"
-      style="background: url(dial_bg.png) no-repeat center">
-    </p>
+    <ul class="blockdisplay">
+      <!-- WEATHER IMAGES START -->
+      <li>
+        <p align=center>
+          <img src="radiation.png"
+          style="background: url(bucket_bg.png) no-repeat center">
+
+
+          <img src="dayrain.png"
+          style="background: url(bucket_bg.png) no-repeat center">
+
+          <img src="stormrain.png"
+          style="background: url(bucket_bg.png) no-repeat center">
+
+          <img src="rainrate.png"
+          style="background: url(bucket_bg.png) no-repeat center">
+
+          <img src="monthrain.png"
+          style="background: url(bucket_bg.png) no-repeat center">
+
+          <img src="yearrain.png"
+          style="background: url(bucket_bg.png) no-repeat center">
+        </p>
+      </li>
+
+      <li>
+        <p>
+          <img src="windroseday.png"
+          style="background: url(dial_bg.png) no-repeat center">
+          <img src="windroseweek.png"
+          style="background: url(dial_bg.png) no-repeat center">
+          <img src="windroseyear.png"
+          style="background: url(dial_bg.png) no-repeat center">
+        </p>
+      </li>
+    </ul>
   </div>
   <table cellpadding="2" cellspacing="2" border="0" width="100%" height="40" align="center">
     <tbody>
@@ -426,7 +426,7 @@ function openURL(urlname)
 
 
 <div style="display: block;">
-  <h4> Tutti i dati </h4>
+  <h3> Tutti i dati </h3>
 
   <p class="tablevalues">
     <!--include readings.inc-->
