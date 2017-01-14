@@ -297,7 +297,7 @@ function openURL(urlname)
 
  <ul class="blockdisplay">
   <li>
-  <a href="webcam.jpg" data-featherlight="image"> <img src="webcam_small.jpg"></a>
+    <a href="webcam.jpg" data-featherlight="image"> <img src="webcam_small.jpg"></a>
   </li>
 
   <!-- WEATHER GEN IMAGES START -->
@@ -320,9 +320,9 @@ function openURL(urlname)
 <!-- FOOTER START -->
 <div class="footer" style="display: block;">
 
+  <!-- WEATHER IMAGES START -->
   <div style="margin: auto;" align="center">
-    <ul class="blockdisplay">
-      <!-- WEATHER IMAGES START -->
+    <ul align=center>
       <li>
         <p align=center>
           <img src="radiation.png"
@@ -358,68 +358,54 @@ function openURL(urlname)
       </li>
     </ul>
   </div>
-  <table cellpadding="2" cellspacing="2" border="0" width="100%" height="40" align="center">
-    <tbody>
-      <tr>
-        <td width="15%" align="center" valign="top"> <input name="button2" type="button"
-          onClick="openURL('almanac.htm')" value="     Almanac    "></td>
-          <td width="15%" align="center" valign="top"> <input name="button2" type="button"
-            onClick="openURL('Daily.htm')" value=" Last 24 Hours "></td>
-            <td width="15%" align="center" valign="top"> <input name="button2" type="button"
-              onClick="openURL('Weekly.htm')" value="  Last 7 Days  "></td>
-              <td width="15%" align="center" valign="top">
-                <input type="button" value=" Last 28 Days "
-                onclick="openURL('Monthly.htm')">
-              </td>
-              <td width="15%" align="center" valign="top">
-                <input name="button" type="button"
-                onClick="openURL('Yearly.htm')" value=" Last 365 Days ">
-              </td>
-              <td width="15%" align="center" valign="top">
-                <input type="button" value="    Forecast     "
-                onClick="openURL('<!--localForecastURL-->')">
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <table cellpadding="2" cellspacing="2" border="0" width="100%" height="30" align="center">
-          <tbody>
-            <tr>
-              <td width="100%" align="center" valign="middle">
-                <font class="text"> CLIMATOLOGICAL SUMMARIES:&nbsp; </font>
-                <script language="JavaScript">
-                 createMonthlySelect("month");
-                 createYearlySelect("year");
-               </script>
+  <!-- WEATHER IMAGES END -->
 
-               <input type="button" value="Monthly Report"
-               onclick="openNoaaFile(this.form.month.value, this.form.year.value)">
-               <input type="button" value="Yearly Report "
-               onclick="openNoaaFile('',this.form.year.value)">
-             </td>
-           </tr>
-           <tr>
-            <td width="100%" align="center" valign="middle">
-              <font class="text"> BROWSE ARCHIVE RECORDS:&nbsp; </font>
-              <script language="JavaScript">
-               createDaySelect("day");
-               createMonthlySelect("month1");
-               createYearlySelect("year1");
-             </script>
-             <input type="button" value="Browse Day Records"
-             onclick="openARCFile(this.form.day.value, this.form.month1.value, this.form.year1.value)">
-           </td>
-         </tr>
-       </tbody>
-     </table>
-   </td>
- </tr>
-</tbody>
-</table>
+  <!-- WVIEW BUTTONS START -->
+  <div style="margin: auto;" align="center">
+   <form method="post">
+    <ul align=center>
+      <li>
+        <input name="button2" type="button"
+        onClick="openURL('almanac.htm')" value="     Almanac    ">
+
+        <input name="button2" type="button"
+        onClick="openURL('Daily.htm')" value=" Last 24 Hours ">
+
+        <input type="button" value=" Last 28 Days "
+        onclick="openURL('Monthly.htm')">
+
+        <input name="button" type="button"
+        onClick="openURL('Yearly.htm')" value=" Last 365 Days ">
+
+        <input type="button" value="    Forecast     "
+        onClick="openURL('<!--localForecastURL-->')">
+      </li>
+
+      <li>
+        <font class="text"> CLIMATOLOGICAL SUMMARIES: </font>
+        <script language="JavaScript">
+         createMonthlySelect("month");
+         createYearlySelect("year");
+       </script>
+       <input type="button" value="Monthly Report"
+       onclick="openNoaaFile(this.form.month.value, this.form.year.value)">
+       <input type="button" value="Yearly Report "
+       onclick="openNoaaFile('',this.form.year.value)">
+       </li>
+       <li>
+       <font class="text"> BROWSE ARCHIVE RECORDS: </font>
+       <script language="JavaScript">
+         createDaySelect("day");
+         createMonthlySelect("month1");
+         createYearlySelect("year1");
+       </script>
+       <input type="button" value="Browse Day Records"
+       onclick="openARCFile(this.form.day.value, this.form.month1.value, this.form.year1.value)">
+     </li>
+   </ul>
+ </form>
+</div>
+<!-- WVIEW BUTTONS END -->
 
 </div>
 <!-- FOOTER END -->
