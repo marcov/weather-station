@@ -1,11 +1,8 @@
 <html>
 <head>
-  <title><!--stationCity-->,<!--stationState--> Weather</title>
-
+  <title>Stazione Meteo di <!--stationCity-->,<!--stationState--></title>
   <meta http-equiv="refresh" content="150" ;="">
-  <link rel="alternate" type="application/rss+xml"
-  title="<!--stationCity-->,<!--stationState--> Weather"
-  href="wxrss.xml">
+  <link rel="alternate" type="application/rss+xml" title="Stazione Meteo di <!--stationCity-->,<!--stationState-->" href="wxrss.xml">
 
   <script language="JavaScript">
     function createDaySelect(name)
@@ -165,7 +162,7 @@ function openURL(urlname)
                     <tr>
                       <td width="100%" align="center" valign="top">
                         <big><b><font size="6" face="Arial, Helvetica, sans-serif" >
-                          <!--stationCity-->,<!--stationState--> Weather</font></b></big>
+                          Stazione Meteo di <!--stationCity-->,<!--stationState--></font></b></big>
                         </td>
                       </tr>
                       <tr>
@@ -424,7 +421,7 @@ function openURL(urlname)
 <div style="display: block;">
   <h3> Tutti i dati </h3>
 
-  <p align="center" class="tablevalues">
+  <p align="center">
     <!--include readings-nostyle.inc-->
   </p>
 
