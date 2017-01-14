@@ -149,7 +149,7 @@ function openURL(urlname)
       </form>
       <h4>Links</h4>
       <form>
-        <input class="externlink" type="button" onClick="openURL('http://fiobbio.blogdns.net/misma')"  value="Vai a Stazione Mt. Misma" />
+        <input class="externlink" type="button" onClick="openURL('http://fiobbio.blogdns.net/misma')"  value="Stazione Mt. Misma" />
         <input class="externlink" type="button" onClick="openURL('mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com')"  value="Contattaci via email" />
    </form>
 
