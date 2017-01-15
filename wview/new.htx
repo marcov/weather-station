@@ -248,12 +248,12 @@ function openURL(urlname)
 </thead>
 <tbody>
   <tr class="even">
-   <td class="title"Attuale</td>
-     <td class="min"><!--lowHumidity--><!--humUnit--> <br><!--lowHumTime--></td>
-     <td class="now"><!--outsideHumidity--><!--humUnit--></td>
-     <td class="max"><!--hiHumidity--><!--humUnit--> <br><!--hiHumTime--></td>
-   </tr >
- </tbody>
+    <td class="title">Attuale</td>
+    <td class="min"><!--lowHumidity--><!--humUnit--> <br><!--lowHumTime--></td>
+    <td class="now"><!--outsideHumidity--><!--humUnit--></td>
+    <td class="max"><!--hiHumidity--><!--humUnit--> <br><!--hiHumTime--></td>
+  </tr >
+</tbody>
 </table>
 
 <table class="tablevalues" style="width: 50%;">
