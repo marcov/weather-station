@@ -358,9 +358,8 @@ h3{
 	padding-bottom: 1em;
 }
 
-a,p,h4,button {
+a,p,h4,button,input {
 	color: whitesmoke;
-	font-family:"Trebuchet MS",Arial,Sans-Serif;
 	-webkit-appearance: none;
 }
 
