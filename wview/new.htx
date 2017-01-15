@@ -1,10 +1,14 @@
+<!DOCTYPE html>
 <html>
 <head>
-  <title>Stazione Meteo di <!--stationCity-->, <!--stationState--></title>
-  <meta http-equiv="refresh" content="150" ;="">
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="refresh" content="150" />
+
+    <title>Stazione Meteo di <!--stationCity-->, <!--stationState--></title>
+
   <link rel="alternate" type="application/rss+xml" title="Stazione Meteo di <!--stationCity-->, <!--stationState-->" href="wxrss.xml">
 
-  <script language="JavaScript">
+  <script type="text/javascript">
     function createDaySelect(name)
     {
      document.write("<select name=" + name + " size='1'>");
@@ -128,18 +132,17 @@ function openURL(urlname)
 	@import "layout.css";
 </style>
 
-<link href="http://cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.css" type="text/css" rel="stylesheet" />
-
 </head>
 
 
 
 <body>
+
   <div class="centercolumn section_0">
 
    <div id="menutop">
      <p>
-      <form>
+      <form action="#">
         <input class="externlink" type="button" onClick="openURL('http://fiobbio.blogdns.net/misma')"  value="Stazione Mt. Misma" />
         <input class="externlink" type="button" onClick="openURL('mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com')"  value="Contattaci via email" />
       </form>
@@ -150,7 +153,7 @@ function openURL(urlname)
   <div id="menubottom">
    <p>
     <h4>Menu</h4>
-    <form>
+    <form action="#">
       <input class="internlink" type="button" id="button_0" value="Inizio Pagina" />
       <input class="internlink" type="button" id="button_1" value="Tutti i dati" />
       <input class="internlink" type="button" id="button_2" value="Stazioni Limitrofe" />
@@ -382,7 +385,7 @@ function openURL(urlname)
 
   <!-- WVIEW BUTTONS START -->
   <div style="margin: auto;" align="center">
-   <form method="post">
+   <form action="#" method="post">
     <ul align="center">
       <li>
         <input name="button2" type="button"
@@ -403,7 +406,7 @@ function openURL(urlname)
 
       <li>
         <font class="text"> CLIMATOLOGICAL SUMMARIES: </font>
-        <script language="JavaScript">
+        <script type="text/javascript">
          createMonthlySelect("month");
          createYearlySelect("year");
        </script>
@@ -414,7 +417,7 @@ function openURL(urlname)
      </li>
      <li>
        <font class="text"> BROWSE ARCHIVE RECORDS: </font>
-       <script language="JavaScript">
+       <script type="text/javascript">
          createDaySelect("day");
          createMonthlySelect("month1");
          createYearlySelect("year1");
@@ -560,7 +563,7 @@ function openURL(urlname)
 
 </div>  <!-- div class centercolumn END -->
 
-
+<link href="http://cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.css" type="text/css" rel="stylesheet" />
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="http://cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
