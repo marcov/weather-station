@@ -115,8 +115,8 @@ function openNoaaFile(month, year)
   url = url + ".txt";
   //window.location=url;
 
-    $("#noaatext").text("\n\n\n           Loading....                             \n\n\n\n");
-    $("#noaatext").load(url);
+  $("#noaatext").text("\n\n\n           Loading....                             \n\n\n\n");
+  $("#noaatext").load(url);
 }
 
 function openARCFile(day, month, year)
@@ -183,7 +183,9 @@ function openURL(urlname)
       </p>
       <p style="font-size: 80%">
         <br>
-        Alba: <!--sunriseTime-->, tramonto:<!--sunsetTime--><br>
+        Alba: <!--sunriseTime-->, tramonto:<!--sunsetTime-->
+        <br>
+        <br>
         Fase lunare:<!--moonPhase--><br>
       </p>
     </li>
@@ -305,7 +307,7 @@ function openURL(urlname)
 
 <!-- RIGHT COLUMN START -->
 <div class="rightcolumn">
-<p align="right">
+  <p align="right">
     <input class="wviewlink" name="button" type="button"
     onClick="openURL('almanac.htm')" value="Almanacco">
 
@@ -321,17 +323,17 @@ function openURL(urlname)
     <input class="wviewlink" type="button" value="Previsioni"
     onClick="openURL('<!--localForecastURL-->')">
   </p>
-      <br>
+  <br>
 
-<p>
+  <p>
     Ultimo aggiornamento: 
     <b>
       <!--stationDate--> <!--stationTime-->
     </b>
-</p>
-<p style="padding-top: 1em;">
-  <a href="webcam.jpg" data-featherlight="image"> <img src="webcam_small.jpg"></a>
-</p>
+  </p>
+  <p style="padding-top: 1em;">
+    <a href="webcam.jpg" data-featherlight="image"> <img src="webcam_small.jpg"></a>
+  </p>
 </div>
 <!-- RIGHT COLUMN END -->
 </div>
@@ -402,37 +404,37 @@ function openURL(urlname)
 <div class="blockdisplay" style="margin: auto;">
   <h3>Storico Dati</h3>
 
-<div class="blockdisplay" style="padding-top: 0em;">
-  <form action="#" method="post">
+  <div class="blockdisplay" style="padding-top: 0em;">
+    <form action="#" method="post">
 
-        <font class="text"> Seleziona mese e/o anno: </font>
-        <script type="text/javascript">
-         createMonthlySelect("month");
-         createYearlySelect("year");
-       </script>
-       <input type="button" value="Mostra mese"
-       onclick="openNoaaFile(this.form.month.value, this.form.year.value)">
-       <input type="button" value="Mostra anno"
-       onclick="openNoaaFile('',this.form.year.value)">
+      <font class="text"> Seleziona mese e/o anno: </font>
+      <script type="text/javascript">
+       createMonthlySelect("month");
+       createYearlySelect("year");
+     </script>
+     <input type="button" value="Mostra mese"
+     onclick="openNoaaFile(this.form.month.value, this.form.year.value)">
+     <input type="button" value="Mostra anno"
+     onclick="openNoaaFile('',this.form.year.value)">
 
      <br>
 
-       <font class="text"> Seleziona giorno: </font>
-       <script type="text/javascript">
-         createDaySelect("day");
-         createMonthlySelect("month1");
-         createYearlySelect("year1");
-       </script>
-       <input type="button" value="Mostra"
-       onclick="openARCFile(this.form.day.value, this.form.month1.value, this.form.year1.value)">
+     <font class="text"> Seleziona giorno: </font>
+     <script type="text/javascript">
+       createDaySelect("day");
+       createMonthlySelect("month1");
+       createYearlySelect("year1");
+     </script>
+     <input type="button" value="Mostra"
+     onclick="openARCFile(this.form.day.value, this.form.month1.value, this.form.year1.value)">
 
- </form>
-</div>
+   </form>
+ </div>
 
  <div class="blockdisplay" style="width: 90%; height: auto; padding-top: 1em;">
-    <pre id="noaatext">
-    </pre>
- </div>
+  <pre id="noaatext">
+  </pre>
+</div>
 </div>
 <!-- FOOTER END -->
 
@@ -541,19 +543,20 @@ function openURL(urlname)
   </ul>
 </div>
 
+<!-- Histats.com  (div with counter) --><div id="histats_counter" class="blockdisplay" align="center"></div>
+<!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+  _Hasync.push(['Histats.start', '1,1781036,4,4015,112,61,00011111']);
+  _Hasync.push(['Histats.fasi', '1']);
+  _Hasync.push(['Histats.track_hits', '']);
+  (function() {
+    var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+    hs.src = ('//s10.histats.com/js15_as.js');
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+  })();</script>
+  <noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?1781036&101" alt="contatore gratuito" border="0"></a></noscript>
+  <!-- Histats.com  END  -->
 
-<div class="blockdisplay" align="center">
- <!-- Histats.com  START  (standard)
- <script type="text/javascript">document.write(unescape("%3Cscript src=%27http://s10.histats.com/js15.js%27 type=%27text/javascript%27%3E%3C/script%3E"));</script>
-
- <a href="http://www.histats.com" target="_blank" title="contatore per sito" ><script  type="text/javascript">
-   try {Histats.start(1,1781036,4,422,112,75,"00011111");
-   Histats.track_hits();} catch(err){};
- </script></a>
- <noscript><a href="http://www.histats.com" target="_blank"><img  src="http://sstatic1.histats.com/0.gif?1781036&101" alt="contatore per sito" border="0"></a></noscript>
-</script>
-Histats.com  END  -->
-</div>
 
 </div>  <!-- div class centercolumn END -->
 
