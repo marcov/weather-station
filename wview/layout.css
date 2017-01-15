@@ -215,12 +215,22 @@ h4
 
 	/*border:1px solid #C9C9C9; */
 	color: #003300;
-	list-style:none;
+
 	/* Make table as large as the div container */
 	min-width: 100%;
+	width: 100%;
+
 	font-size:  90%;
 	/*border-collapse: collapse;*/
 	text-align: center;
+}
+
+
+.tablevalues th.firstcolumn
+{
+	width: 40%;
+	text-align: left;
+	font-weight:bold;
 }
 
 .tablevalues th
@@ -261,7 +271,7 @@ h4
 
 .tablevalues .nowtemperature
 {
-	font-size: 110%;
+	font-size: 170%;
 }
 
 
