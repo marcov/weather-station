@@ -140,8 +140,7 @@ function openURL(urlname)
 
   <div class="centercolumn section_0">
 
-   <div id="menutop">
-    <form action="#">
+   <div id="menutop" class="blockdisplay">
       <input class="internlink" type="button" id="button_0" value="Inizio Pagina" />
       <input class="internlink" type="button" id="button_1" value="Tutti i dati" />
       <input class="internlink" type="button" id="button_2" value="Stazioni Limitrofe" />
@@ -149,7 +148,6 @@ function openURL(urlname)
       <input class="internlink" type="button" id="button_4" value="Satellite/Mappe" />
       <input class="externlink" type="button" onClick="openURL('http://fiobbio.blogdns.net/misma')"  value="Stazione Mt. Misma" />
       <input class="externlink" type="button" onClick="openURL('mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com')"  value="Contattaci via email" />
-    </form>
   </div>
 
   <div id="menubottom">
