@@ -361,6 +361,7 @@ h3{
 a,p,h4,button {
 	color: whitesmoke;
 	font-family:"Trebuchet MS",Arial,Sans-Serif;
+	-webkit-appearance: none;
 }
 
 .internlink {
