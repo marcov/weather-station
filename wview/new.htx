@@ -442,7 +442,7 @@ function openURL(urlname)
   <h3>Stazioni limitrofe</h3>
   <ul class="blockdisplay">
     <li>
-      <a alt="Stazione meteo di Albino" href="http://my.meteonetwork.it/station/lmb257" target="_blank"><img style="border:none;" src="http://my.meteonetwork.it/station/lmb257/sticker-oriz1" /></a>
+      <a title="Stazione meteo di Albino" alt="meteonetwork" href="http://my.meteonetwork.it/station/lmb257" target="_blank"><img style="border:none;" src="http://my.meteonetwork.it/station/lmb257/sticker-oriz1" /></a>
     </li>
 
     <li>
@@ -459,7 +459,7 @@ function openURL(urlname)
   </p>
   <ul class="blockdisplay">
     <li style="padding-top: 1em;">
-      <img src="http://www.yr.no/place/Italy/Lombardia/Albino/avansert_meteogram.png" />
+      <img alt="yr.no" src="http://www.yr.no/place/Italy/Lombardia/Albino/avansert_meteogram.png" />
     </li>
 
     <li style="padding-top: 1em;">
@@ -472,7 +472,7 @@ function openURL(urlname)
   <h3>Radar</h3>
   <ul class="blockdisplay">
     <li>
-      <a href="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" title="Large image" data-featherlight="image">
+      <a alt="arpa.piemonte.it" href="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" title="Large image" data-featherlight="image">
         <img class="satellite" src="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" title="EMCWF 500hPa" />
       </a>
     </li>
@@ -484,7 +484,7 @@ function openURL(urlname)
   <ul class="blockdisplay">
     <li>
       <a href="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&amp;ext=1&amp;y=&amp;run=6&amp;lat=45,8&amp;lon=9,8&amp;runpara=0" title="Large image" data-featherlight="image">
-        <img class="satellite" src="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&amp;ext=1&amp;y=&amp;run=6&amp;lat=45,8&amp;lon=9,8&amp;runpara=0" id="image" name="image" alt="Diagramme GEFS" title="Diagramme GEFS" />
+        <img class="satellite" src="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&amp;ext=1&amp;y=&amp;run=6&amp;lat=45,8&amp;lon=9,8&amp;runpara=0" id="image" alt="Diagramme GEFS" title="Diagramme GEFS" />
       </a>
     </li>
   </ul>
@@ -497,7 +497,7 @@ function openURL(urlname)
 
   <ul class="blockdisplay">
     <li>
-      <a href="http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg" title="Large image" data-featherlight="image">
+      <a alt="eumetsat.org" href="http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg" title="Large image" data-featherlight="image">
         <img class="satellite" src="http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg" title="Small image" />
       </a>
     </li>
@@ -508,7 +508,7 @@ function openURL(urlname)
     </li>
     <li>
       <a href="http://www.sat24.com/images.php?country=alps&sat=&1198352062421" title="Large image" data-featherlight="image">
-        <img class="satellite" src="http://www.sat24.com/images.php?country=alps&sat=&1198352062421" title="Small image" />
+        <img alt="sat24.com" class="satellite" src="http://www.sat24.com/images.php?country=alps&sat=&1198352062421" title="Small image" />
       </a>
     </li>
   </ul>
@@ -520,7 +520,7 @@ function openURL(urlname)
   <ul class="blockdisplay">
     <li>
       <a href="http://www.astrogeo.va.it/fulmini/fulmini.jpg" title="Large image" data-featherlight="image">
-        <img class="satellite" src="http://www.astrogeo.va.it/fulmini/fulmini.jpg" title="EMCWF 500hPa" />
+        <img alt="va.it" class="satellite" src="http://www.astrogeo.va.it/fulmini/fulmini.jpg" title="EMCWF 500hPa" />
       </a>
     </li>
   </ul>
@@ -531,7 +531,7 @@ function openURL(urlname)
   <ul class="blockdisplay">
     <li>
       <a href="http://www.wetterzentrale.de/pics/ecmpanel1.gif" title="Large image" data-featherlight="image">
-        <img class="satellite" src="http://www.wetterzentrale.de/pics/ecmpanel1.gif" title="EMCWF 500hPa" />
+        <img alt="www.wetterzentrale.de" class="satellite" src="http://www.wetterzentrale.de/pics/ecmpanel1.gif" title="EMCWF 500hPa" />
       </a>
     </li>
     <li>
