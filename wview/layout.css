@@ -255,8 +255,15 @@ h4
 .tablevalues .now
 {
 	font-weight: bold;
-	font-size: 102%;
+	font-size: 101%;
 }
+
+
+.tablevalues .nowtemperature
+{
+	font-size: 105%;
+}
+
 
 .tablevalues .min,
 .tablevalues .max

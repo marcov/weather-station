@@ -202,7 +202,7 @@ function openURL(urlname)
        <tr class="even">
          <td class="title">Attuale</td>
          <td class="min"><!--lowOutsideTemp--><!--tempUnit--><br><!--lowOutsideTempTime--></td>
-         <td class="now"><!--outsideTemp--><!--tempUnit--></td>
+         <td class="now nowtemperature"><!--outsideTemp--><!--tempUnit--></td>
          <td class="max"><!--hiOutsideTemp--><!--tempUnit--><br><!--hiOutsideTempTime--></td>
        </tr >
        <tr class="odd">
