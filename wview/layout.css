@@ -23,7 +23,6 @@ Description...
 {
 	clear: none;
 	float: none;
-	background-color: #004d90;
 	/* Removed border */
 	/* border: 1px solid green;*/
 	/*Make column large exactly as content */
@@ -35,15 +34,17 @@ Description...
 	width: 90%;
 
 	color: whitesmoke;
+
+	/* DEBUG */
+    /* background-color: black; */
 }
 
 .footer 
 {
 	/* Avoid div overlapping */
 	clear: both;
-	width: 90%;
+	width: 100%;
 	display: block; 
-	padding-top: 2em;
 }
 
 img.round
@@ -58,32 +59,39 @@ img.round
 	border-radius: 100%;
 }
 
-.centercolumn h4
+div.centercolumn h4
 {
 	float: left;
 }
 
-.rightcolumn
+div.rightcolumn
 {
 	float: center;	
-	width: 60%; 
+	width: 65%;
+	margin-left:1%; 
+	/* DEBUG */
+	/* background-color: violet; */
 }
 
-.leftcolumn
+div.leftcolumn
 {
 	float: left;
-	width: 40%; 
+	width: 33%; 
+	margin-right: 1%;
+
+	/* DEBUG */
+	/* background-color: orange; */
 }
 
-.rightcolumn,
-.leftcolumn
+div.rightcolumn,
+div.leftcolumn
 {
 	clear: none;
-	/* Removed padding */
-	/* padding: 0.5em; */
+
 	color: whitesmoke;
 
-	background-color:#004d90;
+	padding-top: 0em;
+	/* background-color:#004d90; */
 	/*Removed border*/
 	/* border: 1px solid orange;*/
 	/*Make column large exactly as content */
@@ -94,8 +102,8 @@ img.round
 	border-radius: .5em;
 }
 
-.rightcolumn img,
-.leftcolumn img
+div.rightcolumn img,
+div.leftcolumn img
 {
 	/* Make the images in the columm automatically scale when resizing window */
 	max-width: 100%;
@@ -159,6 +167,14 @@ form input
 
 /********************************************************************/
 
+div 
+{
+	margin-top:    0.5em;
+	margin-bottom: 0.5em;
+	padding-top:   3.5em;
+	background-color: #004d90;
+}
+
 img.satellite
 {
 	width: 300px;
@@ -181,12 +197,15 @@ ul.blockdisplay li{
 	float: left;
 }
 
-.blockdisplay
+div.blockdisplay
 {
 	display: block;
 	/*border:1px solid black;*/
 	clear: both;	
 	overflow: hidden;
+
+    /* DEBUG */
+	/* background: red; */
 }
 
 h2.blockdisplay
@@ -211,34 +230,36 @@ h4
 	margin:0;
 	padding:0;
 	/*border:1px solid #C9C9C9; */
-	/* debug */
 	color: #003300;
 	list-style:none;
 	padding: 2em 0 0 0;
 	/* Make table as large as the div container */
 	min-width: 100%;
 	font-size:  90%;
+	border-collapse: collapse;
 }
 
-table.tablevalues th.text{
-	/*min-width: 10em;*/
+.tablevalues th
+{
+	font-weight: normal;
+	font-size: 90%;
 }
 
-.tablevalues thead tr
+.tablevalues thead 
 {
 	font-weight:bold;
 	background:#333;
 	color:#fff;
 }
 
-.tablevalues tbody .even
+.tablevalues .even
 {
-	background:#fff
+	background:#fff;
 }
 
-.tablevalues tbody .odd
+.tablevalues .odd
 {
-	background:#FFFFE6
+	background:#FFFFE6;
 }
 
 .tablevalues tr td
@@ -253,11 +274,15 @@ table.tablevalues th.text{
 	font-size:  95%;
 }
 
-.tablevalues .now,
+.tablevalues .now
+{
+	font-weight: bold;
+	font-size: 120%;
+}
+
 .tablevalues .min,
 .tablevalues .max
 {
-	font-weight:bold;
 	text-align:  center;
 }
 
@@ -296,10 +321,11 @@ table.tablevalues th.text{
 }
 
 #menutop {
+	padding-top: 0em;
 	background-color: rgba(0,0,0,0.3); 
 	color:      #000000; 
 	height:     auto; 
-	/*position:fixed; */
+	position:fixed;
 	font-family: Arial, Helvetica, sans-serif;
 	text-align: right;
 }
@@ -332,7 +358,6 @@ h3{
 	/* Changed inside tab Title color from yellowish*/
 	color: whitesmoke;
 	font-family:"Trebuchet MS",Arial,Sans-Serif;
-	padding-top:    1em;
 	padding-bottom: 1em;
 }
 
@@ -342,14 +367,13 @@ a,p,h4,button {
 }
 
 .internlink {
-	width: 90%;
+	/*width: 90%;*/
+	width: auto;
 	margin-left: 1em;
 	margin-right: 1em;
 }
 
-.externlink {
-	width: 40%;
-}
+
 .externlink {
 	width: auto;
 	padding: 0.1em;
