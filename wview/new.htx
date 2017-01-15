@@ -429,7 +429,7 @@ function openURL(urlname)
  </form>
 </div>
 
- <div class="blockdisplay" style="width: 75%; height: auto; padding-top: 1em;">
+ <div class="blockdisplay" style="width: 90%; height: auto; padding-top: 1em;">
     <pre id="noaatext">
     </pre>
  </div>
