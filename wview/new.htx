@@ -429,7 +429,7 @@ function openURL(urlname)
  </form>
 </div>
 
- <div class="blockdisplay" style="width: 66%; height: auto; padding-top: 1em;">
+ <div class="blockdisplay" style="width: 75%; height: auto; padding-top: 1em;">
     <pre id="noaatext">
     </pre>
  </div>
@@ -453,9 +453,6 @@ function openURL(urlname)
 
 <div class="section_3 blockdisplay">
   <h3>Meteo</h3>
-  <p>
-    <a href="https://www.meteoblue.com/it/italia/tempo-albino" title="Tempo Albino - meteoblue" target="_blank">Link Meteo Albino</a>
-  </p>
   <ul>
     <li style="padding-top: 1em;">
       <img alt="yr.no" src="http://www.yr.no/place/Italy/Lombardia/Albino/avansert_meteogram.png" />
