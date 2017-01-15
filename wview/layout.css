@@ -277,7 +277,7 @@ h4
 .tablevalues .now
 {
 	font-weight: bold;
-	font-size: 105%;
+	font-size: 100%;
 }
 
 .tablevalues .min,
@@ -290,11 +290,15 @@ h4
 .tablevalues .min
 {
 	color: blue;
+	font-weight: bold;
+	font-size: 95%;
 }
 
 .tablevalues .max
 {
 	color: red;
+	font-weight: bold;
+	font-size: 95%;
 }
 /************ End of table values ************/
 
