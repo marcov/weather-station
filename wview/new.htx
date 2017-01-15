@@ -183,10 +183,10 @@ function openURL(urlname)
       </p>
       <p style="font-size: 80%">
         <br>
-        Alba: <!--sunriseTime-->, tramonto:<!--sunsetTime-->
+        Alba: <!--sunriseTime-->, tramonto: <!--sunsetTime-->
         <br>
         <br>
-        Fase lunare:<!--moonPhase--><br>
+        Fase lunare: <!--moonPhase--><br>
       </p>
     </li>
     <!-- HEADER END -->
