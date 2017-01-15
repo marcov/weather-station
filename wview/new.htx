@@ -141,13 +141,13 @@ function openURL(urlname)
   <div class="centercolumn section_0">
 
    <div id="menutop" class="blockdisplay">
-      <input class="internlink" type="button" id="button_0" value="Inizio Pagina" />
-      <input class="internlink" type="button" id="button_1" value="Tutti i dati" />
-      <input class="internlink" type="button" id="button_2" value="Stazioni Limitrofe" />
-      <input class="internlink" type="button" id="button_3" value="Meteo" />
-      <input class="internlink" type="button" id="button_4" value="Satellite/Mappe" />
-      <input class="externlink" type="button" onClick="openURL('http://fiobbio.blogdns.net/misma')"  value="Stazione Mt. Misma" />
-      <input class="externlink" type="button" onClick="openURL('mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com')"  value="Contattaci via email" />
+    <input class="internlink" type="button" id="button_0" value="Inizio Pagina" />
+    <input class="internlink" type="button" id="button_1" value="Tutti i dati" />
+    <input class="internlink" type="button" id="button_2" value="Stazioni Limitrofe" />
+    <input class="internlink" type="button" id="button_3" value="Meteo" />
+    <input class="internlink" type="button" id="button_4" value="Satellite/Mappe" />
+    <input class="externlink" type="button" onClick="openURL('http://fiobbio.blogdns.net/misma')"  value="Stazione Mt. Misma" />
+    <input class="externlink" type="button" onClick="openURL('mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com')"  value="Contattaci via email" />
   </div>
 
   <div id="menubottom">
@@ -321,60 +321,52 @@ function openURL(urlname)
 
 
 <!-- WEATHER IMAGES START -->
-<div class="blockdisplay" align="center" style="padding-top:0;">
-  <ul align="center">
+<div class="blockdisplay" style="padding-top:0;" align="center">
+  <img src="tempdaycomp.png"
+  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+  <img src="wspeeddaycomp.png"
+  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+  <img src="radiationDay.png "
+  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+</div> 
 
-    <!-- WEATHER GEN IMAGES START -->
-    <li>
-      <img src="tempdaycomp.png"
-      style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-      <img src="wspeeddaycomp.png"
-      style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-      <img src="radiationDay.png "
-      style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-    </li>
+<div class="blockdisplay" style="padding-top:0;" align="center">
 
-    <li>
-      <img src="rainday.png"
-      style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-      <img src="baromday.png"
-      style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-    </li>
+  <img src="rainday.png"
+  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+  <img src="baromday.png"
+  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+</div>
 
-    <li>
-      <p align="center">
-        <img src="radiation.png"
-        style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+<div class="blockdisplay" style="padding-top:0;" align="center">
+
+  <img src="radiation.png"
+  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
 
 
-        <img src="dayrain.png"
-        style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+  <img src="dayrain.png"
+  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
 
-        <img src="stormrain.png"
-        style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+  <img src="stormrain.png"
+  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
 
-        <img src="rainrate.png"
-        style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+  <img src="rainrate.png"
+  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
 
-        <img src="monthrain.png"
-        style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+  <img src="monthrain.png"
+  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
 
-        <img src="yearrain.png"
-        style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-      </p>
-    </li>
+  <img src="yearrain.png"
+  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+</div>
 
-    <li>
-      <p>
-        <img class="round" src="windroseday.png"
-        style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-        <img class="round" src="windroseweek.png"
-        style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-        <img class="round" src="windroseyear.png"
-        style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-      </p>
-    </li>
-  </ul>
+<div class="blockdisplay" style="padding-top:0;" align="center">
+  <img class="round" src="windroseday.png"
+  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+  <img class="round" src="windroseweek.png"
+  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+  <img class="round" src="windroseyear.png"
+  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
 </div>
 <!-- WEATHER IMAGES END -->
 
@@ -492,8 +484,6 @@ function openURL(urlname)
 
 <div class="blockdisplay section_4">
   <h3>Immagini satellitari</h3>
-  <h4>Cliccare le immagini per vederle ingrandite. </p> </h4>
-
   <ul>
     <li>
       <a alt="eumetsat.org" href="http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg" title="Large image" data-featherlight="image">

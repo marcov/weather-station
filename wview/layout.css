@@ -133,20 +133,6 @@ span.right
 	background-color: lightBlue;
 }
 
-/* TODO!!!!!*/
-.myiframe img
-{
-	background-color:#eae9d4;
-	/*Removed border*/
-	/* border: 1px solid orange;*/
-	/*Make column large exactly as content */
-	overflow: hidden;
-	/* Make the column scale of size when resizing window */
-	max-width: 30%;
-	-moz-border-radius: .5em;
-	border-radius: .5em;
-}
-
 input
 {
 	-webkit-appearance: none;
@@ -193,8 +179,10 @@ a.webcam img
 	-moz-border-radius: .3em;
 }
 
-ul.blockdisplay li{
-	float: left;
+li {
+	margin: 0.3em 0.3em 0.3em 0.3em;
+	padding: 0em 0em 0em 0em;
+    float: left;
 }
 
 div.blockdisplay
@@ -341,10 +329,6 @@ body{
 	color: whitesmoke;
 	list-style:none;
 	padding: 1em 1em 1em 1em;
-}
-
-li {
-	padding: 0em 1em;
 }
 
 h3{
