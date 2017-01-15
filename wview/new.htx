@@ -113,13 +113,18 @@ function openNoaaFile(month, year)
   }
 
   url = url + ".txt";
-  window.location=url;
+  //window.location=url;
+
+    $("#noaatext").text("\n\n\n           Loading....                             \n\n\n\n");
+    $("#noaatext").load(url);
 }
 
 function openARCFile(day, month, year)
 {
   var url = "Archive/ARC-" + year + "-" + month + "-" + day + ".txt";
-  window.location=url;
+  //window.location=url;
+  $("#noaatext").text("\n\n\n           Loading....                             \n\n\n\n");
+  $("#noaatext").load(url);
 }
 
 function openURL(urlname)
@@ -142,7 +147,7 @@ function openURL(urlname)
 
    <div id="menutop" class="blockdisplay">
     <input class="internlink" type="button" id="button_0" value="Inizio Pagina" />
-    <input class="internlink" type="button" id="button_1" value="Tutti i dati" />
+    <input class="internlink" type="button" id="button_1" value="Dettagli" />
     <input class="internlink" type="button" id="button_2" value="Stazioni Limitrofe" />
     <input class="internlink" type="button" id="button_3" value="Meteo" />
     <input class="internlink" type="button" id="button_4" value="Satellite/Mappe" />
@@ -172,120 +177,118 @@ function openURL(urlname)
     <li>
       <!-- XXXinclude header.inc-->
 
-      <h1><b><font size="6" face="Arial, Helvetica, sans-serif" >
-        Stazione Meteo di <!--stationCity-->, <!--stationState--></font></b></h1>
+      <h1>Stazione Meteo di <!--stationCity-->, <!--stationState--></h1>
+      <p>
+        <!--stationElevation--> s.l.m., <!--stationLatitude--> - <!--stationLongitude--><br>
+      </p>
+      <p style="font-size: 80%">
         <br>
-        Posizione geografica: <!--stationLatitude--> - <!--stationLongitude-->
-        <br>
-        Altitudine: <!--stationElevation--><br>
-
-        Alba:<!--sunriseTime--><br>
-        Tramonto:<!--sunsetTime--><br>
+        Alba: <!--sunriseTime-->, tramonto:<!--sunsetTime--><br>
         Fase lunare:<!--moonPhase--><br>
+      </p>
+    </li>
+    <!-- HEADER END -->
 
-      </li>
-      <!-- HEADER END -->
-
-      <!-- WEATHER IMAGES START -->
-      <li>
-       <!-- NEW TABLE START -->
-       <table class="tablevalues" style="width: 50%;">
-         <thead>
-          <tr> <th> Temperatura</th> <th>min</th> <th> &nbsp; </th> <th>max</th> </tr>
-        </thead>
-        <tbody>
-         <tr class="even">
-           <td class="title">Attuale</td>
-           <td class="min"><!--lowOutsideTemp--><!--tempUnit--><br><!--lowOutsideTempTime--></td>
-           <td class="now"><!--outsideTemp--><!--tempUnit--></td>
-           <td class="max"><!--hiOutsideTemp--><!--tempUnit--><br><!--hiOutsideTempTime--></td>
-         </tr >
-         <tr class="odd">
-           <td class="title">Percepita</td>
-           <td> </td>
-           <td class="now"><!--apparentTemp--><!--tempUnit--></td>
-           <td> </td>
-         </tr >
-       </tbody>
-     </table>
-
+    <!-- WEATHER IMAGES START -->
+    <li>
+     <!-- NEW TABLE START -->
      <table class="tablevalues" style="width: 50%;">
        <thead>
-         <tr>  <th>Vento</th> <th> </th><th>&nbsp;</th> <th>max</th> </tr>
-       </thead>
-       <tbody>
-         <tr class="even">
-           <td class="title">Attuale</td>
-           <td> </td>
-           <td class="now"><!--windSpeed--><!--windUnit--> <br><!--windDirection--></td>
-           <td> </td>
-         </tr >
-         <tr class="odd">
-           <td class="title">Raffica</td>
-           <td> </td>
-           <td class="now"><!--windGustSpeed--><!--windUnit--><br> <!--windGustDirectionDegrees--> gradi</td>
-           <td class="max"><!--hiWindSpeed--><!--windUnit--><br><!--hiWindSpeedTime--></td>
-         </tr>
-         <tr class="even">
-           <td class="title">Media 10 minuti</td>
-           <td> </td>
-           <td class="now"><!--tenMinuteAvgWindSpeed--><!--windUnit--></td>
-           <td> </td>
-         </tr >
-         <tr class="odd">
-           <td class="title">Scala di Beaufort</td>
-           <td> </td>
-           <td class="now"><!--windBeaufortScale--></td>
-           <td> </td>
-         </tr >
-       </tbody>
-     </table>
-
-
-     <table class="tablevalues" style="width: 50%;">
-       <thead>
-        <tr> <th>Umidita'</th> <th>min</th> <th>&nbsp;</th> <th>max</th> <th> </th> </tr>
+        <tr> <th> Temperatura</th> <th>min</th> <th> &nbsp; </th> <th>max</th> </tr>
       </thead>
       <tbody>
-        <tr class="even">
-         <td class="title"Attuale</td>
-           <td class="min"><!--lowHumidity--><!--humUnit--> <br><!--lowHumTime--></td>
-           <td class="now"><!--outsideHumidity--><!--humUnit--></td>
-           <td class="max"><!--hiHumidity--><!--humUnit--> <br><!--hiHumTime--></td>
-         </tr >
-       </tbody>
-     </table>
+       <tr class="even">
+         <td class="title">Attuale</td>
+         <td class="min"><!--lowOutsideTemp--><!--tempUnit--><br><!--lowOutsideTempTime--></td>
+         <td class="now"><!--outsideTemp--><!--tempUnit--></td>
+         <td class="max"><!--hiOutsideTemp--><!--tempUnit--><br><!--hiOutsideTempTime--></td>
+       </tr >
+       <tr class="odd">
+         <td class="title">Percepita</td>
+         <td> </td>
+         <td class="now"><!--apparentTemp--><!--tempUnit--></td>
+         <td> </td>
+       </tr >
+     </tbody>
+   </table>
 
-     <table class="tablevalues" style="width: 50%;">
-       <thead>
-        <tr> <th>Pressione</th> <th>min</th> <th>&nbsp;</th> <th>max</th> <th> </th> </tr>
-      </thead>
+   <table class="tablevalues" style="width: 50%;">
+     <thead>
+       <tr>  <th>Vento</th> <th> </th><th>&nbsp;</th> <th>max</th> </tr>
+     </thead>
+     <tbody>
+       <tr class="even">
+         <td class="title">Attuale</td>
+         <td> </td>
+         <td class="now"><!--windSpeed--><!--windUnit--> <br><!--windDirection--></td>
+         <td> </td>
+       </tr >
+       <tr class="odd">
+         <td class="title">Raffica</td>
+         <td> </td>
+         <td class="now"><!--windGustSpeed--><!--windUnit--><br> <!--windGustDirectionDegrees--> gradi</td>
+         <td class="max"><!--hiWindSpeed--><!--windUnit--><br><!--hiWindSpeedTime--></td>
+       </tr>
+       <tr class="even">
+         <td class="title">Media 10 minuti</td>
+         <td> </td>
+         <td class="now"><!--tenMinuteAvgWindSpeed--><!--windUnit--></td>
+         <td> </td>
+       </tr >
+       <tr class="odd">
+         <td class="title">Scala di Beaufort</td>
+         <td> </td>
+         <td class="now"><!--windBeaufortScale--></td>
+         <td> </td>
+       </tr >
+     </tbody>
+   </table>
+
+
+   <table class="tablevalues" style="width: 50%;">
+     <thead>
+      <tr> <th>Umidita'</th> <th>min</th> <th>&nbsp;</th> <th>max</th> <th> </th> </tr>
+    </thead>
+    <tbody>
       <tr class="even">
-        <td class="title">Attuale</td>
-        <td class="min"><!--lowBarometer--><!--barUnit--> <br><!--lowBarometerTime--></td>
-        <td class="now"><!--barometer--><!--barUnit--></td>
-        <td class="max"><!--hiBarometer--><!--barUnit--> <br><!--hiBarometerTime--></td>
-      </tr>
-      <tr class="even">
-        <td class="title">Trend</td>
-        <td class="min"></td>
-        <td class="now"><!--baromtrend--></td>
-        <td class="max"></td>
-      </tr>
-    </tbody>
-  </table>
+       <td class="title"Attuale</td>
+         <td class="min"><!--lowHumidity--><!--humUnit--> <br><!--lowHumTime--></td>
+         <td class="now"><!--outsideHumidity--><!--humUnit--></td>
+         <td class="max"><!--hiHumidity--><!--humUnit--> <br><!--hiHumTime--></td>
+       </tr >
+     </tbody>
+   </table>
+
+   <table class="tablevalues" style="width: 50%;">
+     <thead>
+      <tr> <th>Pressione</th> <th>min</th> <th>&nbsp;</th> <th>max</th> <th> </th> </tr>
+    </thead>
+    <tr class="even">
+      <td class="title">Attuale</td>
+      <td class="min"><!--lowBarometer--><!--barUnit--> <br><!--lowBarometerTime--></td>
+      <td class="now"><!--barometer--><!--barUnit--></td>
+      <td class="max"><!--hiBarometer--><!--barUnit--> <br><!--hiBarometerTime--></td>
+    </tr>
+    <tr class="even">
+      <td class="title">Trend</td>
+      <td class="min"></td>
+      <td class="now"><!--baromtrend--></td>
+      <td class="max"></td>
+    </tr>
+  </tbody>
+</table>
 
 
-  <table class="tablevalues" style="width: 50%;">
-   <thead>
-    <tr> <th>Pioggia</th><th>Frequenza</th> <th>Totale 24h</th> <th>Evento piovoso</th> <th> </th> </tr>
-  </thead>
-  <tr class="even">
-    <td class="title">Attuale</td>
-    <td class="now"><!--rainRate--><!--rateUnit--></td>
-    <td class="now"><!--dailyRain--><!--rainUnit--></td>
-    <td class="now"><!--stormRain--><!--rainUnit--></td>
-  </tr>
+<table class="tablevalues" style="width: 50%;">
+ <thead>
+  <tr> <th>Pioggia</th><th>Frequenza</th> <th>Totale 24h</th> <th>Evento piovoso</th> <th> </th> </tr>
+</thead>
+<tr class="even">
+  <td class="title">Attuale</td>
+  <td class="now"><!--rainRate--><!--rateUnit--></td>
+  <td class="now"><!--dailyRain--><!--rainUnit--></td>
+  <td class="now"><!--stormRain--><!--rainUnit--></td>
+</tr>
 
 </tbody>
 </table>
@@ -302,18 +305,33 @@ function openURL(urlname)
 
 <!-- RIGHT COLUMN START -->
 <div class="rightcolumn">
+<p align="right">
+    <input class="wviewlink" name="button" type="button"
+    onClick="openURL('almanac.htm')" value="Almanacco">
 
-  <div class="blockdisplay" style="padding-top:0;">
+    <input class="wviewlink" name="button" type="button"
+    onClick="openURL('Daily.htm')" value="Ultime 24 ore">
 
+    <input class="wviewlink" type="button" value="Mese in corso"
+    onclick="openURL('Monthly.htm')">
+
+    <input class="wviewlink" name="button" type="button"
+    onClick="openURL('Yearly.htm')" value="Anno in corso">
+
+    <input class="wviewlink" type="button" value="Previsioni"
+    onClick="openURL('<!--localForecastURL-->')">
+  </p>
+      <br>
+
+<p>
     Ultimo aggiornamento: 
     <b>
       <!--stationDate--> <!--stationTime-->
     </b>
-
-  </div>
-
+</p>
+<p style="padding-top: 1em;">
   <a href="webcam.jpg" data-featherlight="image"> <img src="webcam_small.jpg"></a>
-  <!-- WEATHER GEN IMAGES END -->
+</p>
 </div>
 <!-- RIGHT COLUMN END -->
 </div>
@@ -370,64 +388,54 @@ function openURL(urlname)
 </div>
 <!-- WEATHER IMAGES END -->
 
-
-<!-- FOOTER START -->
-<div class="footer" style="margin: auto;" align="center">
-  <!-- WVIEW BUTTONS START -->
-  <form action="#" method="post">
-    <ul align="center">
-      <li>
-        <input name="button2" type="button"
-        onClick="openURL('almanac.htm')" value="     Almanac    ">
-
-        <input name="button2" type="button"
-        onClick="openURL('Daily.htm')" value=" Last 24 Hours ">
-
-        <input type="button" value=" Last 28 Days "
-        onclick="openURL('Monthly.htm')">
-
-        <input name="button" type="button"
-        onClick="openURL('Yearly.htm')" value=" Last 365 Days ">
-
-        <input type="button" value="    Forecast     "
-        onClick="openURL('<!--localForecastURL-->')">
-      </li>
-
-      <li>
-        <font class="text"> CLIMATOLOGICAL SUMMARIES: </font>
-        <script type="text/javascript">
-         createMonthlySelect("month");
-         createYearlySelect("year");
-       </script>
-       <input type="button" value="Monthly Report"
-       onclick="openNoaaFile(this.form.month.value, this.form.year.value)">
-       <input type="button" value="Yearly Report "
-       onclick="openNoaaFile('',this.form.year.value)">
-     </li>
-     <li>
-       <font class="text"> BROWSE ARCHIVE RECORDS: </font>
-       <script type="text/javascript">
-         createDaySelect("day");
-         createMonthlySelect("month1");
-         createYearlySelect("year1");
-       </script>
-       <input type="button" value="Browse Day Records"
-       onclick="openARCFile(this.form.day.value, this.form.month1.value, this.form.year1.value)">
-     </li>
-   </ul>
- </form>
- <!-- WVIEW BUTTONS END -->
-</div>
-<!-- FOOTER END -->
-
 <div class="blockdisplay section_1">
-  <h3>Tutti i dati </h3>
+  <h3>Dettagli </h3>
   <ul align="center" style="max-width: 50%;">
     <li>
       <!--include readings-nostyle.inc-->
     </li>
   </ul>
 </div>
+
+
+<!-- FOOTER START -->
+<div class="blockdisplay" style="margin: auto;">
+  <h3>Storico Dati</h3>
+
+<div class="blockdisplay" style="padding-top: 0em;">
+  <form action="#" method="post">
+
+        <font class="text"> Seleziona mese e/o anno: </font>
+        <script type="text/javascript">
+         createMonthlySelect("month");
+         createYearlySelect("year");
+       </script>
+       <input type="button" value="Mostra mese"
+       onclick="openNoaaFile(this.form.month.value, this.form.year.value)">
+       <input type="button" value="Mostra anno"
+       onclick="openNoaaFile('',this.form.year.value)">
+
+     <br>
+
+       <font class="text"> Seleziona giorno: </font>
+       <script type="text/javascript">
+         createDaySelect("day");
+         createMonthlySelect("month1");
+         createYearlySelect("year1");
+       </script>
+       <input type="button" value="Mostra"
+       onclick="openARCFile(this.form.day.value, this.form.month1.value, this.form.year1.value)">
+
+ </form>
+</div>
+
+ <div class="blockdisplay" style="width: 66%; height: auto; padding-top: 1em;">
+    <pre id="noaatext">
+    </pre>
+ </div>
+</div>
+<!-- FOOTER END -->
+
 
 <div class="section_2 blockdisplay">
   <h3>Stazioni limitrofe</h3>

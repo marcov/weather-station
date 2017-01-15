@@ -37,14 +37,6 @@ Description...
 	/* background-color: black; */
 }
 
-.footer 
-{
-	/* Avoid div overlapping */
-	clear: both;
-	width: 100%;
-	display: block; 
-}
-
 img.round
 {
 	margin-top: 1em;
@@ -68,7 +60,7 @@ div.rightcolumn
 	width: 65%;
 	margin-left:1%; 
 	/* DEBUG */
-	/* background-color: violet; */
+	/* background-color: violet;  */
 }
 
 div.leftcolumn
@@ -96,8 +88,6 @@ div.leftcolumn
 	overflow: hidden;
 	/* Make the column scale of size when resizing window */
 	/* max-width: 33%; */
-	-moz-border-radius: .5em;
-	border-radius: .5em;
 }
 
 div.rightcolumn img,
@@ -140,9 +130,14 @@ input
 	background: rgba(0, 0, 0, 0.5);
 	font-size: 1em;
 	padding: 0.5em;
+	/* Round button borders */
 	border-radius: .3em;
 	-moz-border-radius: .3em;
-	margin: 0.5em 0.5em 0.5em 0.5em;
+
+	margin-left: 0.2em;
+	margin-right: 0.2em;
+	margin-top:  0.5em;
+	margin-bottom:  0.5em;
 }
 
 #noaatext
@@ -172,7 +167,7 @@ div a.webcam
 	padding: 0;
 }
 
-a.webcam img
+img
 {
 	max-width: 100%;
 	border-radius: .3em;
@@ -325,7 +320,7 @@ font.text {
 body{
 	font-family:Verdana,Arial,Sans-Serif;
 	font-size:90%;
-	background:#333;
+	background:#323232;
 	color: whitesmoke;
 	list-style:none;
 	padding: 1em 1em 1em 1em;
@@ -348,12 +343,17 @@ a,p,h4
 .internlink {
 	/*width: 90%;*/
 	width: auto;
-	margin-left: 1em;
-	margin-right: 1em;
+	background-color: #2A2A2A;
 }
 
+.wviewlink {
+	width: auto;
+	background-color: #7AC7C4;
+		color: #384259;
+}
 
 .externlink {
 	width: auto;
-	background-color: #990033;
+	background-color: #F73859;
+
 }
