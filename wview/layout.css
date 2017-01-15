@@ -152,7 +152,7 @@ input
 	-webkit-appearance: none;
 	color: whitesmoke;
 	background: rgba(0, 0, 0, 0.5);
-	font-size: inherit;
+	font-size: 1em;
 	padding: 0.5em;
 	border-radius: .3em;
 	-moz-border-radius: .3em;
