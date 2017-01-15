@@ -178,7 +178,7 @@ function openURL(urlname)
       <!-- XXXinclude header.inc-->
 
       <h1>Stazione Meteo di <!--stationCity-->, <!--stationState--></h1>
-      <p>
+      <p style="padding-top: 1em;">
         <!--stationElevation--> s.l.m., <!--stationLatitude--> - <!--stationLongitude--><br>
       </p>
       <p style="font-size: 80%">
@@ -543,7 +543,7 @@ function openURL(urlname)
   </ul>
 </div>
 
-<!-- Histats.com  (div with counter) --><div id="histats_counter" class="blockdisplay" align="center"></div>
+<!-- Histats.com  (div with counter) --><div id="histats_counter" class="blockdisplay" align="center" style="padding-top: 0em; margin-top: 1em;"></div>
 <!-- Histats.com  START  (aync)-->
 <script type="text/javascript">var _Hasync= _Hasync|| [];
   _Hasync.push(['Histats.start', '1,1781036,4,4015,112,61,00011111']);

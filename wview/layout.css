@@ -255,12 +255,13 @@ h4
 .tablevalues .now
 {
 	font-weight: bold;
-	font-size: 100%;
+	font-size: 102%;
 }
 
 .tablevalues .min,
 .tablevalues .max
 {
+	font-size: 98%;
 	text-align:  center;
 }
 
