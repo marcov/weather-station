@@ -23,8 +23,6 @@ Description...
 {
 	clear: none;
 	float: none;
-	/* Removed border */
-	/* border: 1px solid green;*/
 	/*Make column large exactly as content */
 	overflow: auto;
 	padding: 0 1em 0 1em;
@@ -36,7 +34,7 @@ Description...
 	color: whitesmoke;
 
 	/* DEBUG */
-    /* background-color: black; */
+	/* background-color: black; */
 }
 
 .footer 
@@ -204,7 +202,7 @@ div.blockdisplay
 	clear: both;	
 	overflow: hidden;
 
-    /* DEBUG */
+	/* DEBUG */
 	/* background: red; */
 }
 
@@ -227,16 +225,17 @@ h4
 
 .tablevalues 
 {
-	margin:0;
-	padding:0;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+
 	/*border:1px solid #C9C9C9; */
 	color: #003300;
 	list-style:none;
-	padding: 2em 0 0 0;
 	/* Make table as large as the div container */
 	min-width: 100%;
 	font-size:  90%;
 	/*border-collapse: collapse;*/
+	text-align: center;
 }
 
 .tablevalues th
@@ -260,12 +259,6 @@ h4
 .tablevalues .odd
 {
 	background:#FFFFE6;
-}
-
-.tablevalues tr td
-{
-	padding: .3em;
-	font-size:  99%;
 }
 
 .tablevalues tr td.title
