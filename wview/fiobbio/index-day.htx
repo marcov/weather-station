@@ -1,3 +1,10 @@
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-5899867438645593",
+    enable_page_level_ads: true
+  });
+</script>
 <html>
 <head>
   <title><!--stationCity-->,<!--stationState--> Weather</title>
@@ -416,7 +423,7 @@ font.text {
          <iframe src="https://www.meteoblue.com/it/italia/tempo-albino/widget?days=7&pictoicon=1&maxtemperature=1&mintemperature=1&windspeed=1&windgust=1&winddirection=1&uv=1&humidity=1&pressure=1&precipitation=1&precipitationprobability=1&spot=1&v=2" allowTransparency="true" height="427" width="376" frameborder="0" scrolling="NO"></iframe><div><a href="https://www.meteoblue.com/it/italia/tempo-albino" title="Tempo Albino - meteoblue" target="_blank">meteoblue.com</a></div>
          
          <img src="http://www.sat24.com/image.ashx?country=eu&amp;type=zoom&amp;format=640x480001001&amp;sat=ir" border="0" title="http://www.sat24.com" style="position:relative; top:0; left:0;">
-         <img style="-webkit-user-select: none; cursor: -webkit-zoom-in; " src="http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGB-12-12-9i-segment14.jpg" width="810" height="527">
+         <img style="-webkit-user-select: none; cursor: -webkit-zoom-in; " src="http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg" width="810" height="527">
          <img border="0" src="http://www.sat24.com/images.php?country=alps&amp;sat=&amp;1198352062421" width="810" height="527">
           
           <br>
