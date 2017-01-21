@@ -37,17 +37,41 @@ Description...
 	/* background-color: black; */
 }
 
+div.zoomradar
+{
+    width:720px; 
+    height:410px; 
+    overflow:hidden; 
+    position:relative;
+    align-content: center;
+}
+
+iframe.zoomradar
+{
+    position:absolute; 
+    top:-360px; 
+    left:-230px; 
+    width: 1200px; 
+    height: 300%;
+}
+
+.wviewgraph
+{
+    background-color: rgba(255, 255, 255, 0.85); 
+    margin-top: 1em;
+}
+
 img.round
 {
 	margin-top: 1em;
 	margin-left: auto;
 	margin-right: auto;
-	background-color:#eae9d4;
 	max-width: 100%;
 	height: auto;
 	-moz-border-radius: 100%;
 	border-radius: 100%;
 }
+
 
 div.centercolumn h4
 {

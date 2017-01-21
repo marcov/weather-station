@@ -145,7 +145,7 @@
         <div class="centercolumn section_0">
             <div id="menutop" class="blockdisplay">
                 <input class="internlink rounded" type="button" id="button_0" value="Inizio Pagina" />
-                <input class="internlink rounded" type="button" id="button_1" value="Dettagli" />
+                <input class="internlink rounded" type="button" id="button_1" value="Storico Dati" />
                 <input class="internlink rounded" type="button" id="button_2" value="Stazioni Limitrofe" />
                 <input class="internlink rounded" type="button" id="button_3" value="Meteo" />
                 <input class="internlink rounded" type="button" id="button_4" value="Satellite/Mappe" />
@@ -311,66 +311,45 @@
 
             <!-- WEATHER IMAGES START -->
             <div class="blockdisplay" style="padding-top:0;" align="center">
-                <img src="tempdaycomp.png"
-                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-                <img src="wspeeddaycomp.png"
-                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-                <img src="radiationDay.png "
-                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+                <img class="wviewgraph" src="tempdaycomp.png">
+                <img class="wviewgraph" src="wspeeddaycomp.png">
+                <img class="wviewgraph" src="radiationDay.png ">
             </div> 
 
             <div class="blockdisplay" style="padding-top:0;" align="center">
-
-                <img src="rainday.png"
-                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-                <img src="baromday.png"
-                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+                <img class="wviewgraph" src="rainday.png">
+                <img class="wviewgraph" src="baromday.png">
             </div>
 
             <div class="blockdisplay" style="padding-top:0;" align="center">
-
-                <img src="radiation.png"
-                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-
-
-                <img src="dayrain.png"
-                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-
-                <img src="stormrain.png"
-                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-
-                <img src="rainrate.png"
-                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-
-                <img src="monthrain.png"
-                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-
-                <img src="yearrain.png"
-                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+                <img class="wviewgraph" src="radiation.png">
+                <img class="wviewgraph" src="dayrain.png">
+                <img class="wviewgraph" ="stormrain.png">
+                <img class="wviewgraph" src="rainrate.png">
+                <img class="wviewgraph" src="monthrain.png">
+                <img class="wviewgraph" src="yearrain.png">
             </div>
 
             <div class="blockdisplay" style="padding-top:0;" align="center">
-                <img class="round" src="windroseday.png"
-                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-                <img class="round" src="windroseweek.png"
-                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-                <img class="round" src="windroseyear.png"
-                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+                <img class="wviewgraph round" src="windroseday.png">
+                <img class="wviewgraph round" src="windroseweek.png">
+                <img class="wviewgraph round" src="windroseyear.png">
             </div>
             <!-- WEATHER IMAGES END -->
 
-            <div class="blockdisplay section_1">
-                <h3>Dettagli </h3>
-                <ul align="center" style="max-width: 50%;">
-                    <li>
-                        <!--include readings-nostyle.inc-->
-                    </li>
-                </ul>
-            </div>
-
+            <!--
+<div class="blockdisplay">
+<h3>Dettagli </h3>
+<ul align="center" style="max-width: 50%;">
+<li>
+<(!--include readings-nostyle.inc x--)>
+</li>
+</ul>
+</div>
+-->
 
             <!-- FOOTER START -->
-            <div class="blockdisplay" style="margin: auto;">
+            <div class="blockdisplay section_1" style="margin: auto;">
                 <h3>Storico Dati</h3>
 
                 <div class="blockdisplay" style="padding-top: 0em;">
@@ -426,15 +405,13 @@
             <div class="section_3 blockdisplay">
                 <h3>Meteo</h3>
                 <iframe class="rounded" frameborder="0" scrolling="NO" style="max-width: 45%; width: 427px; height: 450px; background: rgba(255, 255, 255, 0.6);" src="https://www.meteoblue.com/it/italia/tempo-albino/widget?days=7&pictoicon=1&maxtemperature=1&mintemperature=1&windspeed=1&windgust=1&winddirection=1&uv=1&humidity=1&pressure=1&precipitation=1&precipitationprobability=1&spot=1&v=2"></iframe>
-
-
-                    <a href="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&ext=1&y=&run=6&lat=45,8&lon=9,8&runpara=0" title="Large image" data-featherlight="image">
-                        <img style="margin-left:1em; max-width: 55%; max-height:100%; width: 427px; height: 450px;" src="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&ext=1&y=&run=6&lat=45,8&lon=9,8&runpara=0" alt="Diagramme GEFS" title="Diagramme GEFS" />
-
-                        <img style="margin-top: 1em; min-width: 90%; max-width: 100%; max-height:100%;" alt="yr.no" src="http://www.yr.no/place/Italy/Lombardia/Albino/avansert_meteogram.png" />
-
+                
+                <a href="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&ext=1&y=&run=6&lat=45,8&lon=9,8&runpara=0" title="Large image" data-featherlight="image">
+                    <img style="margin-left:1em; max-width: 55%; max-height:100%; width: 427px; height: 450px;" src="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&ext=1&y=&run=6&lat=45,8&lon=9,8&runpara=0" alt="Diagramme GEFS" title="Diagramme GEFS" />
+                </a>
+                <img style="margin-top: 1em; min-width: 90%; max-width: 100%; max-height:100%;" alt="yr.no" src="http://www.yr.no/place/Italy/Lombardia/Albino/avansert_meteogram.png" />
             </div>
-
+        
             <div class="blockdisplay">
                 <h3>Radar e fulmini</h3>
                 <ul>
@@ -443,21 +420,26 @@
                             <img class="satellite" src="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" title="EMCWF 500hPa" />
                         </a>
                     </li>
-                   
+
                     <li>
                         <a href="http://www.meteox.com/images.aspx?jaar=-3&voor=&soort=loop3uur" title="Large image" data-featherlight="image">
                             <img alt="clouds" class="satellite" src="http://www.meteox.com/images.aspx?jaar=-3&voor=&soort=loop3uur" title="Clouds" />
                         </a>
                     </li>
-                    
-                    
-                    
+
+
+
                     <li>
                         <a href="http://www.astrogeo.va.it/fulmini/fulmini.jpg" title="Large image" data-featherlight="image">
                             <img alt="va.it" class="satellite" src="http://www.astrogeo.va.it/fulmini/fulmini.jpg" title="EMCWF 500hPa" />
                         </a>
                     </li>
                 </ul>
+                <!--
+                <div class="zoomradar rounded">
+                    <iframe class="zoomradar" frameborder="0" scrolling="NO" src="http://www.zoomradar.ch/index.php?lon=9.866164648468462&lat=45.77935393888881"></iframe>
+                </div>
+                -->
             </div>
 
             <div class="blockdisplay section_4">
