@@ -237,6 +237,18 @@ h4
 	font-weight:bold;
 }
 
+.tablevalues th.col3
+{
+    width: 30%;
+
+}
+
+.tablevalues th.col4
+{
+    width: 20%;
+}
+
+
 .tablevalues th
 {
 	font-weight: normal;

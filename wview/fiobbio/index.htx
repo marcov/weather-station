@@ -182,9 +182,9 @@
                     <table class="tablevalues">
                         <thead>
                             <tr><th class="firstcolumn">Temperatura [&deg;<!--tempUnit-->]</th>
-                                <th>Percepita</th>
-                                <th>Min oggi</th>
-                                <th>Max oggi</th>
+                                <th class="col4">Percepita</th>
+                                <th class="col4">Min oggi</th>
+                                <th class="col4">Max oggi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -201,14 +201,14 @@
                         <thead>
                             <tr>
                                 <th class="firstcolumn">Vento [<!--windUnit-->]</th>
-                                <th>Raffica</th>
-                                <th>Media 10min.</th>
-                                <th>Max oggi</th>
+                                <th class="col4">Raffica</th>
+                                <th class="col4">10 Minuti</th>
+                                <th class="col4">Max oggi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="even">
-                                <td class="now"><!--windSpeed--><!--windDirection--><br><!--windBeaufortScale--></td>
+                                <td class="now"><!--windSpeed--> (<!--windDirection-->)<br><!--windBeaufortScale--></td>
                                 <td class="max"><!--windGustSpeed--><br> <!--windGustDirectionDegrees-->&deg;</td>
                                 <td class="now"><!--tenMinuteAvgWindSpeed--></td>
                                 <td class="max"><!--hiWindSpeed--><br><!--hiWindSpeedTime--></td>
@@ -221,8 +221,8 @@
                         <thead>
                             <tr>
                                 <th class="firstcolumn">Umidita' [<!--humUnit-->]</th>
-                                <th>Min oggi</th>
-                                <th>Max oggi</th>
+                                <th class="col3">Min oggi</th>
+                                <th class="col3">Max oggi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -238,8 +238,8 @@
                         <thead>
                             <tr>
                                 <th class="firstcolumn">Pressione [<!--barUnit-->]</th>
-                                <th>Min oggi</th>
-                                <th>Max oggi</th>
+                                <th class="col3">Min oggi</th>
+                                <th class="col3">Max oggi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -256,8 +256,8 @@
                         <thead>
                             <tr>
                                 <th class="firstcolumn">Pioggia [<!--rateUnit-->]</th>
-                                <th>Totale Oggi</th>
-                                <th>Tempesta</th>
+                                <th class="col3">Totale Oggi</th>
+                                <th class="col3">Tempesta</th>
                             </tr>
                         </thead>
                         <tbody>
