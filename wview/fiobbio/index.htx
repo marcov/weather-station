@@ -1,594 +1,570 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-  <meta http-equiv="refresh" content="150" />
-
-  <title>Stazione Meteo di <!--stationCity-->, <!--stationState--></title>
-
-  <link rel="alternate" type="application/rss+xml" title="Stazione Meteo di <!--stationCity-->, <!--stationState-->" href="wxrss.xml">
-
-  <script type="text/javascript">
-    function createDaySelect(name)
-    {
-     document.write("<select name=" + name + " size='1'>");
-     var mydate = new Date();
-     var myday = mydate.getDate();
-     var daystring = "";
-
-     for (var i = 1; i <= 31; ++i) {
-      if(i<10) {
-       daystring = "0" + i;
-       document.write(daystring);
-     } else {
-       daystring = i;
-       document.write(daystring);
-     }
-     if (myday == daystring) {
-       document.write("<option selected='selected' value='" + daystring + "'>" + daystring + "</option>");
-     } else {
-       document.write("<option value='" + daystring + "'>" + daystring + "</option>");
-     }
-   }
-   document.write("</select>");
- }
-
- function createMonthlySelect(name)
- {
-   var month = new Array;
-   month[0]="Jan";
-   month[1]="Feb";
-   month[2]="Mar";
-   month[3]="Apr";
-   month[4]="May";
-   month[5]="Jun";
-   month[6]="Jul";
-   month[7]="Aug";
-   month[8]="Sep";
-   month[9]="Oct";
-   month[10]="Nov";
-   month[11]="Dec";
-
-   var mydate = new Date();
-   var mymonth = mydate.getMonth();
-   var monthstring = "";
-
-   document.write("<select name=" + name + " size='1'>");
-
-   for (var i = 0; i < 12; ++i) {
-    if(i<9) {
-     monthstring = "0" + (i+1);
-   } else {
-     monthstring = i+1;
-   }
-
-   if(mymonth+1 == monthstring) {
-     document.write("<option selected='selected' value='" + monthstring + "'>" + month[i] + "</option>");
-   } else {
-     document.write("<option value='" + monthstring + "'>" + month[i] + "</option>");
-   }
- }
- document.write("</select>");
-}
-
-function createYearlySelect(name)
-{
-	var mydate = new Date();
-	var myyear = (mydate.getYear() % 1900) + 1900;
-	var yearstring = "";
-
-	document.write("<select name=" + name + " size='1'>");
-
-	for (var i = 0; i < 51; ++i)
-  {
-    if (i < 10)
-    {
-     yearstring = "200" + i;
-   }
-   else
-   {
-     yearstring = "20" + i;
-   }
-
-   if (myyear == yearstring)
-   {
-     document.write("<option selected='selected' value='" + yearstring + "'>" + yearstring + "</option>");
-   }
-   else
-   {
-     document.write("<option value='" + yearstring + "'>" + yearstring + "</option>");
-   }
- }
- document.write("</select>");
-}
-
-function openNoaaFile(month, year)
-{
-  var url = "NOAA/NOAA-";
-  url = url + year;
-  if (month != '')
-  {
-    url = url + "-";
-    url = url + month;
-  }
-
-  url = url + ".txt";
-  //window.location=url;
-
-  $("#noaatext").text("\n\n\n           Loading....                             \n\n\n\n");
-  $("#noaatext").load(url);
-}
-
-function openARCFile(day, month, year)
-{
-  var url = "Archive/ARC-" + year + "-" + month + "-" + day + ".txt";
-  //window.location=url;
-  $("#noaatext").text("\n\n\n           Loading....                             \n\n\n\n");
-  $("#noaatext").load(url);
-}
-
-function openURL(urlname)
-{
-  window.location=urlname;
-}
-</script>
-
-<style type="text/css">
-	@import "layout.css";
-</style>
-
-</head>
-
-
-
-<body>
-
-  <div class="centercolumn section_0">
-
-   <div id="menutop" class="blockdisplay">
-    <input class="internlink" type="button" id="button_0" value="Inizio Pagina" />
-    <input class="internlink" type="button" id="button_1" value="Dettagli" />
-    <input class="internlink" type="button" id="button_2" value="Stazioni Limitrofe" />
-    <input class="internlink" type="button" id="button_3" value="Meteo" />
-    <input class="internlink" type="button" id="button_4" value="Satellite/Mappe" />
-    <input class="externlink" type="button" onClick="openURL('http://fiobbio.blogdns.net/misma')"  value="Stazione Mt. Misma" />
-    <input class="externlink" type="button" onClick="openURL('mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com')"  value="Contattaci via email" />
-  </div>
-
-  <div id="menubottom">
-   <p>
-    <h4>Menu</h4>
-    <form action="#">
-
-    </form>
-  </form>
-
-</p>
-</div>
-
-<!-- LEFT RIGHT COLUMNS CONTAINER START -->
-<div class="blockdisplay">
-
-  <!-- LEFT COLUMNT START -->
-  <div class="leftcolumn">
-
-   <!-- HEADER START -->
-   <!-- XXXinclude header.inc-->
-
-   <h1>Stazione Meteo di <!--stationCity-->, <!--stationState--></h1>
-   <p style="padding-top: 1em;">
-    <!--stationElevation--> s.l.m., <!--stationLatitude--> - <!--stationLongitude--><br>
-  </p>
-  <p style="font-size: 80%">
-    <br>
-    Alba: <!--sunriseTime-->, tramonto: <!--sunsetTime-->
-    <br>
-    <br>
-    Fase lunare: <!--moonPhase--><br>
-  </p>
-  <!-- HEADER END -->
-
-  <!-- NEW TABLE START -->
-  <table class="tablevalues">
-   <thead>
-    <tr> <th class="firstcolumn">Temperatura</th> <th>min</th> <th> &nbsp; </th> <th>max</th> </tr>
-  </thead>
-  <tbody>
-   <tr class="even">
-     <td class="title">Attuale</td>
-     <td class="min"><!--lowOutsideTemp--><!--tempUnit--><br><!--lowOutsideTempTime--></td>
-     <td class="now nowtemperature"><!--outsideTemp--><!--tempUnit--></td>
-     <td class="max"><!--hiOutsideTemp--><!--tempUnit--><br><!--hiOutsideTempTime--></td>
-   </tr >
-   <tr class="odd">
-     <td class="title">Percepita</td>
-     <td> </td>
-     <td class="now"><!--apparentTemp--><!--tempUnit--></td>
-     <td> </td>
-   </tr >
- </tbody>
-</table>
-
-<table class="tablevalues" style="width: 50%;">
- <thead>
-   <tr>  <th class="firstcolumn">Vento</th> <th> </th><th>&nbsp;</th> <th>max</th> </tr>
- </thead>
- <tbody>
-   <tr class="even">
-     <td class="title">Attuale</td>
-     <td> </td>
-     <td class="now"><!--windSpeed--><!--windUnit--> <br><!--windDirection--></td>
-     <td> </td>
-   </tr >
-   <tr class="odd">
-     <td class="title">Raffica</td>
-     <td> </td>
-     <td class="now"><!--windGustSpeed--><!--windUnit--><br> <!--windGustDirectionDegrees--> gradi</td>
-     <td class="max"><!--hiWindSpeed--><!--windUnit--><br><!--hiWindSpeedTime--></td>
-   </tr>
-   <tr class="even">
-     <td class="title">Media 10 minuti</td>
-     <td> </td>
-     <td class="now"><!--tenMinuteAvgWindSpeed--><!--windUnit--></td>
-     <td> </td>
-   </tr >
-   <tr class="odd">
-     <td class="title">Scala di Beaufort</td>
-     <td> </td>
-     <td class="now"><!--windBeaufortScale--></td>
-     <td> </td>
-   </tr >
- </tbody>
-</table>
-
-
-<table class="tablevalues" style="width: 50%;">
- <thead>
-  <tr> <th class="firstcolumn">Umidita'</th> <th>min</th> <th>&nbsp;</th> <th>max</th> <th> </th> </tr>
-</thead>
-<tbody>
-  <tr class="even">
-    <td class="title">Attuale</td>
-    <td class="min"><!--lowHumidity--><!--humUnit--> <br><!--lowHumTime--></td>
-    <td class="now"><!--outsideHumidity--><!--humUnit--></td>
-    <td class="max"><!--hiHumidity--><!--humUnit--> <br><!--hiHumTime--></td>
-  </tr >
-</tbody>
-</table>
-
-<table class="tablevalues" style="width: 50%;">
- <thead>
-  <tr> <th class="firstcolumn">Pressione</th> <th>min</th> <th>&nbsp;</th> <th>max</th> <th> </th> </tr>
-</thead>
-<tr class="even">
-  <td class="title">Attuale</td>
-  <td class="min"><!--lowBarometer--><!--barUnit--> <br><!--lowBarometerTime--></td>
-  <td class="now"><!--barometer--><!--barUnit--></td>
-  <td class="max"><!--hiBarometer--><!--barUnit--> <br><!--hiBarometerTime--></td>
-</tr>
-<tr class="even">
-  <td class="title">Trend</td>
-  <td class="min"></td>
-  <td class="now"><!--baromtrend--></td>
-  <td class="max"></td>
-</tr>
-</tbody>
-</table>
-
-
-<table class="tablevalues" style="width: 100%;">
- <thead>
-  <tr> <th class="firstcolumn">Pioggia</th><th>Freq.</th> <th>Tot. 24h</th> <th>Evt. piovoso</th> <th> </th> </tr>
-</thead>
-<tr class="even">
-  <td class="title">Attuale</td>
-  <td class="now"><!--rainRate--><!--rateUnit--></td>
-  <td class="now"><!--dailyRain--><!--rainUnit--></td>
-  <td class="now"><!--stormRain--><!--rainUnit--></td>
-</tr>
-
-</tbody>
-</table>
-<!--  NEW TABLE END -->
-
-</div>
-<!-- LEFT COLUMN END -->
-
-
-<!-- RIGHT COLUMN START -->
-<div class="rightcolumn">
-  <p align="right">
-    <input class="wviewlink" name="button" type="button"
-    onClick="openURL('almanac.htm')" value="Almanacco">
-
-    <input class="wviewlink" name="button" type="button"
-    onClick="openURL('Daily.htm')" value="Ultime 24 ore">
-
-    <input class="wviewlink" type="button" value="Mese in corso"
-    onclick="openURL('Monthly.htm')">
-
-    <input class="wviewlink" name="button" type="button"
-    onClick="openURL('Yearly.htm')" value="Anno in corso">
-
-    <input class="wviewlink" type="button" value="Previsioni"
-    onClick="openURL('<!--localForecastURL-->')">
-  </p>
-  <br>
-
-  <p>
-    Ultimo aggiornamento: 
-    <b>
-      <!--stationDate--> <!--stationTime-->
-    </b>
-  </p>
-  <p style="padding-top: 1em;">
-    <a href="webcam.jpg" data-featherlight="image"> <img src="webcam_small.jpg"></a>
-  </p>
-</div>
-<!-- RIGHT COLUMN END -->
-</div>
-<!-- LEFT RIGHT COLUMNS CONTAINER END -->
-
-
-<!-- WEATHER IMAGES START -->
-<div class="blockdisplay" style="padding-top:0;" align="center">
-  <img src="tempdaycomp.png"
-  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-  <img src="wspeeddaycomp.png"
-  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-  <img src="radiationDay.png "
-  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-</div> 
-
-<div class="blockdisplay" style="padding-top:0;" align="center">
-
-  <img src="rainday.png"
-  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-  <img src="baromday.png"
-  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-</div>
-
-<div class="blockdisplay" style="padding-top:0;" align="center">
-
-  <img src="radiation.png"
-  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-
-
-  <img src="dayrain.png"
-  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-
-  <img src="stormrain.png"
-  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-
-  <img src="rainrate.png"
-  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-
-  <img src="monthrain.png"
-  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-
-  <img src="yearrain.png"
-  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-</div>
-
-<div class="blockdisplay" style="padding-top:0;" align="center">
-  <img class="round" src="windroseday.png"
-  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-  <img class="round" src="windroseweek.png"
-  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-  <img class="round" src="windroseyear.png"
-  style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
-</div>
-<!-- WEATHER IMAGES END -->
-
-<div class="blockdisplay section_1">
-  <h3>Dettagli </h3>
-  <ul align="center" style="max-width: 50%;">
-    <li>
-      <!--include readings-nostyle.inc-->
-    </li>
-  </ul>
-</div>
-
-
-<!-- FOOTER START -->
-<div class="blockdisplay" style="margin: auto;">
-  <h3>Storico Dati</h3>
-
-  <div class="blockdisplay" style="padding-top: 0em;">
-    <form action="#" method="post">
-
-      <font class="text"> Seleziona mese e/o anno: </font>
-      <script type="text/javascript">
-       createMonthlySelect("month");
-       createYearlySelect("year");
-     </script>
-     <input type="button" value="Mostra mese"
-     onclick="openNoaaFile(this.form.month.value, this.form.year.value)">
-     <input type="button" value="Mostra anno"
-     onclick="openNoaaFile('',this.form.year.value)">
-
-     <br>
-
-     <font class="text"> Seleziona giorno: </font>
-     <script type="text/javascript">
-       createDaySelect("day");
-       createMonthlySelect("month1");
-       createYearlySelect("year1");
-     </script>
-     <input type="button" value="Mostra"
-     onclick="openARCFile(this.form.day.value, this.form.month1.value, this.form.year1.value)">
-
-   </form>
- </div>
-
- <div class="blockdisplay" style="width: 90%; height: auto; padding-top: 1em;">
-  <pre id="noaatext">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta http-equiv="refresh" content="150" />
+
+        <title>Stazione Meteo di <!--stationCity-->, <!--stationState--></title>
+
+        <link rel="alternate" type="application/rss+xml" title="Stazione Meteo di <!--stationCity-->, <!--stationState-->" href="wxrss.xml">
+
+        <script type="text/javascript">
+            function createDaySelect(name)
+            {
+                document.write("<select name=" + name + " size='1'>");
+                var mydate = new Date();
+                var myday = mydate.getDate();
+                var daystring = "";
+
+                for (var i = 1; i <= 31; ++i) {
+                    if(i<10) {
+                        daystring = "0" + i;
+                        document.write(daystring);
+                    } else {
+                        daystring = i;
+                        document.write(daystring);
+                    }
+                    if (myday == daystring) {
+                        document.write("<option selected='selected' value='" + daystring + "'>" + daystring + "</option>");
+                    } else {
+                        document.write("<option value='" + daystring + "'>" + daystring + "</option>");
+                    }
+                }
+                document.write("</select>");
+            }
+
+            function createMonthlySelect(name)
+            {
+                var month = new Array;
+                month[0]="Jan";
+                month[1]="Feb";
+                month[2]="Mar";
+                month[3]="Apr";
+                month[4]="May";
+                month[5]="Jun";
+                month[6]="Jul";
+                month[7]="Aug";
+                month[8]="Sep";
+                month[9]="Oct";
+                month[10]="Nov";
+                month[11]="Dec";
+
+                var mydate = new Date();
+                var mymonth = mydate.getMonth();
+                var monthstring = "";
+
+                document.write("<select name=" + name + " size='1'>");
+
+                for (var i = 0; i < 12; ++i) {
+                    if(i<9) {
+                        monthstring = "0" + (i+1);
+                    } else {
+                        monthstring = i+1;
+                    }
+
+                    if(mymonth+1 == monthstring) {
+                        document.write("<option selected='selected' value='" + monthstring + "'>" + month[i] + "</option>");
+                    } else {
+                        document.write("<option value='" + monthstring + "'>" + month[i] + "</option>");
+                    }
+                }
+                document.write("</select>");
+            }
+
+            function createYearlySelect(name)
+            {
+                var mydate = new Date();
+                var myyear = (mydate.getYear() % 1900) + 1900;
+                var yearstring = "";
+
+                document.write("<select name=" + name + " size='1'>");
+
+                for (var i = 0; i < 51; ++i)
+                {
+                    if (i < 10)
+                    {
+                        yearstring = "200" + i;
+                    }
+                    else
+                    {
+                        yearstring = "20" + i;
+                    }
+
+                    if (myyear == yearstring)
+                    {
+                        document.write("<option selected='selected' value='" + yearstring + "'>" + yearstring + "</option>");
+                    }
+                    else
+                    {
+                        document.write("<option value='" + yearstring + "'>" + yearstring + "</option>");
+                    }
+                }
+                document.write("</select>");
+            }
+
+            function openNoaaFile(month, year)
+            {
+                var url = "NOAA/NOAA-";
+                url = url + year;
+                if (month != '')
+                {
+                    url = url + "-";
+                    url = url + month;
+                }
+
+                url = url + ".txt";
+                //window.location=url;
+
+                $("#noaatext").text("\n\n\n           Loading....                             \n\n\n\n");
+                $("#noaatext").load(url);
+            }
+
+            function openARCFile(day, month, year)
+            {
+                var url = "Archive/ARC-" + year + "-" + month + "-" + day + ".txt";
+                //window.location=url;
+                $("#noaatext").text("\n\n\n           Loading....                             \n\n\n\n");
+                $("#noaatext").load(url);
+            }
+
+            function openURL(urlname)
+            {
+                window.location=urlname;
+            }
+        </script>
+
+        <style type="text/css">
+            @import "layout.css";
+        </style>
+
+    </head>
+
+
+
+    <body>
+        <div class="centercolumn section_0">
+            <div id="menutop" class="blockdisplay">
+                <input class="internlink rounded" type="button" id="button_0" value="Inizio Pagina" />
+                <input class="internlink rounded" type="button" id="button_1" value="Dettagli" />
+                <input class="internlink rounded" type="button" id="button_2" value="Stazioni Limitrofe" />
+                <input class="internlink rounded" type="button" id="button_3" value="Meteo" />
+                <input class="internlink rounded" type="button" id="button_4" value="Satellite/Mappe" />
+                <input class="externlink rounded" type="button" onclick="openURL('http://fiobbio.blogdns.net/misma')"  value="Stazione Mt. Misma" />
+                <input class="externlink rounded" type="button" onlick="openURL('mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com')"  value="Contattaci via email" />
+            </div>
+
+            <div id="menubottom">
+                <h4>Menu</h4>
+                <form action="#">
+                </form>
+            </div>
+
+            <!-- LEFT RIGHT COLUMNS CONTAINER START -->
+            <div class="blockdisplay">
+
+                <!-- LEFT COLUMNT START -->
+                <div class="leftcolumn">
+
+                    <!-- HEADER START -->
+                    <!-- XXXinclude header.inc-->
+
+                    <h1>Stazione Meteo di <!--stationCity-->, <!--stationState--></h1>
+                    <p style="padding-top: 1em;">
+                        <!--stationElevation--> s.l.m., <!--stationLatitude--> - <!--stationLongitude--><br>
+                    </p>
+                    <p style="font-size: 80%">
+                        Alba: <!--sunriseTime-->, tramonto: <!--sunsetTime--><br>
+                        Fase lunare: <!--moonPhase--><br>
+                    </p>
+                    <!-- HEADER END -->
+
+                    <!-- NEW TABLE START -->
+                    <table class="tablevalues">
+                        <thead>
+                            <tr><th class="firstcolumn">Temperatura</th>
+                                <th>Percepita</th>
+                                <th>Min oggi</th>
+                                <th>Max oggi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="even">
+                                <td class="now nowtemperature"><!--outsideTemp--><!--tempUnit--></td>
+                                <td class="now"><!--apparentTemp--><!--tempUnit--></td>
+                                <td class="min"><!--lowOutsideTemp--><!--tempUnit--><br><!--lowOutsideTempTime--></td>
+                                <td class="max"><!--hiOutsideTemp--><!--tempUnit--><br><!--hiOutsideTempTime--></td>
+                            </tr >
+                        </tbody>
+                    </table>
+
+                    <table class="tablevalues" style="width: 50%;">
+                        <thead>
+                            <tr>
+                                <th class="firstcolumn">Vento</th>
+                                <th>Raffica</th>
+                                <th>Media 10min.</th>
+                                <th>Scala di Beaufort</th>
+                                <th>Max oggi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="even">
+                                <td class="now"><!--windSpeed--><!--windUnit--> <br><!--windDirection--></td>
+                                <td class="now"><!--windGustSpeed--><!--windUnit--><br> <!--windGustDirectionDegrees--> gradi</td>
+                                <td class="now"><!--windBeaufortScale--></td>
+                                <td class="now"><!--tenMinuteAvgWindSpeed--><!--windUnit--></td>
+                                <td class="max"><!--hiWindSpeed--><!--windUnit--><br><!--hiWindSpeedTime--></td>
+                            </tr >
+                        </tbody>
+                    </table>
+
+
+                    <table class="tablevalues" style="width: 50%;">
+                        <thead>
+                            <tr>
+                                <th class="firstcolumn">Umidita'</th>
+                                <th>Min oggi</th>
+                                <th>Max oggi</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="even">
+                                <td class="now"><!--outsideHumidity--><!--humUnit--></td>
+                                <td class="min"><!--lowHumidity--><!--humUnit--> <br><!--lowHumTime--></td>
+                                <td class="max"><!--hiHumidity--><!--humUnit--> <br><!--hiHumTime--></td>
+                                <td>&nbsp;</td>
+                            </tr >
+                        </tbody>
+                    </table>
+
+                    <table class="tablevalues" style="width: 50%;">
+                        <thead>
+                            <tr>
+                                <th class="firstcolumn">Pressione</th>
+                                <th>Trend</th>
+                                <th>Min oggi</th>
+                                <th>Max oggi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="even">
+                                <td class="now"><!--barometer--><!--barUnit--></td>
+                                <td><!--baromtrend--></td>
+                                <td class="min"><!--lowBarometer--><!--barUnit--> <br><!--lowBarometerTime--></td>
+                                <td class="max"><!--hiBarometer--><!--barUnit--> <br><!--hiBarometerTime--></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <table class="tablevalues" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th class="firstcolumn">Pioggia</th>
+                                <th>Totale Oggi</th>
+                                <th>Tempesta</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="even">
+                                <td class="now"><!--rainRate--><!--rateUnit--></td>
+                                <td><!--dailyRain--><!--rainUnit--></td>
+                                <td class="max"><!--stormRain--><!--rainUnit--></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!--  NEW TABLE END -->
+
+                </div>
+                <!-- LEFT COLUMN END -->
+
+
+                <!-- RIGHT COLUMN START -->
+                <div class="rightcolumn">
+                    <p align="right">
+                        <input class="wviewlink rounded" name="button" type="button"
+                               onclick="openURL('almanac.htm')" value="Almanacco">
+
+                        <input class="wviewlink rounded" name="button" type="button"
+                               onclick="openURL('Daily.htm')" value="Ultime 24 ore">
+
+                        <input class="wviewlink rounded" type="button" value="Mese in corso"
+                               onclick="openURL('Monthly.htm')">
+
+                        <input class="wviewlink rounded" name="button" type="button"
+                               onclick="openURL('Yearly.htm')" value="Anno in corso">
+
+                        <input class="wviewlink rounded" type="button" value="Previsioni"
+                               onclick="openURL('<!--localForecastURL-->')">
+                    </p>
+                    <br>
+
+                    <p>
+                        Ultimo aggiornamento: 
+                        <b>
+                            <!--stationDate--> <!--stationTime-->
+                        </b>
+                    </p>
+                    <p style="padding-top: 1em;">
+                        <a href="webcam.jpg" data-featherlight="image"> <img src="webcam_small.jpg"></a>
+                    </p>
+                </div>
+                <!-- RIGHT COLUMN END -->
+            </div>
+            <!-- LEFT RIGHT COLUMNS CONTAINER END -->
+
+
+            <!-- WEATHER IMAGES START -->
+            <div class="blockdisplay" style="padding-top:0;" align="center">
+                <img src="tempdaycomp.png"
+                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+                <img src="wspeeddaycomp.png"
+                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+                <img src="radiationDay.png "
+                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+            </div> 
+
+            <div class="blockdisplay" style="padding-top:0;" align="center">
+
+                <img src="rainday.png"
+                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+                <img src="baromday.png"
+                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+            </div>
+
+            <div class="blockdisplay" style="padding-top:0;" align="center">
+
+                <img src="radiation.png"
+                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+
+
+                <img src="dayrain.png"
+                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+
+                <img src="stormrain.png"
+                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+
+                <img src="rainrate.png"
+                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+
+                <img src="monthrain.png"
+                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+
+                <img src="yearrain.png"
+                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+            </div>
+
+            <div class="blockdisplay" style="padding-top:0;" align="center">
+                <img class="round" src="windroseday.png"
+                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+                <img class="round" src="windroseweek.png"
+                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+                <img class="round" src="windroseyear.png"
+                     style="background-color: rgba(203, 203, 203, 1); margin-top: 1em;">
+            </div>
+            <!-- WEATHER IMAGES END -->
+
+            <div class="blockdisplay section_1">
+                <h3>Dettagli </h3>
+                <ul align="center" style="max-width: 50%;">
+                    <li>
+                        <!--include readings-nostyle.inc-->
+                    </li>
+                </ul>
+            </div>
+
+
+            <!-- FOOTER START -->
+            <div class="blockdisplay" style="margin: auto;">
+                <h3>Storico Dati</h3>
+
+                <div class="blockdisplay" style="padding-top: 0em;">
+                    <form action="#" method="post">
+
+                        <font class="text"> Seleziona mese e/o anno: </font>
+                        <script type="text/javascript">
+                            createMonthlySelect("month");
+                            createYearlySelect("year");
+                        </script>
+                        <input class="rounded" type="button" value="Mostra mese"
+                               onclick="openNoaaFile(this.form.month.value, this.form.year.value)">
+                        <input class="rounded" type="button" value="Mostra anno"
+                               onclick="openNoaaFile('',this.form.year.value)">
+
+                        <br>
+
+                        <font class="text"> Seleziona giorno: </font>
+                        <script type="text/javascript">
+                            createDaySelect("day");
+                            createMonthlySelect("month1");
+                            createYearlySelect("year1");
+                        </script>
+                        <input class="rounded" type="button" value="Mostra"
+                               onclick="openARCFile(this.form.day.value, this.form.month1.value, this.form.year1.value)">
+
+                    </form>
+                </div>
+
+                <div class="blockdisplay" style="width: 90%; height: auto; padding-top: 1em;">
+                    <pre id="noaatext">
   </pre>
-</div>
-</div>
-<!-- FOOTER END -->
+                </div>
+            </div>
+            <!-- FOOTER END -->
 
 
-<div class="section_2 blockdisplay">
-  <h3>Stazioni limitrofe</h3>
-  <ul>
-    <li>
-      <a title="Stazione meteo di Albino" alt="meteonetwork" href="http://my.meteonetwork.it/station/lmb257" target="_blank"><img style="border:none;" src="http://my.meteonetwork.it/station/lmb257/sticker-oriz1" /></a>
-    </li>
+            <div class="section_2 blockdisplay">
+                <h3>Stazioni limitrofe</h3>
+                <ul>
+                    <li>
+                        <a title="Stazione meteo di Albino" alt="meteonetwork" href="http://my.meteonetwork.it/station/lmb257" target="_blank"><img style="border:none;" src="http://my.meteonetwork.it/station/lmb257/sticker-oriz1" /></a>
+                    </li>
 
-    <li>
-      <object width="290" height="130"><param name="movie" value="http://www.wunderground.com/swf/pws_mini_rf_nc.swf?station=ILOMBARD333&freq=&units=metric&lang=IT" /><embed src="http://www.wunderground.com/swf/pws_mini_rf_nc.swf?station=ILOMBARD333&freq=&units=metric&lang=IT" type="application/x-shockwave-flash" width="290" height="130" /></object>
-    </li>
-  </ul>
-</div>
-
-
-<div class="section_3 blockdisplay">
-  <h3>Meteo</h3>
-  <ul>
-    <li style="padding-top: 1em;">
-      <img alt="yr.no" src="http://www.yr.no/place/Italy/Lombardia/Albino/avansert_meteogram.png" />
-    </li>
-
-    <li style="padding-top: 1em;">
-      <iframe src="https://www.meteoblue.com/it/italia/tempo-albino/widget?days=7&pictoicon=1&maxtemperature=1&mintemperature=1&windspeed=1&windgust=1&winddirection=1&uv=1&humidity=1&pressure=1&precipitation=1&precipitationprobability=1&spot=1&v=2" style="background-color: white;" height="427" width="376" frameborder="0" scrolling="NO"></iframe>
-    </li>
-  </ul>
-</div>
-
-<div class="blockdisplay">
-  <h3>Radar</h3>
-  <ul>
-    <li>
-      <a alt="arpa.piemonte.it" href="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" title="Large image" data-featherlight="image">
-        <img class="satellite" src="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" title="EMCWF 500hPa" />
-      </a>
-    </li>
-  </ul>
-</div>
-
-<div class="blockdisplay">
-  <h3>Meteogramma</h3>
-  <ul>
-    <li>
-      <a href="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&amp;ext=1&amp;y=&amp;run=6&amp;lat=45,8&amp;lon=9,8&amp;runpara=0" title="Large image" data-featherlight="image">
-        <img class="satellite" src="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&amp;ext=1&amp;y=&amp;run=6&amp;lat=45,8&amp;lon=9,8&amp;runpara=0" id="image" alt="Diagramme GEFS" title="Diagramme GEFS" />
-      </a>
-    </li>
-  </ul>
-</div>
+                    <li>
+                        <object class="rounded"><param name="movie" value="http://www.wunderground.com/swf/pws_mini_rf_nc.swf?station=ILOMBARD333&freq=&units=metric&lang=IT" /><embed src="http://www.wunderground.com/swf/pws_mini_rf_nc.swf?station=ILOMBARD333&freq=&units=metric&lang=IT" type="application/x-shockwave-flash" />
+                        </object>
+                    </li>
+                </ul>
+            </div>
 
 
-<div class="blockdisplay section_4">
-  <h3>Immagini satellitari</h3>
-  <ul>
-    <li>
-      <a alt="eumetsat.org" href="http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg" title="Large image" data-featherlight="image">
-        <img class="satellite" src="http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg" title="Small image" />
-      </a>
-    </li>
-    <li>
-      <a href="http://www.sat24.com/image.ashx?country=eu&type=zoom&format=640x480001001&sat=ir" title="Large image" data-featherlight="image">
-        <img class="satellite" src="http://www.sat24.com/image.ashx?country=eu&type=zoom&format=640x480001001&sat=ir" title="Small image" />
-      </a>
-    </li>
-    <li>
-      <a href="http://www.sat24.com/images.php?country=alps&sat=&1198352062421" title="Large image" data-featherlight="image">
-        <img alt="sat24.com" class="satellite" src="http://www.sat24.com/images.php?country=alps&sat=&1198352062421" title="Small image" />
-      </a>
-    </li>
-  </ul>
-</div>
+            <div class="section_3 blockdisplay">
+                <h3>Meteo</h3>
+                <iframe class="rounded" frameborder="0" scrolling="NO" style="max-width: 45%; width: 427px; height: 450px; background: rgba(255, 255, 255, 0.6);" src="https://www.meteoblue.com/it/italia/tempo-albino/widget?days=7&pictoicon=1&maxtemperature=1&mintemperature=1&windspeed=1&windgust=1&winddirection=1&uv=1&humidity=1&pressure=1&precipitation=1&precipitationprobability=1&spot=1&v=2"></iframe>
 
 
-<div class="blockdisplay">
-  <h3>Fulmini</h3>
-  <ul>
-    <li>
-      <a href="http://www.astrogeo.va.it/fulmini/fulmini.jpg" title="Large image" data-featherlight="image">
-        <img alt="va.it" class="satellite" src="http://www.astrogeo.va.it/fulmini/fulmini.jpg" title="EMCWF 500hPa" />
-      </a>
-    </li>
-  </ul>
-</div>
+                    <a href="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&ext=1&y=&run=6&lat=45,8&lon=9,8&runpara=0" title="Large image" data-featherlight="image">
+                        <img style="margin-left:1em; max-width: 55%; max-height:100%; width: 427px; height: 450px;" src="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&ext=1&y=&run=6&lat=45,8&lon=9,8&runpara=0" alt="Diagramme GEFS" title="Diagramme GEFS" />
 
-<div class="blockdisplay">
-  <h3>Mappe EMCWF / GFS</h3>
-  <ul>
-    <li>
-      <a href="http://www.wetterzentrale.de/pics/ecmpanel1.gif" title="Large image" data-featherlight="image">
-        <img alt="www.wetterzentrale.de" class="satellite" src="http://www.wetterzentrale.de/pics/ecmpanel1.gif" title="EMCWF 500hPa" />
-      </a>
-    </li>
-    <li>
-      <a href="http://www.wetterzentrale.de/pics/ecmpanel1.gif" title="Large image" data-featherlight="image">
-        <img class="satellite" src="http://www.wetterzentrale.de/pics/ecmpanel1.gif" title="GFS 500hPa" />
-      </a>
-    </li>
-    <li>
-      <a href="http://www.wetterzentrale.de/pics/ecmpanel1.gif" title="Large image" data-featherlight="image">
-        <img class="satellite" src="http://www.wetterzentrale.de/pics/ecmpanel1.gif" title="GFS Precipitazioni" />
-      </a>
-    </li>
-  </ul>
-</div>
+                        <img style="margin-top: 1em; min-width: 90%; max-width: 100%; max-height:100%;" alt="yr.no" src="http://www.yr.no/place/Italy/Lombardia/Albino/avansert_meteogram.png" />
 
-<!-- Histats.com  (div with counter) --><div id="histats_counter" class="blockdisplay" align="center" style="padding-top: 0em; margin-top: 1em;"></div>
-<!-- Histats.com  START  (aync) -->
-<script type="text/javascript">var _Hasync= _Hasync|| [];
-  _Hasync.push(['Histats.start', '1,1781036,4,4015,112,61,00011111']);
-  _Hasync.push(['Histats.fasi', '1']);
-  _Hasync.push(['Histats.track_hits', '']);
-  (function() {
-    var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
-    hs.src = ('//s10.histats.com/js15_as.js');
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-  })();</script>
-  <noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?1781036&101" alt="contatore gratuito" border="0"></a></noscript>
-  <!-- Histats.com  END  -->
+            </div>
+
+            <div class="blockdisplay">
+                <h3>Radar e fulmini</h3>
+                <ul>
+                    <li>
+                        <a alt="arpa.piemonte.it" href="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" title="Large image" data-featherlight="image">
+                            <img class="satellite" src="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" title="EMCWF 500hPa" />
+                        </a>
+                    </li>
+                   
+                    <li>
+                        <a href="http://www.meteox.com/images.aspx?jaar=-3&voor=&soort=loop3uur" title="Large image" data-featherlight="image">
+                            <img alt="clouds" class="satellite" src="http://www.meteox.com/images.aspx?jaar=-3&voor=&soort=loop3uur" title="Clouds" />
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="http://www.astrogeo.va.it/fulmini/fulmini.jpg" title="Large image" data-featherlight="image">
+                            <img alt="va.it" class="satellite" src="http://www.astrogeo.va.it/fulmini/fulmini.jpg" title="EMCWF 500hPa" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="blockdisplay section_4">
+                <h3>Immagini satellitari</h3>
+                <ul>
+                    <li>
+                        <a alt="eumetsat.org" href="http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg" title="Large image" data-featherlight="image">
+                            <img class="satellite" src="http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg" title="Small image" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.sat24.com/image.ashx?country=eu&type=zoom&format=640x480001001&sat=ir" title="Large image" data-featherlight="image">
+                            <img class="satellite" src="http://www.sat24.com/image.ashx?country=eu&type=zoom&format=640x480001001&sat=ir" title="Small image" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.sat24.com/images.php?country=alps&sat=&1198352062421" title="Large image" data-featherlight="image">
+                            <img alt="sat24.com" class="satellite" src="http://www.sat24.com/images.php?country=alps&sat=&1198352062421" title="Small image" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
 
-</div>  <!-- div class centercolumn END -->
+            <div class="blockdisplay">
+                <h3>Mappe EMCWF / GFS</h3>
+                <ul>
+                    <li>
+                        <a href="http://www.wetterzentrale.de/pics/ecmpanel1.gif" title="Large image" data-featherlight="image">
+                            <img alt="www.wetterzentrale.de" class="satellite" src="http://www.wetterzentrale.de/pics/ecmpanel1.gif" title="EMCWF 500hPa" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.wetterzentrale.de/pics/ecmpanel1.gif" title="Large image" data-featherlight="image">
+                            <img class="satellite" src="http://www.wetterzentrale.de/pics/ecmpanel1.gif" title="GFS 500hPa" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.wetterzentrale.de/pics/ecmpanel1.gif" title="Large image" data-featherlight="image">
+                            <img class="satellite" src="http://www.wetterzentrale.de/pics/ecmpanel1.gif" title="GFS Precipitazioni" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
 
-<link href="http://cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.css" type="text/css" rel="stylesheet" />
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="http://cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
- $.featherlight.defaults.loading = "Caricamento immagine in corso...";
+            <!-- Histats.com  (div with counter) --><div id="histats_counter" class="blockdisplay" align="center" style="padding-top: 0em; margin-top: 1em;"></div>
+            <!-- Histats.com  START  (aync) -->
+            <script type="text/javascript">var _Hasync= _Hasync|| [];
+                _Hasync.push(['Histats.start', '1,1781036,4,4015,112,61,00011111']);
+                _Hasync.push(['Histats.fasi', '1']);
+                _Hasync.push(['Histats.track_hits', '']);
+                (function() {
+                    var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+                    hs.src = ('//s10.histats.com/js15_as.js');
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+                })();</script>
+            <noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?1781036&101" alt="contatore gratuito" border="0"></a></noscript>
+            <!-- Histats.com  END  -->
 
- $("#button_0").click(function() {
-  $('html,body').animate({
-    scrollTop: $(".section_0").offset().top},
-    'slow');
-});
 
- $("#button_1").click(function() {
-  $('html,body').animate({
-    scrollTop: $(".section_1").offset().top},
-    'slow');
-});
+        </div>  <!-- div class centercolumn END -->
 
- $("#button_2").click(function() {
-  $('html,body').animate({
-    scrollTop: $(".section_2").offset().top},
-    'slow');
-});
+        <link href="http://cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="http://cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript">
+            $.featherlight.defaults.loading = "Caricamento immagine in corso...";
 
- $("#button_3").click(function() {
-  $('html,body').animate({
-    scrollTop: $(".section_3").offset().top},
-    'slow');
-});
+            $("#button_0").click(function() {
+                $('html,body').animate({
+                    scrollTop: $(".section_0").offset().top},
+                                       'slow');
+            });
 
- $("#button_4").click(function() {
-  $('html,body').animate({
-    scrollTop: $(".section_4").offset().top},
-    'slow');
-});
+            $("#button_1").click(function() {
+                $('html,body').animate({
+                    scrollTop: $(".section_1").offset().top},
+                                       'slow');
+            });
 
-</script>
+            $("#button_2").click(function() {
+                $('html,body').animate({
+                    scrollTop: $(".section_2").offset().top},
+                                       'slow');
+            });
 
-</body>
+            $("#button_3").click(function() {
+                $('html,body').animate({
+                    scrollTop: $(".section_3").offset().top},
+                                       'slow');
+            });
+
+            $("#button_4").click(function() {
+                $('html,body').animate({
+                    scrollTop: $(".section_4").offset().top},
+                                       'slow');
+            });
+
+        </script>
+
+    </body>
 </html>
 
 
