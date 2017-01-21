@@ -123,6 +123,12 @@ span.right
 	background-color: lightBlue;
 }
 
+.rounded
+{
+    border-radius: .3em;
+    -moz-border-radius: .3em;
+}
+
 input
 {
 	-webkit-appearance: none;
@@ -131,8 +137,6 @@ input
 	font-size: 1em;
 	padding: 0.5em;
 	/* Round button borders */
-	border-radius: .3em;
-	-moz-border-radius: .3em;
 
 	margin-left: 0.2em;
 	margin-right: 0.2em;
