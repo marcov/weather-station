@@ -181,7 +181,7 @@
                     <!-- NEW TABLE START -->
                     <table class="tablevalues">
                         <thead>
-                            <tr><th class="firstcolumn">Temperatura</th>
+                            <tr><th class="firstcolumn">Temperatura [&deg;<!--tempUnit-->]</th>
                                 <th>Percepita</th>
                                 <th>Min oggi</th>
                                 <th>Max oggi</th>
@@ -189,10 +189,10 @@
                         </thead>
                         <tbody>
                             <tr class="even">
-                                <td class="now nowtemperature"><!--outsideTemp--><!--tempUnit--></td>
-                                <td class="now"><!--apparentTemp--><!--tempUnit--></td>
-                                <td class="min"><!--lowOutsideTemp--><!--tempUnit--><br><!--lowOutsideTempTime--></td>
-                                <td class="max"><!--hiOutsideTemp--><!--tempUnit--><br><!--hiOutsideTempTime--></td>
+                                <td class="now nowtemperature"><!--outsideTemp--></td>
+                                <td class="now"><!--apparentTemp--></td>
+                                <td class="min"><!--lowOutsideTemp--><br><!--lowOutsideTempTime--></td>
+                                <td class="max"><!--hiOutsideTemp--><br><!--hiOutsideTempTime--></td>
                             </tr >
                         </tbody>
                     </table>
@@ -200,20 +200,18 @@
                     <table class="tablevalues" style="width: 50%;">
                         <thead>
                             <tr>
-                                <th class="firstcolumn">Vento</th>
+                                <th class="firstcolumn">Vento [<!--windUnit-->]</th>
                                 <th>Raffica</th>
                                 <th>Media 10min.</th>
-                                <th>Scala di Beaufort</th>
                                 <th>Max oggi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="even">
-                                <td class="now"><!--windSpeed--><!--windUnit--> <br><!--windDirection--></td>
-                                <td class="now"><!--windGustSpeed--><!--windUnit--><br> <!--windGustDirectionDegrees--> gradi</td>
-                                <td class="now"><!--windBeaufortScale--></td>
-                                <td class="now"><!--tenMinuteAvgWindSpeed--><!--windUnit--></td>
-                                <td class="max"><!--hiWindSpeed--><!--windUnit--><br><!--hiWindSpeedTime--></td>
+                                <td class="now"><!--windSpeed--><!--windDirection--><br><!--windBeaufortScale--></td>
+                                <td class="max"><!--windGustSpeed--><br> <!--windGustDirectionDegrees-->&deg;</td>
+                                <td class="now"><!--tenMinuteAvgWindSpeed--></td>
+                                <td class="max"><!--hiWindSpeed--><br><!--hiWindSpeedTime--></td>
                             </tr >
                         </tbody>
                     </table>
@@ -222,37 +220,33 @@
                     <table class="tablevalues" style="width: 50%;">
                         <thead>
                             <tr>
-                                <th class="firstcolumn">Umidita'</th>
+                                <th class="firstcolumn">Umidita' [<!--humUnit-->]</th>
                                 <th>Min oggi</th>
                                 <th>Max oggi</th>
-                                <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="even">
-                                <td class="now"><!--outsideHumidity--><!--humUnit--></td>
-                                <td class="min"><!--lowHumidity--><!--humUnit--> <br><!--lowHumTime--></td>
-                                <td class="max"><!--hiHumidity--><!--humUnit--> <br><!--hiHumTime--></td>
-                                <td>&nbsp;</td>
-                            </tr >
+                                <td class="now"><!--outsideHumidity--></td>
+                                <td class="min"><!--lowHumidity--><br><!--lowHumTime--></td>
+                                <td class="max"><!--hiHumidity--><br><!--hiHumTime--></td>
+                            </tr>
                         </tbody>
                     </table>
 
                     <table class="tablevalues" style="width: 50%;">
                         <thead>
                             <tr>
-                                <th class="firstcolumn">Pressione</th>
-                                <th>Trend</th>
+                                <th class="firstcolumn">Pressione [<!--barUnit-->]</th>
                                 <th>Min oggi</th>
                                 <th>Max oggi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="even">
-                                <td class="now"><!--barometer--><!--barUnit--></td>
-                                <td><!--baromtrend--></td>
-                                <td class="min"><!--lowBarometer--><!--barUnit--> <br><!--lowBarometerTime--></td>
-                                <td class="max"><!--hiBarometer--><!--barUnit--> <br><!--hiBarometerTime--></td>
+                                <td class="now"><!--barometer--> (<!--baromtrend-->)</td>
+                                <td class="min"><!--lowBarometer--><br><!--lowBarometerTime--></td>
+                                <td class="max"><!--hiBarometer--><br><!--hiBarometerTime--></td>
                             </tr>
                         </tbody>
                     </table>
@@ -261,16 +255,16 @@
                     <table class="tablevalues" style="width: 100%;">
                         <thead>
                             <tr>
-                                <th class="firstcolumn">Pioggia</th>
+                                <th class="firstcolumn">Pioggia [<!--rateUnit-->]</th>
                                 <th>Totale Oggi</th>
                                 <th>Tempesta</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="even">
-                                <td class="now"><!--rainRate--><!--rateUnit--></td>
-                                <td><!--dailyRain--><!--rainUnit--></td>
-                                <td class="max"><!--stormRain--><!--rainUnit--></td>
+                                <td class="now"><!--rainRate--></td>
+                                <td><!--dailyRain--></td>
+                                <td class="max"><!--stormRain--></td>
                             </tr>
                         </tbody>
                     </table>
