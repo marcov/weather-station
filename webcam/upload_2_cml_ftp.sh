@@ -10,6 +10,7 @@
 # NO NEED TO EDIT BELOW THIS!
 #
 
+rm ${cml_ftp_log_file}
 
 for src in fiobbio misma
 do
@@ -27,7 +28,7 @@ do
 	fi
 
     echo "Uploading image to CML..."
-    ftp -n -v ${cml_ftp_server} > ${cml_ftp_log_file} << EOF
+    ftp -n -v ${cml_ftp_server} >> ${cml_ftp_log_file} << EOF
 user ${_ftp_username} ${_ftp_password}
 cd ${cml_ftp_upload_folder}
 put ${wview_html_dir}/${_img_full} ${_img_full}
