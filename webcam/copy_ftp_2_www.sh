@@ -4,7 +4,7 @@
 #
 
 . ../common_variables.sh
-. ~/cml_ftp_login_data.sh
+. /etc/cml_ftp_login_data.sh
 
 #
 # NO NEED TO EDIT BELOW THIS!
