@@ -28,7 +28,7 @@ do
 
     echo "Uploading image to CML..."
     ftp -n -v ${cml_ftp_server} > ${cml_ftp_log_file} << EOF
-user ${_ftp_username} ${_ftp_pwd}
+user ${_ftp_username} ${_ftp_password}
 cd ${cml_ftp_upload_folder}
 put ${wview_html_dir}/${_img_full} ${_img_full}
 put ${wview_html_dir}/${_img_small} ${_img_small}
