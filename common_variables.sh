@@ -15,5 +15,6 @@ misma_webcam_small_px_name=webcam_misma_small.jpg
 #
 #
 #
+cml_ftp_log_file=/tmp/cml_ftp.log
 cml_ftp_server=ftp.centrometeolombardo.com
 cml_ftp_upload_folder=public
