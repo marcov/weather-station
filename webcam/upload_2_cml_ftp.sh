@@ -14,7 +14,7 @@ rm ${cml_ftp_log_file}
 
 for src in fiobbio misma
 do
-	if [ "${src}" == "${fiobbio}" ] 
+	if [ "${src}" == "fiobbio" ] 
 	then
         _ftp_username=${cml_ftp_user_fiobbio}
         _ftp_password=${cml_ftp_pwd_fiobbio}
