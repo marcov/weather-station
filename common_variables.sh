@@ -12,3 +12,8 @@ misma_ftp_upload_dir=${ftp_upload_dir}/misma
 misma_webcam_px_nowm_name=webcam_misma_nowm.jpg
 misma_webcam_px_name=webcam_misma.jpg
 misma_webcam_small_px_name=webcam_misma_small.jpg
+#
+#
+#
+cml_ftp_server=ftp.centrometeolombardo.com
+cml_ftp_upload_folder=public
