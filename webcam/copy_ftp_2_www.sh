@@ -35,7 +35,7 @@ do
 	/bin/cp ${last_webcam_px} ${wview_html_dir}/${pix} || exit $?
 	chmod +rw ${wview_html_dir}/${pix} || exit $?
 	echo "Done"
-    
+done    
 echo "All is good!"
 
 exit 0
