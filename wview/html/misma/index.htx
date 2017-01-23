@@ -91,8 +91,8 @@
 				La densita' dell' aria e' <!--airDensity--><!--airDensityUnit-->.
 			</span>
 			<span class="right">
-				<a class="webcam" href="http://fiobbio.blogdns.net/weather/webcam_misma.jpg" title="Webcam" data-featherlight="image">
-				<img src="http://fiobbio.blogdns.net/weather/webcam_misma_small.jpg" title="Webcam" />
+				<a class="webcam" href="http://rete.centrometeolombardo.com/bergamo/montemisma/public/webcam.jpg" title="Webcam" data-featherlight="image">
+				<img src="http://rete.centrometeolombardo.com/bergamo/montemisma/public/webcam_small.jpg" title="Webcam" />
 				</a>
 			</span>
 			</p>
