@@ -27,12 +27,14 @@ do
         _img_small=${misma_webcam_small_px_name}
 	fi
 
-    echo "Uploading image to CML..."
+    echo "FTP upload for ${src}..."
     ftp -n -v ${cml_ftp_server} >> ${cml_ftp_log_file} << EOF
 user ${_ftp_username} ${_ftp_password}
+binary
 cd ${cml_ftp_upload_folder}
 put ${wview_html_dir}/${_img_full} ${_img_full}
 put ${wview_html_dir}/${_img_small} ${_img_small}
+quit
 EOF
     echo "Done"
 
