@@ -301,7 +301,7 @@ function openURL(urlname)
             </b>
           </p>
           <p style="padding-top: 1em;">
-            <a href="webcam.jpg" data-featherlight="image"> <img src="webcam_small.jpg"></a>
+            <a href="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam.jpg" data-featherlight="image"> <img src="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam_small.jpg"></a>
           </p>
         </div>
         <!-- RIGHT COLUMN END -->
