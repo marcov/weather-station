@@ -10,7 +10,7 @@
 # NO NEED TO EDIT BELOW THIS!
 #
 
-rm ${cml_ftp_log_file}
+echo "" > ${cml_ftp_log_file}
 
 for src in fiobbio misma
 do
@@ -35,8 +35,11 @@ cd ${cml_ftp_upload_folder}
 put ${wview_html_dir}/${_img_full} ${webcam_img_name}
 put ${wview_html_dir}/${_img_small} ${webcam_img_small_name}
 quit
-EOF 
-    [[ $? != 0 ]] && { echo "Failed"; exit $? }
+EOF
+    if [[ $? != 0 ]]
+    then
+      echo "Failed"
+      exit $?
+    fi
     echo "Done"
-
 done
