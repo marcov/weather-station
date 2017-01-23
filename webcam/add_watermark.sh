@@ -3,7 +3,7 @@
 
 . ../common_variables.sh
 
-for pix in ${wview_webcam_px_nowm_name} ${misma_webcam_px_nowm_name}
+for pix in ${fiobbio_webcam_img_nowm_name} ${misma_webcam_px_nowm_name}
 do
 	pix_wm=$(echo $pix | sed "s/_nowm//g")
 	pix_small=$(echo $pix_wm | sed "s/\.jpg/_small.jpg/g")

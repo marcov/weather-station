@@ -10,7 +10,7 @@
 # NO NEED TO EDIT BELOW THIS!
 #
 
-for pix in ${wview_webcam_px_nowm_name} ${misma_webcam_px_nowm_name}
+for pix in ${fiobbio_webcam_img_nowm_name} ${misma_webcam_px_nowm_name}
 do
 	echo "Locating last webcam pix..."
 

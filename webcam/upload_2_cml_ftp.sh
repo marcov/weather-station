@@ -18,8 +18,8 @@ do
 	then
         _ftp_username=${cml_ftp_user_fiobbio}
         _ftp_password=${cml_ftp_pwd_fiobbio}
-        _img_full=${wview_webcam_px_name}
-        _img_small=${wview_webcam_small_px_name}
+        _img_full=${fiobbio_webcam_img_name}
+        _img_small=${fiobbio_webcam_img_small_name}
 	else
         _ftp_username=${cml_ftp_user_misma}
         _ftp_password=${cml_ftp_pwd_misma}
@@ -32,10 +32,11 @@ do
 user ${_ftp_username} ${_ftp_password}
 binary
 cd ${cml_ftp_upload_folder}
-put ${wview_html_dir}/${_img_full} ${_img_full}
-put ${wview_html_dir}/${_img_small} ${_img_small}
+put ${wview_html_dir}/${_img_full} ${webcam_img_name}
+put ${wview_html_dir}/${_img_small} ${webcam_img_small_name}
 quit
-EOF
+EOF 
+    [[ $? != 0 ]] && { echo "Failed"; exit $? }
     echo "Done"
 
 done
