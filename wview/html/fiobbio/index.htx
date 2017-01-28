@@ -133,7 +133,7 @@ function openURL(urlname)
 }
     </script>
 
-    
+
     <!-- the following is needed for the media queries to work correctly -->
     <meta name="viewport" content="width=device-width">
     <style type="text/css">@import "layout.css";</style>
@@ -301,7 +301,7 @@ function openURL(urlname)
             </b>
           </p>
           <p style="padding-top: 1em;">
-            <a href="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam.jpg" data-featherlight="image"> <img src="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam_small.jpg"></a>
+            <a href="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam.jpg" data-featherlight="image"> <img alt="webcam_small" src="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam_small.jpg"></a>
           </p>
         </div>
         <!-- RIGHT COLUMN END -->
@@ -310,39 +310,39 @@ function openURL(urlname)
 
 
       <!-- WEATHER IMAGES START -->
-      <div class="blockdisplay" style="padding-top:0;" align="center">
-        <img class="wviewgraph wviewxyplot" src="tempdaycomp.png">
-        <img class="wviewgraph wviewxyplot" src="wspeeddaycomp.png">
-        <img class="wviewgraph wviewxyplot" src="radiationDay.png ">
+      <div class="blockdisplay" style="padding-top:0;">
+        <img class="wviewgraph wviewxyplot" alt="wview image" src="tempdaycomp.png">
+        <img class="wviewgraph wviewxyplot" alt="wview image" src="wspeeddaycomp.png">
+        <img class="wviewgraph wviewxyplot" alt="wview image" src="radiationDay.png ">
       </div> 
 
-      <div class="blockdisplay wviewxyplot" style="padding-top:0;" align="center">
-        <img class="wviewgraph wviewxyplot" src="rainday.png">
-        <img class="wviewgraph wviewxyplot" src="baromday.png">
+      <div class="blockdisplay wviewxyplot" style="padding-top:0;">
+        <img class="wviewgraph wviewxyplot" alt="wview image" src="rainday.png">
+        <img class="wviewgraph wviewxyplot" alt="wview image" src="baromday.png">
       </div>
 
-      <div class="blockdisplay" style="padding-top:0;" align="center">
-        <img class="wviewgraph" src="radiation.png">
-        <img class="wviewgraph" src="dayrain.png">
-        <img class="wviewgraph" src="stormrain.png">
-        <img class="wviewgraph" src="rainrate.png">
-        <img class="wviewgraph" src="monthrain.png">
-        <img class="wviewgraph" src="yearrain.png">
+      <div class="blockdisplay" style="padding-top:0;">
+        <img class="wviewgraph" alt="wview image" src="radiation.png">
+        <img class="wviewgraph" alt="wview image" src="dayrain.png">
+        <img class="wviewgraph" alt="wview image" src="stormrain.png">
+        <img class="wviewgraph" alt="wview image" src="rainrate.png">
+        <img class="wviewgraph" alt="wview image" src="monthrain.png">
+        <img class="wviewgraph" alt="wview image" src="yearrain.png">
       </div>
 
-      <div class="blockdisplay" style="padding-top:0;" align="center">
-        <img class="wviewgraph round" src="windroseday.png">
-        <img class="wviewgraph round" src="windroseweek.png">
-        <img class="wviewgraph round" src="windroseyear.png">
+      <div class="blockdisplay" style="padding-top:0;">
+        <img class="wviewgraph round" alt="wview image" src="windroseday.png">
+        <img class="wviewgraph round" alt="wview image" src="windroseweek.png">
+        <img class="wviewgraph round" alt="wview image" src="windroseyear.png">
       </div>
       <!-- WEATHER IMAGES END -->
 
       <!--
 <div class="blockdisplay">
 <h3>Dettagli </h3>
-<ul align="center" style="max-width: 50%;">
+<ul style="max-width: 50%;">
 <li>
-<(!--include readings-nostyle.inc x--)>
+<! - - include readings-nostyle.inc  - - >
 </li>
 </ul>
 </div>
@@ -355,7 +355,7 @@ function openURL(urlname)
         <div class="blockdisplay" style="padding-top: 0em;">
           <form action="#" method="post">
 
-            <font class="text"> Seleziona mese e/o anno: </font>
+            Seleziona mese e/o anno:
             <script type="text/javascript">
 createMonthlySelect("month");
 createYearlySelect("year");
@@ -367,7 +367,7 @@ createYearlySelect("year");
 
             <br>
 
-            <font class="text"> Seleziona giorno: </font>
+            Seleziona giorno:
             <script type="text/javascript">
 createDaySelect("day");
 createMonthlySelect("month1");
@@ -391,14 +391,14 @@ createYearlySelect("year1");
         <h3>Stazioni limitrofe</h3>
         <ul>
           <li>
-            <a title="Stazione meteo Misma" alt="meteonetwork" href="http://my.meteonetwork.it/station/lmb257" target="_blank"><img style="border:none;" src="http://my.meteonetwork.it/station/lmb257/sticker-oriz1" /></a>
+            <a title="Stazione meteo Misma" href="http://my.meteonetwork.it/station/lmb257" target="_blank"><img alt="meteonetwork" style="border:none;" src="http://my.meteonetwork.it/station/lmb257/sticker-oriz1" /></a>
           </li>
 
           <li>
             <!--
 <object class="rounded"><param name="movie" value="http://www.wunderground.com/swf/pws_mini_rf_nc.swf?station=ILOMBARD333&freq=&units=metric&lang=IT" /><embed src="http://www.wunderground.com/swf/pws_mini_rf_nc.swf?station=ILOMBARD333&freq=&units=metric&lang=IT" type="application/x-shockwave-flash" />
 </object> -->
-            <a href="http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID=ILOMBARD333"><img src="http://banners.wunderground.com/cgi-bin/banner/ban/wxBanner?bannertype=pws250_metric&weatherstationcount=ILOMBARD333" width="250" height="150" border="0" alt="Weather Underground PWS ILOMBARD333" /></a>
+            <a href="http://www.wunderground.com/weatherstation/WXDailyHistory.asp?ID=ILOMBARD333"><img src="http://banners.wunderground.com/cgi-bin/banner/ban/wxBanner?bannertype=pws250_metric&weatherstationcount=ILOMBARD333" width="250" height="150" alt="Weather Underground PWS ILOMBARD333" /></a>
           </li>
         </ul>
       </div>
@@ -406,7 +406,7 @@ createYearlySelect("year1");
 
       <div class="section_3 blockdisplay">
         <h3>Meteo</h3>
-        <iframe class="rounded meteo" frameborder="0" scrolling="NO" src="https://www.meteoblue.com/it/italia/tempo-albino/widget?days=7&pictoicon=1&maxtemperature=1&mintemperature=1&windspeed=1&windgust=1&winddirection=1&uv=1&humidity=1&pressure=1&precipitation=1&precipitationprobability=1&spot=1&v=2">
+        <iframe class="rounded meteo" src="https://www.meteoblue.com/it/italia/tempo-albino/widget?days=7&pictoicon=1&maxtemperature=1&mintemperature=1&windspeed=1&windgust=1&winddirection=1&uv=1&humidity=1&pressure=1&precipitation=1&precipitationprobability=1&spot=1&v=2">
         </iframe>
 
         <a href="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&ext=1&y=&run=6&lat=45,8&lon=9,8&runpara=0" title="Large image" data-featherlight="image">
@@ -419,8 +419,8 @@ createYearlySelect("year1");
         <h3>Radar e fulmini</h3>
         <ul>
           <li>
-            <a alt="arpa.piemonte.it" href="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" title="Large image" data-featherlight="image">
-              <img class="satellite" src="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" title="EMCWF 500hPa" />
+            <a href="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" title="Large image" data-featherlight="image">
+              <img class="satellite" alt="arpa.piemonte.it" src="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" title="EMCWF 500hPa" />
             </a>
           </li>
 
@@ -449,13 +449,13 @@ createYearlySelect("year1");
         <h3>Immagini satellitari</h3>
         <ul>
           <li>
-            <a alt="eumetsat.org" href="http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg" title="Large image" data-featherlight="image">
-              <img class="satellite" src="http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg" title="Small image" />
+            <a href="http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg" title="Large image" data-featherlight="image">
+              <img class="satellite" alt="eumetsat.org" src="http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg" title="Small image" />
             </a>
           </li>
           <li>
             <a href="http://www.sat24.com/image.ashx?country=eu&type=zoom&format=640x480001001&sat=ir" title="Large image" data-featherlight="image">
-              <img class="satellite" src="http://www.sat24.com/image.ashx?country=eu&type=zoom&format=640x480001001&sat=ir" title="Small image" />
+              <img class="satellite" alt="sat24.com" src="http://www.sat24.com/image.ashx?country=eu&type=zoom&format=640x480001001&sat=ir" title="Small image" />
             </a>
           </li>
           <li>
@@ -477,19 +477,19 @@ createYearlySelect("year1");
           </li>
           <li>
             <a href="http://www.wetterzentrale.de/pics/avnpanel1.gif" title="Large image" data-featherlight="image">
-              <img class="satellite" src="http://www.wetterzentrale.de/pics/avnpanel1.gif" title="GFS 500hPa" />
+              <img class="satellite" alt="wetterzentrale.de" src="http://www.wetterzentrale.de/pics/avnpanel1.gif" title="GFS 500hPa" />
             </a>
           </li>
           <li>
             <a href="http://www.wetterzentrale.de/pics/avnpanel4.gif" title="Large image" data-featherlight="image">
-              <img class="satellite" src="http://www.wetterzentrale.de/pics/avnpanel4.gif" title="GFS Precipitazioni" />
+              <img class="satellite" alt="wetterzentrale.de" src="http://www.wetterzentrale.de/pics/avnpanel4.gif" title="GFS Precipitazioni" />
             </a>
           </li>
         </ul>
       </div>
 
       <!-- Histats.com  (div with counter) -->
-      <div id="histats_counter" class="blockdisplay" align="center" style="padding-top: 0em; margin-top: 1em;"></div>
+      <div id="histats_counter" class="blockdisplay" style="padding-top: 0em; margin-top: 1em;"></div>
       <!-- Histats.com  START  (aync) -->
       <script type="text/javascript">var _Hasync= _Hasync|| [];
 _Hasync.push(['Histats.start', '1,1781036,4,4015,112,61,00011111']);
@@ -500,7 +500,7 @@ _Hasync.push(['Histats.track_hits', '']);
   hs.src = ('//s10.histats.com/js15_as.js');
   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
 })();</script>
-      <noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?1781036&101" alt="contatore gratuito" border="0"></a></noscript>
+      <noscript><a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?1781036&101" alt="contatore gratuito"></a></noscript>
       <!-- Histats.com  END  -->
 
     </div>  <!-- div class centercolumn END -->

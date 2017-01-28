@@ -223,7 +223,7 @@ div.blockdisplay
   /*border:1px solid black;*/
   clear: both;	
   overflow: hidden;
-
+  text-align: center;
   /* DEBUG */
   /* background: red; */
 }
@@ -240,6 +240,9 @@ iframe.meteo
   max-width: 45%;
   height: 470px;
   background: rgba(255, 255, 255, 0.6);
+  border: 0;
+  /* Disable scrolling */
+  overflow:hidden;
 }
 
 img.meteo
