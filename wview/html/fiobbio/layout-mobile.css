@@ -1,0 +1,55 @@
+@media screen and (max-width: 800px) {
+
+  body 
+  {
+    font-size: 2.5em;
+  }
+
+  div.leftcolumn, div.rightcolumn
+  {
+    float: left;
+    min-width: 100%;
+  }
+
+  img.wviewgraph
+  {
+    width: 30%;
+  }
+
+  img.satellite,img.wviewxyplot
+  {
+    width: 90%;
+    max-width:100%;
+    height: auto;
+  }
+
+  #menutop {
+    font-size: 0.7em;
+    clear:both;
+    max-width: 85%;
+  }
+
+  #wviewbuttons
+  {
+    font-size: 0.5em;
+    text-align: left; 
+    min-width: 100%;
+  }
+
+  .meteo
+  {
+    min-width: 90%;
+    margin-left: 0px;
+    padding-left: 0px;
+  }
+
+  img.meteo
+  {
+    margin-left:0em;
+  }
+
+  select
+  {
+    font-size: 0.7em;
+  }
+}

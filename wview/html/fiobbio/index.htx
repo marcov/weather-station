@@ -276,7 +276,7 @@ function openURL(urlname)
 
         <!-- RIGHT COLUMN START -->
         <div class="rightcolumn">
-          <p align="right">
+          <p id="wviewbuttons">
             <input class="wviewlink rounded" name="button" type="button"
                    onclick="openURL('almanac.htm')" value="Almanacco">
 
@@ -311,14 +311,14 @@ function openURL(urlname)
 
       <!-- WEATHER IMAGES START -->
       <div class="blockdisplay" style="padding-top:0;" align="center">
-        <img class="wviewgraph" src="tempdaycomp.png">
-        <img class="wviewgraph" src="wspeeddaycomp.png">
-        <img class="wviewgraph" src="radiationDay.png ">
+        <img class="wviewgraph wviewxyplot" src="tempdaycomp.png">
+        <img class="wviewgraph wviewxyplot" src="wspeeddaycomp.png">
+        <img class="wviewgraph wviewxyplot" src="radiationDay.png ">
       </div> 
 
-      <div class="blockdisplay" style="padding-top:0;" align="center">
-        <img class="wviewgraph" src="rainday.png">
-        <img class="wviewgraph" src="baromday.png">
+      <div class="blockdisplay wviewxyplot" style="padding-top:0;" align="center">
+        <img class="wviewgraph wviewxyplot" src="rainday.png">
+        <img class="wviewgraph wviewxyplot" src="baromday.png">
       </div>
 
       <div class="blockdisplay" style="padding-top:0;" align="center">
@@ -357,8 +357,8 @@ function openURL(urlname)
 
             <font class="text"> Seleziona mese e/o anno: </font>
             <script type="text/javascript">
-              createMonthlySelect("month");
-              createYearlySelect("year");
+createMonthlySelect("month");
+createYearlySelect("year");
             </script>
             <input class="rounded" type="button" value="Mostra mese"
                    onclick="openNoaaFile(this.form.month.value, this.form.year.value)">
@@ -369,9 +369,9 @@ function openURL(urlname)
 
             <font class="text"> Seleziona giorno: </font>
             <script type="text/javascript">
-              createDaySelect("day");
-              createMonthlySelect("month1");
-              createYearlySelect("year1");
+createDaySelect("day");
+createMonthlySelect("month1");
+createYearlySelect("year1");
             </script>
             <input class="rounded" type="button" value="Mostra"
                    onclick="openARCFile(this.form.day.value, this.form.month1.value, this.form.year1.value)">
@@ -406,10 +406,11 @@ function openURL(urlname)
 
       <div class="section_3 blockdisplay">
         <h3>Meteo</h3>
-        <iframe class="rounded" frameborder="0" scrolling="NO" style="max-width: 45%; width: 427px; height: 450px; background: rgba(255, 255, 255, 0.6);" src="https://www.meteoblue.com/it/italia/tempo-albino/widget?days=7&pictoicon=1&maxtemperature=1&mintemperature=1&windspeed=1&windgust=1&winddirection=1&uv=1&humidity=1&pressure=1&precipitation=1&precipitationprobability=1&spot=1&v=2"></iframe>
+        <iframe class="rounded meteo" frameborder="0" scrolling="NO" style="max-width: 45%; width: 427px; height: 450px; background: rgba(255, 255, 255, 0.6);" src="https://www.meteoblue.com/it/italia/tempo-albino/widget?days=7&pictoicon=1&maxtemperature=1&mintemperature=1&windspeed=1&windgust=1&winddirection=1&uv=1&humidity=1&pressure=1&precipitation=1&precipitationprobability=1&spot=1&v=2">
+        </iframe>
 
         <a href="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&ext=1&y=&run=6&lat=45,8&lon=9,8&runpara=0" title="Large image" data-featherlight="image">
-          <img style="margin-left:1em; max-width: 55%; max-height:100%; width: 427px; height: 450px;" src="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&ext=1&y=&run=6&lat=45,8&lon=9,8&runpara=0" alt="Diagramme GEFS" title="Diagramme GEFS" />
+          <img class="meteo" style="max-height:100%; width: 427px; height: 450px;" src="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&ext=1&y=&run=6&lat=45,8&lon=9,8&runpara=0" alt="Diagramme GEFS" title="Diagramme GEFS" />
         </a>
         <img style="margin-top: 1em; min-width: 90%; max-width: 100%; max-height:100%;" alt="yr.no" src="http://www.yr.no/place/Italy/Lombardia/Albino/avansert_meteogram.png" />
       </div>
@@ -487,7 +488,8 @@ function openURL(urlname)
         </ul>
       </div>
 
-      <!-- Histats.com  (div with counter) --><div id="histats_counter" class="blockdisplay" align="center" style="padding-top: 0em; margin-top: 1em;"></div>
+      <!-- Histats.com  (div with counter) -->
+      <div id="histats_counter" class="blockdisplay" align="center" style="padding-top: 0em; margin-top: 1em;"></div>
       <!-- Histats.com  START  (aync) -->
       <script type="text/javascript">var _Hasync= _Hasync|| [];
 _Hasync.push(['Histats.start', '1,1781036,4,4015,112,61,00011111']);
@@ -501,44 +503,43 @@ _Hasync.push(['Histats.track_hits', '']);
       <noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?1781036&101" alt="contatore gratuito" border="0"></a></noscript>
       <!-- Histats.com  END  -->
 
-
     </div>  <!-- div class centercolumn END -->
 
     <link href="http://cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.css" type="text/css" rel="stylesheet" />
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="http://cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
-      $.featherlight.defaults.loading = "Caricamento immagine in corso...";
+$.featherlight.defaults.loading = "Caricamento immagine in corso...";
 
-      $("#button_0").click(function() {
-        $('html,body').animate({
-          scrollTop: $(".section_0").offset().top},
-                               'slow');
-      });
+$("#button_0").click(function() {
+  $('html,body').animate({
+    scrollTop: $(".section_0").offset().top},
+                         'slow');
+});
 
-      $("#button_1").click(function() {
-        $('html,body').animate({
-          scrollTop: $(".section_1").offset().top},
-                               'slow');
-      });
+$("#button_1").click(function() {
+  $('html,body').animate({
+    scrollTop: $(".section_1").offset().top},
+                         'slow');
+});
 
-      $("#button_2").click(function() {
-        $('html,body').animate({
-          scrollTop: $(".section_2").offset().top},
-                               'slow');
-      });
+$("#button_2").click(function() {
+  $('html,body').animate({
+    scrollTop: $(".section_2").offset().top},
+                         'slow');
+});
 
-      $("#button_3").click(function() {
-        $('html,body').animate({
-          scrollTop: $(".section_3").offset().top},
-                               'slow');
-      });
+$("#button_3").click(function() {
+  $('html,body').animate({
+    scrollTop: $(".section_3").offset().top},
+                         'slow');
+});
 
-      $("#button_4").click(function() {
-        $('html,body').animate({
-          scrollTop: $(".section_4").offset().top},
-                               'slow');
-      });
+$("#button_4").click(function() {
+  $('html,body').animate({
+    scrollTop: $(".section_4").offset().top},
+                         'slow');
+});
 
     </script>
 
