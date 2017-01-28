@@ -23,7 +23,7 @@
     height: auto;
   }
 
-  
+
   #menutop {
     clear:both;
     max-width: 85%;
@@ -35,9 +35,9 @@
     padding: 0.2em 0.2em 0.2em 0.2em;
     margin: 0.1em 0.1em 0.1em 0.1em;
 
-   width: 30%;  
+    width: 30%;  
   }
-  
+
   #wviewbuttons
   {
     text-align: center; 
@@ -47,17 +47,13 @@
     width: 30%;
     font-size: 0.5em;
   }
-  
-  .meteo
+
+
+  iframe.meteo,   img.meteo
   {
-    min-width: 90%;
+    min-width: 100%; 
     margin-left: 0px;
     padding-left: 0px;
-  }
-
-  img.meteo
-  {
-    margin-left:0em;
   }
 
   select

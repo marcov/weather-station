@@ -233,13 +233,18 @@ h2.blockdisplay
   margin-top: 1em;
 }
 
-.meteo
+
+iframe.meteo
 {
   min-width: 45%;
+  max-width: 45%;
+  height: 470px;
+  background: rgba(255, 255, 255, 0.6);
 }
 
 img.meteo
 {
+  min-width: 45%;
   margin-left:1em;
 }
 
