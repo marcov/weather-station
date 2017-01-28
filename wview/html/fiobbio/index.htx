@@ -150,7 +150,7 @@ function openURL(urlname)
         <input class="internlink rounded" type="button" id="button_3" value="Meteo" />
         <input class="internlink rounded" type="button" id="button_4" value="Satellite/Mappe" />
         <input class="externlink rounded" type="button" onclick="openURL('http://fiobbio.blogdns.net/misma')"  value="Stazione Mt. Misma" />
-        <input class="externlink rounded" type="button" onlick="openURL('mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com')"  value="Contattaci via email" />
+        <input class="externlink rounded" type="button" onclick="openURL('mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com')"  value="Contattaci via email" />
       </div>
 
       <div id="menubottom">
