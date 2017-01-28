@@ -133,10 +133,10 @@ function openURL(urlname)
 }
     </script>
 
-    <style type="text/css">
-      @import "layout.css";
-    </style>
-
+    
+    <!-- the following is needed for the media queries to work correctly -->
+    <meta name="viewport" content="width=device-width" />
+    <style type="text/css">@import "layout.css";</style>
   </head>
 
 
