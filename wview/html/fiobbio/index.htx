@@ -319,7 +319,7 @@ function openURL(urlname)
       <div class="blockdisplay wviewxyplot" style="padding-top:0;">
         <img class="wviewgraph wviewxyplot" alt="wview image" src="rainday.png">
         <img class="wviewgraph wviewxyplot" alt="wview image" src="baromday.png">
-        <img class="wviewgraph wviewxyplot" alt="wview image" src="umidday.png">
+        <img class="wviewgraph wviewxyplot" alt="wview image" src="humidday.png">
       </div>
 
       <div class="blockdisplay" style="padding-top:0;">
