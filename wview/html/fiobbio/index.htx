@@ -147,7 +147,7 @@ function openURL(urlname)
         <input class="internlink rounded" type="button" id="button_0" value="Inizio Pagina" />
         <input class="internlink rounded" type="button" id="button_1" value="Storico Dati" />
         <input class="internlink rounded" type="button" id="button_2" value="Stazioni Limitrofe" />
-        <input class="internlink rounded" type="button" id="button_3" value="Meteo" />
+        <input class="internlink rounded" type="button" id="button_3" value="Previsioni" />
         <input class="internlink rounded" type="button" id="button_4" value="Satellite/Mappe" />
         <input class="externlink rounded" type="button" onclick="openURL('http://fiobbio.blogdns.net/misma')"  value="Stazione Mt. Misma" />
         <input class="externlink rounded" type="button" onclick="openURL('mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com')"  value="Contattaci via email" />
@@ -405,7 +405,7 @@ createYearlySelect("year1");
 
 
       <div class="section_3 blockdisplay">
-        <h3>Meteo</h3>
+        <h3>Previsioni</h3>
         <iframe class="rounded meteo" src="https://www.meteoblue.com/it/italia/tempo-albino/widget?days=7&pictoicon=1&maxtemperature=1&mintemperature=1&windspeed=1&windgust=1&winddirection=1&uv=1&humidity=1&pressure=1&precipitation=1&precipitationprobability=1&spot=1&v=2">
         </iframe>
 
