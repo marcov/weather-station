@@ -26,4 +26,6 @@ misma_webcam_small_px_name=webcam_misma_small.jpg
 cml_ftp_log_file=/var/log/cml_ftp.log
 cml_ftp_server=ftp.centrometeolombardo.com
 cml_ftp_upload_folder=public
+# Set to 1 to log ftp upload information to stdout
+cml_ftp_log_info=0
 
