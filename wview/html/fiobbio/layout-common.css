@@ -53,7 +53,10 @@ div
 {
   margin-top:    0.5em;
   margin-bottom: 0.5em;
-  padding-top:   4em;
+  
+  /* padding-top:   4em; */
+  /* hack for sposi */
+  padding-top:   13em;
   background-color: #004d90;
 }
 
@@ -199,9 +202,18 @@ div.leftcolumn img
 .externlink {
   width: auto;
   background-color: #F73859;
-
 }
 
+div.sposi {
+  background-color: darkorchid;
+  color:floralwhite;
+  text-shadow:2px 2px 0 #444;
+  font-family: Papyrus, fantasy;
+  margin-top: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position:sticky;
+}
 
 img.satellite
 {
