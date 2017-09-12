@@ -144,10 +144,6 @@ function openURL(urlname)
   <body>
     <div class="centercolumn section_0">
       <div id="menutop" class="blockdisplay">
-        <div class="sposi rounded"> 
-          <h2 style="font-size:  220%"> Auguri Marcello ! ! ! </h2>
-          <h2 style="font-size:  150%"> 7 Settembre 2017: Maria e Marcello sposi </h2>
-        </div>
         <input class="internlink rounded" type="button" id="button_0" value="Inizio Pagina" />
         <input class="internlink rounded" type="button" id="button_1" value="Storico Dati" />
         <input class="internlink rounded" type="button" id="button_2" value="Stazioni Limitrofe" />
