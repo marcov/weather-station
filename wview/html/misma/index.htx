@@ -19,13 +19,6 @@
   </style>
 <![endif]-->
   
-  <!-- <script type="text/javascript" src="domtab.js"></script>
-  <script type="text/javascript">
-      //document.write('<style type="text/css">');    
-      //document.write('div.domtab div{display:none;}<');
-      //document.write('/s'+'tyle>');    
-  </script> -->	
-  
   <script type="text/javascript" src="wview.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
