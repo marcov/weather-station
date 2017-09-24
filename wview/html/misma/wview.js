@@ -1,31 +1,37 @@
 
-function createDaySelect(name)
-{
-	document.write("<select name=" + name + " size='1'>");
+function createDaySelect(name) {
+    var htmlCode = "";
+    htmlCode += "<select name=" + name + " size='1'>";
 	var mydate = new Date();
 	var myday = mydate.getDate();
 	var daystring = "";
+  
 	
 	for (var i = 1; i <= 31; ++i) {
 		if(i<10) {
 			daystring = "0" + i;
-			document.write(daystring);
+			htmlCode += daystring;
 		} else {
 			daystring = i;
-			document.write(daystring);
+			htmlCode += daystring;
 		}
-		if (myday == daystring) {
-			document.write("<option selected='selected' value='" + daystring + "'>" + daystring + "</option>");
+		
+        if (myday == daystring) {
+			htmlCode += "option selected='selected' value='" + daystring + "'>" + daystring + "</option>";
 		} else {
-			document.write("<option value='" + daystring + "'>" + daystring + "</option>");
+			htmlCode += "<option value='" + daystring + "'>" + daystring + "</option>";
 		}
 	}
-	document.write("</select>");
+	htmlCode += "</select>";
+  
+    return htmlCode;
 }
 
 function createMonthlySelect(name)
 {
 	var month = new Array;
+    var htmlCode = "";
+  
 	month[0]="Jan";
 	month[1]="Feb";
 	month[2]="Mar";
@@ -43,7 +49,7 @@ function createMonthlySelect(name)
 	var mymonth = mydate.getMonth();
 	var monthstring = "";
 	
-	document.write("<select name=" + name + " size='1'>");
+	htmlCode += "<select name=" + name + " size='1'>";
 	
 	for (var i = 0; i < 12; ++i) {
 		if(i<9) {
@@ -53,12 +59,14 @@ function createMonthlySelect(name)
 		}
 		
 		if(mymonth+1 == monthstring) {
-			document.write("<option selected='selected' value='" + monthstring + "'>" + month[i] + "</option>");
+			htmlCode += "<option selected='selected' value='" + monthstring + "'>" + month[i] + "</option>";
 		} else {
-			document.write("<option value='" + monthstring + "'>" + month[i] + "</option>");
+			htmlCode += "<option value='" + monthstring + "'>" + month[i] + "</option>";
 		}
 	}
-	document.write("</select>");
+	htmlCode += "</select>";
+  
+    return htmlCode;
 }
 
 function createYearlySelect(name)
@@ -66,8 +74,9 @@ function createYearlySelect(name)
 	var mydate = new Date();
 	var myyear = (mydate.getYear() % 1900) + 1900;
 	var yearstring = "";
-	
-	document.write("<select name=" + name + " size='1'>");
+    var htmlCode = "";
+  
+	htmlCode += "<select name=" + name + " size='1'>";
 	
 	for (var i = 0; i < 51; ++i)
     {
@@ -82,14 +91,16 @@ function createYearlySelect(name)
 		
         if (myyear == yearstring) 
         {
-			document.write("<option selected='selected' value='" + yearstring + "'>" + yearstring + "</option>");
+			htmlCode += "<option selected='selected' value='" + yearstring + "'>" + yearstring + "</option>";
 		} 
         else 
         {
-			document.write("<option value='" + yearstring + "'>" + yearstring + "</option>");
+			htmlCode += "<option value='" + yearstring + "'>" + yearstring + "</option>";
 		}
 	}
-	document.write("</select>");
+	htmlCode += "</select>";
+  
+    return htmlCode;
 }
 
 

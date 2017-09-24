@@ -198,13 +198,13 @@ h4
 	/* debug */
 	color: #003300;
 	list-style:none;
-	padding: 2em 0 0 0;
-    /* Make table as large as the div container */
-    width: 100%;
+	padding: 3em 0 0 0;
+    width: auto;
+    font-size: 120%;
 }
 
 table.tablevalues th.text{
-	/*min-width: 10em;*/
+	/* min-width: 10em; */
 }
 
 .tablevalues thead tr
@@ -227,7 +227,7 @@ background:#fff
 .tablevalues tr td
 {
     padding: .3em;
-	font-size:  99%;
+	font-size:  110%;
 }
 
 .tablevalues tr td.title

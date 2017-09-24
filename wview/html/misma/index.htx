@@ -1,338 +1,135 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html dir="ltr" lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
-	<title>  <!--stationName--> - <!--stationCity-->, <!--stationState--></title>
-	<style type="text/css">
-		@import "domtab.css";
-		@import "layout.css";
-	</style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+  <title>  <!--stationName--> - <!--stationCity-->, <!--stationState--></title>
+  <meta name="viewport" content="width=device-width">
+  <style type="text/css">
+      @import "domtab.css";
+      @import "layout.css";
+  </style>
 <!--[if gt IE 6]>
-	<style type="text/css">
-		html>body ul.domtabs a:link,
-		html>body ul.domtabs a:visited,
-		html>body ul.domtabs a:active,
-		html>body ul.domtabs a:hover{
-			height:3em;
-		}
-	</style>
+  <style type="text/css">
+      html>body ul.domtabs a:link,
+      html>body ul.domtabs a:visited,
+      html>body ul.domtabs a:active,
+      html>body ul.domtabs a:hover{
+          height:3em;
+      }
+  </style>
 <![endif]-->
-	<script type="text/javascript" src="domtab.js"></script>
-	<script type="text/javascript">
-		document.write('<style type="text/css">');    
-		document.write('div.domtab div{display:none;}<');
-		document.write('/s'+'tyle>');    
-    </script>	
-	
-    
-	<script type="text/javascript" src="wview.js"></script>
+  
+  <!-- <script type="text/javascript" src="domtab.js"></script>
+  <script type="text/javascript">
+      //document.write('<style type="text/css">');    
+      //document.write('div.domtab div{display:none;}<');
+      //document.write('/s'+'tyle>');    
+  </script> -->	
+  
+  <script type="text/javascript" src="wview.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-    <link href="http://cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+  <link href="http://cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.css" type="text/css" rel="stylesheet" />
     
 </head>
+  
 <body>
+  
+  <h1>
+    <a name="top" id="top"><!--stationName--> - <!--stationCity-->, <!--stationState--></a>
+  </h1>
+  <h2 class="title">		
+    <a href="http://goo.gl/maps/Zlghi">
+      Posizione geografica: <!--stationLatitude--> - <!--stationLongitude-->
+    </a>
+  </h2>
+  <p id="domtabprintview"></p>
 
-<h1><a name="top" id="top"><!--stationName--> - <!--stationCity-->, <!--stationState--></a></h1>
-		<h2 class="title">		
-		<a href="http://goo.gl/maps/Zlghi">
-			Posizione geografica: <!--stationLatitude--> - <!--stationLongitude-->
-		</a>
-		</h2>
-<p id="domtabprintview"></p>
-<div class="domtab">
-	<ul class="domtabs">
-		<li><a href="#actual">Situazione</a></li>
-		<li><a href="#details">Dati dettagliati</a></li>
-		<li><a href="#archive">Archivio</a></li>
-		<li><a href="#satellite">Satellite / Radar</a></li>
-		<li><a href="#forecast">Previsioni</a></li>
-		<li><a href="#info">Informazioni sul sito</a></li>
-	</ul>
-	
-	<div class="insidedomtab">
-		<h2 align="center"><a name="actual" id="actual">Dati aggiornati al <!--stationDate--> <!--stationTime--></a></h2>
-		<div class="leftcolumn">
-			<p><b>Andamento sulle 24h<br></b></p>
-			<ul>
-			<li>
-			  <img src="tempdaycomp.png" />
-			</li>
-			<li>
-			 <img src="wspeeddaycomp.png" />
-			</li>
-			<li>
-			<img src="wdirday.png" />
-			</li>
-			</ul>
-		</div> <!-- End of right column -->
-		
-		<div class="rightcolumn">
-			<p><b>Andamento sulle 24h<br></b></p>
-			<ul>
-			<li>
-			 <img src="baromday.png" />
-			</li>
-			<li> 
-			 <img src="humidday.png" />
-			</li>
-			<li>
-			<img src="rainday.png" />
-			</li>
-			</ul>
-		</div> <!-- End of right column -->
-		
-		<div class="centercolumn">
-			<p>
-			<span class="left">
-				Il sole sorge alle h <!--sunriseTime--> e tramonta alle h <!--sunsetTime-->.<br><br>
-				La giornata dura <!--dayLength-->h.<br><br>
-				La luna e' <!--moonPhase-->.<br><br>
-				L'altezza dei cumuli e' <!--cumulusBase--><!--cumulusBaseUnit-->.<br><br>
-				La densita' dell' aria e' <!--airDensity--><!--airDensityUnit-->.
-			</span>
-			<span class="right">
-				<a class="webcam" href="http://rete.centrometeolombardo.com/bergamo/montemisma/public/webcam.jpg" title="Webcam" data-featherlight="image">
-				<img src="http://rete.centrometeolombardo.com/bergamo/montemisma/public/webcam_small.jpg" title="Webcam" />
-				</a>
-			</span>
-			</p>
-			
-			<!-- ----------------------------------------------------------------- -->
-			<table class="tablevalues">
-			<thead>
-				<tr> <th>Temperatura </th> <th>Min oggi</th> <th>Valore </th> <th>Max oggi</th> </tr>
-			</thead>
-			<tbody>
-			<tr class="even"> 
-				 <td class="title">Attuale</td>       
-				 <td class="min"><!--lowOutsideTemp--><!--tempUnit--><br><!--lowOutsideTempTime--></td>
-				 <td class="now"><!--outsideTemp--><!--tempUnit--></td>
-				 <td class="max"><!--hiOutsideTemp--><!--tempUnit--><br><!--hiOutsideTempTime--></td> 
-			</tr >
-			<tr class="odd"> 
-				 <td class="title">Percepita</td>       
-				 <td> </td>
-				 <td class="now"><!--apparentTemp--><!--tempUnit--></td> 
-				 <td> </td> 
-			</tr >
-			<thead>
-				<tr> <th>Vento</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
-			</thead>
-			<tr class="even"> 
-				 <td class="title">Attuale</td>       
-				 <td class="now"><!--windSpeed--><!--windUnit--> <br><!--windDirection--></td>
-				 <td> </td>
-				 <td> </td> 
-			</tr >
-			<tr class="even"> 
-				 <td class="title">Raffica</td>  
-				 <td class="now"><!--windGustSpeed--><!--windUnit--><br> <!--windGustDirectionDegrees--> gradi</td> 
-				 <td class="max"><!--hiWindSpeed--><!--windUnit--><br><!--hiWindSpeedTime--></td> 
-			     <td> </td> 
-			</tr>
-			<tr class="even"> 
-				 <td class="title">Media 10 minuti</td>       
-				 <td class="now"><!--tenMinuteAvgWindSpeed--><!--windUnit--></td>
-				 <td> </td> 
-				 <td> </td> 
-			</tr >
-			<tr class="even"> 
-				 <td class="title">Scala di Beaufort</td>       
-				 <td class="now"><!--windBeaufortScale--></td>
-				 <td> </td> 
-				 <td> </td> 
-			</tr >			
-			
-			<thead>
-				<tr> <th>Umidita'</th> <th>Min oggi</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
-			</thead>
-			<tr class="even"> 
-				 <td class="title">Attuale</td>       
-				 <td class="min"><!--lowHumidity--><!--humUnit--> <br><!--lowHumTime--></td>
-				 <td class="now"><!--outsideHumidity--><!--humUnit--></td>
-				 <td class="max"><!--hiHumidity--><!--humUnit--> <br><!--hiHumTime--></td>
-			</tr >
-			<thead>
-			     <tr> <th>Pressione</th> <th>Min oggi</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
-			</thead>
-			<tr class="even"> 
-				 <td class="title">Attuale</td>  
-				 <td class="min"><!--lowBarometer--><!--barUnit--> <br><!--lowBarometerTime--></td>
-				 <td class="now"><!--barometer--><!--barUnit--></td>
-				 <td class="max"><!--hiBarometer--><!--barUnit--> <br><!--hiBarometerTime--></td>
-			</tr>
-			<tr class="even"> 
-				 <td class="title">Trend</td>  
-				 <td class="min"></td>
-				 <td class="now"><!--baromtrend--></td>
-				 <td class="max"></td>
-			</tr>
-			<thead>
-			     <tr> <th>Pioggia</th><th>Frequenza</th> <th>Totale 24h</th> <th>Evento piovoso</th> <th> </th> </tr>
-			</thead>
-			<tr class="even"> 
-				 <td class="title">Attuale</td>  
-				 <td class="now"><!--rainRate--><!--rateUnit--></td>
-				 <td class="now"><!--dailyRain--><!--rainUnit--></td>
-				 <td class="now"><!--stormRain--><!--rainUnit--></td>	
-		    </tr>
-					
-			</tbody>
-			</table>
-			<!-- ----------------------------------------------------------------- -->
+  <div class="domtab">
+    <ul class="domtabs">
+      <li><a id="link_main">Situazione</a></li>
+      <li><a id="link_details">Dati dettagliati</a></li>
+      <li><a id="link_archive">Archivio</a></li>
+      <li><a id="link_satellite">Satellite / Radar</a></li>
+      <li><a id="link_forecast">Previsioni</a></li>
+      <li><a id="link_info">Informazioni sul sito</a></li>
+    </ul>
 
-			<img class="round" src="windroseday.png" alt=""></img>
-		</div> <!-- End of center column -->
+    <div id="mainContent" class="insidedomtab"></div>
 
-		<p><a href="#top">back to menu</a></p>
-	</div >
-	
-	<div class="insidedomtab">
-		<h2><a name="archive" id="archive">Archivio dati</a></h2>
-		
-		<ul class="blockdisplay">
-		<li>
-			<form method="post">
-			<h4>Climatological Summaries:</h4>
-			
-			<script language="JavaScript">
-			createMonthlySelect("month");
-			createYearlySelect("year");
-			</script>
-			
-			<input type="button" value="Monthly Report" onclick="openNoaaFile(this.form.month.value, this.form.year.value)">
-			<input type="button" value="Yearly Report " onclick="openNoaaFile('',this.form.year.value)">
-			<br>
-			
-			<h4>Browse Archive Records:</h4>
-	
-			<script language="JavaScript">
-			createDaySelect("day");
-			createMonthlySelect("month1");
-			createYearlySelect("year1");
-			</script>
-			<input type="button" value="Browse Day Records" onclick="openARCFile(this.form.day.value, this.form.month1.value, this.form.year1.value)">
-			</form>
-		</li>
-		<li>
-		<pre id="noaatext">
-		</pre>
-		</li>
-		</ul>
-		
-		<p><a href="#top">back to menu</a></p>
-	</div>
-	
-    <div class="insidedomtab">
-        <h3>Cliccare le immagini per vederle ingrandite.</h3>
-		<h2><a name="satellite" id="satellite">Immagini satellitari</a></h2>
-		
-        <ul class="blockdisplay">
-		<li>
-          <a href="http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg" title="Large image" data-featherlight="image">
-		    <img class="satellite" src="http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg" title="Small image" />
-		  </a>
-		</li>
-		<li>
-          <a href="http://www.sat24.com/image.ashx?country=eu&type=zoom&format=640x480001001&sat=ir" title="Large image" data-featherlight="image">
-		    <img class="satellite" src="http://www.sat24.com/image.ashx?country=eu&type=zoom&format=640x480001001&sat=ir" title="Small image" />
-		  </a>
-		</li>
-		<li>
-          <a href="http://www.sat24.com/images.php?country=alps&sat=&1198352062421" title="Large image" data-featherlight="image">
-		    <img class="satellite" src="http://www.sat24.com/images.php?country=alps&sat=&1198352062421" title="Small image" />
-		  </a>
-		</li>
-		</ul>
-		
-		<h2 class="blockdisplay">Radar precipitazioni</h2>
-		
-		<ul class="blockdisplay">
-		<li>
-		<a href="http://www.meteox.com/images.aspx?jaar=-3&voor=&soort=loop3uur" title="Large image" data-featherlight="image">
-		<img class="satellite" src="http://www.meteox.com/images.aspx?jaar=-3&voor=&soort=loop3uur" title="Small image" />
-		</a>
-		</li>
-		<li>
-		<a href="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" title="Large image" data-featherlight="image">
-		<img class="satellite" src="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" title="Small image" />
-		</a>
-		</li>
-		</ul>
-		
-		<h2 class="blockdisplay">Mappa dei fulmini</h2>			
-		<ul class="blockdisplay">
-		<a href="http://www.astrogeo.va.it/fulmini/fulmini.jpg" title="Large image" data-featherlight="image">
-		<img class="satellite" src="http://www.astrogeo.va.it/fulmini/fulmini.jpg" title="Small image" />
-		</a>
-		</li>
-		</ul>
-		
-		
-		<p><a href="#top">back to menu</a></p>
-	</div>
-	
-	<div class="insidedomtab">
-		
-		<h2><a name="details" id="details">Report dettagliato</a></h2>
+    <script>
 
-		<iframe class="myiframe" src="Current.htm" seamless></iframe>
-		<p><a href="#top">back to menu</a></p>
-	</div>
-	
-	<div class="insidedomtab">
-		<h2><a name="forecast" id="forecast">Previsioni</a></h2>
+      function updateLiClass(elem) {
+        $( ".domtabs li a" ).each(function(index) {
+          console.log("index is " + index);
+          $( this ).removeAttr("class");
+        });
+        
+        elem.attr( "class", "active" );
+      }
 
-		<ul class="blockdisplay">
-		<li>
-		<a href="http://www.yr.no/place/Italy/Lombardia/Albino" title="Large image">
-		<img src="http://www.yr.no/place/Italy/Lombardia/Albino/avansert_meteogram.png" title="Small image" />
-		</a>
-		</li>
-		</ul>
-		
-		<h2 class="blockdisplay">Meteogramma</h2>		
-		<ul class="blockdisplay">
-		<li>
-		<a href="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&ext=1&y=&run=6&lat=45,8&lon=9,8&runpara=0" title="Large image">
-		<img  src="http://modeles.meteociel.fr/modeles/gens/graphe_ens3.php?x=&ext=1&y=&run=6&lat=45,8&lon=9,8&runpara=0" title="Small image" />
-		</a>
-		</li>
-		</ul>		
+      $( document ).ready(function(){
+        $( "#mainContent" ).load( "main.html" );
+        updateLiClass($( "#link_main" ));
+      });
 
-		<p><a href="#top">back to menu</a></p>
-	</div>
-	
-	
-	<div class="insidedomtab">
-		<h2><a name="info" id="info">Informazioni</a></h2>
-		<p style="align: center;">La stazione meteo e il sito web sono resi possibili grazie al lavoro di Marcello Alborghetti e Marco Vedovati.<br>
-		<a href="mailto:marcelloalborghetti@gmail.com; marco.vedovati@gmail.com"> Contattaci tramite email. </a>
-		</p>
+      $( "#link_main" ).click(function() {
+        $( "#mainContent" ).empty();
+        $( "#mainContent" ).load( "main.html" );
+        updateLiClass( $( this ) );
+      });
 
-		<p><a href="#top">back to menu</a></p>
-	</div>
-</div>
+      $( "#link_details" ).click(function() {
+        $( "#mainContent" ).empty();
+        $( "#mainContent" ).load( "details.html" );
+        updateLiClass($( this ));
+      });
 
+      $( "#link_archive" ).click(function() {
+        $( "#mainContent" ).empty();
+        $( "#mainContent" ).load( "archive.html" );
+        updateLiClass($( this ));
+      });
 
-<!-- Histats.com  (div with counter) --><div id="histats_counter" align="center"></div>
-<!-- Histats.com  START  (aync)-->
-<script type="text/javascript">var _Hasync= _Hasync|| [];
-_Hasync.push(['Histats.start', '1,2123150,4,3018,130,80,00011101']);
-_Hasync.push(['Histats.fasi', '1']);
-_Hasync.push(['Histats.track_hits', '']);
-(function() {
-var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
-hs.src = ('http://s10.histats.com/js15_as.js');
-(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-})();</script>
-<noscript><a href="http://www.histats.com" target="_blank"><img  src="http://sstatic1.histats.com/0.gif?2123150&101" alt="free website hit counter" border="0"></a></noscript>
-<!-- Histats.com  END  -->
+      $( "#link_satellite" ).click(function() {
+        $( "#mainContent" ).empty();
+        $( "#mainContent" ).load( "satellite.html" );
+        updateLiClass($( this ));
+      });
 
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="http://cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript">
-     $.featherlight.defaults.loading = "Caricamento immagine in corso...";
+      $( "#link_forecast" ).click(function() {
+        $( "#mainContent" ).empty();
+        $( "#mainContent" ).load( "forecast.html" );
+        updateLiClass($( this ));
+      });
+
+      $( "#link_info" ).click(function() {
+        $( "#mainContent" ).empty();
+        $( "#mainContent" ).load( "info.html" );
+        updateLiClass($( this ));
+      });
+      
     </script>
+  </div>
+
+
+  <!-- Histats.com  (div with counter) --><div id="histats_counter" align="center"></div>
+  <!-- Histats.com  START  (aync)-->
+  <script type="text/javascript">var _Hasync= _Hasync|| [];
+  _Hasync.push(['Histats.start', '1,2123150,4,3018,130,80,00011101']);
+  _Hasync.push(['Histats.fasi', '1']);
+  _Hasync.push(['Histats.track_hits', '']);
+  (function() {
+  var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+  hs.src = ('http://s10.histats.com/js15_as.js');
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+  })();</script>
+  <noscript><a href="http://www.histats.com" target="_blank"><img  src="http://sstatic1.histats.com/0.gif?2123150&101" alt="free website hit counter" border="0"></a></noscript>
+  <!-- Histats.com  END  -->
+
+      <script src="http://cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+      <script type="text/javascript">
+       $.featherlight.defaults.loading = "Caricamento immagine in corso...";
+      </script>
 </body>
 </html>
