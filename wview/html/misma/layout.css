@@ -29,21 +29,8 @@ Description...
 	/*Make column large exactly as content */
 	overflow: auto;
 	padding: 0 1em 0 1em;
-	min-width: 33%;
 }
 
-img.round
-{
-	display: block;
-    margin-top: 1em;
-	margin-left: auto;
-    margin-right: auto;
-	background-color:#eae9d4;
-	max-width: 100%;
-	height: auto;
-	-moz-border-radius: 100%;
-	border-radius: 100%;
-}
 
 .centercolumn h4
 {
@@ -67,40 +54,46 @@ img.round
     /* Removed padding */
 	/* padding: 0.5em; */
 	color: #000;
-	background-color:#eae9d4;
     /*Removed border*/
     /* border: 1px solid orange;*/
 	/*Make column large exactly as content */
 	overflow: hidden;
+  
 	/* Make the column scale of size when resizing window */
-	max-width: 30%;
-	-moz-border-radius: .5em;
-	border-radius: .5em;
+	/* max-width: 30%; */
+	
 }
 
 .rightcolumn img,
 .leftcolumn img
 {
-/* Make the images in the columm automatically scale when resizing window */
-	max-width: 100%;
-	height: auto;
+    background-color:#eae9d4;
+    /* Make the images in the columm automatically scale when resizing window */
+	/* max-width: 100%; */
+	
+    -moz-border-radius: .5em;
+	border-radius: .5em;
+    
+    /* make content centered */
+    display: block;
+	margin-top: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-span.left
+.leftcolumn img.round,
+.rightcolumn img.round
+{
+	-moz-border-radius: 100%;
+	border-radius: 100%;
+}
+
+p.top
 {
 	display: block; 
-	max-width: 38%; 
 	float: left;
-	font-weight:bold;
 	line-height: 1.5em;
-}
-
-span.right
-{
-	display: block; 
-	max-width: 60%; 
-	float: right; 
-	align: right;
+    font-size: 1.2em;
 }
 
 .myiframe
@@ -119,9 +112,11 @@ span.right
     /* border: 1px solid orange;*/
 	/*Make column large exactly as content */
 	overflow: hidden;
+  
 	/* Make the column scale of size when resizing window */
 	max-width: 30%;
-	-moz-border-radius: .5em;
+	
+    -moz-border-radius: .5em;
 	border-radius: .5em;
 }
 
@@ -156,12 +151,14 @@ div.domtab div a.webcam
 
 a.webcam img
 {
-	max-width: 100%;
+	width: 100%;
+  
 	border-radius: .3em;
 	-moz-border-radius: .3em;
 }
 
-ul.blockdisplay li{
+ul.blockdisplay li
+{
 	float: left;
 }
 
@@ -190,20 +187,15 @@ h4
 }
 /************ Start of table values ************/
 
+
 .tablevalues 
 {
-	margin:0;
-	padding:0;
-	/*border:1px solid #C9C9C9; */
-	/* debug */
-	color: #003300;
-	list-style:none;
-	padding: 3em 0 0 0;
-    width: auto;
-    font-size: 120%;
+  border:3px solid #ff0000;
+  color: #003300;  
+  font-size: 1.1em;
 }
 
-table.tablevalues th.text{
+.tablevalues th.text{
 	/* min-width: 10em; */
 }
 
@@ -216,7 +208,7 @@ table.tablevalues th.text{
 
 .tablevalues tbody .even
 {
-background:#fff
+    background:#fff
 }
 
 .tablevalues tbody .odd
@@ -227,12 +219,11 @@ background:#fff
 .tablevalues tr td
 {
     padding: .3em;
-	font-size:  110%;
 }
 
 .tablevalues tr td.title
 {
-    padding: .3em;
+    padding:   .3em;
 	font-size:  95%;
 }
 
@@ -240,8 +231,8 @@ background:#fff
 .tablevalues .min,
 .tablevalues .max
 {
-    font-weight:bold;
-	text-align:  center;
+    font-weight: bold;
+	text-align: center;
 }
 
 

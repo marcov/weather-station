@@ -3,21 +3,13 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
   <title>  <!--stationName--> - <!--stationCity-->, <!--stationState--></title>
-  <meta name="viewport" content="width=device-width">
+  <!--
+    <meta name="viewport" content="width=device-width"> 
+  -->
   <style type="text/css">
       @import "domtab.css";
       @import "layout.css";
   </style>
-<!--[if gt IE 6]>
-  <style type="text/css">
-      html>body ul.domtabs a:link,
-      html>body ul.domtabs a:visited,
-      html>body ul.domtabs a:active,
-      html>body ul.domtabs a:hover{
-          height:3em;
-      }
-  </style>
-<![endif]-->
   
   <script type="text/javascript" src="wview.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -54,7 +46,7 @@
 
       function updateLiClass(elem) {
         $( ".domtabs li a" ).each(function(index) {
-          console.log("index is " + index);
+          //console.log("index is " + index);
           $( this ).removeAttr("class");
         });
         

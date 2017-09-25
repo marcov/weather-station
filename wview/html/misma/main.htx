@@ -11,6 +11,9 @@
     <li>
       <img src="wdirday.png" />
     </li>
+    <li>
+      <img class="round" src="windroseday.png" alt="" />
+    </li>
   </ul>
 </div> <!-- End of right column -->
 
@@ -26,110 +29,104 @@
     <li>
       <img src="rainday.png" />
     </li>
+    <li>
+      <img class="round" src="windroseweek.png" alt="" />
+    </li>
   </ul>
 </div> <!-- End of right column -->
 
 <div class="centercolumn">
-  <p>
-    <span class="left">
-      Il sole sorge alle h <!--sunriseTime--> e tramonta alle h <!--sunsetTime-->.<br><br>
-      La giornata dura <!--dayLength-->h.<br><br>
-      La luna e' <!--moonPhase-->.<br><br>
-      L'altezza dei cumuli e' <!--cumulusBase--><!--cumulusBaseUnit-->.<br><br>
-      La densita' dell' aria e' <!--airDensity--><!--airDensityUnit-->.
-    </span>
-    <span class="right">
+  <p class="top">
+      Il giorno dura <!--dayLength--> ore (alba <!--sunriseTime--> - tramonto <!--sunsetTime-->); luna <!--moonPhase-->.<br>
+      Altezza dei cumuli <!--cumulusBase--><!--cumulusBaseUnit-->, densità dell'aria <!--airDensity--><!--airDensityUnit-->.
       <a class="webcam" href="http://rete.centrometeolombardo.com/bergamo/montemisma/public/webcam.jpg" title="Webcam" data-featherlight="image">
         <img src="http://rete.centrometeolombardo.com/bergamo/montemisma/public/webcam_small.jpg" title="Webcam" />
       </a>
-    </span>
+  <!-- ----------------------------------------------------------------- -->
+    <table class="tablevalues">
+      <thead>
+        <tr> <th>Temperatura </th> <th>Min oggi</th> <th>Valore </th> <th>Max oggi</th> </tr>
+      </thead>
+      <tbody>
+        <tr class="even"> 
+          <td class="title">Attuale</td>       
+          <td class="min"><!--lowOutsideTemp--><!--tempUnit--><br><!--lowOutsideTempTime--></td>
+          <td class="now"><!--outsideTemp--><!--tempUnit--></td>
+          <td class="max"><!--hiOutsideTemp--><!--tempUnit--><br><!--hiOutsideTempTime--></td> 
+        </tr >
+        <tr class="odd"> 
+          <td class="title">Percepita</td>       
+          <td> </td>
+          <td class="now"><!--apparentTemp--><!--tempUnit--></td> 
+          <td> </td> 
+        </tr >
+        <thead>
+          <tr> <th>Vento</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
+        </thead>
+        <tr class="even"> 
+          <td class="title">Attuale</td>       
+          <td class="now"><!--windSpeed--><!--windUnit--> <br><!--windDirection--></td>
+          <td> </td>
+          <td> </td> 
+        </tr >
+        <tr class="even"> 
+          <td class="title">Raffica</td>  
+          <td class="now"><!--windGustSpeed--><!--windUnit--><br> <!--windGustDirectionDegrees--> gradi</td> 
+          <td class="max"><!--hiWindSpeed--><!--windUnit--><br><!--hiWindSpeedTime--></td> 
+          <td> </td> 
+        </tr>
+        <tr class="even"> 
+          <td class="title">Media 10 minuti</td>       
+          <td class="now"><!--tenMinuteAvgWindSpeed--><!--windUnit--></td>
+          <td> </td> 
+          <td> </td> 
+        </tr >
+        <tr class="even"> 
+          <td class="title">Scala di Beaufort</td>       
+          <td class="now"><!--windBeaufortScale--></td>
+          <td> </td> 
+          <td> </td> 
+        </tr >			
+
+        <thead>
+          <tr> <th>Umidita'</th> <th>Min oggi</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
+        </thead>
+        <tr class="even"> 
+          <td class="title">Attuale</td>       
+          <td class="min"><!--lowHumidity--><!--humUnit--> <br><!--lowHumTime--></td>
+          <td class="now"><!--outsideHumidity--><!--humUnit--></td>
+          <td class="max"><!--hiHumidity--><!--humUnit--> <br><!--hiHumTime--></td>
+        </tr >
+        <thead>
+          <tr> <th>Pressione</th> <th>Min oggi</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
+        </thead>
+        <tr class="even"> 
+          <td class="title">Attuale</td>  
+          <td class="min"><!--lowBarometer--><!--barUnit--> <br><!--lowBarometerTime--></td>
+          <td class="now"><!--barometer--><!--barUnit--></td>
+          <td class="max"><!--hiBarometer--><!--barUnit--> <br><!--hiBarometerTime--></td>
+        </tr>
+        <tr class="even"> 
+          <td class="title">Trend</td>  
+          <td class="min"></td>
+          <td class="now"><!--baromtrend--></td>
+          <td class="max"></td>
+        </tr>
+        <thead>
+          <tr> <th>Pioggia</th><th>Frequenza</th> <th>Totale 24h</th> <th>Evento piovoso</th> <th> </th> </tr>
+        </thead>
+        <tr class="even"> 
+          <td class="title">Attuale</td>  
+          <td class="now"><!--rainRate--><!--rateUnit--></td>
+          <td class="now"><!--dailyRain--><!--rainUnit--></td>
+          <td class="now"><!--stormRain--><!--rainUnit--></td>	
+        </tr>
+
+      </tbody>
+    </table>
   </p>
-
-  <!-- ----------------------------------------------------------------- -->
-  <table class="tablevalues">
-    <thead>
-      <tr> <th>Temperatura </th> <th>Min oggi</th> <th>Valore </th> <th>Max oggi</th> </tr>
-    </thead>
-    <tbody>
-      <tr class="even"> 
-        <td class="title">Attuale</td>       
-        <td class="min"><!--lowOutsideTemp--><!--tempUnit--><br><!--lowOutsideTempTime--></td>
-        <td class="now"><!--outsideTemp--><!--tempUnit--></td>
-        <td class="max"><!--hiOutsideTemp--><!--tempUnit--><br><!--hiOutsideTempTime--></td> 
-      </tr >
-      <tr class="odd"> 
-        <td class="title">Percepita</td>       
-        <td> </td>
-        <td class="now"><!--apparentTemp--><!--tempUnit--></td> 
-        <td> </td> 
-      </tr >
-      <thead>
-        <tr> <th>Vento</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
-      </thead>
-      <tr class="even"> 
-        <td class="title">Attuale</td>       
-        <td class="now"><!--windSpeed--><!--windUnit--> <br><!--windDirection--></td>
-        <td> </td>
-        <td> </td> 
-      </tr >
-      <tr class="even"> 
-        <td class="title">Raffica</td>  
-        <td class="now"><!--windGustSpeed--><!--windUnit--><br> <!--windGustDirectionDegrees--> gradi</td> 
-        <td class="max"><!--hiWindSpeed--><!--windUnit--><br><!--hiWindSpeedTime--></td> 
-        <td> </td> 
-      </tr>
-      <tr class="even"> 
-        <td class="title">Media 10 minuti</td>       
-        <td class="now"><!--tenMinuteAvgWindSpeed--><!--windUnit--></td>
-        <td> </td> 
-        <td> </td> 
-      </tr >
-      <tr class="even"> 
-        <td class="title">Scala di Beaufort</td>       
-        <td class="now"><!--windBeaufortScale--></td>
-        <td> </td> 
-        <td> </td> 
-      </tr >			
-
-      <thead>
-        <tr> <th>Umidita'</th> <th>Min oggi</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
-      </thead>
-      <tr class="even"> 
-        <td class="title">Attuale</td>       
-        <td class="min"><!--lowHumidity--><!--humUnit--> <br><!--lowHumTime--></td>
-        <td class="now"><!--outsideHumidity--><!--humUnit--></td>
-        <td class="max"><!--hiHumidity--><!--humUnit--> <br><!--hiHumTime--></td>
-      </tr >
-      <thead>
-        <tr> <th>Pressione</th> <th>Min oggi</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
-      </thead>
-      <tr class="even"> 
-        <td class="title">Attuale</td>  
-        <td class="min"><!--lowBarometer--><!--barUnit--> <br><!--lowBarometerTime--></td>
-        <td class="now"><!--barometer--><!--barUnit--></td>
-        <td class="max"><!--hiBarometer--><!--barUnit--> <br><!--hiBarometerTime--></td>
-      </tr>
-      <tr class="even"> 
-        <td class="title">Trend</td>  
-        <td class="min"></td>
-        <td class="now"><!--baromtrend--></td>
-        <td class="max"></td>
-      </tr>
-      <thead>
-        <tr> <th>Pioggia</th><th>Frequenza</th> <th>Totale 24h</th> <th>Evento piovoso</th> <th> </th> </tr>
-      </thead>
-      <tr class="even"> 
-        <td class="title">Attuale</td>  
-        <td class="now"><!--rainRate--><!--rateUnit--></td>
-        <td class="now"><!--dailyRain--><!--rainUnit--></td>
-        <td class="now"><!--stormRain--><!--rainUnit--></td>	
-      </tr>
-
-    </tbody>
-  </table>
   <!-- ----------------------------------------------------------------- -->
 
-  <img class="round" src="windroseday.png" alt="" />
 </div> <!-- End of center column -->
 
 <p><a href="#top">back to menu</a></p>
