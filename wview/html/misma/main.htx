@@ -45,26 +45,26 @@
   <!-- ----------------------------------------------------------------- -->
     <table class="tablevalues">
       <thead>
-        <tr> <th>Temperatura </th> <th>Min oggi</th> <th>Valore </th> <th>Max oggi</th> </tr>
+        <tr> <th></th> <th>min</th> <th>Valore </th> <th>max</th> </tr>
       </thead>
       <tbody>
         <tr class="even"> 
-          <td class="title">Attuale</td>       
+          <td class="title">Temperatura</td>       
           <td class="min"><!--lowOutsideTemp--><!--tempUnit--><br><!--lowOutsideTempTime--></td>
           <td class="now"><!--outsideTemp--><!--tempUnit--></td>
           <td class="max"><!--hiOutsideTemp--><!--tempUnit--><br><!--hiOutsideTempTime--></td> 
         </tr >
         <tr class="odd"> 
-          <td class="title">Percepita</td>       
+          <td class="title">T percepita</td>       
           <td> </td>
           <td class="now"><!--apparentTemp--><!--tempUnit--></td> 
           <td> </td> 
         </tr >
         <thead>
-          <tr> <th>Vento</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
+          <tr> <th></th> <th>Valore</th> <th>max</th> <th> </th> </tr>
         </thead>
         <tr class="even"> 
-          <td class="title">Attuale</td>       
+          <td class="title">Vento</td>       
           <td class="now"><!--windSpeed--><!--windUnit--> <br><!--windDirection--></td>
           <td> </td>
           <td> </td> 
@@ -76,7 +76,7 @@
           <td> </td> 
         </tr>
         <tr class="even"> 
-          <td class="title">Media 10 minuti</td>       
+          <td class="title">Media 10 min.</td>       
           <td class="now"><!--tenMinuteAvgWindSpeed--><!--windUnit--></td>
           <td> </td> 
           <td> </td> 
@@ -89,19 +89,19 @@
         </tr >			
 
         <thead>
-          <tr> <th>Umidita'</th> <th>Min oggi</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
+          <tr> <th></th> <th>min</th> <th>Valore</th> <th>max</th> <th> </th> </tr>
         </thead>
         <tr class="even"> 
-          <td class="title">Attuale</td>       
+          <td class="title">Umidita'</td>       
           <td class="min"><!--lowHumidity--><!--humUnit--> <br><!--lowHumTime--></td>
           <td class="now"><!--outsideHumidity--><!--humUnit--></td>
           <td class="max"><!--hiHumidity--><!--humUnit--> <br><!--hiHumTime--></td>
         </tr >
         <thead>
-          <tr> <th>Pressione</th> <th>Min oggi</th> <th>Valore</th> <th>Max oggi</th> <th> </th> </tr>
+          <tr> <th></th> <th>min</th> <th>Valore</th> <th>max</th> <th> </th> </tr>
         </thead>
         <tr class="even"> 
-          <td class="title">Attuale</td>  
+          <td class="title">Pressione</td>  
           <td class="min"><!--lowBarometer--><!--barUnit--> <br><!--lowBarometerTime--></td>
           <td class="now"><!--barometer--><!--barUnit--></td>
           <td class="max"><!--hiBarometer--><!--barUnit--> <br><!--hiBarometerTime--></td>
@@ -113,10 +113,10 @@
           <td class="max"></td>
         </tr>
         <thead>
-          <tr> <th>Pioggia</th><th>Frequenza</th> <th>Totale 24h</th> <th>Evento piovoso</th> <th> </th> </tr>
+          <tr> <th></th><th>Frequenza</th> <th>Totale 24h</th> <th>Evento piovoso</th> <th> </th> </tr>
         </thead>
         <tr class="even"> 
-          <td class="title">Attuale</td>  
+          <td class="title">Pioggia</td>  
           <td class="now"><!--rainRate--><!--rateUnit--></td>
           <td class="now"><!--dailyRain--><!--rainUnit--></td>
           <td class="now"><!--stormRain--><!--rainUnit--></td>	
