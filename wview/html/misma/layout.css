@@ -190,7 +190,7 @@ h4
 
 .tablevalues 
 {
-  border:3px solid #ff0000;
+  /* DEBUG!! */ /*border:3px solid #ff0000; */
   color: #003300;  
   font-size: 1.1em;
 }
