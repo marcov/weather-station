@@ -198,7 +198,7 @@ div.leftcolumn img
 
 .externlink {
   width: auto;
-  background-color: #F73859;
+  background-color: darkturquoise;
 
 }
 
@@ -403,7 +403,7 @@ img.meteo
 
 #wviewbuttons
 {
-  text-align: right; 
+  text-align: center; 
 }
 
 /***************************************************************/
