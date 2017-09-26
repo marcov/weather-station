@@ -45,13 +45,13 @@
           <!-- XXXinclude header.inc-->
 
           <h1>Stazione Meteo di <!--stationCity-->, <!--stationState--></h1>
-          <p style="padding-top: 0.5em; text-align: left;">
+          <p style="padding-top: 0.5em;">
             <!--stationElevation--> s.l.m., <!--stationLatitude--> - <!--stationLongitude--><br>
           </p>
-          <p style="padding-top: 0.5em;text-align: left;">
+          <p style="padding-top: 0.5em;">
             Dati aggiornati al:  <b> <!--stationDate--> <!--stationTime--></b>
           </p>
-          <p style="font-size: 80%;">
+          <p style="font-size: 80%; padding-top: 0.5em;">
             Alba: <!--sunriseTime-->, tramonto: <!--sunsetTime--><br>
             Fase lunare: <!--moonPhase--><br>
           </p>
@@ -69,7 +69,7 @@
               <tr class="even">
                 <td class="now nowtemperature">
                   <!--outsideTemp--><br>
-                  <span style="font-size:50%">(percepita <!--apparentTemp-->)</span>
+                  <span style="font-size:75%">(percepita <!--apparentTemp-->)</span>
                 </td>
                 <td class="min"><!--lowOutsideTemp--><br><!--lowOutsideTempTime--></td>
                 <td class="max"><!--hiOutsideTemp--><br><!--hiOutsideTempTime--></td>
