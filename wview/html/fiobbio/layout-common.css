@@ -20,7 +20,7 @@ h3{
   /* Changed inside tab Title color from yellowish*/
   color: whitesmoke;
   font-family:"Trebuchet MS",Arial,Sans-Serif;
-  padding-bottom: 1em;
+  /* padding-bottom: 1em; */
 }
 
 a,p,h4 
@@ -53,7 +53,7 @@ div
 {
   margin-top:    0.5em;
   margin-bottom: 0.5em;
-  padding-top:   4em;
+  padding-top:   1em;
   background-color: #004d90;
 }
 
@@ -275,7 +275,6 @@ img.meteo
 .tablevalues th.firstcolumn
 {
   width: 40%;
-  text-align: left;
   font-weight:bold;
 }
 
@@ -410,3 +409,12 @@ img.meteo
 
 
 
+
+::-webkit-scrollbar {
+  width: 0px;  /* remove scrollbar space */
+  background: transparent;  /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: #FF0000;
+}
