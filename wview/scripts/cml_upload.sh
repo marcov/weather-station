@@ -1,12 +1,7 @@
-######################################
-# post-generate.sh :: CML VERSION :: #
-######################################
-
 #!/bin/sh
 
 # Account FTP per upload su server CML
 ############################################
-
 CML_ftp_enabled=1
 
 . /etc/cml_ftp_login_data.sh
