@@ -11,7 +11,7 @@ ${phantomjs_bin} takeshot.js \
     http://www.metradar.ch/2009/pc/index_mobile15.php \
     10000 \
     /var/lib/wview/img/radar_ch.png \
-    1024x1024 
+    1024x1024 \
     500x150x710x680 || exit $?
 
 ${phantomjs_bin} takeshot.js \
