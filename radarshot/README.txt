@@ -2,7 +2,7 @@
 
 Screenshot for metradar
 -----------------------
-phantomjs takeshot.js http://www.metradar.ch/2009/pc/index_mobile15.php 10000 met.png 1024x1024 500x150x715x670
+phantomjs takeshot.js http://www.metradar.ch/2009/pc/index_mobile15.php 10000 met.png 1024x1024 500x150x710x680
 
 Screenshot for CML radar
 ------------------------
