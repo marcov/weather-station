@@ -10,7 +10,7 @@ echo "Executing add watermark..."
 ./add_watermark.sh && echo "OK!" || echo "Failed!" 
 
 echo "Executing wview.txt generate..." 
-../wview/generate_wview_txt.sh && echo "OK!" || echo "Failed!"
+../wview/scripts/generate_wview_txt.sh && echo "OK!" || echo "Failed!"
 
 cd -
 
