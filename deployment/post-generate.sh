@@ -4,6 +4,6 @@
 #
 # Vedi: https://github.com/marcov/weather_station
 #
-/home/pi/weather_station/wview/scripts/pre-generate.sh >/dev/null || exit $?
+/home/pi/weather_station/wview/scripts/post-generate.sh >/dev/null || exit $?
 
 exit 0
