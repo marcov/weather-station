@@ -9,8 +9,7 @@
 
 CML_ftp_enabled=1
 
-CML_usr="fiobbio"
-CML_pwd="***REMOVED***"
+. /etc/cml_ftp_login_data.sh
 
 # Verifica che i contenuti generati siano cambiati dall'ultima chiamata dello script
 ########################################################################################
@@ -66,13 +65,13 @@ if [ $updated -eq 1 ]; then
 		cat /etc/wview/ftp.list >> /etc/wview/ftp_plus_noaa.list
 		
 		if [ $CML_ftp_enabled -eq 1 ]; then
-			cat /etc/wview/ftp_plus_noaa.list | /usr/bin/ftp -iVT put,20000 ftp://$CML_usr:$CML_pwd@ftp.centrometeolombardo.com
+			cat /etc/wview/ftp_plus_noaa.list | /usr/bin/ftp -iVT put,20000 ftp://$cml_ftp_user_fiobbio:$cml_ftp_pwd_fiobbio@ftp.centrometeolombardo.com
 		fi
 
 	else
 	
 		if [ $CML_ftp_enabled -eq 1 ]; then
-			cat /etc/wview/ftp.list | /usr/bin/ftp -iVT put,20000 ftp://$CML_usr:$CML_pwd@ftp.centrometeolombardo.com
+			cat /etc/wview/ftp.list | /usr/bin/ftp -iVT put,20000 ftp://$cml_ftp_user_fiobbio:$cml_ftp_pwd_fiobbio@ftp.centrometeolombardo.com
 		fi
 
 	fi
