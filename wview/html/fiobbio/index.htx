@@ -16,7 +16,7 @@
     <style type="text/css">@import "layout.css";</style>
   </head>
 
-  <body>
+  <body class="fiobbio">
     <div class="centercolumn section_0">
       <div id="menutop" class="blockdisplay">
         <input class="internlink rounded" type="button" id="button_0" value="Inizio Pagina" />
