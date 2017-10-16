@@ -208,18 +208,13 @@ h2.blockdisplay
 
 iframe.meteoblue
 {
-  height: 430px;
+  height: 380px;
   background: rgba(0, 0, 0, 0.5);
   border: 0;
   /* Disable scrolling */
   overflow:hidden;
 }
 
-img.meteo
-{
-  min-width: 45%;
-  margin-left:1em;
-}
 
 
 /***************************************************************/
