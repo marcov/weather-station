@@ -166,8 +166,8 @@ div.leftcolumn img
 
 .wviewlink {
   width: auto;
-  background-color: #7AC7C4;
-  color: #384259;
+  /*background-color: #7AC7C4;
+  color: #384259; */
 }
 
 .externlink {
@@ -365,11 +365,6 @@ iframe.meteoblue
 {
   margin-top: 1em;
   align-content: center;
-}
-
-#wviewbuttons
-{
-  text-align: center; 
 }
 
 /***************************************************************/

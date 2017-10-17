@@ -94,14 +94,14 @@ function openNoaaFile(month, year) {
   url = url + ".txt";
   //window.location=url;
 
-  $("#noaatext").text("\n\n\n           Loading....                             \n\n\n\n");
+  $("#noaatext").text("Loading....");
   $("#noaatext").load(url);
 }
 
 function openARCFile(day, month, year) {
   var url = "Archive/ARC-" + year + "-" + month + "-" + day + ".txt";
   //window.location=url;
-  $("#noaatext").text("\n\n\n           Loading....                             \n\n\n\n");
+  $("#noaatext").text("Loading....");
   $("#noaatext").load(url);
 }
 
