@@ -21,7 +21,7 @@
     <div class="centercolumn section_0">
       <div id="menutop" class="blockdisplay">
         <input class="internlink rounded" type="button" id="button_0" value="Inizio Pagina" />
-        <input class="internlink rounded" type="button" id="button_1" value="Storico Dati" />
+        <!-- <input class="internlink rounded" type="button" id="button_1" value="Storico Dati" /> -->
         <input class="internlink rounded" type="button" id="link_extrastas" value="Stazioni Limitrofe" />
         <input class="internlink rounded" type="button" id="link_forecast" value="Previsioni" />
         <input class="internlink rounded" type="button" id="link_satellite" value="Satellite" />
@@ -211,60 +211,40 @@
 
       <!-- FOOTER START -->
       <div class="blockdisplay">
-          <p id="wviewbuttons">
-            <b style="font-size:120%">Dati dettagliati: </b>
-            <input class="wviewlink rounded" name="button" type="button"
-                   onclick="openURL('almanac.htm')" value="Almanacco">
+        <p>
+          <b style="font-size:120%">Pagine wview: </b>
+          <input class="wviewlink rounded" name="button" type="button" onclick="openURL('almanac.htm')" value="Almanacco">
+          <input class="wviewlink rounded" name="button" type="button" onclick="openURL('Daily.htm')" value="Ultime 24 ore">
+          <input class="wviewlink rounded" type="button" value="Mese in corso" onclick="openURL('Monthly.htm')">
+          <input class="wviewlink rounded" name="button" type="button" onclick="openURL('Yearly.htm')" value="Anno in corso">
+          <input class="wviewlink rounded" type="button" value="Previsioni" onclick="openURL('<!--localForecastURL-->')">
+        </p>
 
-            <input class="wviewlink rounded" name="button" type="button"
-                   onclick="openURL('Daily.htm')" value="Ultime 24 ore">
+        <form action="#" method="post">
+          <b style="font-size:120%">Archivio dati mese/anno: </b>
+          <script type="text/javascript">
+            createMonthlySelect("month");
+            createYearlySelect("year");
+          </script>
+          <input class="rounded" type="button" value="Mostra mese" onclick="openNoaaFile(this.form.month.value, this.form.year.value)">
+          <input class="rounded" type="button" value="Mostra anno" onclick="openNoaaFile('',this.form.year.value)">
 
-            <input class="wviewlink rounded" type="button" value="Mese in corso"
-                   onclick="openURL('Monthly.htm')">
+          <br>
 
-            <input class="wviewlink rounded" name="button" type="button"
-                   onclick="openURL('Yearly.htm')" value="Anno in corso">
+          <b style="font-size:120%">Archivio dati giorno: </b>
+          <script type="text/javascript">
+            createDaySelect("day");
+            createMonthlySelect("month1");
+            createYearlySelect("year1");
+          </script>
+          <input class="rounded" type="button" value="Mostra" onclick="openARCFile(this.form.day.value, this.form.month1.value, this.form.year1.value)">
+        </form>
 
-            <input class="wviewlink rounded" type="button" value="Previsioni"
-                   onclick="openURL('<!--localForecastURL-->')">
-          </p>
-      </div>
-      
-      <div class="blockdisplay section_1" style="margin: auto;">
-        <h3>Storico Dati</h3>
-        <div class="leftcolumn" style="text-align: left; width: 50%;">
-          <form action="#" method="post">
-
-            Seleziona mese e/o anno:
-            <script type="text/javascript">
-createMonthlySelect("month");
-createYearlySelect("year");
-            </script>
-            <input class="rounded" type="button" value="Mostra mese"
-                   onclick="openNoaaFile(this.form.month.value, this.form.year.value)">
-            <input class="rounded" type="button" value="Mostra anno"
-                   onclick="openNoaaFile('',this.form.year.value)">
-
-            <br>
-
-            Seleziona giorno:
-            <script type="text/javascript">
-createDaySelect("day");
-createMonthlySelect("month1");
-createYearlySelect("year1");
-            </script>
-            <input class="rounded" type="button" value="Mostra"
-                   onclick="openARCFile(this.form.day.value, this.form.month1.value, this.form.year1.value)">
-
-            </form>
-        </div>
-        
-        <div class="rightcolumn" style="text-align: left; width: 50%; overflow:scroll;">
+        <div class="blockdisplay" style="text-align: left; overflow:scroll;">
           <pre id="noaatext"></pre>
         </div>
 
-      </div>
-      <!-- FOOTER END -->
+      </div>      <!-- FOOTER END -->
 
       <div id="extrastas" class="section_2 blockdisplay"></div>
       <div id="forecast" class="section_3 blockdisplay"></div>
@@ -345,23 +325,23 @@ createYearlySelect("year1");
         $(window).scroll(bindScroll);
       </script>     
 
-      
+          
       <!-- Histats.com  (div with counter) -->
       <div id="histats_counter" class="blockdisplay" style="padding-top: 0em; margin-top: 1em;"></div>
-      <!-- Histats.com  START  (aync) -->
-      <script type="text/javascript">var _Hasync= _Hasync|| [];
-_Hasync.push(['Histats.start', '1,1781036,4,4015,112,61,00011111']);
-_Hasync.push(['Histats.fasi', '1']);
-_Hasync.push(['Histats.track_hits', '']);
-(function() {
-  var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
-  hs.src = ('//s10.histats.com/js15_as.js');
-  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-})();</script>
-      <noscript><a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?1781036&101" alt="contatore gratuito"></a></noscript>
-      <!-- Histats.com  END  -->
-
-    </div>  <!-- div class centercolumn END -->
+        <!-- Histats.com  START  (aync) -->
+        <script type="text/javascript">var _Hasync= _Hasync|| [];
+          _Hasync.push(['Histats.start', '1,1781036,4,4015,112,61,00011111']);
+          _Hasync.push(['Histats.fasi', '1']);
+          _Hasync.push(['Histats.track_hits', '']);
+          (function() {
+            var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+            hs.src = ('//s10.histats.com/js15_as.js');
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+          })();
+        </script>
+        <noscript><a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?1781036&101" alt="contatore gratuito"></a></noscript>
+        <!-- Histats.com  END  -->
+      </div>  
 
     <link href="http://cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.css" type="text/css" rel="stylesheet" />
     <script src="http://cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
