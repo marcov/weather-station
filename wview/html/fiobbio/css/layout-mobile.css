@@ -67,4 +67,25 @@
   {
     font-size: 90%;
   }
+  
+  div.heading {
+    margin-top: 5em;
+  }
+  
+  .menu {
+    position: absolute;
+    margin-top: 0em;
+    padding-top: 0em;
+    max-height: 2em;
+  }
+  
+  .hamburger-menu-wrapper, .hamburger-menu {
+    margin-top: 0em;
+    padding-top: 0em;
+  }
+  
+  .menu-list {
+    margin-top: 4em;
+  }
+
 }

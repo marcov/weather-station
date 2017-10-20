@@ -201,7 +201,9 @@ div a.webcam
 
 div.heading
 {
-  text-align: center; 
+  text-align: center;
+  padding-top: 0em;
+  margin-top: 0em;
 }
 
 div.blockdisplay

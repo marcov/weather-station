@@ -13,8 +13,8 @@
     
     <!-- the following is needed for the media queries to work correctly -->
     <meta name="viewport" content="width=device-width">
-    <link type="text/css" rel="stylesheet" href="css/layout.css" />
     <link type="text/css" rel="stylesheet" href="css/menu.css" />
+    <link type="text/css" rel="stylesheet" href="css/layout.css" />
   </head>
 
   <body class="fiobbio">
@@ -30,26 +30,26 @@
       -->
       
       <!-- Heading -->
-      <div class="heading" style="padding-top: 0em; margin-top: 0em; ">
-        <div class="menu">
-          <div class="hamburger-menu-wrapper">
-            <div style="float: right; padding-top:  1.5em;">Menu</div>
-            <div style="float: left">
-            <button class="hamburger-menu">
-              <span></span>
-            </button></div>
-          </div>
-          <div class="menu-list">
-            <a href="#" id="link_top"><span>Inzio</span></a><br>
-            <a href="#" id="link_extrastas">Stazioni vicine</a><br>
-            <a href="#" id="link_forecast">Previsioni</a><br>
-            <a href="#" id="link_satellite">Satellite</a><br>
-            <a href="#" id="link_maps">Mappe</a><br>
-            <a href="/misma">Stazione Mt. Misma</a><br>
-            <a href="mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com">Contatti</a><br>
-          </div>
+      <div class="menu">
+        <div class="hamburger-menu-wrapper">
+          <div style="float: right; padding-top:  1.5em;">Menu</div>
+          <div style="float: left">
+          <button class="hamburger-menu">
+            <span></span>
+          </button></div>
         </div>
-
+        <div class="menu-list">
+          <a href="#" id="link_top"><span>Inzio</span></a><br>
+          <a href="#" id="link_extrastas">Stazioni vicine</a><br>
+          <a href="#" id="link_forecast">Previsioni</a><br>
+          <a href="#" id="link_satellite">Satellite</a><br>
+          <a href="#" id="link_maps">Mappe</a><br>
+          <a href="/misma">Stazione Mt. Misma</a><br>
+          <a href="mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com">Contatti</a><br>
+        </div>
+      </div>
+      
+      <div class="heading blockdisplay">
         <b style="font-size: 200%">Stazione Meteo di <!--stationCity-->, <!--stationState--></b>
             (<!--stationElevation--> s.l.m., <!--stationLatitude--> - <!--stationLongitude-->)<br>
           <!-- HEADER START -->
