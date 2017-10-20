@@ -5,32 +5,22 @@
     <meta http-equiv="refresh" content="150" />
     <meta http-equiv="cache-control" content="no-cache" />
         
-    <title>Stazione Meteo di <!--stationCity-->, <!--stationState--></title>
+    <title>Stazione Meteo di <!--stationCity-->, <!--stationState-->&nbsp;</title>
 
     <link rel="alternate" type="application/rss+xml" title="Stazione Meteo di <!--stationCity-->, <!--stationState-->" href="wxrss.xml">
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="wview.js"></script>
-
+    <script type="text/javascript" src="js/wview.js"></script>
+    
     <!-- the following is needed for the media queries to work correctly -->
     <meta name="viewport" content="width=device-width">
-    <style type="text/css">@import "layout.css";</style>
+    <link type="text/css" rel="stylesheet" href="css/layout.css" />
+    <link type="text/css" rel="stylesheet" href="css/menu.css" />
   </head>
 
   <body class="fiobbio">
-    <div class="centercolumn section_0">
-      <div id="menutop" class="blockdisplay">
-        <input class="internlink rounded" type="button" id="button_0" value="Inizio Pagina" />
-        <!-- <input class="internlink rounded" type="button" id="button_1" value="Storico Dati" /> -->
-        <input class="internlink rounded" type="button" id="link_extrastas" value="Stazioni Limitrofe" />
-        <input class="internlink rounded" type="button" id="link_forecast" value="Previsioni" />
-        <input class="internlink rounded" type="button" id="link_satellite" value="Satellite" />
-        <input class="internlink rounded" type="button" id="link_maps" value="Mappe" />
-        <input class="externlink rounded" type="button" onclick="openURL('http://fiobbio.blogdns.net/misma')"  value="Stazione Mt. Misma" />
-        <input class="externlink rounded" type="button" onclick="openURL('mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com')"  value="Contattaci via email" />
-      </div>
+
+    <div class="centercolumn section_0"> 
       
-      <div class="blockdisplay" style="height: 1em;"></div>
       <!--
       <div id="menubottom">
         <h4>Menu</h4>
@@ -38,30 +28,47 @@
         </form>
       </div>
       -->
-      <!-- LEFT RIGHT COLUMNS CONTAINER START -->
-      <div class="blockdisplay">
+      
+      <!-- Heading -->
+      <div class="heading" style="padding-top: 0em; margin-top: 0em; ">
+        <div class="menu">
+          <div class="hamburger-menu-wrapper">
+            <div style="float: right; padding-top:  1.5em;">Menu</div>
+            <div style="float: left">
+            <button class="hamburger-menu">
+              <span></span>
+            </button></div>
+          </div>
+          <div class="menu-list">
+            <a href="#" id="link_top"><span>Inzio</span></a><br>
+            <a href="#" id="link_extrastas">Stazioni vicine</a><br>
+            <a href="#" id="link_forecast">Previsioni</a><br>
+            <a href="#" id="link_satellite">Satellite</a><br>
+            <a href="#" id="link_maps">Mappe</a><br>
+            <a href="/misma">Stazione Mt. Misma</a><br>
+            <a href="mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com">Contatti</a><br>
+          </div>
+        </div>
 
-        <!-- LEFT COLUMNT START -->
-        <div class="leftcolumn">
-
+        <b style="font-size: 200%">Stazione Meteo di <!--stationCity-->, <!--stationState--></b>
+            (<!--stationElevation--> s.l.m., <!--stationLatitude--> - <!--stationLongitude-->)<br>
           <!-- HEADER START -->
-          <!-- XXXinclude header.inc-->
-
-          <h1>Stazione Meteo di <!--stationCity-->, <!--stationState--></h1>
           <p style="padding-top: 0.5em;">
-            <!--stationElevation--> s.l.m., <!--stationLatitude--> - <!--stationLongitude--><br>
           </p>
           <p style="padding-top: 0.5em;">
-            Dati aggiornati al:  <b> <!--stationDate--> <!--stationTime--></b>
+            Ultimo aggiornamento:  <b> <!--stationDate--> <!--stationTime--></b>
           </p>
           <p style="font-size: 80%; padding-top: 0.5em;">
-            Alba: <!--sunriseTime-->, tramonto: <!--sunsetTime--><br>
-            Fase lunare: <!--moonPhase--><br>
+            Alba: <!--sunriseTime-->, tramonto: <!--sunsetTime-->. Fase lunare: <!--moonPhase--><br>
           </p>
           <!-- HEADER END -->
-
+      </div>
+      
+      <!-- LEFT COLUMNT START -->
+      <div class="leftcolumn">
+        <div>
           <!-- NEW TABLE START -->
-          <table class="tablevalues">
+          <table class="tablevalues" style="padding-top: 1.5em;">
             <thead>
               <tr>
                 <th class="col3">Min</th>
@@ -125,7 +132,7 @@
             </thead>
             <tbody>
               <tr class="even">
-                
+
                 <td class="now">
                   <!--windSpeed--> (<!--windDirection-->), <!--windBeaufortScale--> <br>
                   <span class="max">Raffica <!--windGustSpeed-->(<!--windGustDirectionDegrees-->&deg;)</span>
@@ -146,27 +153,27 @@
             </thead>
             <tbody>
               <tr class="even">
-                <td class="now"><!--rainRate--></td>
+                <td class="now">&nbsp;<!--rainRate--></td>
                 <td><!--dailyRain--></td>
                 <td class="max"><!--stormRain--></td>
               </tr>
             </tbody>
           </table>
           <!--  NEW TABLE END -->
-
         </div>
-        <!-- LEFT COLUMN END -->
-
-
-        <!-- RIGHT COLUMN START -->
-        <div class="rightcolumn">
-          <p>
-            <a href="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam.jpg" data-featherlight="image"> <img alt="webcam_small" src="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam_small.jpg"></a>
-          </p>
-        </div>
-        <!-- RIGHT COLUMN END -->
       </div>
-      <!-- LEFT RIGHT COLUMNS CONTAINER END -->
+      <!-- LEFT COLUMN END -->
+
+
+      <!-- RIGHT COLUMN START -->
+      <div class="rightcolumn">
+        <div>
+          <a href="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam.jpg" data-featherlight="image"> 
+            <img style="height: 22em;" alt="webcam_small" src="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam_small.jpg" />
+          </a>
+        </div>
+      </div>
+      <!-- RIGHT COLUMN END -->
 
 
       <!-- WEATHER IMAGES START -->
@@ -244,88 +251,19 @@
           <pre id="noaatext"></pre>
         </div>
 
-      </div>      <!-- FOOTER END -->
+      </div>
+      <!-- FOOTER END -->
 
       <div id="extrastas" class="section_2 blockdisplay"></div>
-      <div id="forecast" class="section_3 blockdisplay"></div>
-      <div id="radar" class="blockdisplay"></div>
+      <div id="forecast"  class="section_3 blockdisplay"></div>
+      <div id="radar"     class="blockdisplay"></div>
       <div id="satellite" class="blockdisplay section_4"></div>
-      <div id="maps" class="blockdisplay"></div>
+      <div id="maps"      class="blockdisplay"></div>
 
-      <script>
-        $("#button_0").click(function() {
-          $('html,body').animate({scrollTop: $(".section_0").offset().top},
-                                 'slow');
-        });
-
-        $("#button_1").click(function() {
-          $('html,body').animate({scrollTop: $(".section_1").offset().top - 50},
-                                 'slow');
-        });
-
-        $( "#link_extrastas" ).click(function() {
-          $('html,body').animate({scrollTop: $("#extrastas").offset().top - 50},
-                                 'slow');
-          $( "#extrastas" ).empty();
-          $( "#extrastas" ).load( "extrastas.html" );
-        });
-
-        $( "#link_forecast" ).click(function() {
-          $('html,body').animate({scrollTop: $("#forecast").offset().top - 50},
-                                 'slow');
-          $( "#forecast" ).empty();
-          $( "#forecast" ).load( "forecast.html" );
-        });
-
-        $( "#link_radar" ).click(function() {
-          $('html,body').animate({scrollTop: $("#radar").offset().top},
-                                 'slow');
-          $( "#radar" ).empty();
-          $( "#radar" ).load( "radar.html" );
-        });
-
-        $( "#link_satellite" ).click(function() {
-          $('html,body').animate({scrollTop: $("#satellite").offset().top - 50},
-                                 'slow');
-          $( "#satellite" ).empty();
-          $( "#satellite" ).load( "satellite.html" );
-        });
-
-        $( "#link_maps" ).click(function() {
-          $('html,body').animate({scrollTop: $("#maps").offset().top - 50},
-                                 'slow');
-          $( "#maps" ).empty();
-          $( "#maps" ).load( "maps.html" );
-        });
-
-        function loadMore()
-        {
-          console.log("More loaded");
-          if ($("#extrastas").is(':empty') ) {
-            $( "#extrastas" ).load( "extrastas.html" );
-          } else if ($("#forecast").is(':empty') ) {
-            $( "#forecast" ).load( "forecast.html" );
-          } else if ($("#radar").is(':empty') ) {
-            $( "#radar" ).load( "radar.html" );
-          } else if ($("#satellite").is(':empty') ) {
-            $( "#satellite" ).load( "satellite.html" );
-          } else if ($("#maps").is(':empty') ) {
-            $( "#maps" ).load( "maps.html" );
-          }
-          $(window).bind('scroll', bindScroll);
-        }
-
-        function bindScroll(){
-          if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-            $(window).unbind('scroll');
-            loadMore();
-          }
-        }
-
-        $(window).scroll(bindScroll);
-      </script>     
-
-          
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+      <script src="js/menu.js"></script>
+      <script src="js/animation.js"></script>
+      
       <!-- Histats.com  (div with counter) -->
       <div id="histats_counter" class="blockdisplay" style="padding-top: 0em; margin-top: 1em;"></div>
         <!-- Histats.com  START  (aync) -->
@@ -335,37 +273,20 @@
           _Hasync.push(['Histats.track_hits', '']);
           (function() {
             var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
-            hs.src = ('//s10.histats.com/js15_as.js');
+            hs.src = ('http://s10.histats.com/js15_as.js');
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
           })();
         </script>
-        <noscript><a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?1781036&101" alt="contatore gratuito"></a></noscript>
+        <noscript><a href="/" target="_blank"><img src="http://sstatic1.histats.com/0.gif?1781036&101" alt="contatore gratuito"></a></noscript>
         <!-- Histats.com  END  -->
       </div>  
 
     <link href="http://cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.css" type="text/css" rel="stylesheet" />
     <script src="http://cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+    
     <script type="text/javascript">
       $.featherlight.defaults.loading = "Caricamento immagine in corso...";
-
-
-      $("#button_2").click(function() {
-      });
-
-      $("#button_3").click(function() {
-        $('html,body').animate({
-          scrollTop: $(".section_3").offset().top},
-                               'slow');
-      });
-
-      $("#button_4").click(function() {
-        $('html,body').animate({
-          scrollTop: $(".section_4").offset().top},
-                               'slow');
-      });
-
     </script>
-
   </body>
 </html>
 

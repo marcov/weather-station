@@ -11,6 +11,13 @@
     min-width: 100%;
   }
 
+  div.leftcolumn div, div.rightcolumn div 
+  {
+    float:left;
+    align-content: center;
+  }
+
+
   img.wviewgraph
   {
     width: 30%;

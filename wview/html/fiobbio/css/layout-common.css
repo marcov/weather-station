@@ -93,7 +93,7 @@ img.round
 div.rightcolumn
 {
   float: right;
-  width: 65%;
+  width: 59%;
   margin-left:1%; 
   /* DEBUG */
   /* background-color: violet;  */
@@ -102,9 +102,19 @@ div.rightcolumn
 div.leftcolumn
 {
   float: left;
-  width: 34%;
+  width: 37%;
   /* DEBUG */
   /* background-color: orange; */
+}
+
+div.leftcolumn div 
+{
+  float: right;
+}
+
+div.rightcolumn div 
+{
+  float: left;
 }
 
 div.centercolumn 
@@ -189,6 +199,11 @@ div a.webcam
 }
 
 
+div.heading
+{
+  text-align: center; 
+}
+
 div.blockdisplay
 {
   display: block;
@@ -227,7 +242,7 @@ iframe.meteoblue
   margin-bottom: 0.5em;
 
   /*border:1px solid #C9C9C9; */
-  color: #003300;
+  color: #333;
 
   /* Make table as large as the div container */
   min-width: 100%;
@@ -270,14 +285,9 @@ iframe.meteoblue
   color:#fff;
 }
 
-.tablevalues .even
+.tablevalues .even 
 {
   background:#fff;
-}
-
-.tablevalues .odd
-{
-  background:#FFFFE6;
 }
 
 .tablevalues tr td.title
@@ -302,7 +312,8 @@ iframe.meteoblue
 .tablevalues .min,
 .tablevalues .max
 {
-  font-size: 98%;
+  font-weight: bold;
+  font-size:   100%;
   text-align:  center;
 }
 
@@ -310,15 +321,11 @@ iframe.meteoblue
 .tablevalues .min
 {
   color: blue;
-  font-weight: bold;
-  font-size: 95%;
 }
 
 .tablevalues .max
 {
   color: red;
-  font-weight: bold;
-  font-size: 95%;
 }
 
 /***************************************************************/
