@@ -73,9 +73,9 @@ li {
 
 /***************************************************************/
 
-.wviewgraph
+img.wviewgraph
 {
-  background-color: rgba(255, 255, 255, 0.85); 
+  background-color: rgba(245, 245, 245, 0.85); 
   margin-top: 1em;
 }
 
@@ -192,10 +192,8 @@ img.satellite
   width: 300px;
 }
 
-div a.webcam
-{
-  display: inline;
-  padding: 0;
+img.webcam {
+  max-height: 22em;
 }
 
 
@@ -235,6 +233,10 @@ iframe.meteoblue
 
 
 /***************************************************************/
+
+.tables {
+  padding-top: 2em;   
+}
 
 /************ Start of table values ************/
 
@@ -284,12 +286,13 @@ iframe.meteoblue
 {
   font-weight:bold;
   background:#333;
-  color:#fff;
+  color: rgba(245,245,245,1); 
 }
 
 .tablevalues .even 
 {
-  background:#fff;
+  background-color: rgba(245,245,245,0.85); 
+  
 }
 
 .tablevalues tr td.title
@@ -389,3 +392,4 @@ iframe.meteoblue
 ::-webkit-scrollbar-thumb {
   background: #FF0000;
 }
+

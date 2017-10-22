@@ -32,11 +32,12 @@
       <!-- Heading -->
       <div class="menu">
         <div class="hamburger-menu-wrapper">
-          <div style="float: right; padding-top:  1.5em;">Menu</div>
-          <div style="float: left">
-          <button class="hamburger-menu">
-            <span></span>
-          </button></div>
+          <div style="float: left; margin: 0em; padding: 0em;">
+            <button class="hamburger-menu">
+              <span></span>
+            </button>
+          </div>
+          <div style="float: right; margin: 0em; padding: 0.6em;">Menu</div>
         </div>
         <div class="menu-list">
           <a href="#" id="link_top"><span>Inzio</span></a><br>
@@ -66,9 +67,9 @@
       
       <!-- LEFT COLUMNT START -->
       <div class="leftcolumn">
-        <div>
+        <div class="tables">
           <!-- NEW TABLE START -->
-          <table class="tablevalues" style="padding-top: 1.5em;">
+          <table class="tablevalues">
             <thead>
               <tr>
                 <th class="col3">Min</th>
@@ -169,7 +170,7 @@
       <div class="rightcolumn">
         <div>
           <a href="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam.jpg" data-featherlight="image"> 
-            <img style="height: 22em;" alt="webcam_small" src="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam_small.jpg" />
+            <img class="webcam" alt="webcam_small" src="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam_small.jpg" />
           </a>
         </div>
       </div>
@@ -178,15 +179,15 @@
 
       <!-- WEATHER IMAGES START -->
       <div class="blockdisplay" style="padding-top:0;">
-        <img class="wviewgraph wviewxyplot" alt="wview image" src="tempdaycomp.png">
-        <img class="wviewgraph wviewxyplot" alt="wview image" src="wspeeddaycomp.png">
-        <img class="wviewgraph wviewxyplot" alt="wview image" src="radiationDay.png ">
+        <img class="wviewgraph" alt="wview image" src="tempdaycomp.png">
+        <img class="wviewgraph" alt="wview image" src="wspeeddaycomp.png">
+        <img class="wviewgraph" alt="wview image" src="radiationDay.png ">
       </div> 
 
-      <div class="blockdisplay wviewxyplot" style="padding-top:0;">
-        <img class="wviewgraph wviewxyplot" alt="wview image" src="rainday.png">
-        <img class="wviewgraph wviewxyplot" alt="wview image" src="baromday.png">
-        <img class="wviewgraph wviewxyplot" alt="wview image" src="humidday.png">
+      <div class="blockdisplay" style="padding-top:0;">
+        <img class="wviewgraph" alt="wview image" src="rainday.png">
+        <img class="wviewgraph" alt="wview image" src="baromday.png">
+        <img class="wviewgraph" alt="wview image" src="humidday.png">
       </div>
 
       <div class="blockdisplay" style="padding-top:0;">

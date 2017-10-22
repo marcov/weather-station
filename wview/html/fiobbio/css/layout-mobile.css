@@ -9,18 +9,28 @@
   {
     float: left;
     min-width: 100%;
+    margin-top: 0em;
+    margin-bottom: 0em;
+    padding-top: 0em;
   }
 
   div.leftcolumn div, div.rightcolumn div 
   {
     float:left;
     align-content: center;
+    padding-top: 0em;
+    margin-top: 0em;
+    margin-bottom: 0em;
   }
-
 
   img.wviewgraph
   {
-    width: 30%;
+    max-width: 49%;
+    max-height: 10em;
+  }
+  
+  img.round {
+    max-width: 30%;
   }
 
   img.satellite,img.wviewxyplot
@@ -69,7 +79,8 @@
   }
   
   div.heading {
-    margin-top: 5em;
+    margin-top: 2em;
+    margin-bottom: 0em;
   }
   
   .menu {
@@ -85,7 +96,10 @@
   }
   
   .menu-list {
-    margin-top: 4em;
+    margin-top: 0.5em;
   }
-
+  
+  .tables {
+    padding-top: 0em;
+  }
 }
