@@ -15,7 +15,6 @@ $("#link_extrastas").click(function () {
   $('html,body').animate({scrollTop: $("#extrastas").offset().top},
                          'slow');
   $("#extrastas").empty();
-  
   $("#extrastas").load("html/extrastas.html");
 });
 
@@ -75,10 +74,11 @@ $(window).scroll(bindScroll);
 function reloadCurrWeather () {
   console.log("Reloading current weather section...");
   $("#currweather").empty();
-  $("#currweather").load( "html/currweather.html" );
+  $("#currweather").load( "html/currweather.htm" );
   setTimeout(reloadCurrWeather, 150000);
 }
 
 $(document).ready(function(){
   setTimeout(reloadCurrWeather, 0);
 });
+
