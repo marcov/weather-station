@@ -74,7 +74,7 @@ $(window).scroll(bindScroll);
 function reloadCurrWeather () {
   console.log("Reloading current weather section...");
   $("#currweather").empty();
-  $("#currweather").load( "html/currweather.htm" );
+  $("#currweather").load( "currweather.htm" );
   setTimeout(reloadCurrWeather, 150000);
 }
 
