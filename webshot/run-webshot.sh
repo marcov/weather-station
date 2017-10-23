@@ -1,6 +1,7 @@
 #!/bin/bash
 
 dst_path=/var/lib/wview/img
+webshot_tool=webshot.js
 #dst_path=.
 params=(\
     "http://www.meteoguru.com/en/pro/ecmwf/?latlon=45.80,9.80 1000  ${dst_path}/mg_ecmwf.png  1280x1280  645x297x945x585" \
@@ -23,6 +24,6 @@ fi
 
 for p in "${params[@]}"
 do
-     ${phantomjs_bin} takeshot.js ${p} || exit $?
+     ${phantomjs_bin} ${webshot_tool} ${p} || exit $?
 done 
 
