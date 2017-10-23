@@ -11,7 +11,7 @@ params=(\
     \
     "http://cml.to/radar 30000 ${dst_path}/radar_lom.png 1024x800 0x20x960x800"\
     \
-    "http://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=gfs&var=93&run=0&lid=OP&bw= 10000 ${dst_path}/wz_meteogram.png 820x1180 620x0x820x557"
+    "http://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=gfs&var=93&run=0&lid=OP&bw= 10000 ${dst_path}/wz_meteogram.png 820x1180 714x0x820x557"
 )
 
 if which phantomjs
