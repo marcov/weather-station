@@ -71,3 +71,14 @@ function loadMore() {
 }
 
 $(window).scroll(bindScroll);
+
+function reloadCurrWeather () {
+  console.log("Reloading current weather section...");
+  $("#currweather").empty();
+  $("#currweather").load( "html/currweather.html" );
+  setTimeout(reloadCurrWeather, 150000);
+}
+
+$(document).ready(function(){
+  setTimeout(reloadCurrWeather, 0);
+});

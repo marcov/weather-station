@@ -2,7 +2,6 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <meta http-equiv="refresh" content="150" />
     <meta http-equiv="cache-control" content="no-cache" />
         
     <title>Stazione Meteo di <!--stationCity-->, <!--stationState-->&nbsp;</title>
@@ -20,7 +19,6 @@
   <body class="fiobbio">
 
     <div class="centercolumn section_0"> 
-      
       <!--
       <div id="menubottom">
         <h4>Menu</h4>
@@ -29,7 +27,6 @@
       </div>
       -->
       
-      <!-- Heading -->
       <div class="menu">
         <div class="hamburger-menu-wrapper">
           <div style="float: left; margin: 0em; padding: 0em;">
@@ -40,193 +37,25 @@
           <div style="float: right; margin: 0em; padding: 0.6em;">Menu</div>
         </div>
         <div class="menu-list">
-          <a href="#" id="link_top"><span>Inzio</span></a><br>
+          <a href="#" id="link_top">Inzio</a><br>
           <a href="#" id="link_extrastas">Stazioni vicine</a><br>
           <a href="#" id="link_forecast">Previsioni</a><br>
           <a href="#" id="link_satellite">Satellite</a><br>
           <a href="#" id="link_maps">Mappe</a><br>
+          <span>Pagine wview</span>
+          <a href="almanac.htm" class="indented">Almanacco</a><br>
+          <a href="Daily.htm" class="indented">24h</a><br>
+          <a href="Monthly.htm" class="indented">Mese in corso</a><br>
+          <a href="Yearly.htm" class="indented">Anno in corso</a><br>
           <a href="/misma">Stazione Mt. Misma</a><br>
           <a href="mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com">Contatti</a><br>
         </div>
       </div>
-      
-      <div class="heading blockdisplay">
-        <b style="font-size: 200%">Stazione Meteo di <!--stationCity-->, <!--stationState--></b>
-            (<!--stationElevation--> s.l.m., <!--stationLatitude--> - <!--stationLongitude-->)<br>
-          <!-- HEADER START -->
-          <p style="padding-top: 0.5em;">
-          </p>
-          <p style="padding-top: 0.5em;">
-            Ultimo aggiornamento:  <b> <!--stationDate--> <!--stationTime--></b>
-          </p>
-          <p style="font-size: 80%; padding-top: 0.5em;">
-            Alba: <!--sunriseTime-->, tramonto: <!--sunsetTime-->. Fase lunare: <!--moonPhase--><br>
-          </p>
-          <!-- HEADER END -->
-      </div>
-      
-      <!-- LEFT COLUMNT START -->
-      <div class="leftcolumn">
-        <div class="tables">
-          <!-- NEW TABLE START -->
-          <table class="tablevalues">
-            <thead>
-              <tr>
-                <th class="col3">Min</th>
-                <th class="firstcolumn">Temperatura [&deg;<!--tempUnit-->]</th>
-                <th class="col3">Max</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="even">
-                <td class="min"><!--lowOutsideTemp--><br><!--lowOutsideTempTime--></td>
-                <td class="now nowtemperature">
-                  <!--outsideTemp--><br>
-                  <span style="font-size:50%">Percepita: </span><!--apparentTemp-->
-                </td>
-                <td class="max"><!--hiOutsideTemp--><br><!--hiOutsideTempTime--></td>
-              </tr >
-            </tbody>
-          </table>
 
-          <table class="tablevalues" style="width: 50%;">
-            <thead>
-              <tr>
-                <th class="col3">Min</th>
-                <th class="firstcolumn">Umidita' [<!--humUnit-->]</th>
-                <th class="col3">Max</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="even">
-                <td class="min"><!--lowHumidity--><br><!--lowHumTime--></td>
-                <td class="now"><!--outsideHumidity--></td>
-                <td class="max"><!--hiHumidity--><br><!--hiHumTime--></td>
-              </tr>
-            </tbody>
-          </table>
-
-          <table class="tablevalues" style="width: 50%;">
-            <thead>
-              <tr>
-                <th class="col3">Min</th>
-                <th class="firstcolumn">Pressione [<!--barUnit-->]</th>
-                <th class="col3">Max</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="even">
-                <td class="min"><!--lowBarometer--><br><!--lowBarometerTime--></td>
-                <td class="now"><!--barometer--> (<!--baromtrend-->)</td>
-                <td class="max"><!--hiBarometer--><br><!--hiBarometerTime--></td>
-              </tr>
-            </tbody>
-          </table>
-
-          <table class="tablevalues" style="width: 50%;">
-            <thead>
-              <tr>
-                <th class="firstcolumn">Vento [<!--windUnit-->]</th>
-                <th class="col3">10 Minuti</th>
-                <th class="col3">Max</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="even">
-
-                <td class="now">
-                  <!--windSpeed--> (<!--windDirection-->), <!--windBeaufortScale--> <br>
-                  <span class="max">Raffica <!--windGustSpeed-->(<!--windGustDirectionDegrees-->&deg;)</span>
-                </td>
-                <td class="now"><!--tenMinuteAvgWindSpeed--></td>
-                <td class="max"><!--hiWindSpeed--><br><!--hiWindSpeedTime--></td>
-              </tr >
-            </tbody>
-          </table>
-
-          <table class="tablevalues" style="width: 100%;">
-            <thead>
-              <tr>
-                <th class="firstcolumn">Pioggia [<!--rateUnit-->]</th>
-                <th class="col3">Totale Oggi</th>
-                <th class="col3">Tempesta</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="even">
-                <td class="now">&nbsp;<!--rainRate--></td>
-                <td><!--dailyRain--></td>
-                <td class="max"><!--stormRain--></td>
-              </tr>
-            </tbody>
-          </table>
-          <!--  NEW TABLE END -->
-        </div>
-      </div>
-      <!-- LEFT COLUMN END -->
-
-
-      <!-- RIGHT COLUMN START -->
-      <div class="rightcolumn">
-        <div>
-          <a href="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam.jpg" data-featherlight="image"> 
-            <img class="webcam" alt="webcam_small" src="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam_small.jpg" />
-          </a>
-        </div>
-      </div>
-      <!-- RIGHT COLUMN END -->
-
-
-      <!-- WEATHER IMAGES START -->
-      <div class="blockdisplay" style="padding-top:0;">
-        <img class="wviewgraph" alt="wview image" src="tempdaycomp.png">
-        <img class="wviewgraph" alt="wview image" src="wspeeddaycomp.png">
-        <img class="wviewgraph" alt="wview image" src="radiationDay.png ">
-      </div> 
-
-      <div class="blockdisplay" style="padding-top:0;">
-        <img class="wviewgraph" alt="wview image" src="rainday.png">
-        <img class="wviewgraph" alt="wview image" src="baromday.png">
-        <img class="wviewgraph" alt="wview image" src="humidday.png">
-      </div>
-
-      <div class="blockdisplay" style="padding-top:0;">
-        <img class="wviewgraph" alt="wview image" src="radiation.png">
-        <img class="wviewgraph" alt="wview image" src="dayrain.png">
-        <img class="wviewgraph" alt="wview image" src="stormrain.png">
-        <img class="wviewgraph" alt="wview image" src="rainrate.png">
-        <img class="wviewgraph" alt="wview image" src="monthrain.png">
-        <img class="wviewgraph" alt="wview image" src="yearrain.png">
-      </div>
-
-      <div class="blockdisplay" style="padding-top:0;">
-        <img class="wviewgraph round" alt="wview image" src="windroseday.png">
-        <img class="wviewgraph round" alt="wview image" src="windroseweek.png">
-        <img class="wviewgraph round" alt="wview image" src="windroseyear.png">
-      </div>
-      <!-- WEATHER IMAGES END -->
-
-      <!--
-<div class="blockdisplay">
-<h3>Dettagli </h3>
-<ul style="max-width: 50%;">
-<li>
-<! - - include readings-nostyle.inc  - - >
-</li>
-</ul>
-</div>
--->
+      <div class="nospace" id="currweather"></div>
 
       <!-- FOOTER START -->
       <div class="blockdisplay">
-        <p>
-          <b style="font-size:120%">Pagine wview: </b>
-          <input class="wviewlink rounded" name="button" type="button" onclick="openURL('almanac.htm')" value="Almanacco">
-          <input class="wviewlink rounded" name="button" type="button" onclick="openURL('Daily.htm')" value="Ultime 24 ore">
-          <input class="wviewlink rounded" type="button" value="Mese in corso" onclick="openURL('Monthly.htm')">
-          <input class="wviewlink rounded" name="button" type="button" onclick="openURL('Yearly.htm')" value="Anno in corso">
-          <input class="wviewlink rounded" type="button" value="Previsioni" onclick="openURL('<!--localForecastURL-->')">
-        </p>
 
         <form action="#" method="post">
           <b style="font-size:120%">Archivio dati mese/anno: </b>
