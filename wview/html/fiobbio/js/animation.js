@@ -6,75 +6,93 @@
 /* eslint-disable no-alert, no-console */
 "use strict";
 
-$("#link_top").click(function () {
-  $('html,body').animate({scrollTop: $(".section_0").offset().top},
-                         'slow');
-});
 
-$("#link_extrastas").click(function () {
-  $('html,body').animate({scrollTop: $("#extrastas").offset().top},
-                         'slow');
-  $("#extrastas").empty();
-  $("#extrastas").load("html/extrastas.html");
-});
+var nDivs = 6;
+var elemList = [
+  {name : "currweather", location : "#slot0"},
+  {name : "extrastas",   location : null},
+  {name : "forecast",    location : null},
+  {name : "radar",       location : null},
+  {name : "satellite",   location : null},
+  {name : "maps",        location : null}
+];
 
-$("#link_forecast").click(function () {
-  $('html,body').animate({scrollTop: $("#forecast").offset().top},
-                         'slow');
-  $("#forecast").empty();
-  $("#forecast").load("html/forecast.html");
-});
+var canLoadMore = true;
 
-$("#link_radar").click(function () {
-  $('html,body').animate({scrollTop: $("#radar").offset().top},
-                         'slow');
-  $("#radar").empty();
-  $("#radar").load("html/radar.html");
-});
-
-$("#link_satellite").click(function () {
-  $('html,body').animate({scrollTop: $("#satellite").offset().top},
-                         'slow');
-  $("#satellite").empty();
-  $("#satellite").load("html/satellite.html");
-});
-
-$("#link_maps").click(function () {
-  $('html,body').animate({scrollTop: $("#maps").offset().top},
-                         'slow');
-  $("#maps").empty();
-  $("#maps").load("html/maps.html");
+document.addEventListener('click', function (e) {
+  var target = e.target;
+  if (target.tagName && target.tagName.toLowerCase() === "a") {
+    console.log("clicked " + target.id);
+    
+    elemList.some(function (e) {
+      if ("link_" + e.name == target.id) {
+        var url = "html/" + e.name + ".html";
+       
+        canLoadMore = false;
+        console.log("is a known element!");
+        if (e.location === null) {
+          e.location = loadNewDiv(url); 
+        }
+        else {
+          console.log("element already loaded...");
+        }
+        
+        $('html,body').animate({scrollTop: $(e.location).offset().top},
+                               'slow');
+        
+        canLoadMore = true;
+        return true;
+      }
+      return false;
+    });
+  }
 });
 
 function bindScroll() {
   if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-    $(window).unbind('scroll');
-    loadMore();
+    if (canLoadMore) {
+      $(window).unbind('scroll');
+      loadMore();
+    }
   }
 }
 
-function loadMore() {
-  console.log("More loaded");
-  if ($("#extrastas").is(':empty')) {
-    $("#extrastas").load("html/extrastas.html");
-  } else if ($("#forecast").is(':empty')) {
-    $("#forecast").load("html/forecast.html");
-  } else if ($("#radar").is(':empty')) {
-    $("#radar").load("html/radar.html");
-  } else if ($("#satellite").is(':empty')) {
-    $("#satellite").load("html/satellite.html");
-  } else if ($("#maps").is(':empty')) {
-    $("#maps").load("html/maps.html");
+function loadNewDiv(url) {
+  console.log("Loading new div for url " + url + "...");
+      
+  for (var i = 0; i < nDivs; i++) {
+    var divName = "#slot" + i.toString();
+    console.log("trying " + divName);
+  
+    if ($(divName).is(':empty')) {  
+      console.log("is empty!");
+      $(divName).load(url);
+      return divName;
+    }
   }
-  $(window).bind('scroll', bindScroll);
+  
+  return null;
+}
+
+function loadMore() {
+  console.log("loadmore triggered...");
+  
+  elemList.some( function (e) {
+    if (!e.location) {
+      var url = "html/" + e.name + ".html";
+      e.location = loadNewDiv(url); 
+      $(window).bind('scroll', bindScroll);
+      return (e.location !== null);
+    }    
+    return false;
+  });
 }
 
 $(window).scroll(bindScroll);
 
 function reloadCurrWeather () {
   console.log("Reloading current weather section...");
-  $("#currweather").empty();
-  $("#currweather").load( "currweather.htm" );
+  loadNewDiv("currweather.htm");
   setTimeout(reloadCurrWeather, 150000);
 }
 
