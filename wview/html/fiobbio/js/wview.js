@@ -84,7 +84,7 @@ function createYearlySelect(name) {
 }
 
 function openNoaaFile(month, year) {
-  var url = "NOAA/NOAA-";
+  var url = "/weather/NOAA/NOAA-";
   url = url + year;
   if (month != '') {
     url = url + "-";
@@ -99,7 +99,7 @@ function openNoaaFile(month, year) {
 }
 
 function openARCFile(day, month, year) {
-  var url = "Archive/ARC-" + year + "-" + month + "-" + day + ".txt";
+  var url = "/weather/Archive/ARC-" + year + "-" + month + "-" + day + ".txt";
   //window.location=url;
   $("#noaatext").text("Loading....");
   $("#noaatext").load(url);
