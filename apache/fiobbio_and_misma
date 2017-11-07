@@ -7,12 +7,12 @@
 		AllowOverride None
 	</Directory>
 	<Directory /var/www/>
-		Options Indexes FollowSymLinks MultiViews
+		Options FollowSymLinks MultiViews
 		AllowOverride None
 		Order allow,deny
 		allow from all
 	</Directory>
-    
+	
 	############# MISMA SECTION ##############
 	
 	RewriteEngine on 
