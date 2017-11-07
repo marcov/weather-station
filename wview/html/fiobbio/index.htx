@@ -18,7 +18,7 @@
 
   <body class="fiobbio">
 
-    <div class="centercolumn"> 
+    <div class="maincolumn"> 
       <!--
       <div id="menubottom">
         <h4>Menu</h4>
@@ -43,48 +43,23 @@
           <a href="#" id="link_radar">Radar</a><br>
           <a href="#" id="link_satellite">Satellite</a><br>
           <a href="#" id="link_maps">Mappe</a><br>
-          <span>Pagine wview</span>
-          <a href="almanac.htm" class="indented">Almanacco</a><br>
-          <a href="Daily.htm" class="indented">24h</a><br>
-          <a href="Monthly.htm" class="indented">Mese in corso</a><br>
-          <a href="Yearly.htm" class="indented">Anno in corso</a><br>
+          <br>
           <a href="/misma">Stazione Mt. Misma</a><br>
           <a href="mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com">Contatti</a><br>
+          <br>
+          <span style="font-size: 90%;">
+            <b>Pagine wview</b>
+            <a href="html/archive.html" class="indented">Archivio Dati</a><br>
+            <a href="almanac.htm" class="indented">Almanacco</a><br>
+            <a href="Daily.htm" class="indented">24h</a><br>
+            <a href="Monthly.htm" class="indented">Mese in corso</a><br>
+            <a href="Yearly.htm" class="indented">Anno in corso</a><br>
+            <br>
+          </span>
         </div>
       </div>
 
       <div id="slot0" class="nospace"></div>
-
-      <!-- FOOTER START -->
-      <div class="blockdisplay">
-
-        <form action="#" method="post">
-          <b style="font-size:120%">Archivio dati mese/anno: </b>
-          <script type="text/javascript">
-            createMonthlySelect("month");
-            createYearlySelect("year");
-          </script>
-          <input class="rounded" type="button" value="Mostra mese" onclick="openNoaaFile(this.form.month.value, this.form.year.value)">
-          <input class="rounded" type="button" value="Mostra anno" onclick="openNoaaFile('',this.form.year.value)">
-
-          <br>
-
-          <b style="font-size:120%">Archivio dati giorno: </b>
-          <script type="text/javascript">
-            createDaySelect("day");
-            createMonthlySelect("month1");
-            createYearlySelect("year1");
-          </script>
-          <input class="rounded" type="button" value="Mostra" onclick="openARCFile(this.form.day.value, this.form.month1.value, this.form.year1.value)">
-        </form>
-
-        <div class="blockdisplay" style="text-align: left; overflow:scroll;">
-          <pre id="noaatext"></pre>
-        </div>
-
-      </div>
-      <!-- FOOTER END -->
-
       <div id="slot1" class="blockdisplay"></div>
       <div id="slot2" class="blockdisplay"></div>
       <div id="slot3" class="blockdisplay"></div>

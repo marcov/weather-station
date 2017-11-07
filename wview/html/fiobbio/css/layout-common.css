@@ -71,6 +71,23 @@ li {
   float: left;
 }
 
+div.maincolumn
+{
+  clear: none;
+  float: none;
+  /*Make column large exactly as content */
+  overflow: auto;
+  padding: 0 0.5em 0 0.5em;
+  /* Center the div element */
+  margin: auto;
+
+  width: 98%;
+
+  color: whitesmoke;
+
+  /* DEBUG */
+  /* background-color: black; */
+}
 /***************************************************************/
 
 img.wviewgraph
@@ -117,24 +134,19 @@ div.rightcolumn div
   float: left;
 }
 
-div.centercolumn 
+
+div.centercolumn
 {
   clear: none;
   float: none;
   /*Make column large exactly as content */
   overflow: auto;
-  padding: 0 1em 0 1em;
+  
   /* Center the div element */
-  margin: auto;
-
-  width: 90%;
-
-  color: whitesmoke;
-
+  width: 30%;
   /* DEBUG */
   /* background-color: black; */
 }
-
 
 div.rightcolumn,
 div.leftcolumn

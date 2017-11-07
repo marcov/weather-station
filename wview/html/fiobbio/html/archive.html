@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="cache-control" content="no-cache" />
+        
+    <title>Archivio Dati</title>
+
+    <script type="text/javascript" src="../js/wview.js"></script>
+    
+    <!-- the following is needed for the media queries to work correctly -->
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../css/menu.css" />
+    <link type="text/css" rel="stylesheet" href="../css/layout.css" />
+  </head>
+
+  <body class="fiobbio">
+
+    <div class="maincolumn"> 
+      <!-- FOOTER START -->
+      <div class="blockdisplay">
+
+        <form action="#" method="post">
+          <b style="font-size:120%">Archivio dati mese/anno: </b>
+          <script type="text/javascript">
+            createMonthlySelect("month");
+            createYearlySelect("year");
+          </script>
+          <input class="rounded" type="button" value="Mostra mese" onclick="openNoaaFile(this.form.month.value, this.form.year.value)">
+          <input class="rounded" type="button" value="Mostra anno" onclick="openNoaaFile('',this.form.year.value)">
+
+          <br>
+
+          <b style="font-size:120%">Archivio dati giorno: </b>
+          <script type="text/javascript">
+            createDaySelect("day");
+            createMonthlySelect("month1");
+            createYearlySelect("year1");
+          </script>
+          <input class="rounded" type="button" value="Mostra" onclick="openARCFile(this.form.day.value, this.form.month1.value, this.form.year1.value)">
+        </form>
+
+        <div class="blockdisplay" style="text-align: left; overflow:scroll;">
+          <pre id="noaatext"></pre>
+        </div>
+
+      </div>
+      <!-- FOOTER END -->
+
+    </div>
+  </body>
+</html>
