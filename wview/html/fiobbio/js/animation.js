@@ -8,8 +8,8 @@
 
 $(function () {
   const nDivs = 6;
-  var loadedDivs = 1;
-  
+  var loadedDivs = 0;
+
   var elemList = [
     {name : "currweather", location : null},
     {name : "extrastas",   location : null},
