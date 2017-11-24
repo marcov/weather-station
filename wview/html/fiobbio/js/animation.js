@@ -6,97 +6,97 @@
 /* eslint-disable no-alert, no-console */
 "use strict";
 
+$(function () {
+  const nDivs = 6;
+  var loadedDivs = 1;
+  
+  var elemList = [
+    {name : "currweather", location : null},
+    {name : "extrastas",   location : null},
+    {name : "forecast",    location : null},
+    {name : "radar",       location : null},
+    {name : "satellite",   location : null},
+    {name : "maps",        location : null}
+  ];
 
-var nDivs = 6;
-var elemList = [
-  {name : "currweather", location : "#slot0"},
-  {name : "extrastas",   location : null},
-  {name : "forecast",    location : null},
-  {name : "radar",       location : null},
-  {name : "satellite",   location : null},
-  {name : "maps",        location : null}
-];
+  var canLoadMore = true;
 
-var canLoadMore = true;
+  document.addEventListener('click', function (e) {
+    var target = e.target;
+    if (target.tagName && target.tagName.toLowerCase() === "a") {
+      console.log("clicked " + target.id);
 
-document.addEventListener('click', function (e) {
-  var target = e.target;
-  if (target.tagName && target.tagName.toLowerCase() === "a") {
-    console.log("clicked " + target.id);
-    
-    elemList.some(function (e) {
-      if ("link_" + e.name == target.id) {
-        var url = "html/" + e.name + ".html";
-       
-        canLoadMore = false;
-        console.log("is a known element!");
-        if (e.location === null) {
-          e.location = loadNewDiv(url); 
+      elemList.some(function (e) {
+        if ("link_" + e.name == target.id) {
+          var url = "html/" + e.name + ".html";
+
+          canLoadMore = false;
+          console.log("is a known element!");
+          if (e.location === null) {
+            loadEleminNewDiv(e);
+          }
+          else {
+            console.log("element already loaded...");
+          }
+
+          $('html,body').animate({scrollTop: $(e.location).offset().top},
+                                 'slow');
+
+          canLoadMore = true;
+          return true;
         }
-        else {
-          console.log("element already loaded...");
-        }
-        
-        $('html,body').animate({scrollTop: $(e.location).offset().top},
-                               'slow');
-        
-        canLoadMore = true;
-        return true;
+        return false;
+      });
+    }
+  });
+
+  function bindScroll() {
+    if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+      if (canLoadMore) {
+        $(window).unbind('scroll');
+        loadMore();
+      }
+    }
+  }
+
+  function loadEleminNewDiv(elem) {
+    if (loadedDivs <= nDivs) {
+      var url = "html/" + elem.name + ".html";
+      var divName = "#slot" + loadedDivs.toString();
+      loadedDivs++;
+      console.log("Loading url=" + url + "into new div="+divName+"...");
+      $(divName).load(url);
+      elem.location = divName;
+      return true;
+    }
+
+    return false;
+  }
+
+  function loadMore() {
+    console.log("loadmore triggered...");
+
+    elemList.some( function (e) {
+      if (!e.location) {
+        loadEleminNewDiv(e);
+        $(window).bind('scroll', bindScroll);
+        return (e.location !== null);
       }
       return false;
     });
   }
-});
 
-function bindScroll() {
-  if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-    if (canLoadMore) {
-      $(window).unbind('scroll');
-      loadMore();
-    }
+  $(window).scroll(bindScroll);
+
+  function reloadCurrWeather () {
+    console.log("Reloading current weather section...");
+    loadEleminNewDiv(elemList[0]);
+    setTimeout(reloadCurrWeather, 150000);
   }
-}
 
-function loadNewDiv(url) {
-  console.log("Loading new div for url " + url + "...");
-      
-  for (var i = 0; i < nDivs; i++) {
-    var divName = "#slot" + i.toString();
-    console.log("trying " + divName);
-  
-    if ($(divName).is(':empty')) {  
-      console.log("is empty!");
-      $(divName).load(url);
-      return divName;
-    }
-  }
-  
-  return null;
-}
 
-function loadMore() {
-  console.log("loadmore triggered...");
-  
-  elemList.some( function (e) {
-    if (!e.location) {
-      var url = "html/" + e.name + ".html";
-      e.location = loadNewDiv(url); 
-      $(window).bind('scroll', bindScroll);
-      return (e.location !== null);
-    }    
-    return false;
+  $(document).ready(function() {
+    loadedDivs = 0;
+    setTimeout(reloadCurrWeather, 0);
   });
-}
-
-$(window).scroll(bindScroll);
-
-function reloadCurrWeather () {
-  console.log("Reloading current weather section...");
-  loadNewDiv("currweather.htm");
-  setTimeout(reloadCurrWeather, 150000);
-}
-
-$(document).ready(function(){
-  setTimeout(reloadCurrWeather, 0);
 });
-
