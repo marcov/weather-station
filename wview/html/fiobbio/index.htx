@@ -3,13 +3,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta http-equiv="cache-control" content="no-cache" />
-        
+
     <title>Stazione Meteo di <!--stationCity-->, <!--stationState-->&nbsp;</title>
 
     <link rel="alternate" type="application/rss+xml" title="Stazione Meteo di <!--stationCity-->, <!--stationState-->" href="wxrss.xml">
 
     <script type="text/javascript" src="js/wview.js"></script>
-    
+
     <!-- the following is needed for the media queries to work correctly -->
     <meta name="viewport" content="width=device-width">
     <link type="text/css" rel="stylesheet" href="css/menu.css" />
@@ -18,15 +18,7 @@
 
   <body class="fiobbio">
 
-    <div class="maincolumn"> 
-      <!--
-      <div id="menubottom">
-        <h4>Menu</h4>
-        <form action="#">
-        </form>
-      </div>
-      -->
-      
+    <div class="maincolumn">
       <div class="menu">
         <div class="hamburger-menu-wrapper">
           <div style="float: left; margin: 0em; padding: 0em;">
@@ -66,10 +58,10 @@
       <div id="slot4" class="blockdisplay"></div>
       <div id="slot5" class="blockdisplay"></div>
 
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+      <script src="js/jquery.js"></script>
       <script src="js/menu.js"></script>
       <script src="js/animation.js"></script>
-      
+
       <!-- Histats.com  (div with counter) -->
       <div id="histats_counter" class="blockdisplay" style="padding-top: 0em; margin-top: 1em;"></div>
         <!-- Histats.com  START  (aync) -->
@@ -85,11 +77,11 @@
         </script>
         <noscript><a href="/" target="_blank"><img src="http://sstatic1.histats.com/0.gif?1781036&101" alt="contatore gratuito"></a></noscript>
         <!-- Histats.com  END  -->
-      </div>  
+      </div>
 
-    <link href="http://cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.css" type="text/css" rel="stylesheet" />
-    <script src="http://cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
-    
+    <link href="css/featherlight.min.css" type="text/css" rel="stylesheet" />
+    <script src="js/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
     <script type="text/javascript">
       $.featherlight.defaults.loading = "Caricamento immagine in corso...";
     </script>
