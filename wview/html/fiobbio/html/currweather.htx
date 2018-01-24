@@ -114,7 +114,6 @@
 </div>
 <!-- LEFT COLUMN END -->
 
-
 <!-- RIGHT COLUMN START -->
 <div class="rightcolumn">
   <div>
@@ -122,6 +121,7 @@
       <img class="webcam" alt="webcam_small" src="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam_small.jpg" />
     </a>
   </div>
+  
 </div>
 <!-- RIGHT COLUMN END -->
 
