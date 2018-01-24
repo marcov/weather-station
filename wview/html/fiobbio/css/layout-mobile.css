@@ -5,35 +5,8 @@
     font-size: 90%;
   }
 
-  div.leftcolumn, div.rightcolumn
-  {
-    float: left;
-    min-width: 100%;
-    margin-top: 0em;
-    margin-bottom: 0em;
-    padding-top: 0em;
-  }
 
-  div.leftcolumn div, div.rightcolumn div 
-  {
-    float:left;
-    align-content: center;
-    padding-top: 0em;
-    margin-top: 0em;
-    margin-bottom: 0em;
-  }
-
-  img.wviewgraph
-  {
-    max-width: 49%;
-    max-height: 10em;
-  }
-  
-  img.round {
-    max-width: 30%;
-  }
-
-  img.satellite,img.wviewxyplot
+  img.satellite
   {
     width: 90%;
     max-width:100%;
@@ -97,9 +70,5 @@
   
   .menu-list {
     margin-top: 0.5em;
-  }
-  
-  .tables {
-    padding-top: 0em;
   }
 }

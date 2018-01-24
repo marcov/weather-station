@@ -1,156 +1,239 @@
-
 <div class="heading blockdisplay">
-  <b style="font-size: 200%">Stazione Meteo di <!--stationCity-->, <!--stationState--></b>
-      (<!--stationElevation--> s.l.m., <!--stationLatitude--> - <!--stationLongitude-->)<br>
-    <!-- HEADER START -->
-    <p style="padding-top: 0.5em;">
-    </p>
-    <p style="padding-top: 0.5em;">
-      Ultimo aggiornamento:  <b> <!--stationDate--> <!--stationTime--></b>
-    </p>
-    <p style="font-size: 80%; padding-top: 0.5em;">
-      Alba: <!--sunriseTime-->, tramonto: <!--sunsetTime-->. Fase lunare: <!--moonPhase--><br>
-    </p>
-    <!-- HEADER END -->
+  <b style="font-size: 200%">Stazione Meteo di <!--stationCity-->, <!--stationState--></b> (
+  <!--stationElevation-->s.l.m.,
+  <!--stationLatitude-->-
+  <!--stationLongitude-->)<br>
+  <!-- HEADER START -->
+  <p style="padding-top: 0.5em;">
+  </p>
+  <p style="padding-top: 0.5em;">
+    Ultimo aggiornamento: <b> <!--stationDate--> <!--stationTime--></b>
+  </p>
+  <p style="font-size: 80%; padding-top: 0.5em;">
+    Alba:
+    <!--sunriseTime-->, tramonto:
+    <!--sunsetTime-->. Fase lunare:
+    <!--moonPhase--><br>
+  </p>
+  <!-- HEADER END -->
 </div>
 
-<!-- LEFT COLUMNT START -->
-<div class="leftcolumn">
-  <div id="tables">
-    <!-- NEW TABLE START -->
-    <table class="tablevalues">
-      <thead>
-        <tr>
-          <th class="col3">Min</th>
-          <th class="firstcolumn">Temperatura [&deg;<!--tempUnit-->]</th>
-          <th class="col3">Max</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="even">
-          <td class="min"><!--lowOutsideTemp--><br><!--lowOutsideTempTime--></td>
-          <td class="now nowtemperature">
-            <!--outsideTemp--><br>
-            <span style="font-size:50%">Percepita: </span><!--apparentTemp-->
-          </td>
-          <td class="max"><!--hiOutsideTemp--><br><!--hiOutsideTempTime--></td>
-        </tr >
-      </tbody>
-    </table>
+<div class="blockdisplay">
+  <ul class="flex-container">
+    <li>
+      <ul class="tables-container">
+        <!-- NEW TABLE START -->
+        <li>
+          <table class="tablevalues">
+            <thead>
+              <tr>
+                <th class="col3">Min</th>
+                <th class="firstcolumn">Temperatura [&deg;
+                  <!--tempUnit-->]</th>
+                <th class="col3">Max</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="even">
+                <td class="min">
+                  <!--lowOutsideTemp--><br>
+                  <!--lowOutsideTempTime-->
+                </td>
+                <td class="now nowtemperature">
+                  <!--outsideTemp--><br>
+                  <span style="font-size:50%">Percepita: </span>
+                  <!--apparentTemp-->
+                </td>
+                <td class="max">
+                  <!--hiOutsideTemp--><br>
+                  <!--hiOutsideTempTime-->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
+        <li>
 
-    <table class="tablevalues" style="width: 50%;">
-      <thead>
-        <tr>
-          <th class="col3">Min</th>
-          <th class="firstcolumn">Umidita' [<!--humUnit-->]</th>
-          <th class="col3">Max</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="even">
-          <td class="min"><!--lowHumidity--><br><!--lowHumTime--></td>
-          <td class="now"><!--outsideHumidity--></td>
-          <td class="max"><!--hiHumidity--><br><!--hiHumTime--></td>
-        </tr>
-      </tbody>
-    </table>
+          <table class="tablevalues" style="width: 50%;">
+            <thead>
+              <tr>
+                <th class="col3">Min</th>
+                <th class="firstcolumn">Umidita' [
+                  <!--humUnit-->]</th>
+                <th class="col3">Max</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="even">
+                <td class="min">
+                  <!--lowHumidity--><br>
+                  <!--lowHumTime-->
+                </td>
+                <td class="now">
+                  <!--outsideHumidity-->
+                </td>
+                <td class="max">
+                  <!--hiHumidity--><br>
+                  <!--hiHumTime-->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
+        <li>
 
-    <table class="tablevalues" style="width: 50%;">
-      <thead>
-        <tr>
-          <th class="col3">Min</th>
-          <th class="firstcolumn">Pressione [<!--barUnit-->]</th>
-          <th class="col3">Max</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="even">
-          <td class="min"><!--lowBarometer--><br><!--lowBarometerTime--></td>
-          <td class="now"><!--barometer--> (<!--baromtrend-->)</td>
-          <td class="max"><!--hiBarometer--><br><!--hiBarometerTime--></td>
-        </tr>
-      </tbody>
-    </table>
+          <table class="tablevalues" style="width: 50%;">
+            <thead>
+              <tr>
+                <th class="col3">Min</th>
+                <th class="firstcolumn">Pressione [
+                  <!--barUnit-->]</th>
+                <th class="col3">Max</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="even">
+                <td class="min">
+                  <!--lowBarometer--><br>
+                  <!--lowBarometerTime-->
+                </td>
+                <td class="now">
+                  <!--barometer-->(
+                  <!--baromtrend-->)</td>
+                <td class="max">
+                  <!--hiBarometer--><br>
+                  <!--hiBarometerTime-->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
+        <li>
 
-    <table class="tablevalues" style="width: 50%;">
-      <thead>
-        <tr>
-          <th class="firstcolumn">Vento [<!--windUnit-->]</th>
-          <th class="col3">10 Minuti</th>
-          <th class="col3">Max</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="even">
+          <table class="tablevalues" style="width: 50%;">
+            <thead>
+              <tr>
+                <th class="firstcolumn">Vento [
+                  <!--windUnit-->]</th>
+                <th class="col3">10 Minuti</th>
+                <th class="col3">Max</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="even">
 
-          <td class="now">
-            <!--windSpeed--> (<!--windDirection-->), <!--windBeaufortScale--> <br>
-            <span class="max">Raffica <!--windGustSpeed-->(<!--windGustDirectionDegrees-->&deg;)</span>
-          </td>
-          <td class="now"><!--tenMinuteAvgWindSpeed--></td>
-          <td class="max"><!--hiWindSpeed--><br><!--hiWindSpeedTime--></td>
-        </tr >
-      </tbody>
-    </table>
+                <td class="now">
+                  <!--windSpeed-->(
+                  <!--windDirection-->),
+                  <!--windBeaufortScale--><br>
+                  <span class="max">Raffica <!--windGustSpeed-->(<!--windGustDirectionDegrees-->&deg;)</span>
+                </td>
+                <td class="now">
+                  <!--tenMinuteAvgWindSpeed-->
+                </td>
+                <td class="max">
+                  <!--hiWindSpeed--><br>
+                  <!--hiWindSpeedTime-->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
+        <li>
 
-    <table class="tablevalues" style="width: 100%;">
-      <thead>
-        <tr>
-          <th class="firstcolumn">Pioggia [<!--rateUnit-->]</th>
-          <th class="col3">Totale Oggi</th>
-          <th class="col3">Tempesta</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="even">
-          <td class="now">&nbsp;<!--rainRate--></td>
-          <td><!--dailyRain--></td>
-          <td class="max"><!--stormRain--></td>
-        </tr>
-      </tbody>
-    </table>
-    <!--  NEW TABLE END -->
-  </div>
+          <table class="tablevalues" style="width: 100%;">
+            <thead>
+              <tr>
+                <th class="firstcolumn">Pioggia [
+                  <!--rateUnit-->]</th>
+                <th class="col3">Totale Oggi</th>
+                <th class="col3">Tempesta</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="even">
+                <td class="now">&nbsp;
+                  <!--rainRate-->
+                </td>
+                <td>
+                  <!--dailyRain-->
+                </td>
+                <td class="max">
+                  <!--stormRain-->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
+        <!--  NEW TABLE END -->
+      </ul>
+
+    </li>
+
+
+    <li>
+      <a href="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam.jpg" data-featherlight="image"> 
+        <img class="webcam" alt="webcam_small" src="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam_small.jpg" />
+      </a>
+    </li>
+  </ul>
 </div>
-<!-- LEFT COLUMN END -->
 
-<!-- RIGHT COLUMN START -->
-<div class="rightcolumn">
-  <div>
-    <a href="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam.jpg" data-featherlight="image"> 
-      <img class="webcam" alt="webcam_small" src="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam_small.jpg" />
-    </a>
-  </div>
-  
-</div>
-<!-- RIGHT COLUMN END -->
+<div class="blockdisplay">
+  <ul class="graph-container">
+    <li>
+      <img class="wviewgraph" alt="wview image" src="tempdaycomp.png">
+    </li>
+    <li>
+      <img class="wviewgraph" alt="wview image" src="wspeeddaycomp.png">
+    </li>
+    <li>
+      <img class="wviewgraph" alt="wview image" src="radiationDay.png ">
+    </li>
+  </ul>
 
+  <ul class="graph-container">
+    <li>
+      <img class="wviewgraph" alt="wview image" src="rainday.png">
+    </li>
+    <li>
+      <img class="wviewgraph" alt="wview image" src="baromday.png">
+    </li>
+    <li>
+      <img class="wviewgraph" alt="wview image" src="humidday.png">
+    </li>
+  </ul>
 
-<!-- WEATHER IMAGES START -->
-<div class="blockdisplay" style="padding-top:0;">
-  <img class="wviewgraph" alt="wview image" src="tempdaycomp.png">
-  <img class="wviewgraph" alt="wview image" src="wspeeddaycomp.png">
-  <img class="wviewgraph" alt="wview image" src="radiationDay.png ">
-</div> 
-
-<div class="blockdisplay" style="padding-top:0;">
-  <img class="wviewgraph" alt="wview image" src="rainday.png">
-  <img class="wviewgraph" alt="wview image" src="baromday.png">
-  <img class="wviewgraph" alt="wview image" src="humidday.png">
-</div>
-
-<div class="blockdisplay" style="padding-top:0;">
-  <img class="wviewgraph" alt="wview image" src="radiation.png">
-  <img class="wviewgraph" alt="wview image" src="dayrain.png">
-  <img class="wviewgraph" alt="wview image" src="stormrain.png">
-  <img class="wviewgraph" alt="wview image" src="rainrate.png">
-  <img class="wviewgraph" alt="wview image" src="monthrain.png">
-  <img class="wviewgraph" alt="wview image" src="yearrain.png">
-</div>
-
-<div class="blockdisplay" style="padding-top:0;">
-  <img class="wviewgraph round" alt="wview image" src="windroseday.png">
-  <img class="wviewgraph round" alt="wview image" src="windroseweek.png">
-  <img class="wviewgraph round" alt="wview image" src="windroseyear.png">
+  <ul class="graph-container">
+    <li>
+      <img class="wviewgraph wviewbar" alt="wview image" src="radiation.png">
+    </li>
+    <li>
+      <img class="wviewgraph wviewbar" alt="wview image" src="dayrain.png">
+    </li>
+    <li>
+      <img class="wviewgraph wviewbar" alt="wview image" src="stormrain.png">
+    </li>
+    <li>
+      <img class="wviewgraph wviewbar" alt="wview image" src="rainrate.png">
+    </li>
+    <li>
+      <img class="wviewgraph wviewbar" alt="wview image" src="monthrain.png">
+    </li>
+    <li>
+      <img class="wviewgraph wviewbar" alt="wview image" src="yearrain.png">
+    </li>
+  </ul>
+  <ul class="graph-container">
+    <li>
+      <img class="wviewgraph round" alt="wview image" src="windroseday.png">
+    </li>
+    <li>
+      <img class="wviewgraph round" alt="wview image" src="windroseweek.png">
+    </li>
+    <li>
+      <img class="wviewgraph round" alt="wview image" src="windroseyear.png">
+    </li>
+  </ul>
 </div>
 <!-- WEATHER IMAGES END -->

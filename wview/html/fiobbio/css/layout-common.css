@@ -67,8 +67,7 @@ img
 
 li {
   margin: 0.3em 0.3em 0.3em 0.3em;
-  padding: 0em 0em 0em 0em;
-  float: left;
+  padding: 0;
 }
 
 div.maincolumn
@@ -93,7 +92,6 @@ div.maincolumn
 img.wviewgraph
 {
   background-color: rgba(245, 245, 245, 0.85); 
-  margin-top: 1em;
 }
 
 img.round
@@ -107,97 +105,6 @@ img.round
   border-radius: 100%;
 }
 
-div.rightcolumn
-{
-  float: right;
-  width: 59%;
-  margin-left:1%; 
-  /* DEBUG */
-  /* background-color: violet;  */
-}
-
-div.leftcolumn
-{
-  float: left;
-  width: 37%;
-  /* DEBUG */
-  /* background-color: orange; */
-}
-
-div.leftcolumn div 
-{
-  float: right;
-}
-
-div.rightcolumn div 
-{
-  float: left;
-}
-
-
-div.centercolumn
-{
-  clear: none;
-  float: none;
-  /*Make column large exactly as content */
-  overflow: auto;
-  
-  /* Center the div element */
-  width: 30%;
-  /* DEBUG */
-  /* background-color: black; */
-}
-
-div.rightcolumn,
-div.leftcolumn
-{
-  clear: none;
-
-  color: whitesmoke;
-
-  padding-top: 0em;
-  /* background-color:#004d90; */
-  /*Removed border*/
-  /* border: 1px solid orange;*/
-  /*Make column large exactly as content */
-  overflow: hidden;
-  /* Make the column scale of size when resizing window */
-  /* max-width: 33%; */
-}
-
-div.rightcolumn img,
-div.leftcolumn img
-{
-  /* Make the images in the columm automatically scale when resizing window */
-  max-width: 100%;
-  height: auto;
-}
-
-.rounded
-{
-  border-radius: .3em;
-  -moz-border-radius: .3em;
-}
-
-
-.internlink {
-  /*width: 90%;*/
-  width: auto;
-  background-color: #2A2A2A;
-}
-
-.wviewlink {
-  width: auto;
-  /*background-color: #7AC7C4;
-  color: #384259; */
-}
-
-.externlink {
-  width: auto;
-  background-color: darkturquoise;
-
-}
-
 
 img.satellite
 {
@@ -207,7 +114,6 @@ img.satellite
 img.webcam {
   max-height: 22em;
 }
-
 
 div.heading
 {
@@ -232,25 +138,17 @@ h2.blockdisplay
   margin-top: 1em;
 }
 
-
-iframe.meteoblue
-{
-  height: 380px;
-  background: rgba(0, 0, 0, 0.5);
-  border: 0;
-  /* Disable scrolling */
-  overflow:hidden;
-}
-
-
-
 /***************************************************************/
 
-#tables {
-  padding-top: 2em;   
-}
-
 /************ Start of table values ************/
+
+.tables-container {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
 
 .tablevalues 
 {
@@ -397,6 +295,7 @@ div.nospace
   margin:      0 0 0 0;
   padding-top: 0 0 0 0;
 }
+
 /***************************************************************/
 
 
@@ -411,3 +310,57 @@ div.nospace
   background: #FF0000;
 }
 
+
+/*****************************************************************/
+
+li.meteoblue { width: 340; padding: 0; overflow: hidden; }
+
+iframe.meteoblue
+{
+  width: 340px;
+  height: 380px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 0;
+  /* Disable scrolling */
+  overflow:hidden;
+}
+
+/*  Enable the following to scale the iframe! */
+/*
+iframe.meteoblue {
+  -ms-zoom: 0.85;
+  -moz-transform: scale(0.85);
+  -moz-transform-origin: 0 0;
+  -o-transform: scale(0.85);
+  -o-transform-origin: 0 0;
+  -webkit-transform: scale(0.85);
+  -webkit-transform-origin: 0 0;
+}
+*/
+/******************************************************************/
+
+.flex-container {
+  /* We first create a flex layout context */
+  display: flex;
+
+  /* Then we define the flow direction 
+  and if we allow the items to wrap 
+  * Remember this is the same as:
+  * flex-direction: row;
+  * flex-wrap: wrap;
+  */
+  flex-flow: row wrap;
+
+  /* Then we define how is distributed the remaining space */
+  justify-content: center;
+  align-items: center;
+}
+
+.graph-container {
+  display: flex;
+
+  flex-flow: row nowrap;
+
+  justify-content: center;
+  align-items: center;
+}
