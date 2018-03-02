@@ -61,7 +61,7 @@
           <!--lowBarometerTime-->
         </div>
         <div class="curr">
-          <!--barometer--> <!--barunit--><br>
+          <!--barometer--><!--barUnit--><br>
           <div style="font-size:50%">
             Tendenza&nbsp;<!--baromtrend-->
           </div>
