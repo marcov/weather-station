@@ -13,7 +13,7 @@
   <!-- HEADER END -->
 </div>
 
-<div>
+<div style="margin-top: 1em;">
   <ul class="measures-container">
     <li class="measure">
       <label>Temperatura</label>
@@ -72,7 +72,8 @@
         </div>
       </div>
     </li>
-
+  </ul>
+  <ul class="measures-container">
     <li class="measure">
       <label>Vento</label>
       <div>

@@ -83,7 +83,7 @@ li {
   justify-content: center;
   background-color: rgba(50, 50, 50, 0.8);
   margin: auto;
-  margin-top: 1em;
+  padding-top: 1.5em;
 }
 
 .measure {
