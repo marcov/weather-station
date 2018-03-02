@@ -77,13 +77,12 @@
 
   .measures-container {
     flex-flow: column nowrap;
-    font-size: 60%;
+    font-size: 80%;
   }
 
   .measure {
     flex-flow      : row;
     justify-content: space-between;
-    max-width: 90%;
     margin-top:    1.2em;
     margin-bottom: 1.2em;
   }
