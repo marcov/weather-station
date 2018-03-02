@@ -239,6 +239,10 @@ iframe.meteoblue {
   align-items: center;
 }
 
+.flex-container > li {
+  margin: 0.1em;
+}
+
 .graph-container {
   display: flex;
 
