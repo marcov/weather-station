@@ -16,8 +16,7 @@
     <link type="text/css" rel="stylesheet" href="css/layout.css" />
   </head>
 
-  <body class="fiobbio">
-
+  <body>
     <div class="maincolumn">
       <div class="menu">
         <div class="hamburger-menu-wrapper">
@@ -26,7 +25,6 @@
               <span></span>
             </button>
           </div>
-          <div style="float: right; margin: 0em; padding: 0.6em;">Menu</div>
         </div>
         <div class="menu-list">
           <a href="#" id="link_currweather">Inzio</a><br>
@@ -51,19 +49,23 @@
         </div>
       </div>
 
-      <div id="slot0" class="nospace"></div>
-      <div id="slot1" class="blockdisplay"></div>
-      <div id="slot2" class="blockdisplay"></div>
-      <div id="slot3" class="blockdisplay"></div>
-      <div id="slot4" class="blockdisplay"></div>
-      <div id="slot5" class="blockdisplay"></div>
+      <div class="lastUpdate">
+        Dati aggiornati al <b> <!--stationDate--> <!--stationTime--></b>
+      </div>
+
+      <div id="slot0"></div>
+      <div id="slot1"></div>
+      <div id="slot2"></div>
+      <div id="slot3"></div>
+      <div id="slot4"></div>
+      <div id="slot5"></div>
 
       <script src="js/jquery.js"></script>
       <script src="js/menu.js"></script>
       <script src="js/animation.js"></script>
 
       <!-- Histats.com  (div with counter) -->
-      <div id="histats_counter" class="blockdisplay" style="padding-top: 0em; margin-top: 1em;"></div>
+      <div id="histats_counter" style="padding-top: 0em; margin-top: 1em;"></div>
         <!-- Histats.com  START  (aync) -->
         <script type="text/javascript">var _Hasync= _Hasync|| [];
           _Hasync.push(['Histats.start', '1,1781036,4,4015,112,61,00011111']);

@@ -1,10 +1,13 @@
 @media screen and (max-width: 800px) {
 
-  body 
+  body
   {
     font-size: 90%;
   }
 
+  .heading > .title {
+    font-size: 200%;
+  }
 
   img.satellite
   {
@@ -25,12 +28,12 @@
     padding: 0.2em 0.2em 0.2em 0.2em;
     margin: 0.1em 0.1em 0.1em 0.1em;
 
-    width: 30%;  
+    width: 30%;
   }
 
   #wviewbuttons
   {
-    text-align: center; 
+    text-align: center;
   }
 
   .wviewlink {
@@ -41,7 +44,7 @@
 
   iframe.meteo,   img.meteo
   {
-    min-width: 100%; 
+    min-width: 100%;
     margin-left: 0px;
     padding-left: 0px;
   }
@@ -50,25 +53,42 @@
   {
     font-size: 90%;
   }
-  
+
   div.heading {
     margin-top: 2em;
     margin-bottom: 0em;
   }
-  
+
   .menu {
     position: absolute;
     margin-top: 0em;
     padding-top: 0em;
     max-height: 2em;
   }
-  
+
   .hamburger-menu-wrapper, .hamburger-menu {
     margin-top: 0em;
     padding-top: 0em;
   }
-  
+
   .menu-list {
     margin-top: 0.5em;
   }
+
+  .measures-container {
+    flex-flow: column nowrap;
+  }
+
+  .measure {
+    flex-flow      : row;
+    justify-content: space-between;
+    max-width: 90%;
+  }
+
+  .measure > .label {
+    margin-left: 0;
+    padding-left: 0;
+    width: 30%;
+  }
+
 }

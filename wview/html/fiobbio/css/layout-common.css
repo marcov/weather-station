@@ -1,39 +1,29 @@
-*{
-  margin:0;
-  padding:0;
-  list-style:none;
-  border:none;
+
+body
+{
+  background-color : #323232;
+  font-size   : 90%;
+  font-family : Verdana,Arial,Sans-Serif;
+  color       : whitesmoke;
+  margin : 0;
+  padding: 0;
+  border : none;
 }
 
-body.fiobbio
+div
 {
-  font-family:Verdana,Arial,Sans-Serif;
-  font-size:90%;
-  background:#323232;
-  color: whitesmoke;
-  list-style:none;
-  padding: 1em 1em 1em 1em;
+  background-color: #004d90;
+  /*border: 1px solid yellow;*/
 }
 
 h3{
   font-size:1.8em;
-  /*color:#ff4; */
-  /* Changed inside tab Title color from yellowish*/
-  color: whitesmoke;
-  font-family:"Trebuchet MS",Arial,Sans-Serif;
-  /* padding-bottom: 1em; */
+  text-align: center;
 }
 
-a,p,h4 
-{
-  color: whitesmoke;
+a {
+  color: inherit;
 }
-
-h4
-{
-  padding: 0 0 0.5em 0;
-}
-
 
 input
 {
@@ -50,13 +40,6 @@ input
   margin-bottom:  0.5em;
 }
 
-div 
-{
-  margin-top:    0.5em;
-  margin-bottom: 0.5em;
-  padding-top:   1em;
-  background-color: #004d90;
-}
 
 img
 {
@@ -65,34 +48,94 @@ img
   -moz-border-radius: .3em;
 }
 
-li {
-  margin: 0.3em 0.3em 0.3em 0.3em;
-  padding: 0;
+ul {
+  padding-left: 0;
 }
 
-div.maincolumn
+li {
+  margin-left: 0;
+  list-style:none;
+}
+
+/***************************************************************/
+
+.lastUpdate {
+  position: absolute;
+  top: 1.1em;
+  right: 1.1em;
+  float: right;
+  font-size: 90%;
+}
+
+.maincolumn
 {
+  margin   : 1em;
+
   clear: none;
   float: none;
   /*Make column large exactly as content */
   overflow: auto;
-  padding: 0 0.5em 0 0.5em;
-  /* Center the div element */
-  margin: auto;
-
-  width: 98%;
-
-  color: whitesmoke;
-
-  /* DEBUG */
-  /* background-color: black; */
 }
+
+.measures-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  background-color: rgba(50, 50, 50, 0.8);
+  margin: auto;
+  margin-top: 1em;
+}
+
+.measure {
+  display        : flex;
+  flex-flow      : column;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.measure > label {
+  font-weight: normal;
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+
+.measure > div {
+  display: flex;
+  flex-flow: row;
+}
+.measure div {
+  background-color: inherit;
+}
+
+.measure  .curr {
+  font-size: 170%;
+}
+
+.measure  .max {
+  color: red;
+}
+
+.measure  .min {
+  color: blue;
+}
+.measure  .other {
+  font-size: 90%;
+}
+
 /***************************************************************/
 
-img.wviewgraph
-{
-  background-color: rgba(245, 245, 245, 0.85); 
+.webcams-container {
+  display        : flex;
+  flex-flow      : row wrap;
+  justify-content: center;
 }
+
+.webcams-container > li {
+  margin: 0.5em;
+}
+/***************************************************************/
 
 img.round
 {
@@ -105,7 +148,6 @@ img.round
   border-radius: 100%;
 }
 
-
 img.satellite
 {
   width: 300px;
@@ -115,164 +157,18 @@ img.webcam {
   max-height: 22em;
 }
 
-div.heading
+.heading
 {
   text-align: center;
-  padding-top: 0em;
-  margin-top: 0em;
 }
 
-div.blockdisplay
-{
-  display: block;
-  /*border:1px solid black;*/
-  clear: both;	
-  overflow: hidden;
-  text-align: center;
-  /* DEBUG */
-  /* background: red; */
-}
-
-h2.blockdisplay
-{
-  margin-top: 1em;
-}
-
-/***************************************************************/
-
-/************ Start of table values ************/
-
-.tables-container {
-  padding: 0;
+.heading > .title {
+  font-size: 3em;
+  font-weight: bold;
   margin: 0;
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-}
-
-.tablevalues 
-{
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-
-  /*border:1px solid #C9C9C9; */
-  color: #333;
-
-  /* Make table as large as the div container */
-  min-width: 100%;
-  width: 100%;
-
-  font-size:  90%;
-  /*border-collapse: collapse;*/
-  text-align: center;
-}
-
-
-.tablevalues th.firstcolumn
-{
-  width: 40%;
-  font-weight:bold;
-}
-
-.tablevalues th.col3
-{
-  width: 30%;
-
-}
-
-.tablevalues th.col4
-{
-  width: 20%;
-}
-
-
-.tablevalues th
-{
-  font-weight: normal;
-  font-size: 90%;
-}
-
-.tablevalues thead 
-{
-  font-weight:bold;
-  background:#333;
-  color: rgba(245,245,245,1); 
-}
-
-.tablevalues .even 
-{
-  background-color: rgba(245,245,245,0.85); 
-  
-}
-
-.tablevalues tr td.title
-{
-  padding: .3em;
-  font-size:  95%;
-}
-
-.tablevalues .now
-{
-  font-weight: bold;
-  font-size: 101%;
-}
-
-
-.tablevalues .nowtemperature
-{
-  font-size: 170%;
-}
-
-
-.tablevalues .min,
-.tablevalues .max
-{
-  font-weight: bold;
-  font-size:   100%;
-  text-align:  center;
-}
-
-
-.tablevalues .min
-{
-  color: blue;
-}
-
-.tablevalues .max
-{
-  color: red;
 }
 
 /***************************************************************/
-
-
-/* IDs */
-
-#menubottom {
-  background-color: rgba(0,0,0,0.3); 
-  color:      #000000; 
-  height:     auto; 
-  line-height:30px;
-  letter-spacing:1px; 
-  width:15%;
-  position:fixed;
-  bottom: 5px;
-  right: 5px;
-  font-family: Arial, Helvetica, sans-serif;
-  padding: 5px;
-  text-align: left;
-}
-
-#menutop {
-  padding-top: 0em;
-  background-color: rgba(0,0,0,0.3); 
-  position:fixed;
-}
-
-#misc {
-  width:100%;
-  margin-bottom: 20px;
-}
 
 #noaatext
 {
@@ -289,17 +185,7 @@ h2.blockdisplay
   align-content: center;
 }
 
-
-div.nospace 
-{
-  margin:      0 0 0 0;
-  padding-top: 0 0 0 0;
-}
-
 /***************************************************************/
-
-
-
 
 ::-webkit-scrollbar {
   width: 0px;  /* remove scrollbar space */
@@ -343,15 +229,8 @@ iframe.meteoblue {
   /* We first create a flex layout context */
   display: flex;
 
-  /* Then we define the flow direction 
-  and if we allow the items to wrap 
-  * Remember this is the same as:
-  * flex-direction: row;
-  * flex-wrap: wrap;
-  */
   flex-flow: row wrap;
 
-  /* Then we define how is distributed the remaining space */
   justify-content: center;
   align-items: center;
 }
@@ -363,4 +242,9 @@ iframe.meteoblue {
 
   justify-content: center;
   align-items: center;
+}
+
+.graph-container > li > img {
+  margin: 0.1em;
+  background-color: rgba(245, 245, 245, 0.85);
 }
