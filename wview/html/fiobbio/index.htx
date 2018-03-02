@@ -59,13 +59,15 @@
       <div id="slot3"></div>
       <div id="slot4"></div>
       <div id="slot5"></div>
+      <!-- Histats.com  (div with counter) -->
+      <div>
+        <div class="histats_counter" style="padding-top: 0em; margin-top: 1em;"></div>
+      </div>
 
       <script src="js/jquery.js"></script>
       <script src="js/menu.js"></script>
       <script src="js/animation.js"></script>
 
-      <!-- Histats.com  (div with counter) -->
-      <div id="histats_counter" style="padding-top: 0em; margin-top: 1em;"></div>
         <!-- Histats.com  START  (aync) -->
         <script type="text/javascript">var _Hasync= _Hasync|| [];
           _Hasync.push(['Histats.start', '1,1781036,4,4015,112,61,00011111']);

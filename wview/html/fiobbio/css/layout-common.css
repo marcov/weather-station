@@ -171,6 +171,13 @@ img.webcam {
   margin: 0;
 }
 
+.histats_counter
+{
+  margin: auto;
+  margin-top: 1em;
+  align-content: center;
+}
+
 /***************************************************************/
 
 #noaatext
@@ -181,12 +188,6 @@ img.webcam {
   background: rgba(0, 0, 0, 0.3);
 }
 
-
-#histats_counter
-{
-  margin-top: 1em;
-  align-content: center;
-}
 
 /***************************************************************/
 
