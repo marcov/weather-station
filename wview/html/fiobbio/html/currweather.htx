@@ -15,6 +15,26 @@
 
 <div style="margin-top: 1em;">
   <ul class="measures-container">
+    
+    <li class="measure">
+      <label>Vento</label>
+      <div>
+        <div class="other">
+          Raffica<br><!--windGustSpeed--><!--windUnit-->
+        </div>
+        <div class="curr">
+          <!--windSpeed--><!--windUnit--><br>
+          <div style="font-size:50%">
+            <!--windDirection-->&nbsp;<!--windBeaufortScale-->
+          </div>
+        </div>
+        <div class="max">
+          <!--hiWindSpeed--><!--windUnit--><br>
+          <!--hiWindSpeedTime-->
+        </div>
+      </div>
+    </li>
+    
     <li class="measure">
       <label>Temperatura</label>
       <div>
@@ -53,6 +73,10 @@
       </div>
     </li>
 
+  </ul>
+
+  <ul class="measures-container">
+
     <li class="measure">
       <label>Pressione</label>
       <div>
@@ -72,26 +96,6 @@
         </div>
       </div>
     </li>
-  </ul>
-  <ul class="measures-container">
-    <li class="measure">
-      <label>Vento</label>
-      <div>
-        <div class="other">
-          Raffica<br><!--windGustSpeed--><!--windUnit-->
-        </div>
-        <div class="curr">
-          <!--windSpeed--><!--windUnit--><br>
-          <div style="font-size:50%">
-            <!--windDirection-->&nbsp;<!--windBeaufortScale-->
-          </div>
-        </div>
-        <div class="max">
-          <!--hiWindSpeed--><!--windUnit--><br>
-          <!--hiWindSpeedTime-->
-        </div>
-      </div>
-    </li>
 
     <li class="measure">
       <label>Pioggia</label>
@@ -100,14 +104,12 @@
           Tot<br><!--dailyRain-->mm
         </div>
         <div class="curr">
-          <!--rainRate-->mm<br>
+          <!--rainRate--><!--rateUnit--><br>
           <div style="font-size:50%">
-            Accumulo
           </div>
         </div>
-
         <div class="max">
-        <!--stormRain--><!--rateUnit--><br>
+        <!--stormRain--><!--rateUnit-->
         </div>
       </div>
     </li>

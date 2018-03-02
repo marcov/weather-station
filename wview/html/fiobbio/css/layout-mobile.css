@@ -1,4 +1,4 @@
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) {
 
   body
   {
@@ -77,19 +77,23 @@
 
   .measures-container {
     flex-flow: column nowrap;
-    font-size: 80%;
   }
 
   .measure {
     flex-flow      : row;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin-top:    1.2em;
     margin-bottom: 1.2em;
   }
 
-  .measure > .label {
+  .measure > label {
     margin-left: 0;
     padding-left: 0;
-    width: 30%;
+    width: 33%;
+    font-size: 100%;
+    text-align: left;
   }
-}
+
+ .webcams-container {
+   flex-flow: column nowrap;
+ }
