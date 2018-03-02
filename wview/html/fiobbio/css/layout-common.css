@@ -111,14 +111,17 @@ li {
 
 .measure  .curr {
   font-size: 170%;
+  text-align: center;
+  margin-left: 0.2em;
+  margin-right: 0.2em;
 }
 
 .measure  .max {
-  color: red;
+  color: crimson;
 }
 
 .measure  .min {
-  color: blue;
+  color:  aquamarine;
 }
 .measure  .other {
   font-size: 90%;

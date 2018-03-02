@@ -76,17 +76,18 @@
     <li class="measure">
       <label>Vento</label>
       <div>
+        <div class="other">
+          Raffica <!--windGustSpeed-->&nbsp;<!--windunit-->&nbsp; <!--windGustDirectionDegrees--><br>
+        </div>
         <div class="curr">
           <!--windSpeed-->&nbsp; <!--windunit-->&nbsp; <!--windDirection--> <br>
           <div style="font-size:50%">
-            Intensita'&nbsp; <!--windBeaufortScale-->
+            <!--windBeaufortScale-->
           </div>
         </div>
         <div class="max">
-          <!--hiWindSpeed-->&nbsp;<!--windunit-->&nbsp; <!--hiWindSpeedTime--><br>
-        </div>
-        <div class="other">
-          Raffica <!--windGustSpeed-->&nbsp;<!--windunit-->&nbsp; <!--windGustDirectionDegrees--><br>
+          <!--hiWindSpeed-->&nbsp;<!--windunit--><br>
+          <!--hiWindSpeedTime-->
         </div>
       </div>
     </li>
@@ -96,13 +97,12 @@
       <div>
         <div class="curr">
           <!--rainRate--> mm<br>
-          <div style="font-size: 50%">&nbsp;</div>
+          <div style="font-size: 50%">
+            Totale <!--dailyRain--> mm<br>
+          </div>
         </div>
         <div class="max">
         <!--stormRain--> <!--rateUnit--><br>
-        </div>
-        <div class="other">
-            Totale <!--dailyRain--> mm<br>
         </div>
       </div>
     </li>
