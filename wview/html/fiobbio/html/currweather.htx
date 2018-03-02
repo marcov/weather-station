@@ -20,7 +20,7 @@
       <div>
         <div class="min">
           <!--lowOutsideTemp--> C<br>
-          <!--lowOutsideTempTime -->
+          <!--lowOutsideTempTime-->
         </div>
         <div class="curr">
           <!--outsideTemp--> C <br>
@@ -57,7 +57,7 @@
       <label>Pressione</label>
       <div>
         <div class="min">
-          <!--lowBarometer--> <!--barUnit--><br>
+          <!--lowBarometer--><!--barUnit--><br>
           <!--lowBarometerTime-->
         </div>
         <div class="curr">
@@ -67,7 +67,7 @@
           </div>
         </div>
         <div class="max">
-        <!--hiBarometer-->  <!--barUnit--><br>
+        <!--hiBarometer--><!--barUnit--><br>
           <!--hiBarometerTime-->
         </div>
       </div>
@@ -77,10 +77,10 @@
       <label>Vento</label>
       <div>
         <div class="other">
-          Raffica <!--windGustSpeed--><!--windUnit--><br>
+          Raffica<br><!--windGustSpeed--><!--windUnit-->
         </div>
         <div class="curr">
-          <!--windSpeed--><!--windUnit-->&nbsp; <!--windDirection--> <br>
+          <!--windSpeed--><!--windUnit-->&nbsp;<!--windDirection--><br>
           <div style="font-size:50%">
             <!--windBeaufortScale-->
           </div>
@@ -96,13 +96,17 @@
       <label>Pioggia</label>
       <div>
         <div class="other">
-          Tot <!--dailyRain--> mm<br>
+          Tot<br><!--dailyRain-->mm
         </div>
         <div class="curr">
-          <!--rainRate--> mm<br>
+          <!--rainRate-->mm<br>
+          <div style="font-size:50%">
+            Accumulo
+          </div>
         </div>
+
         <div class="max">
-        <!--stormRain--> <!--rateUnit--><br>
+        <!--stormRain--><!--rateUnit--><br>
         </div>
       </div>
     </li>
