@@ -81,9 +81,9 @@
           Raffica<br><!--windGustSpeed--><!--windUnit-->
         </div>
         <div class="curr">
-          <!--windSpeed--><!--windUnit-->&nbsp;<!--windDirection--><br>
+          <!--windSpeed--><!--windUnit--><br>
           <div style="font-size:50%">
-            <!--windBeaufortScale-->
+            <!--windDirection-->&nbsp;<!--windBeaufortScale-->
           </div>
         </div>
         <div class="max">
