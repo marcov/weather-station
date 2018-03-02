@@ -77,16 +77,16 @@
       <label>Vento</label>
       <div>
         <div class="other">
-          Raffica <!--windGustSpeed-->&nbsp;<!--windunit-->&nbsp; <!--windGustDirectionDegrees--><br>
+          Raffica <!--windGustSpeed--><!--windUnit--><br>
         </div>
         <div class="curr">
-          <!--windSpeed-->&nbsp; <!--windunit-->&nbsp; <!--windDirection--> <br>
+          <!--windSpeed--><!--windUnit-->&nbsp; <!--windDirection--> <br>
           <div style="font-size:50%">
             <!--windBeaufortScale-->
           </div>
         </div>
         <div class="max">
-          <!--hiWindSpeed-->&nbsp;<!--windunit--><br>
+          <!--hiWindSpeed--><!--windUnit--><br>
           <!--hiWindSpeedTime-->
         </div>
       </div>
@@ -95,11 +95,11 @@
     <li class="measure">
       <label>Pioggia</label>
       <div>
+        <div class="other">
+          Tot <!--dailyRain--> mm<br>
+        </div>
         <div class="curr">
           <!--rainRate--> mm<br>
-          <div style="font-size: 50%">
-            Totale <!--dailyRain--> mm<br>
-          </div>
         </div>
         <div class="max">
         <!--stormRain--> <!--rateUnit--><br>
