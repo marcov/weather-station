@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 
-. ../common_variables.sh
+. ../../common_variables.sh
 
 for pix in ${fiobbio_webcam_img_nowm_name} ${misma_webcam_px_nowm_name}
 do
