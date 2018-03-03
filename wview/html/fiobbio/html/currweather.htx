@@ -20,7 +20,10 @@
       <label>Vento</label>
       <div>
         <div class="other">
-          Raffica<br><!--windGustSpeed--><label class="unit"><!--windUnit--></label>
+          <!--windGustSpeed--><label class="unit"><!--windUnit--></label>
+          <div style="font-size: 50%;">
+	    Raffica
+	  </div>
         </div>
         <div class="curr">
           <!--windSpeed--><label class="unit"><!--windUnit--></label>
@@ -29,7 +32,8 @@
           </div>
         </div>
         <div class="max">
-          <!--hiWindSpeed--><div class="unit"><!--windUnit--></div>
+          <!--hiWindSpeed--><label class="unit"><!--windUnit--></label>
+          <br>
           <!--hiWindSpeedTime-->
         </div>
       </div>
@@ -97,7 +101,10 @@
       <label>Pioggia</label>
       <div>
         <div class="other">
-          Tot<br><!--dailyRain--><label class="unit">mm</label>
+          <!--dailyRain--><label class="unit">mm</label>
+          <div style="font-size: 50%;">
+            Totale
+          </div>
         </div>
         <div class="curr">
           <!--rainRate--><label class="unit"><!--rateUnit--></label>

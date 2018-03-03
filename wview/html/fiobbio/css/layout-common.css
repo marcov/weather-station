@@ -112,12 +112,14 @@ li {
 
 .measure div {
   background-color: inherit;
-  text-align: center;
+  text-align: right;
 }
 
 .measure  .curr {
   font-size: 140%;
-  width:  6em;
+  padding-left:  0.2em;
+  padding-right: 0.4em;
+  min-width: 3em;
 }
 
 .measure  .max {
@@ -127,16 +129,17 @@ li {
 .measure  .min {
   color:  aquamarine;
 }
+
 .measure .min, .measure .max, .measure  .other {
   font-size: 90%;
   width:  4.5em;
+  padding-top: 0.5em;
   white-space: nowrap;
 }
 
 .measure .unit {
   font-size:60%;
   margin: 0;
-  padding-left: 0.5em;
 }
 /***************************************************************/
 

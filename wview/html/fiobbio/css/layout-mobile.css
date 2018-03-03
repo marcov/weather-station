@@ -95,6 +95,11 @@
     text-align: left;
   }
 
+  .measure  .curr {
+    font-size: 140%;
+    width: 5em;
+  } 
+
  .webcams-container {
    flex-flow: column nowrap;
  }
