@@ -3,7 +3,7 @@
 # copy from ftp upload dir to weather station www data
 #
 
-. ../common_variables.sh
+. ../../common_variables.sh
 . /etc/cml_ftp_login_data.sh
 
 #

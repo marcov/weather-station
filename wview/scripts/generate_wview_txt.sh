@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. ../common_variables.sh
+. ../../common_variables.sh
 
 cd ${wview_html_dir} || exit $?
 

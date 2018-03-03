@@ -3,7 +3,7 @@
 # upload webcam images from www data to cml ftp
 #
 
-. ../common_variables.sh
+. ../../common_variables.sh
 . /etc/cml_ftp_login_data.sh
 
 #
