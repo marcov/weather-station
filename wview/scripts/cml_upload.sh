@@ -8,7 +8,6 @@ listFile=/var/lib/wview/img/ftp_plus_noaa.list
 
 . /etc/cml_ftp_login_data.sh
 
-
 # Verifica che i contenuti generati siano cambiati dall'ultima chiamata dello script
 ########################################################################################
 
@@ -34,7 +33,6 @@ if [ $updated -eq 1 ]; then
   minuti=`date +"%M"`
   
   if [ $minuti -gt 10 -a $minuti -le 15 ]; then
-  
     if [ $mese -eq 1 ]; then
       pr_mese="12"
       pr_anno=`expr $anno - 1`
