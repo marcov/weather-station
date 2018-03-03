@@ -1,0 +1,29 @@
+#!/bin/sh
+# Create a set of symbolic links...
+
+repoRoot=/home/pi/weather_station
+
+cd /var/lib/wview/img
+ln -s ${repoRoot}/wview/html/fiobbio/html html
+ln -s ${repoRoot}/wview/html/fiobbio/css css
+ln -s ${repoRoot}/wview/html/fiobbio/js js
+
+cd /etc/
+ln -s ${repoRoot}/wview/etc_wview wview
+
+cd /etc/wview/html
+ln -s ${repoRoot}/wview/html/fiobbio/html/currweather.htx currweather.htx
+ln -s ${repoRoot}/wview/html/fiobbio/html/index.htx index.htx
+
+cd /etc/wview
+ln -s /var/lib/wview/conf/wview-conf.sdb wview-conf.sdb
+
+
+cd /etc/cron.d
+cp ${repoRoot}/webcam/cron/crontab webcam
+chmod +x webcam
+
+cd /etc/cron.daily
+cp ${repoRoot}/webcam/cron/daily webcam
+chmod +x webcam
+
