@@ -50,7 +50,7 @@
       </div>
 
       <div class="lastUpdate">
-        Dati aggiornati al <b> <!--stationDate--> <!--stationTime--></b>
+        <!--stationDate--> <!--stationTime-->
       </div>
 
       <div id="slot0"></div>

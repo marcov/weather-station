@@ -8,12 +8,12 @@
   </div>
   <!-- HEADER START -->
   <div style="font-size: 80%; padding-top: 0.5em;">
-    Alba: <!--sunriseTime-->, tramonto: <!--sunsetTime-->. Fase lunare: <!--moonPhase-->
+    Alba: <!--sunriseTime-->, tramonto: <!--sunsetTime-->.Fase lunare: <!--moonPhase-->
   </div>
   <!-- HEADER END -->
 </div>
 
-<div style="margin-top: 1em;">
+<div>
   <ul class="measures-container">
 
     <li class="measure">
@@ -43,7 +43,7 @@
           <!--lowOutsideTempTime-->
         </div>
         <div class="curr">
-          <!--outsideTemp-->12.3<label class="unit">C</label> <br>
+          <!--outsideTemp--><label class="unit">C</label> <br>
           <div style="font-size: 50%;">
             Percepita &nbsp; <!--apparentTemp--><label class="unit">C</label>
           </div>
