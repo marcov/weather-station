@@ -128,7 +128,7 @@ li {
   color:  aquamarine;
 }
 .measure .min, .measure .max, .measure  .other {
-  font-size: 90%; 
+  font-size: 90%;
   width:  4.5em;
   white-space: nowrap;
 }
@@ -136,7 +136,7 @@ li {
 .measure .unit {
   font-size:60%;
   margin: 0;
-  padding: 0;
+  padding-left: 0.5em;
 }
 /***************************************************************/
 
