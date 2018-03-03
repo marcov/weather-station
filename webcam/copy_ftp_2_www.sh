@@ -17,7 +17,11 @@ do
 	if [ "${pix}" == "${misma_webcam_px_nowm_name}" ] 
 	then
         _lookup_path=${misma_ftp_upload_dir}
-        _file_pattern="*jpg"
+
+        _file_pattern="snap.jpg"
+        rm -f ${misma_ftp_upload_dir}/${_file_pattern}
+        curl --basic -u admin:misma 192.168.1.205:8083/tmpfs/snap.jpg -v -o ${misma_ftp_upload_dir}/${_file_pattern}
+
         _ftp_username=${cml_ftp_user_misma}
         _ftp_password=${cml_ftp_pwd_misma}
 	else
