@@ -1,0 +1,3 @@
+# DO NOT EDIT OR REMOVE
+# This file is a simple placeholder to keep dpkg from removing this directory
+*/5 * * * *    root    cd /home/pi/weather_station/webcam/scripts && ./gen_new_pic.sh > /dev/null
