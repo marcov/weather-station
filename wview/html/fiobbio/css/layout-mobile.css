@@ -77,20 +77,21 @@
 
   .measures-container {
     flex-flow: column nowrap;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .measure {
     flex-flow      : row;
     justify-content: flex-start;
-    margin-top:    1.2em;
-    margin-bottom: 1.2em;
+    margin-bottom: 0.5em;
   }
 
   .measure > label {
     margin-left: 0;
     padding-left: 0;
-    width: 33%;
-    font-size: 100%;
+    width: 25%;
+    font-size: 80%;
     text-align: left;
   }
 

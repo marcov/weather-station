@@ -1,5 +1,5 @@
 
-<div class="heading">
+<d3iv class="heading">
   <div class="title">
     Meteo Fiobbio
   </div>
@@ -20,16 +20,16 @@
       <label>Vento</label>
       <div>
         <div class="other">
-          Raffica<br><!--windGustSpeed--><!--windUnit-->
+          Raffica<br><!--windGustSpeed--><div class="unit"><!--windUnit--></div>
         </div>
         <div class="curr">
-          <!--windSpeed--><!--windUnit--><br>
+          <!--windSpeed--><div class="unit"><!--windUnit--></div><br>
           <div style="font-size:50%">
             <!--windDirection-->&nbsp;<!--windBeaufortScale-->
           </div>
         </div>
         <div class="max">
-          <!--hiWindSpeed--><!--windUnit--><br>
+          <!--hiWindSpeed--><div class="unit"><!--windUnit--></div><br>
           <!--hiWindSpeedTime-->
         </div>
       </div>
@@ -39,17 +39,17 @@
       <label>Temperatura</label>
       <div>
         <div class="min">
-          <!--lowOutsideTemp--> C<br>
+          <!--lowOutsideTemp--><div class="unit">C</div><br>
           <!--lowOutsideTempTime-->
         </div>
         <div class="curr">
-          <!--outsideTemp--> C <br>
+          <!--outsideTemp--><div class="unit">C</div> <br>
           <div style="font-size: 50%;">
-            Percepita &nbsp; <!--apparentTemp--> C
+            Percepita &nbsp; <!--apparentTemp--><div class="unit">C</div>
           </div>
         </div>
         <div class="max">
-        <!--hiOutsideTemp-->  C <br>
+        <!--hiOutsideTemp--><div class="unit">C</div><br>
           <!--hiOutsideTempTime-->
         </div>
       </div>
@@ -59,39 +59,35 @@
       <label>Umidit&agrave;</label>
       <div>
         <div class="min">
-          <!--lowHumidity--> %<br>
+          <!--lowHumidity--><div class="unit">%</div><br>
           <!--lowHumTime-->
         </div>
         <div class="curr">
-          <!--outsideHumidity--> %<br>
+          <!--outsideHumidity--><div class="unit">%</div><br>
           <div style="font-size: 50%">&nbsp;</div>
         </div>
         <div class="max">
-        <!--hiHumidity-->  %<br>
+        <!--hiHumidity--> <div class="unit">%</div><br>
           <!--hiHumTime-->
         </div>
       </div>
     </li>
 
-  </ul>
-
-  <ul class="measures-container">
-
     <li class="measure">
       <label>Pressione</label>
       <div>
         <div class="min">
-          <!--lowBarometer--><!--barUnit--><br>
+          <!--lowBarometer--><div class="unit"><!--barUnit--></div><br>
           <!--lowBarometerTime-->
         </div>
         <div class="curr">
-          <!--barometer--><!--barUnit--><br>
+          <!--barometer--><div class="unit"><!--barUnit--></div><br>
           <div style="font-size:50%">
             Tendenza&nbsp;<!--baromtrend-->
           </div>
         </div>
         <div class="max">
-        <!--hiBarometer--><!--barUnit--><br>
+        <!--hiBarometer--><div class="unit"><!--barUnit--></div><br>
           <!--hiBarometerTime-->
         </div>
       </div>
@@ -101,15 +97,15 @@
       <label>Pioggia</label>
       <div>
         <div class="other">
-          Tot<br><!--dailyRain-->mm
+          Tot<br><!--dailyRain--><div class="unit">mm</div>
         </div>
         <div class="curr">
-          <!--rainRate--><!--rateUnit--><br>
+          <!--rainRate--><div class="unit"><!--rateUnit--></div><br>
           <div style="font-size:50%">
           </div>
         </div>
         <div class="max">
-        <!--stormRain--><!--rateUnit-->
+        <!--stormRain--><div class="unit"><!--rateUnit--></div>
         </div>
       </div>
     </li>

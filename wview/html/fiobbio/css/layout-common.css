@@ -85,12 +85,17 @@ li {
   background-color: rgba(50, 50, 50, 0.8);
   margin: auto;
   padding-top: 1.5em;
+  padding-left: 3em;
+  padding-right: 3em;
 }
 
 .measure {
   display        : flex;
   flex-flow      : column;
   justify-content: space-between;
+  margin-bottom: 1em;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
 }
 
 .measure > label {
@@ -128,6 +133,11 @@ li {
   white-space: nowrap;
 }
 
+.measure .unit {
+  font-size:60%;
+  margin: 0;
+  padding: 0;
+}
 /***************************************************************/
 
 .webcams-container {
