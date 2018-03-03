@@ -20,16 +20,16 @@
       <label>Vento</label>
       <div>
         <div class="other">
-          Raffica<br><!--windGustSpeed--><div class="unit"><!--windUnit--></div>
+          Raffica<br><!--windGustSpeed--><label class="unit"><!--windUnit--></label>
         </div>
         <div class="curr">
-          <!--windSpeed--><div class="unit"><!--windUnit--></div><br>
+          <!--windSpeed--><label class="unit"><!--windUnit--></label>
           <div style="font-size:50%">
             <!--windDirection-->&nbsp;<!--windBeaufortScale-->
           </div>
         </div>
         <div class="max">
-          <!--hiWindSpeed--><div class="unit"><!--windUnit--></div><br>
+          <!--hiWindSpeed--><div class="unit"><!--windUnit--></div>
           <!--hiWindSpeedTime-->
         </div>
       </div>
@@ -43,7 +43,7 @@
           <!--lowOutsideTempTime-->
         </div>
         <div class="curr">
-          <!--outsideTemp--><label class="unit">C</label> <br>
+          <!--outsideTemp--><label class="unit">C</label>
           <div style="font-size: 50%;">
             Percepita &nbsp; <!--apparentTemp--><label class="unit">C</label>
           </div>
@@ -63,7 +63,7 @@
           <!--lowHumTime-->
         </div>
         <div class="curr">
-          <!--outsideHumidity--><label class="unit">%</label><br>
+          <!--outsideHumidity--><label class="unit">%</label>
           <div style="font-size: 50%">&nbsp;</div>
         </div>
         <div class="max">
@@ -81,7 +81,7 @@
           <!--lowBarometerTime-->
         </div>
         <div class="curr">
-          <!--barometer--><label class="unit"><!--barUnit--></label><br>
+          <!--barometer--><label class="unit"><!--barUnit--></label>
           <div style="font-size:50%">
             Tendenza&nbsp;<!--baromtrend-->
           </div>
@@ -100,7 +100,7 @@
           Tot<br><!--dailyRain--><label class="unit">mm</label>
         </div>
         <div class="curr">
-          <!--rainRate--><label class="unit"><!--rateUnit--></label><br>
+          <!--rainRate--><label class="unit"><!--rateUnit--></label>
           <div style="font-size:50%">
           </div>
         </div>
