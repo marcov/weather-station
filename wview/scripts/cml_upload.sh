@@ -4,7 +4,10 @@
 ############################################
 CML_ftp_enabled=1
 
+listFile=/var/lib/wview/img/ftp_plus_noaa.list
+
 . /etc/cml_ftp_login_data.sh
+
 
 # Verifica che i contenuti generati siano cambiati dall'ultima chiamata dello script
 ########################################################################################
@@ -45,22 +48,24 @@ if [ $updated -eq 1 ]; then
 		
 		# NOAA Archive Upload
 		
-		echo "cd private" > /etc/wview/ftp_plus_noaa.list
+		echo "cd private" > ${listFile}
 		if [ $giorno -eq 1 ]; then
-			echo "put /var/lib/wview/img/NOAA/NOAA-$pr_anno-$pr_mese.txt NOAA-$pr_anno-$pr_mese.txt" >> /etc/wview/ftp_plus_noaa.list
+			echo "put /var/lib/wview/img/NOAA/NOAA-$pr_anno-$pr_mese.txt NOAA-$pr_anno-$pr_mese.txt" >> ${listFile}
 			if [ $pr_anno -le $anno ]; then
-				echo "put /var/lib/wview/img/NOAA/NOAA-$pr_anno.txt NOAA-$pr_anno.txt" >> /etc/wview/ftp_plus_noaa.list
+				echo "put /var/lib/wview/img/NOAA/NOAA-$pr_anno.txt NOAA-$pr_anno.txt" >> ${listFile}
 			fi
 		else
-			echo "put /var/lib/wview/img/NOAA/NOAA-$anno-$mese.txt NOAA-$anno-$mese.txt" >> /etc/wview/ftp_plus_noaa.list
+			echo "put /var/lib/wview/img/NOAA/NOAA-$anno-$mese.txt NOAA-$anno-$mese.txt" >> ${listFile}
 		fi
-		echo "put /var/lib/wview/img/NOAA/NOAA-$anno.txt NOAA-$anno.txt" >> /etc/wview/ftp_plus_noaa.list
-		echo "cd .." >> /etc/wview/ftp_plus_noaa.list
+		echo "put /var/lib/wview/img/NOAA/NOAA-$anno.txt NOAA-$anno.txt" >> ${listFile}
+		echo "cd .." >> ${listFile}
 		
-		cat /etc/wview/ftp.list >> /etc/wview/ftp_plus_noaa.list
-		
+        if [ -e /etc/wview/ftp.list ]; then
+		  cat /etc/wview/ftp.list >> ${listFile}
+	    fi
+
 		if [ $CML_ftp_enabled -eq 1 ]; then
-			cat /etc/wview/ftp_plus_noaa.list | /usr/bin/ftp -iVT put,20000 ftp://$cml_ftp_user_fiobbio:$cml_ftp_pwd_fiobbio@ftp.centrometeolombardo.com
+			cat ${listFile} | /usr/bin/ftp -iVT put,20000 ftp://$cml_ftp_user_fiobbio:$cml_ftp_pwd_fiobbio@ftp.centrometeolombardo.com
 		fi
 
 	else
