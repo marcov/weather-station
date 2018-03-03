@@ -1,0 +1,4 @@
+cd private
+put /var/lib/wview/img/NOAA/NOAA-2018-03.txt NOAA-2018-03.txt
+put /var/lib/wview/img/NOAA/NOAA-2018.txt NOAA-2018.txt
+cd ..

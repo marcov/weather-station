@@ -1,5 +1,0 @@
-#!bin/bash
-
-# Remove wview.txt to limit upload size 
-cd /var/lib/wview/img 
-rm wview.txt

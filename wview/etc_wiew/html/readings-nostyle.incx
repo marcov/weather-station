@@ -1,0 +1,255 @@
+  <table class="tablevalues" cellspacing="1" cellpadding="0" align="left" border="1">
+   <thead>
+     <tr> 
+       <th>Misura</th> 
+       <th>Valore</th>
+     </tr>
+   </thead>
+   <tbody>
+    <tr class="even">
+      <td class="title">
+        Temperature:
+      </td>
+      <td align="left">
+        <!--outsideTemp--><!--tempUnit-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        Wind Chill:
+      </td>
+      <td align="left">
+        <!--windChill--><!--tempUnit-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        Heat Index:
+      </td>
+      <td align="left">
+        <!--outsideHeatIndex--><!--tempUnit-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        Apparent Temp:
+      </td>
+      <td align="left">
+        <!--apparentTemp--><!--tempUnit-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        Dewpoint:
+      </td>
+      <td align="left">
+        <!--outsideDewPt--><!--tempUnit-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        Humidity:
+      </td>
+      <td align="left">
+        <!--outsideHumidity--><!--humUnit-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        Barometer:
+      </td>
+      <td align="left">
+        <!--barometer-->&nbsp;<!--barUnit-->&nbsp;<!--baromtrend-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        Wind:
+      </td>
+      <td align="left">
+        <!--windDirection-->&nbsp;&nbsp;at&nbsp;&nbsp;
+        <!--windSpeed-->&nbsp;<!--windUnit-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        High Wind:
+      </td>
+      <td align="left">
+        <!--hiWindSpeed--> <!--windUnit--> at 
+        <!--hiWindSpeedTime-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        Recent Avg Wind:
+      </td>
+      <td align="left">
+        <!--intervalAvgWindSpeed--> <!--windUnit-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        Recent Beaufort Scale:
+      </td>
+      <td align="left">
+        <!--intervalAvgBeaufortScale-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        Today's Rain:
+      </td>
+      <td align="left">
+        <!--dailyRain-->&nbsp;<!--rainUnit-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        Rain Rate:
+      </td>
+      <td align="left">
+        <!--rainRate-->&nbsp;<!--rateUnit-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        High Rain Rate:
+      </td>
+      <td align="left">
+        <!--hiRainRate--> <!--rateUnit--> at 
+        <!--hiRainRateTime-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        Storm Total:
+      </td>
+      <td align="left">
+        <!--stormRain-->&nbsp;<!--rainUnit-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        Monthly Rain:
+      </td>
+      <td align="left">
+        <!--monthlyRain-->&nbsp;<!--rainUnit-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        Yearly Rain (<!--rainSeasonStart-->):
+      </td>
+      <td align="left">
+        <!--totalRain-->&nbsp;<!--rainUnit-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        Air Density:
+      </td>
+      <td align="left">
+        <!--airDensity-->&nbsp;<!--airDensityUnit-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        Est. Cumulus Base:
+      </td>
+      <td align="left">
+        <!--cumulusBase-->&nbsp;<!--cumulusBaseUnit-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        High Temperature:
+      </td>
+      <td align="left">
+        <!--hiOutsideTemp--><!--tempUnit--> at 
+        <!--hiOutsideTempTime-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        Low Temperature:
+      </td>
+      <td align="left">
+        <!--lowOutsideTemp--><!--tempUnit--> at 
+        <!--lowOutsideTempTime-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        High Heat Index:
+      </td>
+      <td align="left">
+        <!--hiHeatindex--><!--tempUnit--> at 
+        <!--hiHeatindexTime-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        Low Wind Chill:
+      </td>
+      <td align="left">
+        <!--lowWindchill--><!--tempUnit--> at 
+        <!--lowWindchillTime-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        High Humidity:
+      </td>
+      <td align="left">
+        <!--hiHumidity--><!--humUnit--> at 
+        <!--hiHumTime-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        Low Humidity:
+      </td>
+      <td align="left">
+        <!--lowHumidity--><!--humUnit--> at 
+        <!--lowHumTime-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        High Dewpoint:
+      </td>
+      <td align="left">
+        <!--hiDewpoint--><!--tempUnit--> at 
+        <!--hiDewpointTime-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        Low Dewpoint:
+      </td>
+      <td align="left">
+        <!--lowDewpoint--><!--tempUnit--> at 
+        <!--lowDewpointTime-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        High Barometer:
+      </td>
+      <td align="left">
+        <!--hiBarometer--> <!--barUnit--> at 
+        <!--hiBarometerTime-->
+      </td>
+    </tr>
+    <tr class="even">
+      <td class="title">
+        Low Barometer:
+      </td>
+      <td align="left">
+        <!--lowBarometer--> <!--barUnit--> at 
+        <!--lowBarometerTime-->
+      </td>
+    </tr>
+  </tbody>
+</table>

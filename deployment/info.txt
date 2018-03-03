@@ -1,2 +1,0 @@
-cp ./delete_ftp_pictures /etc/cron.daily/
-cp ./pre-generate.sh /etc/wview/
