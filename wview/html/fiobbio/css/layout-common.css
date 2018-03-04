@@ -27,7 +27,7 @@ a {
 
 input
 {
-  -webkit-appearance: none;
+  /*-webkit-appearance: none;*/
   color: whitesmoke;
   background: rgba(0, 0, 0, 0.5);
   font-size: 1em;
@@ -45,7 +45,7 @@ img
 {
   max-width: 100%;
   border-radius: .3em;
-  -moz-border-radius: .3em;
+  /*-moz-border-radius: .3em;*/
 }
 
 ul {
@@ -164,7 +164,7 @@ img.round
   margin-right: auto;
   max-width: 100%;
   height: auto;
-  -moz-border-radius: 100%;
+  /*-moz-border-radius: 100%;*/
   border-radius: 100%;
 }
 
@@ -207,27 +207,13 @@ img.webcam {
 }
 
 
-/***************************************************************/
-
-::-webkit-scrollbar {
-  width: 0px;  /* remove scrollbar space */
-  background: transparent;  /* optional: just make scrollbar invisible */
-}
-/* optional: show position indicator in red */
-::-webkit-scrollbar-thumb {
-  background: #FF0000;
-}
-
-
 /*****************************************************************/
 
-li.meteoblue { width: 340; padding: 0; overflow: hidden; }
-
-iframe.meteoblue
-{
+.meteoblue {
   width: 340px;
   height: 380px;
   background: rgba(0, 0, 0, 0.5);
+  padding: 0; 
   border: 0;
   /* Disable scrolling */
   overflow:hidden;

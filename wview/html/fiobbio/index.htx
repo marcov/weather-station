@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <meta http-equiv="cache-control" content="no-cache" />
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Stazione Meteo di <!--stationCity-->, <!--stationState-->&nbsp;</title>
 
     <link rel="alternate" type="application/rss+xml" title="Stazione Meteo di <!--stationCity-->, <!--stationState-->" href="wxrss.xml">
 
-    <script type="text/javascript" src="js/wview.js"></script>
+    <script src="js/wview.js"></script>
 
     <!-- the following is needed for the media queries to work correctly -->
     <meta name="viewport" content="width=device-width">
@@ -69,7 +67,7 @@
       <script src="js/animation.js"></script>
 
         <!-- Histats.com  START  (aync) -->
-        <script type="text/javascript">var _Hasync= _Hasync|| [];
+        <script>var _Hasync= _Hasync|| [];
           _Hasync.push(['Histats.start', '1,1781036,4,4015,112,61,00011111']);
           _Hasync.push(['Histats.fasi', '1']);
           _Hasync.push(['Histats.track_hits', '']);
@@ -84,9 +82,9 @@
       </div>
 
     <link href="css/featherlight.min.css" type="text/css" rel="stylesheet" />
-    <script src="js/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/featherlight.min.js"></script>
 
-    <script type="text/javascript">
+    <script>
       $.featherlight.defaults.loading = "Caricamento immagine in corso...";
     </script>
   </body>
