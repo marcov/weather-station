@@ -21,7 +21,7 @@
       <div>
         <div class="other">
           <!--windGustSpeed--><label class="unit"><!--windUnit--></label>
-          <div style="font-size: 50%;">
+          <div style="font-size: 80%;">
 	    Raffica
 	  </div>
         </div>
@@ -102,7 +102,7 @@
       <div>
         <div class="other">
           <!--dailyRain--><label class="unit">mm</label>
-          <div style="font-size: 50%;">
+          <div style="font-size: 80%;">
             Totale
           </div>
         </div>
@@ -127,7 +127,7 @@
       </a>
     </li>
     <li>
-      <a href="http://rete.centrometeolombardo.com/bergamo/montemisma/public/webcam_small.jpg" data-featherlight="image">
+      <a href="http://rete.centrometeolombardo.com/bergamo/montemisma/public/webcam.jpg" data-featherlight="image">
         <img class="webcam" alt="webcam_small" src="http://rete.centrometeolombardo.com/bergamo/montemisma/public/webcam_small.jpg" />
       </a>
     </li>
