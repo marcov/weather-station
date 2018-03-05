@@ -64,7 +64,7 @@ $(function () {
   }
 
   function getUrl(elemName) {
-    return "html/" + elem.name + ".html";
+    return "html/" + elemName + ".html";
   }
 
 
