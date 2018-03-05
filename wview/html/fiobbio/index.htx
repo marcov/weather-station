@@ -47,9 +47,6 @@
         </div>
       </div>
 
-      <div class="lastUpdate">
-        <!--stationDate--> <!--stationTime-->
-      </div>
 
       <div id="slot0"></div>
       <div id="slot1"></div>

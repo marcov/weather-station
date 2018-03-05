@@ -1,5 +1,8 @@
 
 <div class="heading">
+  <div class="lastUpdate">
+    <!--stationDate--> <!--stationTime-->
+  </div>
   <div class="title">
     Meteo Fiobbio
   </div>
@@ -22,8 +25,8 @@
         <div class="other">
           <!--windGustSpeed--><label class="unit"><!--windUnit--></label>
           <div style="font-size: 80%;">
-	    Raffica
-	  </div>
+        Raffica
+      </div>
         </div>
         <div class="curr">
           <!--windSpeed--><label class="unit"><!--windUnit--></label>
