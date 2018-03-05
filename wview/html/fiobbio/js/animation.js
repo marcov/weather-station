@@ -59,12 +59,21 @@ $(function () {
     }
   }
 
+  function getDivId(slotNumber) {
+      return "#slot" + slotNumber.toString();
+  }
+
+  function getUrl(elemName) {
+    return "html/" + elem.name + ".html";
+  }
+
+
   function loadEleminNewDiv(elem) {
     if (loadedDivs <= nDivs) {
-      var url = "html/" + elem.name + ".html";
-      var divName = "#slot" + loadedDivs.toString();
-      loadedDivs++;
-      console.log("Loading url=" + url + "into new div="+divName+"...");
+      var url = getUrl(elem.name);
+      var divName = getDivId(loadedDivs++);
+
+      console.log("Loading url=" + url + " into new div="+divName+"...");
       $(divName).load(url);
       elem.location = divName;
       return true;
@@ -90,13 +99,15 @@ $(function () {
 
   function reloadCurrWeather () {
     console.log("Reloading current weather section...");
-    loadEleminNewDiv(elemList[0]);
+    var curr = elemList[0]
+    $(curr.location).load(getUrl(curr.name));
     setTimeout(reloadCurrWeather, 150000);
   }
 
 
   $(document).ready(function() {
     loadedDivs = 0;
-    setTimeout(reloadCurrWeather, 0);
+    loadEleminNewDiv(elemList[0]);
+    setTimeout(reloadCurrWeather, 150000);
   });
 });
