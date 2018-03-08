@@ -23,10 +23,10 @@
       <label>Vento</label>
       <div>
         <div class="other">
-          <!--windGustSpeed-->
+          <div><!--windGustSpeed--></div>
           <div style="font-size: 80%;">
-        Raffica
-      </div>
+            Raffica
+          </div>
         </div>
         <div class="curr">
           <!--windSpeed--><label class="unit"><!--windUnit--></label>
@@ -35,9 +35,8 @@
           </div>
         </div>
         <div class="max">
-          <!--hiWindSpeed-->
-          <br>
-          <!--hiWindSpeedTime-->
+          <div><!--hiWindSpeed--></div>
+          <div><!--hiWindSpeedTime--></div>
         </div>
       </div>
     </li>
@@ -46,8 +45,8 @@
       <label>Temperatura</label>
       <div>
         <div class="min">
-          <!--lowOutsideTemp-->
-          <!--lowOutsideTempTime-->
+          <div><!--lowOutsideTemp--></div>
+          <div><!--lowOutsideTempTime--></div>
         </div>
         <div class="curr">
           <!--outsideTemp--><label class="unit">C</label>
