@@ -103,9 +103,11 @@
       <label>Pioggia</label>
       <div>
         <div class="other">
-          <!--dailyRain--><label class="unit">mm</label>
+          <div>
+            <!--dailyRain-->
+          </div>
           <div class="sub">
-            Totale
+            mm totali
           </div>
         </div>
         <div class="curr">
