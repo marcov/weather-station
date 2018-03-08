@@ -143,6 +143,10 @@ li {
   font-size: 50%;
   margin: 0;
 }
+
+.measure .sub {
+  font-size: 80%;
+}
 /***************************************************************/
 
 .webcams-container {
@@ -213,7 +217,7 @@ img.webcam {
   width: 340px;
   height: 380px;
   background: rgba(0, 0, 0, 0.5);
-  padding: 0; 
+  padding: 0;
   border: 0;
   /* Disable scrolling */
   overflow:hidden;
