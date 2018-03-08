@@ -23,7 +23,7 @@
       <label>Vento</label>
       <div>
         <div class="other">
-          <!--windGustSpeed--><label class="unit"><!--windUnit--></label>
+          <!--windGustSpeed-->
           <div style="font-size: 80%;">
         Raffica
       </div>
@@ -35,7 +35,7 @@
           </div>
         </div>
         <div class="max">
-          <!--hiWindSpeed--><label class="unit"><!--windUnit--></label>
+          <!--hiWindSpeed-->
           <br>
           <!--hiWindSpeedTime-->
         </div>
@@ -46,7 +46,7 @@
       <label>Temperatura</label>
       <div>
         <div class="min">
-          <!--lowOutsideTemp--><label class="unit">C</label><br>
+          <!--lowOutsideTemp-->
           <!--lowOutsideTempTime-->
         </div>
         <div class="curr">
@@ -56,7 +56,7 @@
           </div>
         </div>
         <div class="max">
-        <!--hiOutsideTemp--><label class="unit">C</label><br>
+        <!--hiOutsideTemp-->
           <!--hiOutsideTempTime-->
         </div>
       </div>
@@ -66,7 +66,7 @@
       <label>Umidit&agrave;</label>
       <div>
         <div class="min">
-          <!--lowHumidity--><label class="unit">%</label><br>
+          <!--lowHumidity-->
           <!--lowHumTime-->
         </div>
         <div class="curr">
@@ -74,7 +74,7 @@
           <div style="font-size: 50%">&nbsp;</div>
         </div>
         <div class="max">
-        <!--hiHumidity--> <label class="unit">%</label><br>
+        <!--hiHumidity-->
           <!--hiHumTime-->
         </div>
       </div>
@@ -84,7 +84,7 @@
       <label>Pressione</label>
       <div>
         <div class="min">
-          <!--lowBarometer--><label class="unit"><!--barUnit--></label><br>
+          <!--lowBarometer-->
           <!--lowBarometerTime-->
         </div>
         <div class="curr">
@@ -94,7 +94,7 @@
           </div>
         </div>
         <div class="max">
-        <!--hiBarometer--><label class="unit"><!--barUnit--></label><br>
+        <!--hiBarometer-->
           <!--hiBarometerTime-->
         </div>
       </div>
@@ -115,7 +115,7 @@
           </div>
         </div>
         <div class="max">
-        <!--stormRain--><label class="unit"><!--rateUnit--></label>
+          <!--stormRain-->
         </div>
       </div>
     </li>
