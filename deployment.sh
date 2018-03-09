@@ -10,6 +10,7 @@ exit 0
 sudo chown -R pi ${wviewVar}/img
 
 cd /var/lib/wview/img
+ln -s ${repoRoot}/wview/html/fiobbio/index.html index.html
 ln -s ${repoRoot}/wview/html/fiobbio/html html
 ln -s ${repoRoot}/wview/html/fiobbio/css css
 ln -s ${repoRoot}/wview/html/fiobbio/js js
