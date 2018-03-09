@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Stazione Meteo di <!--stationCity-->, <!--stationState-->&nbsp;</title>
+    <title>Stazione Meteo di Fiobbio di Albino (BG)</title>
 
-    <link rel="alternate" type="application/rss+xml" title="Stazione Meteo di <!--stationCity-->, <!--stationState-->" href="wxrss.xml">
+    <link rel="alternate" type="application/rss+xml" title="Stazione Meteo di Fiobbio di Albino (BG)" href="wxrss.xml">
 
     <script src="js/wview.js"></script>
 
@@ -61,7 +61,7 @@
 
       <script src="js/jquery.js"></script>
       <script src="js/menu.js"></script>
-      <script src="js/animation.js"></script>
+      <script src="js/dynamic.js"></script>
 
         <!-- Histats.com  START  (aync) -->
         <script>var _Hasync= _Hasync|| [];
@@ -82,7 +82,11 @@
     <script src="js/featherlight.min.js"></script>
 
     <script>
-      $.featherlight.defaults.loading = "Caricamento immagine in corso...";
+      $(function () {
+        $.featherlight.defaults.loading = "Caricamento immagine in corso...";
+
+
+      });
     </script>
   </body>
 </html>

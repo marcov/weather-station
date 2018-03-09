@@ -1,42 +1,42 @@
 
 <div class="heading">
   <div class="lastUpdate">
-    <!--stationDate--> <!--stationTime-->
+    <span id="stationTime"></span>, <span id="stationDate"></span>
   </div>
   <div class="title">
     Meteo Fiobbio
   </div>
-  <div>
-    Stazione a <!--stationElevation-->&nbsp;, <!--stationLatitude-->- <!--stationLongitude-->
+  <div id="stationInfo">
+    Stazione a <span id="stationElevation"></span>&nbsp;, <span id="stationLatitude"></span>-<span id="stationLongitude"></span>
   </div>
   <!-- HEADER START -->
   <div style="font-size: 80%; padding-top: 0.5em;">
-    Alba: <!--sunriseTime-->, tramonto: <!--sunsetTime-->.Fase lunare: <!--moonPhase-->
+    Alba: <span id="sunriseTime"></span>, tramonto: <span id="sunsetTime"></span>.Fase lunare: <span id="moonPhase"></span>
   </div>
   <!-- HEADER END -->
 </div>
 
 <div>
-  <ul class="measures-container">
-
+  <ul id="genericMeasures" class="measures-container" style="display: none;">
+    <li class="where"></li>
     <li class="measure">
       <label>Vento</label>
       <div>
         <div class="other">
-          <div><!--windGustSpeed--></div>
+          <div><span id="windGustSpeed"></span></div>
           <div class="sub">
             Raffica
           </div>
         </div>
         <div class="curr">
-          <!--windSpeed--><label class="unit"><!--windUnit--></label>
+          <span id="windSpeed"></span><label class="unit"><span id="windUnit"></span></label>
           <div style="font-size:50%">
-            <!--windDirection-->&nbsp;<!--windBeaufortScale-->
+            <span id="windDirection"></span>&nbsp;<span id="windBeaufortScale"></span>
           </div>
         </div>
         <div class="max">
-          <div><!--hiWindSpeed--></div>
-          <div class="sub"><!--hiWindSpeedTime--></div>
+          <div><span id="hiWindSpeed"></span></div>
+          <div class="sub"><span id="hiWindSpeedTime"></span></div>
         </div>
       </div>
     </li>
@@ -45,18 +45,18 @@
       <label>Temperatura</label>
       <div>
         <div class="min">
-          <div><!--lowOutsideTemp--></div>
-          <div class="sub"><!--lowOutsideTempTime--></div>
+          <div><span id="lowOutsideTemp"></span></div>
+          <div class="sub"><span id="lowOutsideTempTime"></span></div>
         </div>
         <div class="curr">
-          <!--outsideTemp--><label class="unit">C</label>
+          <span id="outsideTemp"></span><label class="unit">C</label>
           <div style="font-size: 50%;">
-            Percepita &nbsp; <!--apparentTemp--><label class="unit">C</label>
+            Percepita &nbsp; <span id="apparentTemp"></span><label class="unit">C</label>
           </div>
         </div>
         <div class="max">
-          <div><!--hiOutsideTemp--></div>
-          <div class="sub"><!--hiOutsideTempTime--></div>
+          <div><span id="hiOutsideTemp"></span></div>
+          <div class="sub"><span id="hiOutsideTempTime"></span></div>
         </div>
       </div>
     </li>
@@ -65,16 +65,16 @@
       <label>Umidit&agrave;</label>
       <div>
         <div class="min">
-          <div><!--lowHumidity--></div>
-          <div class="sub"><!--lowHumTime--></div>
+          <div><span id="lowHumidity"></span></div>
+          <div class="sub"><span id="lowHumTime"></span></div>
         </div>
         <div class="curr">
-          <!--outsideHumidity--><label class="unit">%</label>
+          <span id="outsideHumidity"></span><label class="unit">%</label>
           <div style="font-size: 50%">&nbsp;</div>
         </div>
         <div class="max">
-          <div><!--hiHumidity--></div>
-          <div class="sub"><!--hiHumTime--></div>
+          <div><span id="hiHumidity"></span></div>
+          <div class="sub"><span id="hiHumTime"></span></div>
         </div>
       </div>
     </li>
@@ -83,18 +83,18 @@
       <label>Pressione</label>
       <div>
         <div class="min">
-          <div><!--lowBarometer--></div>
-          <div class="sub"><!--lowBarometerTime--></div>
+          <div><span id="lowBarometer"></span></div>
+          <div class="sub"><span id="lowBarometerTime"></span></div>
         </div>
         <div class="curr">
-          <!--barometer--><label class="unit"><!--barUnit--></label>
+          <span id="barometer"></span><label class="unit"><span id="barUnit"></span></label>
           <div style="font-size:50%">
-            Tendenza&nbsp;<!--baromtrend-->
+            Tendenza&nbsp;<span id="baromtrend"></span>
           </div>
         </div>
         <div class="max">
-          <div><!--hiBarometer--></div>
-          <div class="sub"><!--hiBarometerTime--></div>
+          <div><span id="hiBarometer"></span></div>
+          <div class="sub"><span id="hiBarometerTime"></span></div>
         </div>
       </div>
     </li>
@@ -104,23 +104,27 @@
       <div>
         <div class="other">
           <div>
-            <!--dailyRain-->
+            <span id="dailyRain"></span>
           </div>
           <div class="sub">
             mm totali
           </div>
         </div>
         <div class="curr">
-          <!--rainRate--><label class="unit"><!--rateUnit--></label>
+          <span id="rainRate"></span><label class="unit"><span id="rateUnit"></span></label>
           <div style="font-size:50%">
           </div>
         </div>
         <div class="max">
-          <div><!--stormRain--></div>
+          <div><span id="stormRain"></span></div>
         </div>
       </div>
     </li>
-  </ul>
+  </ul> <!-- measures-container -->
+
+  <ul id="fiobbioMeasures" class="measures-container"></ul>
+  <ul id="mismaMeasures" class="measures-container"></ul>
+
 </div>
 
 <div>
@@ -196,3 +200,60 @@
   </ul>
 </div>
 <!-- WEATHER IMAGES END -->
+
+<script>
+  function populateStationInfo() {
+      $.ajax({
+        url      : "stationinfo.json",
+        dataType : "json"
+      }).done( (data) => {
+
+        // we map 1:1 json key value with id name,
+        // so that data loading is trivial!
+        $.each(data, (key, val) => {
+          $("#" + key).text(val);
+        });
+      });
+  }
+
+  function populateMeasures(locs) {
+
+    locs.forEach((loc) => {
+      $.ajax({
+
+        url      : loc.url,
+        dataType : "json"
+
+      }).done( (data) => {
+
+        $("#" + loc.tgtId).html($("#genericMeasures").html());
+
+        $("#" + loc.tgtId + " .where").text(loc.where);
+
+        // we map 1:1 json key value with id name,
+        // so that data loading is trivial!
+        $.each(data, (key, val) => {
+          $("#" + loc.tgtId + " #" + key).text(val);
+        });
+
+      }); // ajax..done
+
+    }); // forEach
+  }
+
+  $(document).ready(() => {
+    const locations = [
+      { url   : "realtime.json" ,
+        tgtId : "fiobbioMeasures",
+        where : "Paese"},
+      { url   : "/misma/realtime.json",
+        tgtId : "mismaMeasures",
+        where : "Misma"
+      }
+    ];
+
+    populateStationInfo();
+    populateMeasures(locations);
+  });
+
+</script>

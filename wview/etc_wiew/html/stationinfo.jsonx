@@ -1,0 +1,9 @@
+{
+    "stationDate" : "<!--stationDate-->",
+    "stationTime" : "<!--stationTime-->",
+    "stationLatitude"  : "<!--stationLatitude-->",
+    "stationLongitude" : "<!--stationLongitude-->",
+    "sunriseTime"      : "<!--sunriseTime-->",
+    "sunsetTime"       : "<!--sunsetTime-->",
+    "moonPhase"        : "<!--moonPhase-->"
+}

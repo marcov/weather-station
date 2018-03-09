@@ -1,6 +1,4 @@
-
-body
-{
+body {
   background-color : #323232;
   font-size   : 90%;
   font-family : Verdana,Arial,Sans-Serif;
@@ -264,4 +262,9 @@ iframe.meteoblue {
   margin: 0.1em;
   background-color: #F5F5F5;
   background-color: rgba(245, 245, 245, 0.85);
+}
+
+.measures-container > .where {
+  padding-top: 1.8em;
+  font-weight: bold;
 }
