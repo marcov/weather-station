@@ -40,5 +40,8 @@
     "totalRain" : "<!--totalRain-->",
     "rainRate" : "<!--rainRate-->",
     "hiRainRate" : "<!--hiRainRate-->",
-    "hiRainRateTime" : "<!--hiRainRateTime-->"
+    "hiRainRateTime" : "<!--hiRainRateTime-->",
+    "windGustSpeed" : "<!--windGustSpeed-->",
+    "windBeaufortScale" : "<!--windBeaufortScale-->",
+    "apparentTemp" : "<!--apparentTemp-->"
 }
