@@ -95,7 +95,7 @@ li {
   margin-bottom: 1em;
   padding-left: 0.2em;
   padding-right: 0.2em;
-  width: 19ch;
+  width: 22ch;
 }
 
 .measure > label {
@@ -162,11 +162,11 @@ li {
 }
 
 .narrower {
-  width: 16ch;
+  width: 17ch;
 }
 
 .narrower .curr {
-  width: 0.5em;
+  width: 0.3em;
 }
 
 .narrower .min, .narrower .max {
