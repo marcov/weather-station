@@ -12,10 +12,10 @@ $(function () {
 
   var elemList = [
     {name : "currweather", location : null},
+    {name : "satellite",   location : null},
     {name : "extrastas",   location : null},
     {name : "forecast",    location : null},
     {name : "radar",       location : null},
-    {name : "satellite",   location : null},
     {name : "maps",        location : null}
   ];
 

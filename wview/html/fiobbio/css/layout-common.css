@@ -1,21 +1,20 @@
 body {
-  background-color : #323232;
-  font-size   : 90%;
-  font-family : Verdana,Arial,Sans-Serif;
-  color       : whitesmoke;
-  margin : 0;
+  background-color: #323232;
+  font-size: 90%;
+  font-family: Verdana, Arial, Sans-Serif;
+  color: whitesmoke;
+  margin: 0;
   padding: 0;
-  border : none;
+  border: none;
 }
 
-div
-{
+div {
   background-color: #004d90;
   /*border: 1px solid yellow;*/
 }
 
-h3{
-  font-size:1.8em;
+h3 {
+  font-size: 1.8em;
   text-align: center;
 }
 
@@ -23,24 +22,21 @@ a {
   color: inherit;
 }
 
-input
-{
+input {
   /*-webkit-appearance: none;*/
   color: whitesmoke;
   background: rgba(0, 0, 0, 0.5);
   font-size: 1em;
   padding: 0.5em;
   /* Round button borders */
-
   margin-left: 0.2em;
   margin-right: 0.2em;
-  margin-top:  0.5em;
-  margin-bottom:  0.5em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 
-img
-{
+img {
   max-width: 100%;
   border-radius: .3em;
   /*-moz-border-radius: .3em;*/
@@ -53,7 +49,7 @@ ul {
 
 li {
   margin-left: 0;
-  list-style:none;
+  list-style: none;
 }
 
 /***************************************************************/
@@ -66,9 +62,8 @@ li {
   font-size: 90%;
 }
 
-.maincolumn
-{
-  margin   : 1em;
+.maincolumn {
+  margin: 1em;
 
   clear: none;
   float: none;
@@ -89,8 +84,8 @@ li {
 }
 
 .measure {
-  display        : flex;
-  flex-flow      : column;
+  display: flex;
+  flex-flow: column;
   justify-content: space-between;
   margin-bottom: 1em;
   padding-left: 0.2em;
@@ -115,25 +110,27 @@ li {
   text-align: right;
 }
 
-.measure  .curr {
+.measure .curr {
   font-size: 140%;
-  padding-left:  0.2em;
+  padding-left: 0.2em;
   padding-right: 0.4em;
   min-width: 3em;
   font-weight: 600;
 }
 
-.measure  .max {
+.measure .max {
   color: #F15025;
 }
 
-.measure  .min {
+.measure .min {
   color: #5ADBFF;
 }
 
-.measure .min, .measure .max, .measure  .other {
+.measure .min,
+.measure .max,
+.measure .other {
   font-size: 90%;
-  width:  3.25em;
+  width: 3.25em;
   padding-top: 0.5em;
   white-space: nowrap;
 }
@@ -157,7 +154,8 @@ li {
   width: 5em;
 }
 
-.wider .min, .wider .max {
+.wider .min,
+.wider .max {
   width: 4em;
 }
 
@@ -169,14 +167,16 @@ li {
   width: 0.3em;
 }
 
-.narrower .min, .narrower .max {
+.narrower .min,
+.narrower .max {
   width: 3em;
 }
+
 /***************************************************************/
 
 .webcams-container {
-  display        : flex;
-  flex-flow      : row nowrap;
+  display: flex;
+  flex-flow: row nowrap;
   justify-content: center;
 }
 
@@ -184,10 +184,10 @@ li {
   margin-left: 0.5em;
   margin-right: 0.5em;
 }
+
 /***************************************************************/
 
-img.round
-{
+img.round {
   margin-top: 1em;
   margin-left: auto;
   margin-right: auto;
@@ -197,8 +197,7 @@ img.round
   border-radius: 100%;
 }
 
-img.satellite
-{
+img.satellite {
   width: 300px;
 }
 
@@ -206,8 +205,7 @@ img.webcam {
   max-height: 22em;
 }
 
-.heading
-{
+.heading {
   text-align: center;
 }
 
@@ -218,8 +216,7 @@ img.webcam {
   margin: 0;
 }
 
-.histats_counter
-{
+.histats_counter {
   margin: auto;
   margin-top: 1em;
   align-content: center;
@@ -227,8 +224,7 @@ img.webcam {
 
 /***************************************************************/
 
-#noaatext
-{
+#noaatext {
   font-size: 95%;
   text-align: left;
   padding-left: 1em;
@@ -240,15 +236,18 @@ img.webcam {
 
 .meteoblue {
   width: 340px;
-  height: 380px;
+  height: 390px;
   background: rgba(0, 0, 0, 0.5);
   padding: 0;
   border: 0;
   /* Disable scrolling */
-  overflow:hidden;
+  overflow-x:hidden;
+  overflow-y:hidden;
+  overflow: hidden;
 }
 
 /*  Enable the following to scale the iframe! */
+
 /*
 iframe.meteoblue {
   -ms-zoom: 0.85;
@@ -260,6 +259,7 @@ iframe.meteoblue {
   -webkit-transform-origin: 0 0;
 }
 */
+
 /******************************************************************/
 
 .flex-container {
@@ -296,7 +296,7 @@ iframe.meteoblue {
   text-align: left;
   width: 5ch;
   padding-top: 1.8em;
-  color : #FFF2BD;
+  color: #FFF2BD;
 }
 
 #mismaMeasures {
@@ -304,11 +304,11 @@ iframe.meteoblue {
   padding-top: 0;
 }
 
-#mismaMeasures > .measure > label  {
+#mismaMeasures > .measure > label {
   display: none;
 }
 
-#mismaMeasures  .where {
+#mismaMeasures .where {
   padding-top: 0.3em;
   padding-left: 0;
 }
