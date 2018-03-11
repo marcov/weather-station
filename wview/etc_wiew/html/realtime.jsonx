@@ -43,5 +43,8 @@
     "hiRainRateTime" : "<!--hiRainRateTime-->",
     "windGustSpeed" : "<!--windGustSpeed-->",
     "windBeaufortScale" : "<!--windBeaufortScale-->",
-    "apparentTemp" : "<!--apparentTemp-->"
+    "apparentTemp" : "<!--apparentTemp-->",
+    "windUnit" : "windUnit",
+    "barUnit"  : "barUnit",
+    "rateUnit" : "rateUnit"
 }

@@ -6,12 +6,14 @@
   <div class="title">
     Meteo Fiobbio
   </div>
-  <div id="stationInfo">
+  <div class="stationInfo">
     Stazione a <span id="stationElevation"></span>&nbsp;, <span id="stationLatitude"></span>-<span id="stationLongitude"></span>
   </div>
   <!-- HEADER START -->
-  <div style="font-size: 80%; padding-top: 0.5em;">
-    Alba: <span id="sunriseTime"></span>, tramonto: <span id="sunsetTime"></span>.Fase lunare: <span id="moonPhase"></span>
+  <div class="sunMoon">
+    Alba: <span id="sunriseTime"></span>,&nbsp;
+    tramonto: <span id="sunsetTime"></span>.&nbsp;
+    Fase lunare: <span id="moonPhase"></span>
   </div>
   <!-- HEADER END -->
 </div>
@@ -23,20 +25,20 @@
       <label>Vento</label>
       <div>
         <div class="other">
-          <div><span id="windGustSpeed"></span></div>
+          <div><span class="windGustSpeed"></span></div>
           <div class="sub">
             Raffica
           </div>
         </div>
         <div class="curr">
-          <span id="windSpeed"></span><label class="unit"><span id="windUnit"></span></label>
+          <span class="windSpeed"></span><label class="unit"><span class="windUnit"></span></label>
           <div style="font-size:50%">
-            <span id="windDirection"></span>&nbsp;<span id="windBeaufortScale"></span>
+            <span class="windDirection"></span>&nbsp;<span class="windBeaufortScale"></span>
           </div>
         </div>
         <div class="max">
-          <div><span id="hiWindSpeed"></span></div>
-          <div class="sub"><span id="hiWindSpeedTime"></span></div>
+          <div><span class="hiWindSpeed"></span></div>
+          <div class="sub"><span class="hiWindSpeedTime"></span></div>
         </div>
       </div>
     </li>
@@ -45,56 +47,56 @@
       <label>Temperatura</label>
       <div>
         <div class="min">
-          <div><span id="lowOutsideTemp"></span></div>
-          <div class="sub"><span id="lowOutsideTempTime"></span></div>
+          <div><span class="lowOutsideTemp"></span></div>
+          <div class="sub"><span class="lowOutsideTempTime"></span></div>
         </div>
         <div class="curr">
-          <span id="outsideTemp"></span><label class="unit">C</label>
+          <span class="outsideTemp"></span><label class="unit">C</label>
           <div style="font-size: 50%;">
-            Percepita &nbsp; <span id="apparentTemp"></span><label class="unit">C</label>
+            Percepita &nbsp; <span class="apparentTemp"></span><label class="unit">C</label>
           </div>
         </div>
         <div class="max">
-          <div><span id="hiOutsideTemp"></span></div>
-          <div class="sub"><span id="hiOutsideTempTime"></span></div>
+          <div><span class="hiOutsideTemp"></span></div>
+          <div class="sub"><span class="hiOutsideTempTime"></span></div>
         </div>
       </div>
     </li>
 
-    <li class="measure">
+    <li class="measure narrower">
       <label>Umidit&agrave;</label>
       <div>
         <div class="min">
-          <div><span id="lowHumidity"></span></div>
-          <div class="sub"><span id="lowHumTime"></span></div>
+          <div><span class="lowHumidity"></span></div>
+          <div class="sub"><span class="lowHumTime"></span></div>
         </div>
         <div class="curr">
-          <span id="outsideHumidity"></span><label class="unit">%</label>
+          <span class="outsideHumidity"></span><label class="unit">%</label>
           <div style="font-size: 50%">&nbsp;</div>
         </div>
         <div class="max">
-          <div><span id="hiHumidity"></span></div>
-          <div class="sub"><span id="hiHumTime"></span></div>
+          <div><span class="hiHumidity"></span></div>
+          <div class="sub"><span class="hiHumTime"></span></div>
         </div>
       </div>
     </li>
 
-    <li class="measure">
+    <li class="measure wider">
       <label>Pressione</label>
       <div>
         <div class="min">
-          <div><span id="lowBarometer"></span></div>
-          <div class="sub"><span id="lowBarometerTime"></span></div>
+          <div><span class="lowBarometer"></span></div>
+          <div class="sub"><span class="lowBarometerTime"></span></div>
         </div>
         <div class="curr">
-          <span id="barometer"></span><label class="unit"><span id="barUnit"></span></label>
+          <span class="barometer"></span><label class="unit"><span class="barUnit"></span></label>
           <div style="font-size:50%">
-            Tendenza&nbsp;<span id="baromtrend"></span>
+            Tendenza&nbsp;<span class="baromtrend"></span>
           </div>
         </div>
         <div class="max">
-          <div><span id="hiBarometer"></span></div>
-          <div class="sub"><span id="hiBarometerTime"></span></div>
+          <div><span class="hiBarometer"></span></div>
+          <div class="sub"><span class="hiBarometerTime"></span></div>
         </div>
       </div>
     </li>
@@ -104,19 +106,24 @@
       <div>
         <div class="other">
           <div>
-            <span id="dailyRain"></span>
+            <span class="dailyRain"></span>
           </div>
           <div class="sub">
             mm totali
           </div>
         </div>
         <div class="curr">
-          <span id="rainRate"></span><label class="unit"><span id="rateUnit"></span></label>
+          <span class="rainRate"></span><label class="unit"><span class="rateUnit"></span></label>
           <div style="font-size:50%">
           </div>
         </div>
         <div class="max">
-          <div><span id="stormRain"></span></div>
+          <div>
+            <span class="stormRain"></span><label class="unit"><span class="rateUnit"></span></label>
+          </div>
+          <div class="sub">
+            Tempesta
+          </div>
         </div>
       </div>
     </li>
@@ -142,7 +149,7 @@
   </ul>
 </div>
 
-<div class="blockdisplay">
+<div>
   <ul class="graph-container">
     <li>
       <img class="wviewgraph" alt="wview image" src="tempdaycomp.png">
@@ -233,7 +240,7 @@
         // we map 1:1 json key value with id name,
         // so that data loading is trivial!
         $.each(data, (key, val) => {
-          $("#" + loc.tgtId + " #" + key).text(val);
+          $("#" + loc.tgtId + " ." + key).text(val);
         });
 
       }); // ajax..done

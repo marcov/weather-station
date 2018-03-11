@@ -81,10 +81,15 @@
     padding-right: 0;
   }
 
+  .measures-container > .where {
+    padding-top: 0;
+  }
+
   .measure {
     flex-flow      : row;
-    justify-content: flex-start;
-    margin-bottom: 0.5em;
+    justify-content: space-evenly;
+    margin-bottom: 0.4em;
+    width: 99%;
   }
 
   .measure > label {
@@ -98,8 +103,13 @@
   .measure  .curr {
     font-size: 140%;
     width: 5em;
-  } 
+  }
 
  .webcams-container {
    flex-flow: column nowrap;
  }
+
+  #mismaMeasures > .measure > label {
+    display: inherit;
+  }
+}
