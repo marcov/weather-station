@@ -1,41 +1,43 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Stazione Meteo di Fiobbio di Albino (BG)</title>
 
-    <link rel="alternate" type="application/rss+xml" title="Stazione Meteo di Fiobbio di Albino (BG)" href="wxrss.xml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Stazione Meteo di Fiobbio di Albino (BG)</title>
 
-    <script src="js/wview.js"></script>
+  <link rel="alternate" type="application/rss+xml" title="Stazione Meteo di Fiobbio di Albino (BG)" href="wxrss.xml">
 
-    <!-- the following is needed for the media queries to work correctly -->
-    <meta name="viewport" content="width=device-width">
-    <link type="text/css" rel="stylesheet" href="css/menu.css" />
-    <link type="text/css" rel="stylesheet" href="css/layout.css" />
-  </head>
+  <!-- the following is needed for the media queries to work correctly -->
+  <meta name="viewport" content="width=device-width">
+  <link type="text/css" rel="stylesheet" href="css/menu.css" />
+  <link type="text/css" rel="stylesheet" href="css/layout.css" />
+  <link href="css/featherlight.min.css" type="text/css" rel="stylesheet" />
+  <link href="css/paver.min.css" type="text/css" rel="stylesheet" />
+</head>
 
-  <body>
-    <div class="maincolumn">
-      <div class="menu">
-        <div class="hamburger-menu-wrapper">
-          <div style="float: left; margin: 0em; padding: 0em;">
-            <button class="hamburger-menu">
+<body>
+  <div class="maincolumn">
+
+    <div class="menu">
+      <div class="hamburger-menu-wrapper">
+        <div style="float: left; margin: 0em; padding: 0em;">
+          <button class="hamburger-menu">
               <span></span>
             </button>
-          </div>
         </div>
-        <div class="menu-list">
-          <a href="#" id="link_currweather">Inzio</a><br>
-          <a href="#" id="link_extrastas">Stazioni vicine</a><br>
-          <a href="#" id="link_forecast">Previsioni</a><br>
-          <a href="#" id="link_radar">Radar</a><br>
-          <a href="#" id="link_satellite">Satellite</a><br>
-          <a href="#" id="link_maps">Mappe</a><br>
-          <br>
-          <a href="/misma">Stazione Mt. Misma</a><br>
-          <a href="mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com">Contatti</a><br>
-          <br>
-          <span style="font-size: 90%;">
+      </div>
+      <div class="menu-list">
+        <a href="#" id="link_currweather">Inzio</a><br>
+        <a href="#" id="link_extrastas">Stazioni vicine</a><br>
+        <a href="#" id="link_forecast">Previsioni</a><br>
+        <a href="#" id="link_radar">Radar</a><br>
+        <a href="#" id="link_satellite">Satellite</a><br>
+        <a href="#" id="link_maps">Mappe</a><br>
+        <br>
+        <a href="/misma">Stazione Mt. Misma</a><br>
+        <a href="mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com">Contatti</a><br>
+        <br>
+        <span style="font-size: 90%;">
             <b>Pagine wview</b>
             <a href="html/archive.html" class="indented">Archivio Dati</a><br>
             <a href="almanac.htm" class="indented">Almanacco</a><br>
@@ -44,53 +46,54 @@
             <a href="Yearly.htm" class="indented">Anno in corso</a><br>
             <br>
           </span>
-        </div>
       </div>
+    </div>
+    <!-- div..menu-->
 
 
-      <div id="slot0"></div>
-      <div id="slot1"></div>
-      <div id="slot2"></div>
-      <div id="slot3"></div>
-      <div id="slot4"></div>
-      <div id="slot5"></div>
-      <!-- Histats.com  (div with counter) -->
-      <div>
-        <div class="histats_counter" style="padding-top: 0em; margin-top: 1em;"></div>
-      </div>
+    <div id="slot0"></div>
+    <div id="slot1"></div>
+    <div id="slot2"></div>
+    <div id="slot3"></div>
+    <div id="slot4"></div>
+    <div id="slot5"></div>
+    <div id="histats_counter"></div>
 
-      <script src="js/jquery.js"></script>
-      <script src="js/menu.js"></script>
-      <script src="js/dynamic.js"></script>
+  </div>
+  <!-- div..maincolumn -->
 
-        <!-- Histats.com  START  (aync) -->
-        <script>var _Hasync= _Hasync|| [];
-          _Hasync.push(['Histats.start', '1,1781036,4,4015,112,61,00011111']);
-          _Hasync.push(['Histats.fasi', '1']);
-          _Hasync.push(['Histats.track_hits', '']);
-          (function() {
-            var hs = document.createElement('script'); hs.async = true;
-            hs.src = ('http://s10.histats.com/js15_as.js');
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-          })();
-        </script>
-        <noscript><a href="/" target="_blank"><img src="http://sstatic1.histats.com/0.gif?1781036&101" alt="contatore gratuito"></a></noscript>
-        <!-- Histats.com  END  -->
-      </div>
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/dynamic.js"></script>
+  <script src="js/featherlight.min.js"></script>
+  <script src="js/jquery.ba-throttle-debounce.min.js"></script>
+  <script src="js/jquery.paver.min.js"></script>
+  <script src="js/wview.js"></script>
 
-    <link href="css/featherlight.min.css" type="text/css" rel="stylesheet" />
-    <script src="js/featherlight.min.js"></script>
+  <!-- Histats.com  START  (aync)-->
+  <script>
+    var _Hasync = _Hasync || [];
+    _Hasync.push(['Histats.start', '1,1781036,4,4015,112,61,00011111']);
+    _Hasync.push(['Histats.fasi', '1']);
+    _Hasync.push(['Histats.track_hits', '']);
+    (function() {
+      var hs = document.createElement('script');
+      hs.async = true;
+      hs.src = ('//s10.histats.com/js15_as.js');
+      document.getElementsByTagName('body')[0].appendChild(hs);
+    })();
 
-    <script>
-      $(function () {
-        $.featherlight.defaults.loading = "Caricamento immagine in corso...";
+  </script>
+  <noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?1781036&101" alt="counter" border="0"></a></noscript>
+  <!-- Histats.com  END  -->
+
+  <script>
+    $(function() {
+      $.featherlight.defaults.loading = "Caricamento immagine in corso...";
 
 
-      });
-    </script>
-  </body>
+    });
+  </script>
+</body>
+
 </html>
-
-
-
-

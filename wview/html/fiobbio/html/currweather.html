@@ -134,6 +134,14 @@
 
 </div>
 
+<div class="showPanorama">
+  <button name="showPanorama">Mostra Panorama</button>
+</div>
+
+<div class="panorama" data-paver>
+  <img src="panorama.jpg" alt="panorama"  title="panorama" />
+</div>
+
 <div>
   <ul class="webcams-container">
     <li>
@@ -209,58 +217,87 @@
 <!-- WEATHER IMAGES END -->
 
 <script>
-  function populateStationInfo() {
-      $.ajax({
-        url      : "stationinfo.json",
-        dataType : "json"
-      }).done( (data) => {
+  $(() => {
 
-        // we map 1:1 json key value with id name,
-        // so that data loading is trivial!
-        $.each(data, (key, val) => {
-          $("#" + key).text(val);
+    panoramaVisible = false;
+
+    function populateStationInfo() {
+        $.ajax({
+          url      : "stationinfo.json",
+          dataType : "json"
+        }).done( (data) => {
+
+          // we map 1:1 json key value with id name,
+          // so that data loading is trivial!
+          $.each(data, (key, val) => {
+            $("#" + key).text(val);
+          });
         });
+    }
+
+    function populateMeasures(locs) {
+
+      locs.forEach((loc) => {
+        $.ajax({
+
+          url      : loc.url,
+          dataType : "json"
+
+        }).done( (data) => {
+
+          $("#" + loc.tgtId).html($("#genericMeasures").html());
+
+          $("#" + loc.tgtId + " .where").text(loc.where);
+
+          // we map 1:1 json key value with id name,
+          // so that data loading is trivial!
+          $.each(data, (key, val) => {
+            $("#" + loc.tgtId + " ." + key).text(val);
+          });
+
+        }); // ajax..done
+
+      }); // forEach
+    }
+
+    $(document).ready(() => {
+      const locations = [
+        { url   : "realtime.json" ,
+          tgtId : "fiobbioMeasures",
+          where : "Paese"},
+        { url   : "/misma/realtime.json",
+          tgtId : "mismaMeasures",
+          where : "Misma"
+        }
+      ];
+
+      populateStationInfo();
+      populateMeasures(locations);
+
+      panoramaButton = 'button[name=showPanorama]';
+
+      $(panoramaButton).click(() => {
+
+        if (panoramaVisible) {
+          $('div.panorama').hide();
+          $(panoramaButton).text("Mostra Panorama");
+        } else {
+          $('div.panorama').show();
+          $(panoramaButton).text("Nascondi");
+        }
+        $('html,body').animate({scrollTop: $(panoramaButton).offset().top},
+                               'slow');
+
+        panoramaVisible = !panoramaVisible;
       });
-  }
 
-  function populateMeasures(locs) {
+      // Paver
+      //$('div[data-paver]').paver({scaleFactor : 1.25});
+      $('div[data-paver]').paver({scaleFactor: 1.25,
+                                  panningThrottle: 1000,
+                                  disableGyro : true,
+                                  gracefulFailure : false});
+    });
 
-    locs.forEach((loc) => {
-      $.ajax({
-
-        url      : loc.url,
-        dataType : "json"
-
-      }).done( (data) => {
-
-        $("#" + loc.tgtId).html($("#genericMeasures").html());
-
-        $("#" + loc.tgtId + " .where").text(loc.where);
-
-        // we map 1:1 json key value with id name,
-        // so that data loading is trivial!
-        $.each(data, (key, val) => {
-          $("#" + loc.tgtId + " ." + key).text(val);
-        });
-
-      }); // ajax..done
-
-    }); // forEach
-  }
-
-  $(document).ready(() => {
-    const locations = [
-      { url   : "realtime.json" ,
-        tgtId : "fiobbioMeasures",
-        where : "Paese"},
-      { url   : "/misma/realtime.json",
-        tgtId : "mismaMeasures",
-        where : "Misma"
-      }
-    ];
-
-    populateStationInfo();
-    populateMeasures(locations);
   });
-
 </script>
