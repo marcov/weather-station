@@ -11,9 +11,10 @@ function addWatermark() {
     src=$2
     pattern=$3
     text=$4
+    temperature=$7
 
     text=$(echo ${text} | sed "s/_/ /g")
-	text="${text}, `date +\"%d-%m-%Y  %T\"`"
+	text="${text}, `date +\"%d-%m-%Y  %T\"`. T: ${temperature}C"
 
     src=${wview_html_dir}/${webcam_raw_prefix}_${name}.jpg
     dst=$(echo ${src} | sed "s/${webcam_raw_prefix}/${webcam_prefix}/g")
@@ -26,7 +27,7 @@ function addWatermark() {
 
     echo "Adding watermark..."
 
-	convert -pointsize 20 \
+	convert -pointsize 32 \
 		-fill white \
 		-undercolor black \
 		-gravity northwest \
