@@ -18,10 +18,10 @@ function ftpUpload() {
     _ftp_username=$5
     _ftp_password=$6
 
-    src=${wview_html_dir}/${webcam_prefix}.jpg
-    src_small=$(echo ${src} | sed "s/${webcam_prefix}/${webcam_prefix_small}/g")
+    src=${wview_html_dir}/${webcam_prefix}_${name}.jpg
+    src_small=$(echo ${src} | sed "s/${webcam_prefix}/${webcam_small_prefix}/g")
 
-    echo "FTP upload for ${src}..." >> ${log_dest}
+    echo "FTP upload for ${src} ${src_small}..." >> ${log_dest}
 
     # vvv FTP commands starts here vvv
     ftp -n -v ${cml_ftp_server} >> ${cml_ftp_log_file} << EOF

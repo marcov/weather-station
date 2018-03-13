@@ -7,7 +7,8 @@
 ftp_upload_dir=/srv/ftp/upload
 wview_html_dir=/var/www/weather
 
-misma_webcam_url=192.168.1.205:8083/tmpfs/snap.jpg
+misma_pic_name="snap.jpg"
+misma_webcam_url=192.168.1.205:8083/tmpfs/${misma_pic_name}
 
 #
 #
@@ -32,7 +33,7 @@ fiobbioCfg=( "fiobbio" \
 
 mismaCfg=( "misma" \
            ${ftp_upload_dir}/misma \
-           "snap.jpg" \
+           ${misma_pic_name} \
            "Monte_Misma_(Fiobbio)"
            ${cml_ftp_user_misma} \
            ${cml_ftp_pwd_misma} )
