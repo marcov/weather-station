@@ -3,45 +3,46 @@
 
 . ../../common_variables.sh
 
-for pix in ${fiobbio_webcam_img_nowm_name} ${misma_webcam_px_nowm_name}
-do
-	pix_wm=$(echo $pix | sed "s/_nowm//g")
-	pix_small=$(echo $pix_wm | sed "s/\.jpg/_small.jpg/g")
 
-	if [ "${pix}" == "${misma_webcam_px_nowm_name}" ] 
-	then
-		webcam_watermark_text="Monte Misma (Fiobbio)"
-	else
-		webcam_watermark_text="Fiobbio di Albino"
-	fi
+function addWatermark() {
+    webcam_raw=
 
-	webcam_watermark_text="${webcam_watermark_text}, `date +\"%d-%m-%Y  %T (%Z)\"`"
-	
-	echo "Start pix is: $pix"
-	echo "  With watermark: ${pix_wm}"
-	echo "  Resized: ${pix_small}"
-	echo "  Watermark: ${webcam_watermark_text}"
-	#
-	#
-	#
-	echo "Adding watermark..."
+    name=$1
+    src=$2
+    pattern=$3
+    text=$4
+
+    text=$(echo ${text} | sed "s/_/ /g")
+	text="${text}, `date +\"%d-%m-%Y  %T (%Z)\"`"
+
+    src=${wview_html_dir}/${webcam_raw_prefix}_${name}.jpg
+    dst=$(echo ${src} | sed "s/${webcam_raw_prefix}/${webcam_prefix}/g")
+    dst_small=$(echo ${src} | sed "s/${webcam_raw_prefix}/${webcam_small_prefix}/g")
+
+	echo "Source: ${src}"
+	echo "  With watermark: ${dst}"
+	echo "  Resized: ${dst_small}"
+	echo "  Watermark text: ${text}"
+
+    echo "Adding watermark..."
 
 	convert -pointsize 16 \
 		-fill white \
 		-undercolor black \
 		-gravity northwest \
-		-draw "text 0,0 \"${webcam_watermark_text}\"" \
-		${wview_html_dir}/${pix} \
-		${wview_html_dir}/${pix_wm}  || exit $?
+		-draw "text 0,0 \"${text}\"" \
+        ${src} ${dst} || returni $?
 	echo "Done"
 
 	echo "Creating resized image for faster loading..."
 
-	convert ${wview_html_dir}/${pix_wm}    \
-	 	-resize 800x600                \
-		${wview_html_dir}/${pix_small}
+	convert \
+	 	-resize 800x600 \
+        ${dst} ${dst_small} || return $?
 	echo "Done"
-done
+}
 
+addWatermark "${fiobbioCfg[@]}"
+addWatermark "${mismaCfg[@]}"
 exit 0
 
