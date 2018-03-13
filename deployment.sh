@@ -22,13 +22,13 @@ cd /etc/wview/html
 ln -s ${repoRoot}/wview/html/fiobbio/html/currweather.htx currweather.htx
 ln -s ${repoRoot}/wview/html/fiobbio/html/index.htx index.htx
 
-# Note: moved wview-conf.sdb in ${wviewVar}/conf ! So it needs to be 
+# Note: moved wview-conf.sdb in ${wviewVar}/conf ! So it needs to be
 # linked back to /etc/wview
 cd /etc/wview
 ln -s ${wviewVar}/conf/wview-conf.sdb wview-conf.sdb
 
 # Install crontab
-crontab -u root ${repoRoot}/webcam/cron/crontab 
+crontab -u root ${repoRoot}/webcam/cron/crontab
 # See crontab
 crontab -u root -l
 
@@ -36,3 +36,9 @@ cd /etc/cron.daily
 cp ${repoRoot}/webcam/cron/daily webcam
 chmod +x webcam
 
+sudo echo -e "cml_ftp_user_fiobbio='foo'" >> /etc/cml_ftp_login_data.sh
+sudo echo -e "cml_ftp_pwd_fiobbio='foo'" >> /etc/cml_ftp_login_data.sh
+sudo echo -e "cml_ftp_user_misma='foo'" >> /etc/cml_ftp_login_data.sh
+sudo echo -e "cml_ftp_pwd_misma='foo'" >> /etc/cml_ftp_login_data.sh
+
+sudo echo -e "misma_webcam_login='foo:bar'\n" > /etc/webcam_login_data.sh
