@@ -8,7 +8,7 @@ ftp_upload_dir=/srv/ftp/upload
 wview_html_dir=/var/www/weather
 
 fiobbioTemperature=$(grep outsideTemp ${wview_html_dir}/realtime.json | sed -E "s/.+\"([0-9]+.[0-9]+)\".+/\1/g")
-mismaTemperature=$(curl http://localhost/misma/realtime.json | grep outsideTemp | sed -E "s/.+\"([0-9]+.[0-9]+)\".+/\1/g")
+mismaTemperature=$(curl http://localhost/misma/realtime.json | grep outsideTemp | sed -E "s/.+\"([-]?[0-9]+\.[0-9]+)\".+/\1/g")
 
 misma_pic_name="snap.jpg"
 misma_webcam_url=192.168.1.205:8083/tmpfs/${misma_pic_name}
