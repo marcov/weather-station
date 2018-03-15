@@ -5,8 +5,6 @@
 
 
 function addWatermark() {
-    webcam_raw=
-
     name=$1
     src=$2
     pattern=$3
@@ -14,33 +12,33 @@ function addWatermark() {
     temperature=$7
 
     text=$(echo ${text} | sed "s/_/ /g")
-	text="${text}, `date +\"%d-%m-%Y  %T\"`. T: ${temperature}C"
+    text="${text}, `date +\"%d-%m-%Y  %T\"`. T: ${temperature}C"
 
     src=${wview_html_dir}/${webcam_raw_prefix}_${name}.jpg
     dst=$(echo ${src} | sed "s/${webcam_raw_prefix}/${webcam_prefix}/g")
     dst_small=$(echo ${src} | sed "s/${webcam_raw_prefix}/${webcam_small_prefix}/g")
 
-	echo "Source: ${src}"
-	echo "  With watermark: ${dst}"
-	echo "  Resized: ${dst_small}"
-	echo "  Watermark text: ${text}"
+    echo "Source: ${src}"
+    echo "  With watermark: ${dst}"
+    echo "  Resized: ${dst_small}"
+    echo "  Watermark text: ${text}"
 
     echo "Adding watermark..."
 
-	convert -pointsize 32 \
-		-fill white \
-		-undercolor black \
-		-gravity northwest \
-		-draw "text 0,0 \"${text}\"" \
+    convert -pointsize 32 \
+        -fill white \
+        -undercolor "rgba(0,0,0,0.6)" \
+        -gravity northwest \
+        -draw "text 0,0 \"${text}\"" \
         ${src} ${dst} || returni $?
-	echo "Done"
+    echo "Done"
 
-	echo "Creating resized image for faster loading..."
+    echo "Creating resized image for faster loading..."
 
-	convert \
-	 	-resize 800x600 \
+    convert \
+        resize 800x600 \
         ${dst} ${dst_small} || return $?
-	echo "Done"
+    echo "Done"
 }
 
 addWatermark "${fiobbioCfg[@]}"
