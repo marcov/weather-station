@@ -5,7 +5,7 @@
 
 sudo apt-get install -t testing opencv
 sudo apt-get install -t testing libopencv-stitching-dev
-sudo apt-get install -t testing libopencv-stitching-dev python3 python3-pycurl
+sudo apt-get install -t testing libopencv-stitching-dev python3 python3-pip
 
 sudo apt-get install build-essential
 sudo apt-get install -t testing libgd-dev
@@ -44,7 +44,7 @@ make
 sudo make install
 
 
-# Install sqlite3
+# Generate the inital wview-conf.sdb configuration file
 
 sudo apt-get install sqlite3
 
@@ -62,8 +62,9 @@ cp wview-conf.sdb /usr/local/var/wview/wview-conf.sdb
 
 sudo apt-get install nginx-light
 
-# Use sites-enabled / available from git repo!
+---> Use sites-enabled / available from this git repo!
 
 
-
+# Other
+sudo pip3 install pycurl
 

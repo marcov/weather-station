@@ -85,7 +85,11 @@ function takeShot(page, outFile) {
     try {
       return doConfirm(false);
     } catch (ReferenceError) {
-      return "Nothing to eval";
+      try {
+        return document.getElementsByClassName("cc_btn_accept_all")[0].click();
+      } catch (ReferenceError) {
+        return "Nothing to eval";
+      }
     }
   });
 
