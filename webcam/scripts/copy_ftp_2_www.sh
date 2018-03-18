@@ -14,6 +14,11 @@ function copy2www() {
     src=$2
     pattern=$3
 
+    if [ ${src} == "" ]; then
+        echo "src is empty...nothing to copy"
+        return
+    fi
+
     echo ${name} ${src} ${pattern}
 
     echo "Locating last webcam pic..."
@@ -40,6 +45,7 @@ function copy2www() {
 
 copy2www ${fiobbioCfg[@]}
 copy2www ${mismaCfg[@]}
+#copy2www ${mismaPanoCfg[@]}
 
 exit 0
 

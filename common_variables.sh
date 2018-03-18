@@ -12,7 +12,7 @@ mismaTemperature=$(curl http://localhost/misma/realtime.json | grep outsideTemp 
 
 misma_pic_name="snap.jpg"
 misma_webcam_url=192.168.1.205:8083/tmpfs/${misma_pic_name}
-
+misma_pano_name="panorama.jpg"
 #
 #
 # CML FTP config (note: login credentials are not here :P)
@@ -27,6 +27,18 @@ webcam_prefix="webcam"
 webcam_raw_prefix="${webcam_prefix}_raw"
 webcam_small_prefix="${webcam_prefix}_small"
 
+
+#
+# cfg format:
+#
+# name=$1
+# src=$2
+# pattern=$3
+# text=$4
+# ftpuser=$5
+# ftppass=$6
+# temperature=$7
+
 fiobbioCfg=( "fiobbio" \
              ${ftp_upload_dir} \
              "*-alarm.jpg" \
@@ -39,6 +51,15 @@ mismaCfg=( "misma" \
            ${ftp_upload_dir}/misma \
            ${misma_pic_name} \
            "Monte_Misma_(Fiobbio)"
+           ${cml_ftp_user_misma} \
+           ${cml_ftp_pwd_misma} \
+           "${mismaTemperature}" )
+
+
+mismaPanoCfg=( "mismapano" \
+           "" \
+           ${misma_pano_name} \
+           "Monte_Misma_360"
            ${cml_ftp_user_misma} \
            ${cml_ftp_pwd_misma} \
            "${mismaTemperature}" )

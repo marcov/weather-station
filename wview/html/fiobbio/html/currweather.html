@@ -134,14 +134,6 @@
 
 </div>
 
-<div class="showPanorama">
-  <button name="showPanorama">Mostra Panorama</button>
-</div>
-
-<div class="panorama" data-paver>
-  <img src="panorama.jpg" alt="panorama"  title="panorama" />
-</div>
-
 <div>
   <ul class="webcams-container">
     <li>
@@ -155,6 +147,12 @@
       </a>
     </li>
   </ul>
+</div>
+
+<!-- credits: https://css-tricks.com/infinite-all-css-scrolling-slideshow/ -->
+<div class="panorama-scroll">
+  <div class="mover-1"></div>
+  <div class="mover-2"></div>
 </div>
 
 <div>
@@ -219,8 +217,6 @@
 <script>
   $(() => {
 
-    panoramaVisible = false;
-
     function populateStationInfo() {
         $.ajax({
           url      : "stationinfo.json",
@@ -274,29 +270,6 @@
       populateStationInfo();
       populateMeasures(locations);
 
-      panoramaButton = 'button[name=showPanorama]';
-
-      $(panoramaButton).click(() => {
-
-        if (panoramaVisible) {
-          $('div.panorama').hide();
-          $(panoramaButton).text("Mostra Panorama");
-        } else {
-          $('div.panorama').show();
-          $(panoramaButton).text("Nascondi");
-        }
-        $('html,body').animate({scrollTop: $(panoramaButton).offset().top},
-                               'slow');
-
-        panoramaVisible = !panoramaVisible;
-      });
-
-      // Paver
-      //$('div[data-paver]').paver({scaleFactor : 1.25});
-      $('div[data-paver]').paver({scaleFactor: 1.25,
-                                  panningThrottle: 1000,
-                                  disableGyro : true,
-                                  gracefulFailure : false});
     });
 
   });

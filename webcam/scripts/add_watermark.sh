@@ -6,7 +6,6 @@
 
 function addWatermark() {
     name=$1
-    src=$2
     pattern=$3
     text=$4
     temperature=$7
@@ -43,5 +42,6 @@ function addWatermark() {
 
 addWatermark "${fiobbioCfg[@]}"
 addWatermark "${mismaCfg[@]}"
+#addWatermark "${mismaPanoCfg[@]}"
 exit 0
 
