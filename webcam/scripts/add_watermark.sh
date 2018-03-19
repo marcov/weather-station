@@ -6,6 +6,7 @@
 
 function addWatermark() {
     name=$1
+    srcDir=$2
     pattern=$3
     text=$4
     temperature=$7
@@ -16,6 +17,11 @@ function addWatermark() {
     src=${wview_html_dir}/${webcam_raw_prefix}_${name}.jpg
     dst=$(echo ${src} | sed "s/${webcam_raw_prefix}/${webcam_prefix}/g")
     dst_small=$(echo ${src} | sed "s/${webcam_raw_prefix}/${webcam_small_prefix}/g")
+
+    if ! [[ -e ${src} ]]; then
+        echo "Source ${src} does not exists...nothing to do"
+        return
+    fi
 
     echo "Source: ${src}"
     echo "  With watermark: ${dst}"
@@ -37,11 +43,15 @@ function addWatermark() {
     convert \
         resize 800x600 \
         ${dst} ${dst_small} || return $?
+
+    rm ${src}
+
     echo "Done"
 }
 
 addWatermark "${fiobbioCfg[@]}"
 addWatermark "${mismaCfg[@]}"
-#addWatermark "${mismaPanoCfg[@]}"
+addWatermark "${mismaPanoCfg[@]}"
+
 exit 0
 

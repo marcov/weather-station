@@ -12,7 +12,7 @@
 function ftpUpload() {
 
     name=$1
-    src=$2
+    srcDir=$2
     pattern=$3
     text=$4
     _ftp_username=$5
@@ -20,6 +20,11 @@ function ftpUpload() {
 
     src=${wview_html_dir}/${webcam_prefix}_${name}.jpg
     src_small=$(echo ${src} | sed "s/${webcam_prefix}/${webcam_small_prefix}/g")
+
+    if ! [[ -e ${src} ]] && ! [[ -e ${src_small} ]]; then
+        echo "srcs do not exists...nothing to do"
+        return
+    fi
 
     echo "FTP upload for ${src} ${src_small}..." >> ${log_dest}
 
@@ -39,6 +44,9 @@ EOF
       echo "Failed FTP upload for ${src}!"
       exit $?
     fi
+
+    rm ${src} ${src_small}
+
     echo "Done" >> ${log_dest}
 
 }
@@ -52,6 +60,10 @@ fi
 
 # Reset ftp log file
 echo "" > ${cml_ftp_log_file}
+
 ftpUpload "${fiobbioCfg[@]}"
 ftpUpload "${mismaCfg[@]}"
+ftpUpload "${mismaPanoCfg[@]}"
+
+exit 0
 

@@ -57,9 +57,11 @@ mismaCfg=( "misma" \
 
 
 mismaPanoCfg=( "mismapano" \
-           "" \
+           "${ftp_upload_dir}/misma" \
            ${misma_pano_name} \
            "Monte_Misma_360"
            ${cml_ftp_user_misma} \
            ${cml_ftp_pwd_misma} \
            "${mismaTemperature}" )
+
+

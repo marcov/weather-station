@@ -11,19 +11,19 @@
 
 function copy2www() {
     name=$1
-    src=$2
+    srcDir=$2
     pattern=$3
 
-    if [ ${src} == "" ]; then
-        echo "src is empty...nothing to copy"
+    if [ ${srcDir} == "" ]; then
+        echo "srcDir is empty...nothing to copy"
         return
     fi
 
-    echo ${name} ${src} ${pattern}
+    echo ${name} ${srcDir} ${pattern}
 
     echo "Locating last webcam pic..."
 
-    webcam_raw=$(find ${src} -type f -name "${pattern}" | sort | tail -n 1)
+    webcam_raw=$(find ${srcDir} -type f -name "${pattern}" | sort | tail -n 1)
 
 	if ! [ -e "${webcam_raw}" ]; then
 	    echo "Raw image not found...exiting"
@@ -45,7 +45,7 @@ function copy2www() {
 
 copy2www ${fiobbioCfg[@]}
 copy2www ${mismaCfg[@]}
-#copy2www ${mismaPanoCfg[@]}
+copy2www ${mismaPanoCfg[@]}
 
 exit 0
 
