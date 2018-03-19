@@ -8,119 +8,59 @@
 var system = require('system');
 
 
-function getArgs() {
-  var args = {
-    url: "",
-    waitTime: 5000,
-    outFile: "website.png",
-    viewSize: [1024, 800],
-    cropSize: [0, 0, 1024, 800]
-  };
-  var tmp = [];
 
-  if (system.args.length === 1 || system.args[1] === "-h" || system.args[1] === "--help") {
-    console.log("Usage: phantomjs" + system.args[0] +
-                " URL [waitTime] [outfile] [viewsize] [cropsize]");
-    console.log("[viewsize]: _width_x_height_");
-    console.log("[cropsize]: _offsetRow_x_offsetColumn_x_width_x_height_");
+function usage() {
+    console.log("Usage: phantomjs " + system.args[0] + "json cfg");
+}
+
+function getArgs() {
+
+  if (system.args.length < 2 || system.args[1] === "-h" || system.args[1] === "--help") {
+    usage();
     phantom.exit();
   }
 
-  args.url = system.args[1];
-
-  if (system.args.length > 2) {
-    args.waitTime = system.args[2];
-  }
-
-  if (system.args.length > 3) {
-    args.outFile = system.args[3];
-  }
-  if (system.args.length > 4) {
-    var viewSize = system.args[4].split("x");
-
-    if (viewSize.length !== 2) {
-      console.log("Invalid viewsize format");
-      phantom.exit();
-    }
-
-    tmp = [];
-    viewSize.forEach(function (i) {
-      var n = parseInt(i);
-      if (isNaN(n)) {
-        console.log("Invalid viewsize format");
-      }
-      tmp.push(n);
-
-    });
-    args.viewSize = tmp;
-  }
-
-  if (system.args.length > 5) {
-    var cropSize = system.args[5].split("x");
-    if (cropSize.length !== 4) {
-      console.log("Invalid cropsize format");
-    }
-
-    tmp = [];
-    cropSize.forEach(function (i) {
-      var n = parseInt(i);
-      if (isNaN(n)) {
-        console.log("Invalid viewsize format");
-      }
-      tmp.push(n);
-
-    });
-    args.cropSize = tmp;
-  }
-
-  console.log("args:\n" + JSON.stringify(args));
-
-  return args;
+  return JSON.parse(system.args.slice(1));
 }
 
-function takeShot(page, outFile) {
-  var evalResult = page.evaluate(function () {
+function takeShot(page, evalCode, outFile) {
 
-    /* CML hack */
-    try {
-      return doConfirm(false);
-    } catch (ReferenceError) {
-      try {
-        return document.getElementsByClassName("cc_btn_accept_all")[0].click();
-      } catch (ReferenceError) {
-        return "Nothing to eval";
-      }
-    }
-  });
+  console.log("evalCode : " + evalCode);
 
-  console.log(evalResult);
+  if (evalCode && evalCode.length > 0) {
+
+    var evalFx = new Function(evalCode);
+
+    var evalResult = page.evaluate(evalFx);
+
+    console.log(evalResult);
+  }
 
   page.render(outFile);
   console.log("Screenshot done");
   phantom.exit();
 }
 
-function main() {
+function getWebsite(cfg) {
   var page = require('webpage').create();
-  var args = getArgs();
 
+  console.log(JSON.stringify(cfg));
 
   //viewportSize being the actual size of the headless browser
-  page.viewportSize = {width: args.viewSize[0],
-                       height: args.viewSize[1]};
+  page.viewportSize = {width: cfg.viewSize[0],
+                       height: cfg.viewSize[1]};
   //the clipRect is the portion of the page you are taking a screenshot of
-  page.clipRect = {top: args.cropSize[0],
-                   left: args.cropSize[1],
-                   width: args.cropSize[2],
-                   height: args.cropSize[3]};
+  page.clipRect = {top: cfg.cropSize[0],
+                   left: cfg.cropSize[1],
+                   width: cfg.cropSize[2],
+                   height: cfg.cropSize[3]};
 
-  //console.log(JSON.stringify(page.viewportSize));
-  //console.log(JSON.stringify(page.clipRect));
 
   page.onResourceRequested = function (request) {
     //console.log('Request ' + JSON.stringify(request, undefined, 4));
     console.log("+++ ask " + request.url);
   };
+
   page.onResourceReceived = function (response) {
     //console.log('Receive ' + JSON.stringify(response, undefined, 4));
     console.log("--- rx " + response.url);
@@ -128,16 +68,25 @@ function main() {
 
   page.onLoadFinished = function () {
     console.log("page Load Finished");
-    setTimeout(takeShot, args.waitTime, page, args.outFile);
+    setTimeout(takeShot, cfg.waitTime, page, cfg.evalCode, cfg.outFile);
   };
 
-  page.open(args.url, function (status) {
-
+  page.open(cfg.url, function (status) {
     if (status !== "success") {
       console.log(">>> page open FAILED!");
       phantom.exit();
     }
   });
+
+}
+
+
+function main() {
+  var jsonCfg = getArgs();
+
+  getWebsite(jsonCfg);
 }
 
 main();
+
+// will exit by callback call...
