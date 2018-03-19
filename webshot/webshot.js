@@ -68,6 +68,7 @@ function getWebsite(cfg) {
 
   page.onLoadFinished = function () {
     console.log("page Load Finished");
+    console.log("setting timeout to " + cfg.waitTime);
     setTimeout(takeShot, cfg.waitTime, page, cfg.evalCode, cfg.outFile);
   };
 

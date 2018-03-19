@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#dst_path=/var/lib/wview/img
-dst_path=.
+dst_path=/var/lib/wview/img
+#dst_path=.
 webshot_tool=webshot.js
 
 if which phantomjs > /dev/null
