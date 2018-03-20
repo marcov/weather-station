@@ -44,7 +44,6 @@ function localGet() {
 function getRawPicture() {
     name=$1
     srcType=$(echo $2 | cut -d" " -f 1)
-    pattern=$3
 
     dst=${wview_html_dir}/${webcam_raw_prefix}_${name}.jpg
 
@@ -59,6 +58,7 @@ function getRawPicture() {
     elif [ ${srcType} == "local" ]; then
 
         srcDir=$(echo $2 | cut -d" " -f 2)
+        pattern=$(echo $2 | cut -d" " -f 3)
 
         localGet ${srcDir} ${pattern} ${dst}
 

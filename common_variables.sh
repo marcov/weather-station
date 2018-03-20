@@ -1,8 +1,8 @@
 #
 # Common variables. Edit variables as needed
 #
-. /etc/cml_ftp_login_data.sh
-. /etc/webcam_login_data.sh
+. /usr/local/etc/cml_ftp_login_data.sh
+. /usr/local/etc/webcam_login_data.sh
 
 ftp_upload_dir=/srv/ftp/upload
 wview_html_dir=/var/www/weather
@@ -11,7 +11,7 @@ fiobbioTempUrl="http://localhost/weather/realtime.json"
 mismaTempUrl="http://localhost/misma/realtime.json"
 
 misma_pic_name="snap.jpg"
-misma_webcam_url=192.168.1.205:8083/tmpfs/${misma_pic_name}
+misma_webcam_url=
 misma_pano_name="panorama.jpg"
 #
 #
@@ -33,24 +33,25 @@ webcam_small_prefix="${webcam_prefix}_small"
 #
 # name=$1
 # srcInfo=$2
-# pattern=$3
-# text=$4
-# ftpuser=$5
-# ftppass=$6
-# temperature=$7
+# text=$3
+# temperature=$4
+# ftp_login=$5
+
+#fiobbioCfgFtp=( "fiobbio" \
+#             "local ${ftp_upload_dir} *-alarm.jpg" \
+#             "Fiobbio_di_Albino" \
+#             ${cml_ftp_user_fiobbio} \
+#             ${cml_ftp_pwd_fiobbio}  \
+#             "${fiobbioTempUrl}" )
 
 fiobbioCfg=( "fiobbio" \
-             "local ${ftp_upload_dir}" \
-             "*-alarm.jpg" \
+             "http ${fiobbio_webcam_login} http://192.168.1.178/cgi-bin/snapshot.cgi?stream=0" \
              "Fiobbio_di_Albino" \
-             ${cml_ftp_user_fiobbio} \
-             ${cml_ftp_pwd_fiobbio}  \
-             "${fiobbioTempUrl}" )
+             "${fiobbioTempUrl}" \
+             "${cml_ftp_user_fiobbio} ${cml_ftp_pwd_fiobbio}" )
 
 mismaCfg=( "misma" \
-           "http ${misma_webcam_login} ${misma_webcam_url}"  \
-           ${ftp_upload_dir}/misma \
-           ${misma_pic_name} \
+           "http ${misma_webcam_login} 192.168.1.205:8083/tmpfs/${misma_pic_name}" \
            "Monte_Misma_(Fiobbio)"
            ${cml_ftp_user_misma} \
            ${cml_ftp_pwd_misma} \
@@ -58,11 +59,9 @@ mismaCfg=( "misma" \
 
 
 mismaPanoCfg=( "mismapano" \
-           "" \
-           ${misma_pano_name} \
-           "Monte_Misma_360"
-           ${cml_ftp_user_misma} \
-           ${cml_ftp_pwd_misma} \
-           "${mismaTempUrl}" )
+               "local /home/pi/dev/panogen/out panorama.jpg" \
+               "Monte_Misma_360"
+               "${mismaTempUrl}" \
+               "${cml_ftp_user_misma} ${cml_ftp_pwd_misma}" )
 
 

@@ -65,6 +65,15 @@ sudo apt-get install nginx-light
 ---> Use sites-enabled / available from this git repo!
 
 
-# Other
+# pycurl for camera control
 sudo pip3 install pycurl
+
+# phantomjs for website screenshot generation
+
+Get deb from: https://github.com/fg2it/phantomjs-on-raspberry
+
+wget https://github.com/fg2it/phantomjs-on-raspberry/releases/download/v2.1.1-wheezy-jessie-armv6/phantomjs_2.1.1_armhf.deb
+sudo dpkg -i phantomjs_2.1.1_armhf.deb
+
+
 

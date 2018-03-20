@@ -13,10 +13,12 @@ function ftpUpload() {
 
     name=$1
     srcInfo=$2
-    pattern=$3
-    text=$4
-    _ftp_username=$5
-    _ftp_password=$6
+    text=$3
+    temperatureUrl=$4
+
+    _ftp_username=$(echo $5 | cut -d " " -f 1)
+    _ftp_password=$(echo $5 | cut -d " " -f 2)
+
 
     src=${wview_html_dir}/${webcam_prefix}_${name}.jpg
     src_small=$(echo ${src} | sed "s/${webcam_prefix}/${webcam_small_prefix}/g")
