@@ -1,6 +1,8 @@
 #!/bin/bash
 
-dst_path=/var/lib/wview/img
+. ../common_variables.sh
+
+dst_path=${wview_html_dir}
 #dst_path=.
 webshot_tool=webshot.js
 

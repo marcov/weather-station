@@ -32,7 +32,7 @@ webcam_small_prefix="${webcam_prefix}_small"
 # cfg format:
 #
 # name=$1
-# src=$2
+# srcInfo=$2
 # pattern=$3
 # text=$4
 # ftpuser=$5
@@ -40,7 +40,7 @@ webcam_small_prefix="${webcam_prefix}_small"
 # temperature=$7
 
 fiobbioCfg=( "fiobbio" \
-             ${ftp_upload_dir} \
+             "local ${ftp_upload_dir}" \
              "*-alarm.jpg" \
              "Fiobbio_di_Albino" \
              ${cml_ftp_user_fiobbio} \
@@ -48,6 +48,7 @@ fiobbioCfg=( "fiobbio" \
              "${fiobbioTemperature}" )
 
 mismaCfg=( "misma" \
+           "http ${misma_webcam_login} ${misma_webcam_url}"  \
            ${ftp_upload_dir}/misma \
            ${misma_pic_name} \
            "Monte_Misma_(Fiobbio)"

@@ -6,7 +6,7 @@
 
 function addWatermark() {
     name=$1
-    srcDir=$2
+    srcInfo=$2
     pattern=$3
     text=$4
     temperature=$7

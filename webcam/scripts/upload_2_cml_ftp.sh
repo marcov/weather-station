@@ -12,7 +12,7 @@
 function ftpUpload() {
 
     name=$1
-    srcDir=$2
+    srcInfo=$2
     pattern=$3
     text=$4
     _ftp_username=$5
