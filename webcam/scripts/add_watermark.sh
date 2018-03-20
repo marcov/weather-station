@@ -9,7 +9,9 @@ function addWatermark() {
     srcInfo=$2
     pattern=$3
     text=$4
-    temperature=$7
+    temperatureUrl=$7
+
+    temperature=$(curl ${temperatureUrl} | grep outsideTemp | sed -E "s/.+\"([-]?[0-9]+\.[0-9]+)\".+/\1/g")
 
     text=$(echo ${text} | sed "s/_/ /g")
     text="${text}, `date +\"%d-%m-%Y  %T\"`. T: ${temperature}C"

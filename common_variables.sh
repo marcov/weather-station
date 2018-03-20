@@ -7,8 +7,8 @@
 ftp_upload_dir=/srv/ftp/upload
 wview_html_dir=/var/www/weather
 
-fiobbioTemperature=$(grep outsideTemp ${wview_html_dir}/realtime.json | sed -E "s/.+\"([0-9]+.[0-9]+)\".+/\1/g")
-mismaTemperature=$(curl http://localhost/misma/realtime.json | grep outsideTemp | sed -E "s/.+\"([-]?[0-9]+\.[0-9]+)\".+/\1/g")
+fiobbioTempUrl="http://localhost/weather/realtime.json"
+mismaTempUrl="http://localhost/misma/realtime.json"
 
 misma_pic_name="snap.jpg"
 misma_webcam_url=192.168.1.205:8083/tmpfs/${misma_pic_name}
@@ -45,7 +45,7 @@ fiobbioCfg=( "fiobbio" \
              "Fiobbio_di_Albino" \
              ${cml_ftp_user_fiobbio} \
              ${cml_ftp_pwd_fiobbio}  \
-             "${fiobbioTemperature}" )
+             "${fiobbioTempUrl}" )
 
 mismaCfg=( "misma" \
            "http ${misma_webcam_login} ${misma_webcam_url}"  \
@@ -54,7 +54,7 @@ mismaCfg=( "misma" \
            "Monte_Misma_(Fiobbio)"
            ${cml_ftp_user_misma} \
            ${cml_ftp_pwd_misma} \
-           "${mismaTemperature}" )
+           "${mismaTempUrl}" )
 
 
 mismaPanoCfg=( "mismapano" \
@@ -63,6 +63,6 @@ mismaPanoCfg=( "mismapano" \
            "Monte_Misma_360"
            ${cml_ftp_user_misma} \
            ${cml_ftp_pwd_misma} \
-           "${mismaTemperature}" )
+           "${mismaTempUrl}" )
 
 
