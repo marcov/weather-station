@@ -18,6 +18,7 @@ ftpUpload() {
 
     _ftp_username=$(echo $5 | cut -d " " -f 1)
     _ftp_password=$(echo $5 | cut -d " " -f 2)
+    suffix=$(echo $5 | cut -d " " -f 3)
 
 
     src=${wview_html_dir}/${webcam_prefix}_${name}.jpg
@@ -31,12 +32,12 @@ ftpUpload() {
     echo "FTP upload for ${src} ${src_small}..." >> ${log_dest}
 
     # vvv FTP commands starts here vvv
-    ftp -n -v ${cml_ftp_server} >> ${cml_ftp_log_file} << EOF
+    ftp -n -v -p ${cml_ftp_server} >> ${cml_ftp_log_file} << EOF
 user ${_ftp_username} ${_ftp_password}
 binary
 cd ${cml_ftp_upload_folder}
-put ${src} ${webcam_prefix}.jpg
-put ${src_small} ${webcam_small_prefix}.jpg
+put ${src} ${webcam_prefix}${suffix}.jpg
+put ${src_small} ${webcam_small_prefix}${suffix}.jpg
 quit
 EOF
 # ^^^ FTP commands ends here ^^^

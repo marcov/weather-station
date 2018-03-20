@@ -35,19 +35,17 @@ addWatermark() {
         -fill white \
         -undercolor "rgba(0,0,0,0.6)" \
         -gravity northwest \
-        -draw "text 0,0 \"${text}\"" \
-        ${src} ${dst} || returni $?
+        -draw "text 0,0 \"${text}\" " \
+        ${src} ${dst} || return $?
     echo "Done"
 
     echo "Creating resized image for faster loading..."
-
     convert \
-        resize 800x600 \
+        -resize 800x600 \
         ${dst} ${dst_small} || return $?
+    echo "Done"
 
     rm ${src}
-
-    echo "Done"
 }
 
 addWatermark "${fiobbioCfg[@]}"
