@@ -23,6 +23,7 @@ sudo apt-get install libusb-1.0-0-dev
 sudo apt-get install libssl1.1
 sudo apt-get install libssl-dev
 
+sudo apt-get install imagemagick ftp
 
 # Compile radlib
 
@@ -39,10 +40,11 @@ sudo make install
 cd wview-xxx/
 mkdir build
 cd build
-../configure --prefix=/usr/local
+../configure --prefix=/usr/local --enable-install-dpkg --sysconfdir=/etc --localstatedir=/var/lib
 make
 sudo make install
 
+# copy from examples/Debian wview.sh in /etc/init.d/wview
 
 # Generate the inital wview-conf.sdb configuration file
 
