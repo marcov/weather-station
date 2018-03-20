@@ -5,7 +5,7 @@
 . /etc/webcam_login_data.sh
 
 ftp_upload_dir=/srv/ftp/upload
-wview_html_dir=/var/www/weather
+wview_html_dir=/var/lib/wview/img
 
 fiobbioTempUrl="http://localhost/weather/realtime.json"
 mismaTempUrl="http://localhost/misma/realtime.json"
@@ -53,15 +53,14 @@ fiobbioCfg=( "fiobbio" \
 mismaCfg=( "misma" \
            "http ${misma_webcam_login} 192.168.1.205:8083/tmpfs/${misma_pic_name}" \
            "Monte_Misma_(Fiobbio)" \
-           ${cml_ftp_user_misma} \
-           ${cml_ftp_pwd_misma} \
-           "${mismaTempUrl}" )
+           "${mismaTempUrl}" \
+           "${cml_ftp_user_misma} ${cml_ftp_pwd_misma}" )
 
 
 mismaPanoCfg=( "mismapano" \
-               "local /home/pi/dev/panogen/out panorama.jpg" \
+               "local /home/pi/panogen/out panorama.jpg" \
                "Monte_Misma_360" \
                "${mismaTempUrl}" \
-               "${cml_ftp_user_misma} ${cml_ftp_pwd_misma}" )
+               "${cml_ftp_user_misma} ${cml_ftp_pwd_misma} _pano" )
 
 
