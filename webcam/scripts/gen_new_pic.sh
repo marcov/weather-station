@@ -9,7 +9,7 @@ echo "Executing add watermark..."
 ./add_watermark.sh && echo "OK!" || echo "Failed!"
 
 echo "Uploading 2 cml ftp..."
-./upload_2_cml_ftp.sh && echo "OK!" || echor "Failed!"
+./upload_2_cml_ftp.sh && echo "OK!" || echo "Failed!"
 
 cd -
 
