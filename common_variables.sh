@@ -1,8 +1,8 @@
 #
 # Common variables. Edit variables as needed
 #
-. /usr/local/etc/cml_ftp_login_data.sh
-. /usr/local/etc/webcam_login_data.sh
+. /etc/cml_ftp_login_data.sh
+. /etc/etc/webcam_login_data.sh
 
 ftp_upload_dir=/srv/ftp/upload
 wview_html_dir=/var/www/weather
