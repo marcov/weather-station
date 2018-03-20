@@ -4,7 +4,7 @@
 . ../../common_variables.sh
 
 
-function addWatermark() {
+addWatermark() {
     name=$1
     srcInfo=$2
     text=$3

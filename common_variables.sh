@@ -52,7 +52,7 @@ fiobbioCfg=( "fiobbio" \
 
 mismaCfg=( "misma" \
            "http ${misma_webcam_login} 192.168.1.205:8083/tmpfs/${misma_pic_name}" \
-           "Monte_Misma_(Fiobbio)"
+           "Monte_Misma_(Fiobbio)" \
            ${cml_ftp_user_misma} \
            ${cml_ftp_pwd_misma} \
            "${mismaTempUrl}" )
@@ -60,7 +60,7 @@ mismaCfg=( "misma" \
 
 mismaPanoCfg=( "mismapano" \
                "local /home/pi/dev/panogen/out panorama.jpg" \
-               "Monte_Misma_360"
+               "Monte_Misma_360" \
                "${mismaTempUrl}" \
                "${cml_ftp_user_misma} ${cml_ftp_pwd_misma}" )
 

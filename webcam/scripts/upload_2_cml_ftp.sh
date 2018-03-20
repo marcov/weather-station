@@ -9,7 +9,7 @@
 # NO NEED TO EDIT BELOW THIS!
 #
 
-function ftpUpload() {
+ftpUpload() {
 
     name=$1
     srcInfo=$2

@@ -9,7 +9,7 @@
 # NO NEED TO EDIT BELOW THIS!
 #
 
-function httpGet() {
+httpGet() {
     login=$1
     url=$2
     dst=$3
@@ -19,7 +19,7 @@ function httpGet() {
     curl --max-time 10 --basic -u ${login} ${url}  -o ${dst}
 }
 
-function localGet() {
+localGet() {
         srcDir=$1
         pattern=$2
         dst=$3
@@ -41,7 +41,7 @@ function localGet() {
         /bin/cp ${webcamLocal} ${dst} || return $?
 }
 
-function getRawPicture() {
+getRawPicture() {
     name=$1
     srcType=$(echo $2 | cut -d" " -f 1)
 
@@ -72,9 +72,9 @@ function getRawPicture() {
 	echo "Done"
 }
 
-getRawPicture ${fiobbioCfg[@]}
-getRawPicture ${mismaCfg[@]}
-getRawPicture ${mismaPanoCfg[@]}
+getRawPicture "${fiobbioCfg[@]}"
+getRawPicture "${mismaCfg[@]}"
+getRawPicture "${mismaPanoCfg[@]}"
 
 exit 0
 
