@@ -339,7 +339,7 @@ iframe.meteoblue {
 .panorama-scroll > div {
   height: 200px;
   width: 2526px;
-  background: url(panorama.jpg);
+  background: url(/panorama.jpg);
   position: absolute;
   top: 0;
   left: 0;
