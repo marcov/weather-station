@@ -8,31 +8,37 @@ listFile=/var/lib/wview/img/ftp_plus_noaa.list
 
 . /etc/cml_ftp_login_data.sh
 
+ftpUrl="ftp://$cml_ftp_user_fiobbio:$cml_ftp_pwd_fiobbio@ftp.centrometeolombardo.com"
+ftpPort=20000
+
 # Verifica che i contenuti generati siano cambiati dall'ultima chiamata dello script
 ########################################################################################
 
-updated=1
-if [ -e /var/lib/wview/img/tempday_last.png ]; then
+if ! [ ${CML_ftp_enabled} -eq 1 ]; then
+    echo "Ftp is disabled..exiting"
+    exit 0
+fi
+
+
+if ! true && [ -e /var/lib/wview/img/tempday_last.png ]; then
  cmp -s /var/lib/wview/img/tempday.png /var/lib/wview/img/tempday_last.png
- status=$?
- if [ $status -eq 0 ]; then
-  updated=0
+ if [ $? -eq 0 ]; then
+    echo "Content has not changed...exiting"
+    exit 0
+ else
+    cp /var/lib/wview/img/tempday.png /var/lib/wview/img/tempday_last.png
  fi
 fi
 
 # Procedi all'upload FTP
 
-if [ $updated -eq 1 ]; then
-  
-  cp /var/lib/wview/img/tempday.png /var/lib/wview/img/tempday_last.png
-  
-  anno=`date +"%Y"`
-  mese=`date +"%m"`
-  giorno=`date +"%d"`
-  ore=`date +"%H"`
-  minuti=`date +"%M"`
-  
-  if [ $minuti -gt 10 -a $minuti -le 15 ]; then
+anno=`date +"%Y"`
+mese=`date +"%m"`
+giorno=`date +"%d"`
+ore=`date +"%H"`
+minuti=`date +"%M"`
+
+if [ $minuti -gt 10 -a $minuti -le 15 ]; then
     if [ $mese -eq 1 ]; then
       pr_mese="12"
       pr_anno=`expr $anno - 1`
@@ -43,10 +49,11 @@ if [ $updated -eq 1 ]; then
       fi
       pr_anno=$anno;
     fi
-    
+
     # NOAA Archive Upload
-    
+
     echo "cd private" > ${listFile}
+
     if [ $giorno -eq 1 ]; then
       echo "put /var/lib/wview/img/NOAA/NOAA-$pr_anno-$pr_mese.txt NOAA-$pr_anno-$pr_mese.txt" >> ${listFile}
       if [ $pr_anno -le $anno ]; then
@@ -57,25 +64,26 @@ if [ $updated -eq 1 ]; then
     fi
     echo "put /var/lib/wview/img/NOAA/NOAA-$anno.txt NOAA-$anno.txt" >> ${listFile}
     echo "cd .." >> ${listFile}
-    
+
     if [ -e /etc/wview/ftp.list ]; then
       cat /etc/wview/ftp.list >> ${listFile}
     fi
 
-    if [ $CML_ftp_enabled -eq 1 ]; then
-      cat ${listFile} | /usr/bin/ftp -iVT put,20000 ftp://$cml_ftp_user_fiobbio:$cml_ftp_pwd_fiobbio@ftp.centrometeolombardo.com
-    fi
+    echo "NOAA Archive Upload"
+    /usr/bin/ftp -n -v -p -i \
+     ${ftpUrl} ${ftpPort} \
+     ${listFile}
 
-  else
-  
-    if [ $CML_ftp_enabled -eq 1 ]; then
-      if [ -e /etc/wview/ftp.list ]; then
-        cat /etc/wview/ftp.list | /usr/bin/ftp -iVT put,20000 ftp://$cml_ftp_user_fiobbio:$cml_ftp_pwd_fiobbio@ftp.centrometeolombardo.com
-      fi
-    fi
+else
 
+  echo "Normal ftp upload"
+  if [ -e /etc/wview/ftp.list ]; then
+    echo /usr/bin/ftp -n -v -p -i \
+      ${ftpUrl} ${ftpPort} \
+      /etc/wview/ftp.list
   fi
-  
+
 fi
+
 
 exit 0
