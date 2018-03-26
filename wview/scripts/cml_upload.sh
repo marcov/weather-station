@@ -12,7 +12,7 @@ noasListFile=/var/lib/wview/img/ftp_plus_noaa.list
 ftpUrl="ftp.centrometeolombardo.com"
 #ftpPort=20000
 
-ftpCommands="/etc/wview/ftp.list"
+ftpCommands="ftp_commands.txt"
 
 tmpFile="/tmp/cml_ftp_commands.txt"
 
@@ -43,9 +43,8 @@ ore=`date +"%H"`
 minuti=`date +"%M"`
 
 
-rm ${tmpFile}
-echo "USER $cml_ftp_user_fiobbio" >> ${tmpFile}
-echo "PASS $cml_ftp_pwd_fiobbio" >> ${tmpFile}
+rm -f ${tmpFile}
+echo "user ${cml_ftp_user_fiobbio} ${cml_ftp_pwd_fiobbio}" >> ${tmpFile}
 cat ${ftpCommands} >> ${tmpFile}
 
 if [ $minuti -gt 10 -a $minuti -le 15 ]; then
@@ -79,7 +78,7 @@ else
     echo "Normal ftp upload"
 fi
 
-/usr/bin/ftp -n -v -p -i ${ftpUrl} ${ftpPort} ${tmpFile}
+/usr/bin/ftp -n -v -p -i ${ftpUrl} ${ftpPort} < ${tmpFile}
 
 
 exit 0
