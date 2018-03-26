@@ -4,7 +4,7 @@
 
 cd ${wview_html_dir} || exit $?
 
-[ -e wview.htm ] || echo "wview.htm not found!"; exit $?
+[ -e wview.htm ] || exit $?
 cat wview.htm >> wview.txt
 
 cd -
