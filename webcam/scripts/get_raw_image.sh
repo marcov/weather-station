@@ -38,7 +38,7 @@ localGet() {
 
         echo "Copying..."
 
-        /bin/cp ${webcamLocal} ${dst} || return $?
+        /bin/mv ${webcamLocal} ${dst} || return $?
 }
 
 getRawPicture() {
