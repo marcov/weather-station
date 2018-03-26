@@ -4,6 +4,6 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 MAILTO=""
 
 # panorama 
-3 * * * *    cd /home/pi/weather_station/panogen && python3 panogen.py | logger -t panogen
+3 * * * *    cd /home/pi/panogen && python3 panogen.py | logger -t panogen
 #webshot
-3 * * * *    cd /home/pi/weather_station/webshot && ./run.sh | logger -t webshot
+17 * * * *    cd /home/pi/weather_station/webshot && ./run.sh | logger -t webshot

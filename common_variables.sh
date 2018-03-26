@@ -7,7 +7,7 @@
 ftp_upload_dir=/srv/ftp/upload
 wview_html_dir=/var/lib/wview/img
 
-fiobbioTempUrl="http://localhost/weather/realtime.json"
+fiobbioTempUrl="http://localhost/realtime.json"
 mismaTempUrl="http://localhost/misma/realtime.json"
 
 misma_pic_name="snap.jpg"
