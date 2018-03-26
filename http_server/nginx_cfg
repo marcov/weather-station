@@ -67,15 +67,15 @@ server {
     location / {
         
         # Temporary for test... 
-        proxy_pass http://192.168.1.200/weather/;
+        #proxy_pass http://192.168.1.200/weather/;
 
-        #  root /var/lib/wview/img;
+        root /var/lib/wview/img;
         #  # First attempt to serve request as file, then
         #  # as directory, then fall back to displaying a 404.
-        #  try_files $uri $uri/ =404;
+        try_files $uri $uri/ =404;
 
         #  # Redirect old /weather path
-        #  rewrite /weather  / permanent;
+        rewrite ^/weather/(.*)$  /$1 break;
     }
     
 
