@@ -28,7 +28,8 @@ cd /etc/wview
 ln -s ${wviewVar}/conf/wview-conf.sdb wview-conf.sdb
 
 # Install crontab
-crontab -u root ${repoRoot}/webcam/cron/crontab
+crontab -u root ${repoRoot}/crontabs/crontab-root
+crontab -u pi ${repoRoot}/crontabs/crontab-pi
 # See crontab
 crontab -u root -l
 
