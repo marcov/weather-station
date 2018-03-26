@@ -1,3 +1,4 @@
+binary
 cd dati
 put /var/lib/wview/img/realtime.htm realtime.txt
 cd ..
