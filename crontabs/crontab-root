@@ -4,4 +4,4 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 MAILTO=""
 
 # webcam
-*/5 * * * *    cd /home/pi/weather_station/webcam/scripts && ./gen_new_pic.sh > /dev/null
+*/5 * * * *    cd /home/pi/weather_station/webcam/scripts && ./gen_new_pic.sh | logger -t webcam
