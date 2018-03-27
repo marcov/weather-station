@@ -328,8 +328,8 @@ iframe.meteoblue {
 
 .panorama-scroll {
   margin-top: 1em;
-  height: 200px;
-  max-width: 800px;
+  height: 300px;
+  max-width: 1000px;
   margin: 0 auto;
   position: relative;
   overflow: hidden;
@@ -337,7 +337,7 @@ iframe.meteoblue {
 }
 
 .panorama-scroll > div {
-  height: 200px;
+  height: 300px;
   width: 2526px;
   background: url(http://rete.centrometeolombardo.com/bergamo/montemisma/public/webcam_pano.jpg);
   position: absolute;
@@ -347,21 +347,36 @@ iframe.meteoblue {
   transform: translate3d(0, 0, 0);
   background-size: contain;
 }
+
 .panorama-scroll .mover-1 {
-  animation: moveSlideshow 32s linear infinite;
+  animation: moveSlideshow;
+  animation-duration: 40s;
+  /* Repeat forever */
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
+
+.panorama-scroll:hover .mover-1 {
+  animation-play-state: paused;
+}
+
+/*
 .panorama-scroll .mover-2 {
   opacity: 0;
   transition: opacity 0.5s ease-out;
   background-position: 0 -200px;
   animation: moveSlideshow 40s linear infinite;
 }
+
+
 .panorama-scroll:hover .mover-2 {
   opacity: 1;
 }
+*/
+
 
 @keyframes moveSlideshow {
   100% {
-    transform: translateX(-66.6666%);
+    transform: translateX(-50.5%);
   }
 }
