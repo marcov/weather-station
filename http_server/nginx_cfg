@@ -75,7 +75,9 @@ server {
         try_files $uri $uri/ =404;
 
         #  # Redirect old /weather path
-        rewrite ^/weather/(.*)$  /$1 break;
+	rewrite ^/weather/(.+)$  /$1 last;
+	
+	rewrite ^/weather/?$ / permanent;
     }
     
 
