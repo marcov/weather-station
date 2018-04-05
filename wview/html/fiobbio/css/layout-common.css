@@ -346,6 +346,7 @@ iframe.meteoblue {
   height: 100%;
   transform: translate3d(0, 0, 0);
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .panorama-scroll .mover-1 {
