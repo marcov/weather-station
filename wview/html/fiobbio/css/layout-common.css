@@ -325,59 +325,45 @@ iframe.meteoblue {
 }
 
 /* credits: https://css-tricks.com/infinite-all-css-scrolling-slideshow/ */
+/* https://css-tricks.com/books/volume-i/infinite-scrolling-background-image/ */
 
 .panorama-scroll {
   margin-top: 1em;
-  height: 300px;
-  max-width: 1000px;
   margin: 0 auto;
+  height: 300px;
+  width: 90vw;
   position: relative;
   overflow: hidden;
-  transform: translate3d(0, 0, 0);
 }
 
-.panorama-scroll > div {
+.sliding-background {
   height: 300px;
-  width: 2526px;
+  width: 22119px; /* pano width x 3 */
   background: url(http://rete.centrometeolombardo.com/bergamo/montemisma/public/webcam_pano.jpg);
+  background-repeat: repeat-x;
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
-  transform: translate3d(0, 0, 0);
   background-size: contain;
-  background-repeat: no-repeat;
-}
 
-.panorama-scroll .mover-1 {
-  animation: moveSlideshow;
-  animation-duration: 40s;
+  animation: slide;
+  animation-duration: 60s;
   /* Repeat forever */
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }
 
-.panorama-scroll:hover .mover-1 {
+.panorama-scroll:hover .sliding-background {
   animation-play-state: paused;
 }
 
-/*
-.panorama-scroll .mover-2 {
-  opacity: 0;
-  transition: opacity 0.5s ease-out;
-  background-position: 0 -200px;
-  animation: moveSlideshow 40s linear infinite;
-}
 
-
-.panorama-scroll:hover .mover-2 {
-  opacity: 1;
-}
-*/
-
-
-@keyframes moveSlideshow {
-  100% {
-    transform: translateX(-50.5%);
+@keyframes slide {
+  0%{
+    transform: translate3d(0, 0, 0);
+  }
+  100%{
+    transform: translate3d(-7373px, 0, 0); /* pano width */
   }
 }
+
