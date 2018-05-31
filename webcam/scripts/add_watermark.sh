@@ -11,6 +11,8 @@ addWatermark() {
     temperatureUrl=$4
 
     temperature=$(curl ${temperatureUrl} | grep outsideTemp | sed -E "s/.+\"([-]?[0-9]+\.[0-9]+)\".+/\1/g")
+    ftplogin=$5
+    resolution=$6
 
     text=$(echo ${text} | sed "s/_/ /g")
     text="${text}, `date +\"%d-%m-%Y  %T\"`. T: ${temperature}C"
@@ -41,16 +43,16 @@ addWatermark() {
 
     echo "Creating resized image for faster loading..."
     convert \
-        -resize 800x600 \
+        -resize ${resolution} \
         ${dst} ${dst_small} || return $?
     echo "Done"
 
     rm ${src}
 }
 
-addWatermark "${fiobbioCfg[@]}"
-addWatermark "${mismaCfg[@]}"
-addWatermark "${mismaPanoCfg[@]}"
+addWatermark "${fiobbioCfg[@]} 800x600"
+addWatermark "${mismaCfg[@]} 800x600"
+addWatermark "${mismaPanoCfg[@]} 2048x1536"
 
 exit 0
 

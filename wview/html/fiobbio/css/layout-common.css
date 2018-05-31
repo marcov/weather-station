@@ -339,7 +339,7 @@ iframe.meteoblue {
 .sliding-background {
   height: 300px;
   width: 22119px; /* pano width x 3 */
-  background: url(http://rete.centrometeolombardo.com/bergamo/montemisma/public/webcam_pano.jpg);
+  background: url(http://rete.centrometeolombardo.com/bergamo/montemisma/public/webcam_small_pano.jpg);
   background-repeat: repeat-x;
   position: absolute;
   top: 0;
