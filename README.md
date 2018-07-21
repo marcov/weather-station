@@ -11,7 +11,7 @@ This repository hosts all the coded needed to run the weather station website at
 ## Software
 
 * Raspbian OS
-* [wview](www.wviewweather.com)
+* [wview](http://www.wviewweather.com)
 * nginx
 * imagemagick, ... 
 
