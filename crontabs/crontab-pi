@@ -3,7 +3,10 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 # Avoid sending mail
 MAILTO=""
 
-# panorama 
-3 * * * *    cd /home/pi/panogen && python3 panogen.py | logger -t panogen
-#webshot
-17 * * * *    cd /home/pi/weather_station/webshot && ./run.sh | logger -t webshot
+# panorama: generate a panorama from the misma webcam
+3 * * * *    cd /home/pi/panogen && chronic python3 panogen.py | logger -t panogen
+# webshot: generate static images from selected webpages
+17 * * * *    cd /home/pi/weather_station/webshot && chronic ./run.sh | logger -t webshot
+# wview-rrd: generate rrd graphs
+*/10 * * * *  cd /var/lib/wview/archive && chronic /usr/local/bin/wview-rrd -m | logger -t wview-rrd
+
