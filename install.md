@@ -3,6 +3,7 @@
 
 # Install some stuff
 
+```
 sudo apt-get install -t testing opencv
 sudo apt-get install -t testing libopencv-stitching-dev
 sudo apt-get install -t testing libopencv-stitching-dev python3 python3-pip
@@ -24,6 +25,9 @@ sudo apt-get install libssl1.1
 sudo apt-get install libssl-dev
 
 sudo apt-get install imagemagick ftp
+# limit logs
+sudo apt-get install chronic
+```
 
 # Compile radlib
 
