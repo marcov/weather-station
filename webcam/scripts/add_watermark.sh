@@ -47,12 +47,12 @@ addWatermark() {
         ${dst} ${dst_small} || return $?
     echo "Done"
 
-    rm ${src}
+    rm -f ${src}
 }
 
-addWatermark "${fiobbioCfg[@]} 800x600"
-addWatermark "${mismaCfg[@]} 800x600"
-addWatermark "${mismaPanoCfg[@]} 2048x1536"
+addWatermark "${fiobbioCfg[@]}"
+addWatermark "${mismaCfg[@]}"
+addWatermark "${mismaPanoCfg[@]}"
 
 exit 0
 
