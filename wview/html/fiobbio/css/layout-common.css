@@ -367,3 +367,29 @@ iframe.meteoblue {
   }
 }
 
+#topbanner {
+  text-align: center;
+  font-size: 2em;
+  color: red;
+  font-family: 'Charm', cursive;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: .5em;
+  display: table;
+  margin: 0 auto;
+  position:relative;  z-index: 2;
+}
+
+#topbanner > a {
+  text-decoration: none;
+}
+
+#bottombanner {
+  font-size: 1.5em;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: .5em;
+  display: table;
+  margin: 0 auto;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+  padding: 0.3em;
+}

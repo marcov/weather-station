@@ -13,6 +13,9 @@
   <link type="text/css" rel="stylesheet" href="css/layout.css" />
   <link type="text/css" rel="stylesheet" href="css/featherlight.min.css" />
   <link type="text/css" rel="stylesheet" href="css/snow.css" />
+  <!-- for the top banner -->
+  <link href="https://fonts.googleapis.com/css?family=Charm" rel="stylesheet">
+
 </head>
 
 <body>
@@ -50,8 +53,19 @@
     </div>
     <!-- div..menu-->
 
+    <div id="topbanner">
+      <a href="mailto:marcelloalborghetti@gmail.com?subject=Voglio%20il%20calendario%20CML!&body=Grazie">
+        <p style="font-size: 80%; margin: 0; padding: 0;">Calendario Centro Meteo Lombardo 2019</p>
+        <p style="font-size: 110%; margin: 0; padding: 0;">Ordinalo qui!</p>
+      </a>
+    </div>
 
     <div id="slot0"></div>
+    <div id="bottombanner">
+          <span style="font-size:70%;">Stazione meteo, webcams:&nbsp;</span> <b>Marcello Alborghetti</b>
+          --
+          <span style="font-size:70%;">Sito Web:&nbsp;</span><b>Marco Vedovati</b>
+    </div>
     <div id="slot1"></div>
     <div id="slot2"></div>
     <div id="slot3"></div>
@@ -89,8 +103,6 @@
   <script>
     $(function() {
       $.featherlight.defaults.loading = "Caricamento immagine in corso...";
-
-
     });
   </script>
 </body>
