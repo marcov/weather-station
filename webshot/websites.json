@@ -7,7 +7,8 @@
           "waitTime": 1000,
           "outFile":  "mg_ecmwf.png",
           "viewSize": [1280, 1280],
-          "cropSize": [645, 297, 945, 585],
+          "topLeft":  [645, 297],
+          "size":     [945, 585],
           "evalCode": ""
         },
 
@@ -16,7 +17,8 @@
            "waitTime": 10000,
            "outFile":  "radar_ch.png",
            "viewSize": [1024, 1024],
-           "cropSize": [300, 266, 710, 550],
+           "topLeft":  [276, 266],
+           "size":     [650, 550],
            "evalCode": ""
         },
         
@@ -25,7 +27,8 @@
            "waitTime": 10000,
            "outFile":  "radar_ch_detailed.png",
            "viewSize": [1015, 822],
-           "cropSize":  [356, 141, 713, 466],
+           "topLeft":  [356, 141],
+           "size":     [713, 466],
            "evalCode": ""
         },
 
@@ -34,7 +37,8 @@
            "waitTime": 30000,
            "outFile":  "radar_lom.png",
            "viewSize": [1024, 800],
-           "cropSize": [0, 20, 960, 800],
+           "topLeft":  [0, 20],
+           "size":     [960, 800],
            "evalCode": "doConfirm(false);"
         },
 
@@ -43,7 +47,8 @@
            "waitTime": 10000,
            "outFile":  "wz_meteogram.png",
            "viewSize": [820, 1180], 
-           "cropSize": [674, 0, 820, 557],
+           "topLeft":  [674, 0],
+           "size":     [820, 557],
            "evalCode": "document.getElementsByClassName('cc_btn_accept_all')[0].click();"
         }
     ]

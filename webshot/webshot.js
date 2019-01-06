@@ -50,10 +50,10 @@ function getWebsite(cfg) {
   page.viewportSize = {width: cfg.viewSize[0],
                        height: cfg.viewSize[1]};
   //the clipRect is the portion of the page you are taking a screenshot of
-  page.clipRect = {top: cfg.cropSize[0],
-                   left: cfg.cropSize[1],
-                   width: cfg.cropSize[2],
-                   height: cfg.cropSize[3]};
+  page.clipRect = {top: cfg.topLeft[0],
+                   left: cfg.topLeft[1],
+                   width: cfg.size[0],
+                   height: cfg.size[1]};
 
 
   page.onResourceRequested = function (request) {
