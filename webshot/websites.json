@@ -16,7 +16,7 @@
            "waitTime": 10000,
            "outFile":  "radar_ch.png",
            "viewSize": [1024, 1024],
-           "cropSize": [500, 150, 710, 680],
+           "cropSize": [300, 266, 710, 550],
            "evalCode": ""
         },
         
