@@ -383,7 +383,7 @@ iframe.meteoblue {
   text-decoration: none;
 }
 
-#bottombanner {
+.bottombanner {
   font-size: 1.5em;
   background: rgba(255, 255, 255, 0.2);
   border-radius: .5em;
