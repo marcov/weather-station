@@ -10,19 +10,26 @@ const child_process = require('child_process');
 
 
 function usage() {
-    console.log("Usage: " + process.argv[0] + "<phantomjs executable> <phantomjs jsfile> cfg_file.json dst_path");
+  var tmp = process.argv[1].split("/");
+  var myname = tmp[tmp.length - 1];
+  console.log("Usage:");
+  console.log(myname + " <PHANTOMJS PATH> <phantomjs jsfile> config.json <DST PATH>");
 }
 
 function getArgs() {
-
-  console.log("getting argv...");
+  console.log("INFO: Getting command line arguments");
 
   var args = process.argv.slice(2);
-  // console.log(args);
 
-  if (process.argv.length === 0 || args[0] === "-h" || args[0] === "--help") {
+  if (args.length < 4) {
+    console.log("ERROR: not enough arguments provided");
     usage();
-    phantom.exit();
+    process.exit();
+  }
+
+  if (args[0] === "-h" || args[0] === "--help") {
+    usage();
+    process.exit();
   }
 
   var phantomJsExec  = args[0];
@@ -37,7 +44,7 @@ function getArgs() {
 }
 
 function main() {
-  console.log("starting up...");
+  console.log("INFO: webshot started");
   var allArgs = getArgs();
 
   var phantomJsExec = allArgs[0];
@@ -45,11 +52,12 @@ function main() {
   var jsonCfg = allArgs[2];
 
   jsonCfg.websites.forEach( (ws) => {
+    console.log("INFO: spawning phantomjs child process for "+ws.outFile);
     ws.outFile = jsonCfg.dstFolder + "/" + ws.outFile;
     child_process.spawnSync(phantomJsExec, [phantomJsFile, JSON.stringify(ws)], {stdio: 'inherit'});
-    //console.log("CFG:");
-    //console.log(JSON.stringify(ws));
   });
+
+  console.log("INFO: done");
 }
 
 main();

@@ -1,11 +1,19 @@
 #
 # Common variables. Edit variables as needed
 #
-. /etc/cml_ftp_login_data.sh
-. /etc/webcam_login_data.sh
 
-ftp_upload_dir=/srv/ftp/upload
-wview_html_dir=/var/lib/wview/img
+credentialFiles=( \
+ "/etc/cml_ftp_login_data.sh" \
+ "/etc/webcam_login_data.sh" \
+)
+
+for c in "${credentialFiles[@]}"; do
+	[ -f "$c" ] && source "$c"
+done
+
+ftp_upload_dir="/srv/ftp/upload"
+wview_html_dir="/var/lib/wview/img"
+phantomjs_pi_path="/home/pi/bin/phantomjs-2.0.1-development-linux-armv6l/bin/phantomjs"
 
 fiobbioTempUrl="http://localhost/realtime.json"
 mismaTempUrl="http://localhost/misma/realtime.json"

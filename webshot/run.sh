@@ -1,17 +1,25 @@
 #!/bin/bash
 
+set -o pipefail
+
 . ../common_variables.sh
 
 dst_path=${wview_html_dir}
 #dst_path=.
-webshot_tool=webshot.js
+webshot_tool=js/webshot.js
 
-if which phantomjs > /dev/null
-then
-    phantomjs_bin=phantomjs
-else
-    phantomjs_bin=/home/pi/bin/phantomjs-2.0.1-development-linux-armv6l/bin/phantomjs
+# Use phantomjs in path
+phantomjs_bin="$(command -v phantomjs)"
+
+# Use phantomjs from a local folder
+if [ -z "$phantomjs_bin" ]; then
+	phantomjs_bin="$phantomjs_pi_path"
+	if ! [ -x "$phantomjs_bin" ]; then
+		echo "ERROR: phantomjs tool could not be found"
+		exit -1
+	fi
 fi
 
-node run-webshot.js ${phantomjs_bin} ${webshot_tool} websites.json ${dst_path} || exit $?
+node js/run-webshot.js ${phantomjs_bin} ${webshot_tool} config.json ${dst_path}
+exit $?
 

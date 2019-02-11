@@ -18,7 +18,7 @@
            "outFile":  "radar_ch.png",
            "viewSize": [1024, 1024],
            "topLeft":  [276, 266],
-           "size":     [650, 550],
+           "size":     [550, 550],
            "evalCode": ""
         },
         
