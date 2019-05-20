@@ -236,8 +236,8 @@ img.webcam {
 
 .meteoblue {
   width: 340px;
-  height: 390px;
-  background: rgba(0, 0, 0, 0.5);
+  height: 430px;
+  /*background: rgba(0, 0, 0, 0.5);*/
   padding: 0;
   border: 0;
   /* Disable scrolling */
