@@ -10,13 +10,13 @@ $(function () {
   const nDivs = 6;
   var loadedDivs = 0;
 
-  var elemList = [
-    {name : "currweather", location : null},
-    {name : "satellite",   location : null},
-    {name : "extrastas",   location : null},
-    {name : "forecast",    location : null},
-    {name : "radar",       location : null},
-    {name : "maps",        location : null}
+  var staticPages = [
+    {name : "currweather", location : null, enabled: true},
+    {name : "satellite",   location : null, enabled: true},
+    {name : "extrastas",   location : null, enabled: false},
+    {name : "forecast",    location : null, enabled: true},
+    {name : "radar",       location : null, enabled: true},
+    {name : "maps",        location : null, enabled: false}
   ];
 
   var canLoadMore = true;
@@ -26,7 +26,7 @@ $(function () {
     if (target.tagName && target.tagName.toLowerCase() === "a") {
       console.log("clicked " + target.id);
 
-      elemList.some(function (e) {
+      staticPages.some(function (e) {
         if ("link_" + e.name == target.id) {
 
           canLoadMore = false;
@@ -84,13 +84,19 @@ $(function () {
   function loadMore() {
     console.log("loadmore triggered...");
 
-    elemList.some( function (e) {
-      if (!e.location) {
-        loadEleminNewDiv(e);
-        $(window).bind('scroll', bindScroll);
-        return (e.location !== null);
+    staticPages.some( function (e) {
+      if (!e.enabled) {
+        return false;
       }
-      return false;
+
+      if (e.location) {
+        return false;
+      }
+
+      loadEleminNewDiv(e);
+      $(window).bind('scroll', bindScroll);
+      return (e.location !== null);
+      }
     });
   }
 
@@ -98,7 +104,7 @@ $(function () {
 
   function reloadCurrWeather () {
     console.log("Reloading current weather section...");
-    var curr = elemList[0]
+    var curr = staticPages[0]
     $(curr.location).load(getUrl(curr.name));
     setTimeout(reloadCurrWeather, 150000);
   }
@@ -106,7 +112,7 @@ $(function () {
 
   function dynamicLoadInit() {
     loadedDivs = 0;
-    loadEleminNewDiv(elemList[0]);
+    loadEleminNewDiv(staticPages[0]);
     setTimeout(reloadCurrWeather, 150000);
   }
 
