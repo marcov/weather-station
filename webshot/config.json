@@ -3,36 +3,6 @@
 
     "websites" : [
         {
-          "url" :     "http://www.meteoguru.com/en/pro/ecmwf/?latlon=45.80,9.80",
-          "waitTime": 1000,
-          "outFile":  "mg_ecmwf.png",
-          "viewSize": [1280, 1280],
-          "topLeft":  [645, 297],
-          "size":     [945, 585],
-          "evalCode": ""
-        },
-
-        { 
-           "url":      "http://www.metradar.ch/2009/pc/index_mobile15.php",
-           "waitTime": 10000,
-           "outFile":  "radar_ch.png",
-           "viewSize": [1024, 1024],
-           "topLeft":  [276, 266],
-           "size":     [550, 550],
-           "evalCode": ""
-        },
-        
-        { 
-           "url":      "http://www.zoomradar.ch/index.php?lon=9.866164648468462&lat=45.77935393888881",
-           "waitTime": 10000,
-           "outFile":  "radar_ch_detailed.png",
-           "viewSize": [1015, 822],
-           "topLeft":  [356, 141],
-           "size":     [713, 466],
-           "evalCode": ""
-        },
-
-        {
            "url":      "http://cml.to/radar",
            "waitTime": 30000,
            "outFile":  "radar_lom.png",
