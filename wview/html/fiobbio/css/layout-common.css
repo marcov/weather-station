@@ -391,5 +391,6 @@ iframe.meteoblue {
   margin: 0 auto;
   margin-top: 0.2em;
   margin-bottom: 0.2em;
-  padding: 0.3em;
+  padding: .5em;
+  line-height: 2em;
 }
