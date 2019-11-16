@@ -96,7 +96,6 @@ $(function () {
       loadEleminNewDiv(e);
       $(window).bind('scroll', bindScroll);
       return (e.location !== null);
-      }
     });
   }
 
