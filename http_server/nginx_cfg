@@ -40,21 +40,35 @@ server {
 
 	#root /var/www/html;
 
-	# Add index.php to the list if you are using PHP
-	index index.html index.htm index.nginx-debian.html;
+    # Add index.php to the list if you are using PHP
+    index index.html index.htm index.nginx-debian.html;
 
-	server_name _;
+    server_name _;
 
     # = : exact match
     location  = / {
         root /home/pi/weather_station/wview/html/fiobbio/;
         try_files $uri $uri/ =404;
+
+        # kill cache
+        add_header Last-Modified $date_gmt;
+        add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
+        if_modified_since off;
+        expires off;
+        etag off;
     }
 
     # ~ : regex
     location ~ ^/(index\.|js/|css/|html/) {
         root /home/pi/weather_station/wview/html/fiobbio/;
         try_files $uri $uri/ =404;
+
+        # kill cache
+        add_header Last-Modified $date_gmt;
+        add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
+        if_modified_since off;
+        expires off;
+        etag off;
     }
    
     # TODO : enable php...
@@ -62,6 +76,18 @@ server {
     #    alias /var/lib/wviewmgmt/;
     #    try_files $uri $uri/ =404;
     #}
+
+
+	#CGI for perl
+	location /cgi-bin/ {
+		root /home/pi/wview-rrd/;
+		try_files $uri =404;
+		gzip off;
+		fastcgi_pass  127.0.0.1:8999;
+		fastcgi_index index.pl;
+		fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+		include fastcgi_params;
+	}  
 
     # fallback
     location / {
@@ -75,9 +101,8 @@ server {
         try_files $uri $uri/ =404;
 
         #  # Redirect old /weather path
-	rewrite ^/weather/(.+)$  /$1 last;
-	
-	rewrite ^/weather/?$ / permanent;
+        rewrite ^/weather/(.+)$  /$1 last;
+        rewrite ^/weather/?$ / permanent;
     }
     
 
