@@ -25,17 +25,20 @@ function getArgs() {
 
 function takeShot(page, evalCode, outFile) {
 
-  console.log("evalCode : " + evalCode);
+  console.log("INFO: trying to evaluate : " + evalCode);
 
   if (evalCode && evalCode.length > 0) {
+    var evalResult;
 
-    var evalFx = new Function(evalCode);
-
-    var evalResult = page.evaluate(evalFx);
-
-    console.log(evalResult);
+    try {
+      var evalFx = new Function(evalCode);
+      evalResult = page.evaluate(evalFx);
+      console.log("INFO: eval result: " + evalResult);
+    } catch (e) {
+      console.error("ERROR: failed to evaluate: " + e);
+      return;
+    }
   }
-
   page.render(outFile);
   console.log("Screenshot done");
   phantom.exit();
