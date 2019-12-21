@@ -10,7 +10,7 @@
            "viewSize": [1024, 730],
            "topLeft":  [230, 20],
            "size":     [760, 360],
-           "evalCode": "javascript:document.getElementById('accept_all_cookies').click();"
+           "evalCode": "document.getElementsByClassName('gdpr_message')[0].style.visibility='hidden';"
         },
 
         {
