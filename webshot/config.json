@@ -7,12 +7,12 @@
            "url":      "https://www.meteoblue.com/en/weather/week/fiobbio_italy_8951344",
            "waitTime": 2000,
            "outFile":  "meteoblue.png",
-           "viewSize": [1024, 730],
-           "topLeft":  [230, 20],
-           "size":     [760, 360],
+           "viewSize": [1024, 1024],
+           "info":     " v----v----- 1st value is pixels from TOP (y), 2nd value is pixels from left (y)",
+           "topLeft":  [675, 220],
+           "size":     [600, 290],
            "evalCode": "document.getElementsByClassName('gdpr_message')[0].style.visibility='hidden';"
         },
-
         {
            "url":      "http://cml.to/radar",
            "waitTime": 30000,
