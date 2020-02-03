@@ -216,6 +216,20 @@ img.webcam {
   margin: 0;
 }
 
+/**** Calendar START *****/
+.heading > a > .calendar {
+  font-size: 2em;
+  letter-spacing: 0.3em;
+  font-weight: bold;
+  margin: 0;
+  color: red;
+}
+
+.heading > a {
+  text-decoration: none;
+}
+/**** Calendar STOP  *****/
+
 #histats_counter div {
   margin: 0 auto;
   margin-top: 1em;
@@ -236,7 +250,7 @@ img.webcam {
 
 .meteoblue {
   width: 340px;
-  height: 430px;
+  height: 480px;
   /*background: rgba(0, 0, 0, 0.5);*/
   padding: 0;
   border: 0;
