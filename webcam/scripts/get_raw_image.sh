@@ -2,21 +2,36 @@
 #
 # copy from ftp upload dir to weather station www data
 #
+set -euo pipefail
 
 . ../../common_variables.sh
 
-#
-# NO NEED TO EDIT BELOW THIS!
-#
-
 httpGet() {
-    login=$1
-    url=$2
-    dst=$3
+    login="$1"
+    url="$2"
+    dst="$3"
 
-    echo "HTTP GET"
+    echo "INFO: HTTP GET"
+    httpResponseHeaders=$(curl \
+                             -fL \
+                             --max-time 30 \
+                             --basic -u "${login}" \
+                             -o "${dst}" \
+                             --dump-header /dev/stdout \
+                             "${url}")
 
-    curl --max-time 10 --basic -u ${login} ${url}  -o ${dst}
+    [ "$?" = "0" ] || { echo "ERR: HTTP GET failed"; false; return; }
+
+    contentLength=$(grep -P -o -e "Content-Length: \K([0-9]+)" <<< "${httpResponseHeaders}")
+    [ "$?" = "0" ] || { echo "ERR: detecting file size failed"; false; return; }
+
+    echo "INFO: HTTP GET Content-Length: ${contentLength}"
+
+    filesize=$(stat -c "%s" "${dst}")
+    [ "$?" = "0" ] || { echo "ERR: stat'ing dst file"; false; return; }
+    echo "INFO: stat file size: ${filesize}"
+
+    [ "$contentLength" = "$filesize" ] || { echo "ERR: file size $filesize does not match HTTP Content-Length $contentLength"; false; return; }
 }
 
 localGet() {
@@ -24,21 +39,22 @@ localGet() {
         pattern=$2
         dst=$3
 
-        echo "Local GET"
-        echo "Locating last webcam pic..."
+        echo "INFO: LOCAL GET"
+        echo "INFO: Locating most recent file..."
 
-        webcamLocal=$(find ${srcDir} -type f -name "${pattern}" | sort | tail -n 1)
+        latest=$(find ${srcDir} -type f -name "${pattern}" | sort | tail -n 1)
 
-        if ! [ -e "${webcamLocal}" ]; then
-            echo "Raw image not found...exiting"
+        if ! [ -e "${latest}" ]; then
+            echo "ERR: latest file not found...exiting"
+            false
             return
         fi
 
-        echo "Raw image found: ${webcamLocal}"
+        echo "INFO: latest file found: ${latest}"
 
-        echo "Copying..."
+        echo "INFO: Copying..."
 
-        /bin/mv ${webcamLocal} ${dst} || return $?
+        /bin/mv ${latest} ${dst} || { false; return; }
 }
 
 getRawPicture() {
@@ -47,34 +63,45 @@ getRawPicture() {
 
     dst=${wview_html_dir}/${webcam_raw_prefix}_${name}.jpg
 
-
     if [ ${srcType} == "http" ]; then
-
         login=$(echo $2 | cut -d" " -f 2)
         url=$(echo $2 | cut -d" " -f 3)
 
-        httpGet ${login} ${url} ${dst}
-
+        httpGet ${login} ${url} ${dst} || { false; return; }
     elif [ ${srcType} == "local" ]; then
-
         srcDir=$(echo $2 | cut -d" " -f 2)
         pattern=$(echo $2 | cut -d" " -f 3)
 
-        localGet ${srcDir} ${pattern} ${dst}
+        localGet ${srcDir} ${pattern} ${dst} || { false; return; }
 
     else
-        echo "srcType is empty / invalid ...nothing to do"
+        echo "ERR: srcType is empty / invalid ...nothing to do"
+        false
         return
     fi
 
-    echo "chmoding..."
-	chmod +rw ${dst} || return $?
-	echo "Done"
+    echo "INFO: chmod +rw"
+    chmod +rw ${dst} || return $?
+    echo "INFO: Done"
 }
 
-getRawPicture "${fiobbioCfg[@]}"
-getRawPicture "${mismaCfg[@]}"
-getRawPicture "${mismaPanoCfg[@]}"
+for i in {1..3}; do
+    echo "INFO: get fiobbio $i"
+    getRawPicture "${fiobbioCfg[@]}"
+    [ "$?" = "0" ] && break || echo "ERR: failed to get fiobbio"
+done
 
-exit 0
+for i in {1..3}; do
+    echo "INFO: get misma $i"
+    getRawPicture "${mismaCfg[@]}"
+    [ "$?" = "0" ] && break || echo "ERR: failed to get misma"
+done
 
+
+for i in {1..3}; do
+    echo "INFO: get misma pano $i"
+    getRawPicture "${mismaPanoCfg[@]}"
+    [ "$?" = "0" ] && break || echo "ERR: failed to get misma pano"
+done
+
+exit $?

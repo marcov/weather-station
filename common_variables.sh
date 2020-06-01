@@ -1,14 +1,13 @@
 #
 # Common variables. Edit variables as needed
 #
-
 credentialFiles=( \
  "/etc/cml_ftp_login_data.sh" \
  "/etc/webcam_login_data.sh" \
 )
 
 for c in "${credentialFiles[@]}"; do
-	[ -f "$c" ] && source "$c"
+    [ -f "$c" ] && source "$c"
 done
 
 ftp_upload_dir="/srv/ftp/upload"
@@ -21,20 +20,19 @@ mismaTempUrl="http://localhost/misma/realtime.json"
 misma_pic_name="snap.jpg"
 misma_webcam_url=
 misma_pano_name="panorama.jpg"
-#
+
 #
 # CML FTP config (note: login credentials are not here :P)
+#
 cml_ftp_log_file=/var/log/cml_ftp.log
 cml_ftp_server=ftp.centrometeolombardo.com
 cml_ftp_upload_folder=public
 # Set to 1 to log ftp upload information to stdout
 cml_ftp_log_info=1
 
-
 webcam_prefix="webcam"
 webcam_raw_prefix="${webcam_prefix}_raw"
 webcam_small_prefix="${webcam_prefix}_small"
-
 
 #
 # cfg format:
@@ -60,12 +58,9 @@ mismaCfg=( "misma" \
            "${cml_ftp_user_misma} ${cml_ftp_pwd_misma}" \
            "800x600" )
 
-
 mismaPanoCfg=( "mismapano" \
                "local /home/pi/panogen/out panorama.jpg" \
                "Monte_Misma_360" \
                "${mismaTempUrl}" \
                "${cml_ftp_user_misma} ${cml_ftp_pwd_misma} _pano" \
                "2048x1536" )
-
-
