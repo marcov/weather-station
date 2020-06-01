@@ -4,7 +4,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 MAILTO=""
 
 # panorama: generate a panorama from the misma webcam
-3 * * * *    cd /home/pi/panogen && chronic python3 panogen.py | logger -t panogen
+#3 * * * *    cd /home/pi/panogen && chronic python3 panogen.py | logger -t panogen
 # webshot: generate static images from selected webpages
 17 * * * *    cd /home/pi/weather_station/webshot && chronic ./run.sh | logger -t webshot
 # wview-rrd: generate rrd graphs
