@@ -103,6 +103,13 @@ server {
         #  # Redirect old /weather path
         rewrite ^/weather/(.+)$  /$1 last;
         rewrite ^/weather/?$ / permanent;
+
+        # kill cache
+        add_header Last-Modified $date_gmt;
+        add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
+        if_modified_since off;
+        expires off;
+        etag off;
     }
     
 
@@ -119,7 +126,7 @@ server {
     
    # Reverse proxy for misma website 
    location /misma/ {
-       proxy_pass http://192.168.1.150:8080/weather/;
+       proxy_pass http://192.168.1.150:8080/;
    }
 }
 
