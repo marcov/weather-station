@@ -148,7 +148,7 @@
         <img class="webcam" alt="webcam_small" src="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam_small.jpg" />
       </a>
     </li>
-    <li style="display:none;">
+    <li>
       <a href="http://rete.centrometeolombardo.com/bergamo/montemisma/public/webcam.jpg" data-featherlight="image">
         <img class="webcam" alt="webcam_small" src="http://rete.centrometeolombardo.com/bergamo/montemisma/public/webcam_small.jpg" />
       </a>
@@ -187,7 +187,8 @@
     </li>
   </ul>
 
-  <ul class="graph-container">
+  <!-- All radiation + rain -->
+  <ul class="graph-container" style="display:none;">
     <li>
       <img class="wviewbar" alt="wview image" src="radiation.png">
     </li>
@@ -207,13 +208,37 @@
       <img class="wviewbar" alt="wview image" src="yearrain.png">
     </li>
   </ul>
-  <ul class="graph-container">
+
+  <!-- All wind -->
+  <ul class="graph-container" style="display:none;">
     <li>
       <img class="round" alt="wview image" src="windroseday.png">
     </li>
     <li>
       <img class="round" alt="wview image" src="windroseweek.png">
     </li>
+    <li>
+      <img class="round" alt="wview image" src="windroseyear.png">
+    </li>
+  </ul>
+
+  <!-- Wind / rain mix -->
+  <ul class="graph-container">
+    <li>
+      <img class="round" alt="wview image" src="windroseday.png">
+    </li>
+
+    <li>
+      <img class="wviewbar" alt="wview image" src="dayrain.png">
+    </li>
+    <li>
+      <img class="wviewbar" alt="wview image" src="monthrain.png">
+    </li>
+    <li>
+      <img class="wviewbar" alt="wview image" src="yearrain.png">
+    </li>
+
+
     <li>
       <img class="round" alt="wview image" src="windroseyear.png">
     </li>
