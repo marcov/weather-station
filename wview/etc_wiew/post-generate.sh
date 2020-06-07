@@ -1,15 +1,17 @@
 #!/bin/sh
 
-cd /home/pi/weather_station/wview/scripts > /dev/null || exit $?
+#set -uo pipefail
 
-loggerTag="wview post-generate.sh"
-echo logger -t ${loggerTag} "Generating wview txt..."
+pushd /home/pi/weather_station/wview/scripts > /dev/null || exit $?
 
-./generate_wview_txt.sh > /dev/null && logger -t ${loggerTag} "Exit code: $?"
+loggerTag="wview-post-generate.sh"
 
-logger -t ${loggerTag} "CML ftp upload"
-./cml_upload.sh > /dev/null && logger -t ${loggerTag} "Exit code: $?"
+logger -t ${loggerTag} "Generating wview txt..."
+chronic ./generate_wview_txt.sh | logger -t ${loggerTag}
 
-cd - >/dev/null
+logger -t ${loggerTag} "CML FTP upload"
+chronic ./cml_upload.sh | logger -t ${loggerTag}
+
+popd
 
 exit 0
