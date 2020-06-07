@@ -1,7 +1,7 @@
 binary
+ls
 cd dati
 put /var/lib/wview/img/realtime.htm realtime.txt
-cd ..
 cd immagini
 put /var/lib/wview/img/tempday.png tempday.png
 put /var/lib/wview/img/dewday.png dewday.png
@@ -11,4 +11,3 @@ put /var/lib/wview/img/wspeedday.png wspeedday.png
 put /var/lib/wview/img/hiwspeedday.png hiwspeedday.png
 put /var/lib/wview/img/wdirday.png wdirday.png
 put /var/lib/wview/img/rainday.png rainday.png
-quit
