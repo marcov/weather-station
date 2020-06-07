@@ -85,23 +85,23 @@ getRawPicture() {
     echo "INFO: Done"
 }
 
-for i in {1..3}; do
+for i in {0..2}; do
+    sleep "$(( $i * 2 ))"
     echo "INFO: get fiobbio $i"
-    getRawPicture "${fiobbioCfg[@]}"
-    [ "$?" = "0" ] && break || echo "ERR: failed to get fiobbio"
+    getRawPicture "${fiobbioCfg[@]}" && break || echo "ERR: failed to get fiobbio"
 done
 
-for i in {1..3}; do
+for i in {0..2}; do
+    sleep $(($i * 2))
     echo "INFO: get misma $i"
-    getRawPicture "${mismaCfg[@]}"
-    [ "$?" = "0" ] && break || echo "ERR: failed to get misma"
+    getRawPicture "${mismaCfg[@]}" && break || echo "ERR: failed to get misma"
 done
 
 
-for i in {1..3}; do
+for i in {0..2}; do
+    sleep $(($i * 2))
     echo "INFO: get misma pano $i"
-    getRawPicture "${mismaPanoCfg[@]}"
-    [ "$?" = "0" ] && break || echo "ERR: failed to get misma pano"
+    getRawPicture "${mismaPanoCfg[@]}" && break || echo "ERR: failed to get misma pano"
 done
 
 exit $?
