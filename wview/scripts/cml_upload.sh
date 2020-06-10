@@ -81,4 +81,4 @@ fi
 echo "quit" >> ${ftpSendCmds}
 
 /usr/bin/ftp \
-    -d -n -v -p -i ${ftpUrl} ${ftpPort} < ${ftpSendCmds}
+    -n -v -i ${ftpUrl} ${ftpPort} < ${ftpSendCmds}
