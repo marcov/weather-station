@@ -51,6 +51,11 @@ fiobbioCfg=( "fiobbio" \
              "${cml_ftp_user_fiobbio} ${cml_ftp_pwd_fiobbio}" \
              "800x600" )
 
+
+declare -i fiobbioRetries=1
+declare -i mismaRetries=6
+declare -i panoRetries=0
+
 mismaCfg=( "misma" \
            "http ${misma_webcam_login} 192.168.1.205:8083/tmpfs/${misma_pic_name}" \
            "Monte_Misma_(Fiobbio)" \

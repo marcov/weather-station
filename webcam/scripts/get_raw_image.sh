@@ -75,7 +75,7 @@ getRawPicture() {
         localGet ${srcDir} ${pattern} ${dst} || { false; return; }
 
     else
-        echo "ERR: srcType is empty / invalid ...nothing to do"
+        echo "ERR: srcType is empty / invalid...nothing to do"
         false
         return
     fi
@@ -85,20 +85,19 @@ getRawPicture() {
     echo "INFO: Done"
 }
 
-for i in {0..2}; do
+for i in $(seq 0 ${fiobbioRetries}); do
     sleep "$(( $i * 2 ))"
     echo "INFO: get fiobbio $i"
     getRawPicture "${fiobbioCfg[@]}" && break || echo "ERR: failed to get fiobbio"
 done
 
-for i in {0..2}; do
+for i in $(seq 0 ${mismaRetries}); do
     sleep $(($i * 2))
     echo "INFO: get misma $i"
     getRawPicture "${mismaCfg[@]}" && break || echo "ERR: failed to get misma"
 done
 
-
-for i in {0..2}; do
+for i in $(seq 0 ${panoRetries}); do
     sleep $(($i * 2))
     echo "INFO: get misma pano $i"
     getRawPicture "${mismaPanoCfg[@]}" && break || echo "ERR: failed to get misma pano"
