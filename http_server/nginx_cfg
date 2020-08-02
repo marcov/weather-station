@@ -22,6 +22,13 @@ server {
 	listen 80 default_server;
 	listen [::]:80 default_server;
 
+    #
+    # Redirect from old to new domain name
+    #
+	if ($http_host = 'fiobbio.blogdns.net') {
+		rewrite ^(.*) http://meteo.fiobbio.com$1 redirect;
+	}
+
 	# SSL configuration
 	#
 	# listen 443 ssl default_server;
@@ -128,8 +135,12 @@ server {
    location /misma/ {
        proxy_pass http://192.168.1.150:8080/;
    }
-}
 
+   location ~ ^/ap/(.*)$ {
+       proxy_pass http://192.168.1.254/$1;
+   }
+
+}
 
 # Virtual Host configuration for example.com
 #
