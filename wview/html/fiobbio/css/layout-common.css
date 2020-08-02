@@ -55,7 +55,6 @@ li {
 /***************************************************************/
 
 .lastUpdate {
-  position: absolute;
   top: 1.1em;
   right: 1.1em;
   float: right;
@@ -399,24 +398,16 @@ iframe.meteoblue {
 }
 
 .header {
-  padding: 10px 16px;
-  background: #555;
-  color: #f1f1f1;
-}
-
-/* Page content */
-.content {
-  padding: 16px;
+  padding: .1rem;
+  background-color: #555;
+  width: 66%;
+  margin-left: 16.5%;
+  text-align: center;
 }
 
 /* The sticky class is added to the header with JS when it reaches its scroll position */
 .sticky {
   position: fixed;
   top: 0;
-  width: 100%
 }
 
-/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
-.sticky + .content {
-  padding-top: 102px;
-}
