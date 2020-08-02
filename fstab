@@ -1,0 +1,13 @@
+proc            /proc           proc    defaults          0       0
+PARTUUID=9d97f467-01  /boot           vfat    defaults          0       2
+PARTUUID=9d97f467-02  /               ext4    defaults,noatime  0       1
+# a swapfile is not a swap partition, no line here
+#   use  dphys-swapfile swap[on|off]  for that
+#
+#/run, /var/run, /run/lock, /var/run/lock will be automatically created by default - tmpfs
+tmpfs /tmp tmpfs defaults,noatime,nosuid,nodev,noexec,mode=0755,size=10M 0 0
+tmpfs /var/tmp tmpfs defaults,noatime,nosuid,nodev,noexec,mode=0755,size=1M 0 0
+tmpfs /var/log tmpfs defaults,noatime,nosuid,nodev,noexec,mode=0755 0 0
+tmpfs /var/log/nginx tmpfs defaults,noatime,nosuid,nodev,noexec,mode=0755 0 0
+tmpfs /var/log/samba tmpfs defaults,noatime,nosuid,nodev,noexec,mode=0755 0 0
+tmpfs /var/log/apt tmpfs defaults,noatime,nosuid,nodev,noexec,mode=0755 0 0
