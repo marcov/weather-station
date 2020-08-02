@@ -11,9 +11,6 @@ noasListFile="${wview_html_dir}"/ftp_plus_noaa.list
 
 . /etc/cml_ftp_login_data.sh
 
-declare -r ftpUrl="ftp.centrometeolombardo.com"
-#ftpPort=20000
-
 declare -r ftpBaseCmds="ftp_commands.txt"
 declare -r ftpSendCmds="/tmp/cml_ftp_commands.txt"
 
@@ -81,4 +78,4 @@ fi
 echo "quit" >> ${ftpSendCmds}
 
 /usr/bin/ftp \
-    -n -v -i ${ftpUrl} ${ftpPort} < ${ftpSendCmds}
+    -n -v -i ${cml_ftp_server} ${ftpPort} < ${ftpSendCmds}
