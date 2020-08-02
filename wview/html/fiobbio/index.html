@@ -17,13 +17,16 @@
   -->
   <!-- for the top banner -->
   <link href="https://fonts.googleapis.com/css?family=Charm" rel="stylesheet">
-
 </head>
 
 <body>
   <!-- enable snow:
   <canvas id="snowcanvas"></canvas>
   -->
+  <div class="header" id="myHeader">
+    <h2>Nuovo indirizzo: <i>meteo.fiobbio.com</i>!</h2>
+  </div>
+
   <div class="maincolumn">
     <div class="menu">
       <div class="hamburger-menu-wrapper">
@@ -85,6 +88,26 @@
   <!-- enable snow:
   <script src="js/snow.js"></script>
   -->
+
+  <script>
+    // When the user scrolls the page, execute myFunction
+    window.onscroll = function() {myFunction()};
+
+    // Get the header
+    var header = document.getElementById("myHeader");
+
+    // Get the offset position of the navbar
+    var sticky = header.offsetTop;
+
+    // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function myFunction() {
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+      } else {
+        header.classList.remove("sticky");
+      }
+    }
+  </script>
 
   <!-- Histats.com  START  (aync)-->
   <script>

@@ -386,22 +386,6 @@ iframe.meteoblue {
   }
 }
 
-#topbanner {
-  text-align: center;
-  font-size: 2em;
-  color: red;
-  font-family: 'Charm', cursive;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: .5em;
-  display: table;
-  margin: 0 auto;
-  position:relative;  z-index: 2;
-}
-
-#topbanner > a {
-  text-decoration: none;
-}
-
 .bottombanner {
   font-size: 1.2em;
   background: rgba(255, 255, 255, 0.2);
@@ -412,4 +396,27 @@ iframe.meteoblue {
   margin-bottom: 0.2em;
   padding: .5em;
   line-height: 2em;
+}
+
+.header {
+  padding: 10px 16px;
+  background: #555;
+  color: #f1f1f1;
+}
+
+/* Page content */
+.content {
+  padding: 16px;
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 102px;
 }
