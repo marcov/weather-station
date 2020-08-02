@@ -9,4 +9,5 @@ MAILTO=""
 17 * * * *    cd /home/pi/weather_station/webshot && chronic ./run.sh | logger -t webshot
 # wview-rrd: generate rrd graphs
 */10 * * * *  cd /var/lib/wview/archive && chronic /usr/local/bin/wview-rrd -m | logger -t wview-rrd
-
+# update DDNS
+*/5 * * * *    cd /home/pi/weather_station/ddns && chronic ./ddns.sh | logger -t ddns
