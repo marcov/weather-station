@@ -10,7 +10,7 @@ body {
 
 div {
   background-color: #004d90;
-  /*border: 1px solid yellow;*/
+  /* border: 1px solid yellow; */
 }
 
 h3 {
@@ -55,9 +55,8 @@ li {
 /***************************************************************/
 
 .lastUpdate {
-  top: 1.1em;
-  right: 1.1em;
   float: right;
+  width: fit-content;
   font-size: 90%;
 }
 
@@ -210,9 +209,9 @@ img.webcam {
 
 .heading > .title {
   font-size: 3em;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.4em;
   font-weight: bold;
-  margin: 0;
+  margin: 0 auto;
 }
 
 /**** Calendar START *****/
@@ -399,10 +398,15 @@ iframe.meteoblue {
 
 .header {
   padding: .1rem;
-  background-color: #555;
+  background-color: #5558;
   width: 66%;
   margin-left: 16.5%;
   text-align: center;
+}
+
+.header p {
+    margin-block-start: .5em;
+    margin-block-end: .5em;
 }
 
 /* The sticky class is added to the header with JS when it reaches its scroll position */
