@@ -7,7 +7,7 @@ credentialFiles=( \
 )
 
 for c in "${credentialFiles[@]}"; do
-    [ -f "$c" ] && source "$c"
+    source "$c" || { echo "Credential file \"$c\" missing"; exit -1; }
 done
 
 ftp_upload_dir="/srv/ftp/upload"
@@ -24,9 +24,9 @@ misma_pano_name="panorama.jpg"
 #
 # CML FTP config (note: login credentials are not here :P)
 #
-cml_ftp_log_file="${XDG_RUNTIME_DIR}/cml_ftp.log"
+cml_ftp_log_file="${XDG_RUNTIME_DIR:-/tmp}/cml_ftp.log"
 cml_ftp_server="ftp.centrometeolombardo.com"
-cml_ftp_upload_folder=public
+cml_ftp_upload_folder="public"
 # Set to 1 to log ftp upload information to stdout
 cml_ftp_log_info=1
 

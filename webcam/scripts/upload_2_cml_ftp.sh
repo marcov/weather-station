@@ -2,6 +2,7 @@
 #
 # upload webcam images from www data to cml ftp
 #
+set -euo pipefail
 
 . ../../common_variables.sh
 
@@ -10,7 +11,6 @@
 #
 
 ftpUpload() {
-
     name=$1
     srcInfo=$2
     text=$3
@@ -62,7 +62,7 @@ else
 fi
 
 # Reset ftp log file
-echo "" > ${cml_ftp_log_file}
+rm -f ${cml_ftp_log_file}
 
 ftpUpload "${fiobbioCfg[@]}"
 ftpUpload "${mismaCfg[@]}"

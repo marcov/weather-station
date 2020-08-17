@@ -1,10 +1,8 @@
-#!/bin/sh
-#
 # copy from ftp upload dir to weather station www data
 #
 set -euo pipefail
 
-. ../../common_variables.sh
+source ../../common_variables.sh
 
 httpGet() {
     login="$1"
