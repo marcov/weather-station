@@ -10,4 +10,6 @@ MAILTO=""
 # wview-rrd: generate rrd graphs
 */10 * * * *  cd /var/lib/wview/archive && chronic /usr/local/bin/wview-rrd -m | logger -t wview-rrd
 # update DDNS
-*/5 * * * *    cd /home/pi/weather_station/ddns && chronic ./ddns.sh | logger -t ddns
+*/5 * * * *    cd /home/pi/nc-ddns && chronic ./nc-ddns.sh | logger -t ddns
+# webcam
+*/5 * * * *    cd /home/pi/weather_station/webcam/scripts && chronic ./main.sh | logger -t webcam
