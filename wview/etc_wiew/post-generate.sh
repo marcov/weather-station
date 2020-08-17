@@ -12,6 +12,6 @@ chronic ./generate_wview_txt.sh | logger -t ${loggerTag}
 logger -t ${loggerTag} "CML FTP upload"
 chronic ./cml_upload.sh | logger -t ${loggerTag}
 
-popd
+popd > /dev/null
 
 exit 0
