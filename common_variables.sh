@@ -24,7 +24,7 @@ misma_pano_name="panorama.jpg"
 #
 # CML FTP config (note: login credentials are not here :P)
 #
-cml_ftp_log_file="${XDG_RUNTIME_DIR:-/tmp}/cml_ftp.log"
+cml_ftp_log_file="${XDG_RUNTIME_DIR:-/run/user/`id -u`}/cml_ftp.log"
 cml_ftp_server="ftp.centrometeolombardo.com"
 cml_ftp_upload_folder="public"
 # Set to 1 to log ftp upload information to stdout
