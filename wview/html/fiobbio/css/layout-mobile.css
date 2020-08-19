@@ -111,4 +111,8 @@
   #mismaMeasures > .measure > label {
     display: inherit;
   }
+
+  .bottombanner {
+    font-size: 90%;
+  }
 }

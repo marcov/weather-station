@@ -1,50 +1,68 @@
 <div class="heading">
 
-  <div class="lastUpdate">
-    <span id="stationTime"></span>, <span id="stationDate"></span>
+  <div class="topRightBanner">
+    <!--<span id="stationTime"></span>, <span id="stationDate"></span>-->
   </div>
+
   <div>
-  &nbsp;
+    &nbsp;
     <!-- PADDING to center the title below, becasue this ^ is floating... -->
   </div>
   <div class="title">
     Meteo Fiobbio
   </div>
-  <a style="display: none;" href="http://cml.to/calendario">
-    <div class="calendar">
-      ➡ Calendario CML 2020
-      <br>
-      <img style="height: 2em;" src="http://www.centrometeolombardo.com/Files/CML/Pubblicazioni/Calendario2020/Spot_Cal2020.png" />
-    </div>
-  </a>
   <div class="stationInfo">
-    Stazione a <span id="stationElevation"></span>&nbsp;, <span id="stationLatitude"></span>-<span id="stationLongitude"></span>
+    Alt. <span id="stationElevation"></span>&nbsp; - Loc. <span id="stationLatitude"></span>-<span id="stationLongitude"></span>
   </div>
   <!-- HEADER START -->
   <div class="sunMoon">
-    Alba: <span id="sunriseTime"></span>,&nbsp;
-    tramonto: <span id="sunsetTime"></span>.&nbsp;
-    Fase lunare: <span id="moonPhase"></span>
+    Alba <span id="sunriseTime"></span>&nbsp; - Tramonto <span id="sunsetTime"></span>&nbsp; - Luna <span id="moonPhase"></span>
   </div>
   <!-- HEADER END -->
 </div>
 
 <div>
-  <ul id="genericMeasures" class="measures-container" style="display: none;">
-    <li class="where"></li>
+  <!-- NOTE: this is actually just a template, being used for the 2 containers below -->
+  <ul id="measuresTemplate" class="measures-container" style="display: none;">
+    <li class="">
+      <label>&nbsp;</label>
+      <p id="location" class="where">XXXXXX</p>
+      <p class="timestamp">
+        <span class="stationTime"></span>, <span class="stationDate"></span>
+      </p>
+    </li>
+
     <li class="measure">
-      <label>Vento</label>
+      <label>Temperatura (&deg;C)</label>
+      <div>
+        <div class="min">
+          <div><span class="lowOutsideTemp"></span></div>
+          <div class="sub"><span class="lowOutsideTempTime"></span></div>
+        </div>
+        <div class="curr">
+          <span class="outsideTemp"></span>
+          <span style="font-size: 50%;"> Feels&nbsp;</span><span style="font-size: 80%;" class="apparentTemp"></span>
+        </div>
+        <div class="max">
+          <div><span class="hiOutsideTemp"></span></div>
+          <div class="sub"><span class="hiOutsideTempTime"></span></div>
+        </div>
+      </div>
+    </li>
+
+    <li class="measure">
+      <label>Vento (km/h)</label>
       <div>
         <div class="other">
           <div><span class="windGustSpeed"></span></div>
           <div class="sub">
-            Raffica
+            Raff
           </div>
         </div>
         <div class="curr">
-          <span class="windSpeed"></span><label class="unit"><span class="windUnit"></span></label>
+          <span class="windSpeed"></span>
           <div style="font-size:50%">
-            <span class="windDirection"></span>&nbsp;<span class="windBeaufortScale"></span>
+            <span class="windDirection"></span>
           </div>
         </div>
         <div class="max">
@@ -55,34 +73,14 @@
     </li>
 
     <li class="measure">
-      <label>Temperatura</label>
-      <div>
-        <div class="min">
-          <div><span class="lowOutsideTemp"></span></div>
-          <div class="sub"><span class="lowOutsideTempTime"></span></div>
-        </div>
-        <div class="curr">
-          <span class="outsideTemp"></span><label class="unit">C</label>
-          <div style="font-size: 50%;">
-            Percepita &nbsp; <span class="apparentTemp"></span><label class="unit">C</label>
-          </div>
-        </div>
-        <div class="max">
-          <div><span class="hiOutsideTemp"></span></div>
-          <div class="sub"><span class="hiOutsideTempTime"></span></div>
-        </div>
-      </div>
-    </li>
-
-    <li class="measure narrower">
-      <label>Umidit&agrave;</label>
+      <label>Umidit&agrave; (%)</label>
       <div>
         <div class="min">
           <div><span class="lowHumidity"></span></div>
           <div class="sub"><span class="lowHumTime"></span></div>
         </div>
-        <div class="curr">
-          <span class="outsideHumidity"></span><label class="unit">%</label>
+        <div class="curr narrow">
+          <span class="outsideHumidity"></span>
           <div style="font-size: 50%">&nbsp;</div>
         </div>
         <div class="max">
@@ -92,6 +90,7 @@
       </div>
     </li>
 
+<!--
     <li class="measure">
       <label>Pressione</label>
       <div>
@@ -111,29 +110,30 @@
         </div>
       </div>
     </li>
+-->
 
     <li class="measure">
-      <label>Pioggia</label>
+      <label>Pioggia (mm/h)</label>
       <div>
         <div class="other">
           <div>
             <span class="dailyRain"></span>
           </div>
           <div class="sub">
-            mm totali
+            Accum
           </div>
         </div>
         <div class="curr">
-          <span class="rainRate"></span><label class="unit"><span class="rateUnit"></span></label>
+          <span class="rainRate"></span>
           <div style="font-size:50%">
           </div>
         </div>
         <div class="max">
           <div>
-            <span class="stormRain"></span><label class="unit"><span class="rateUnit"></span></label>
+            <span class="stormRain"></span>
           </div>
           <div class="sub">
-            Tempesta
+            Storm
           </div>
         </div>
       </div>
@@ -142,7 +142,6 @@
 
   <ul id="fiobbioMeasures" class="measures-container"></ul>
   <ul id="mismaMeasures" class="measures-container"></ul>
-
 </div>
 
 <div>
@@ -277,9 +276,10 @@
 
         }).done( (data) => {
 
-          $("#" + loc.tgtId).html($("#genericMeasures").html());
+          // Copy the HTML template into the actual element ID
+          $("#" + loc.tgtId).html($("#measuresTemplate").html());
 
-          $("#" + loc.tgtId + " .where").text(loc.where);
+          $("#" + loc.tgtId + " #location").text(loc.location);
 
           // we map 1:1 json key value with id name,
           // so that data loading is trivial!
@@ -294,12 +294,15 @@
 
     $(document).ready(() => {
       const locations = [
-        { url   : "realtime.json" ,
+        {
+          url   : "realtime.json" ,
           tgtId : "fiobbioMeasures",
-          where : "Paese"},
-        { url   : "/misma/realtime.json",
+          location : "Paese"
+        },
+        {
+          url   : "/misma/realtime.json",
           tgtId : "mismaMeasures",
-          where : "Misma"
+          location : "Misma"
         }
       ];
 
