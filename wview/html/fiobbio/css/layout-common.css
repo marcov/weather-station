@@ -71,7 +71,7 @@ li {
   overflow: auto;
 }
 
-.measures-container {
+.measures-group {
   margin: 0 auto;
   display: flex;
   flex-flow: row wrap;
@@ -80,7 +80,6 @@ li {
   padding-top: 0.5rem;
   padding-left: 0.2rem;
   padding-right: 0.2rem;
-  width: 99%;
 }
 
 .measure {
@@ -203,6 +202,14 @@ img.webcam {
   margin: 0 auto;
   line-height: 2rem;
   font-weight: 800;
+  padding-top: 1.5rem;
+}
+
+.subTitle {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  font-size: 90%;
 }
 
 #histats_counter div {
@@ -254,9 +261,7 @@ iframe.meteoblue {
 .flex-container {
   /* We first create a flex layout context */
   display: flex;
-
   flex-flow: row wrap;
-
   justify-content: center;
   align-items: center;
 }
@@ -280,7 +285,7 @@ iframe.meteoblue {
   background-color: rgba(245, 245, 245, 0.85);
 }
 
-.measures-container .where, .measures-container .timestamp {
+.measures-group .location, .measures-group .timestamp {
   font-weight: bold;
   text-align: left;
   width: 8rem;
@@ -291,10 +296,16 @@ iframe.meteoblue {
   color: #FFF2BD;
 }
 
-.measures-container .timestamp {
+.measures-group .timestamp {
     font-size: 80%;
-    margin: 0 auto;
+    margin: 0;
     padding: 0;
+}
+
+.measures-container {
+    display: table;
+    margin: 0 auto;
+    margin-bottom: .5rem;
 }
 
 #mismaMeasures {
@@ -306,19 +317,8 @@ iframe.meteoblue {
   display: none;
 }
 
-.stationInfo {
-  font-size: 90%;
-}
-
-.sunMoon {
-  font-size: 80%;
-  padding-top: 0.2em;
-  padding-bottom: 0.2em;
-}
-
 /* credits: https://css-tricks.com/infinite-all-css-scrolling-slideshow/ */
 /* https://css-tricks.com/books/volume-i/infinite-scrolling-background-image/ */
-
 .panorama-scroll {
   margin-top: 1em;
   margin: 0 auto;
@@ -377,21 +377,16 @@ iframe.meteoblue {
 }
 
 .header {
-  padding: .1rem;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
+.header li {
+  font-size: 110%;
+  padding: .5rem 2rem .5rem 2rem;
   background-color: #5558;
-  width: 66%;
-  margin-left: 16.5%;
   text-align: center;
 }
-
-.header p {
-    margin-block-start: .5em;
-    margin-block-end: .5em;
-}
-
-/* The sticky class is added to the header with JS when it reaches its scroll position */
-.sticky {
-  position: fixed;
-  top: 0;
-}
-

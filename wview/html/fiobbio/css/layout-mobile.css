@@ -7,6 +7,7 @@
 
   .heading > .title {
     font-size: 200%;
+    padding-top: .5rem;
   }
 
   img.satellite
@@ -15,7 +16,6 @@
     max-width:100%;
     height: auto;
   }
-
 
   #menutop {
     clear:both;
@@ -74,13 +74,12 @@
     margin-top: 0.5em;
   }
 
-  .measures-container {
+  .measures-group {
     flex-flow: column nowrap;
-    padding-left: 0;
-    padding-right: 0;
+    padding: 0;
   }
 
-  .measures-container > .where {
+  .measures-group > .where {
     padding-top: 0;
   }
 
@@ -95,12 +94,11 @@
     margin-left: 0;
     padding-left: 0;
     width: 25%;
-    font-size: 80%;
     text-align: left;
   }
 
   .measure  .curr {
-    font-size: 140%;
+    font-size: 150%;
     width: 5em;
   }
 
@@ -115,4 +113,15 @@
   .bottombanner {
     font-size: 90%;
   }
-}
+
+  .emptyLabel {
+    display: none;
+  }
+
+  .subTitle {
+      padding: 0;
+      line-height: 1rem;
+      font-size: 66%;
+  }
+
+} /* KEEP THIS AS THE LAST LINE!  @media screen and (max-width: 600px)  */

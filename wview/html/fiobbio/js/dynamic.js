@@ -12,9 +12,9 @@ $(function () {
 
   var staticPages = [
     {name : "currweather", location : null, enabled: true},
+    {name : "forecast",    location : null, enabled: true},
     {name : "satellite",   location : null, enabled: true},
     {name : "extrastas",   location : null, enabled: false},
-    {name : "forecast",    location : null, enabled: true},
     {name : "radar",       location : null, enabled: true},
     {name : "maps",        location : null, enabled: false}
   ];

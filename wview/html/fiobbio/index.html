@@ -23,14 +23,18 @@
   <!-- enable snow:
   <canvas id="snowcanvas"></canvas>
   -->
-  <div class="header" id="myHeader">
-    <p>Nuovo indirizzo: <a href="http://meteo.fiobbio.com" style="font-style: italic; font-weight: bold; color: orange;">meteo.fiobbio.com</a> ... prendi nota!</p>
-  </div>
+  <ul class="header">
+      <li>
+      <span style="text-decoration-line:line-through; color: #a0a0a0;">fiobbio.blogdns.net</span>
+      &nbsp;&rarr;&nbsp;
+      <a href="http://meteo.fiobbio.com" style="font-size: 110%; font-weight: 800; color: orange; text-decoration-line: none;">meteo.fiobbio.com</a>
+      </li>
+  </ul>
 
   <div class="maincolumn">
     <div class="menu">
       <div class="hamburger-menu-wrapper">
-        <div style="float: left; margin: 0em; padding: 0em;">
+        <div style="margin: 0em; padding: 0em;">
           <button class="hamburger-menu">
               <span></span>
             </button>
@@ -81,33 +85,29 @@
   <!-- div..maincolumn -->
 
   <script src="js/jquery-3.3.1.min.js"></script>
-  <script src="js/menu.js"></script>
+  <script>
+    (function () {
+      'use strict';
+      $('.hamburger-menu-wrapper').click(function (e) {
+        e.preventDefault();
+        if ($(this).hasClass('active')) {
+          $(this).removeClass('active');
+          $('.menu-overlay').fadeToggle('fast', 'linear');
+          $('.menu .menu-list').slideToggle('slow', 'swing');
+        } else {
+          $(this).addClass('active');
+          $('.menu-overlay').fadeToggle('fast', 'linear');
+          $('.menu .menu-list').slideToggle('slow', 'swing');
+        }
+      });
+    })();
+  </script>
   <script src="js/dynamic.js"></script>
   <script src="js/featherlight.min.js"></script>
   <script src="js/wview.js"></script>
   <!-- enable snow:
   <script src="js/snow.js"></script>
   -->
-
-  <script>
-    // When the user scrolls the page, execute myFunction
-    window.onscroll = function() {myFunction()};
-
-    // Get the header
-    var header = document.getElementById("myHeader");
-
-    // Get the offset position of the navbar
-    var sticky = header.offsetTop;
-
-    // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
-    function myFunction() {
-      if (window.pageYOffset > sticky) {
-        header.classList.add("sticky");
-      } else {
-        header.classList.remove("sticky");
-      }
-    }
-  </script>
 
   <!-- Histats.com  START  (aync)-->
   <script>

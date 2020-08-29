@@ -4,32 +4,41 @@
     <!--<span id="stationTime"></span>, <span id="stationDate"></span>-->
   </div>
 
-  <div>
-    &nbsp;
-    <!-- PADDING to center the title below, becasue this ^ is floating... -->
-  </div>
   <div class="title">
     Meteo Fiobbio
   </div>
-  <div class="stationInfo">
-    Alt. <span id="stationElevation"></span>&nbsp; - Loc. <span id="stationLatitude"></span>-<span id="stationLongitude"></span>
-  </div>
-  <!-- HEADER START -->
-  <div class="sunMoon">
-    Alba <span id="sunriseTime"></span>&nbsp; - Tramonto <span id="sunsetTime"></span>&nbsp; - Luna <span id="moonPhase"></span>
-  </div>
+  <ul class="subTitle">
+    <li>
+      &#9650; <span id="stationElevation"></span>
+    </li>
+    <li> &nbsp;&#8211;&nbsp; </li>
+
+    <li>
+      <span id="stationLatitude"></span>&#8210;<span id="stationLongitude"></span>
+    </li>
+    <li> &nbsp;&#8211;&nbsp; </li>
+
+    <li>
+      &#9788;&UpperRightArrow;<span id="sunriseTime"></span>&nbsp;&LowerRightArrow;<span id="sunsetTime"></span>
+    </li>
+    <li> &nbsp;&#8211;&nbsp; </li>
+
+    <li>
+        &#9789; <span id="moonPhase"></span>
+    </li>
+
+  </ul>
   <!-- HEADER END -->
 </div>
 
-<div>
+<div class="measures-container">
   <!-- NOTE: this is actually just a template, being used for the 2 containers below -->
-  <ul id="measuresTemplate" class="measures-container" style="display: none;">
+  <ul id="measuresTemplate" class="measures-group" style="display: none;">
     <li class="">
-      <label>&nbsp;</label>
-      <p id="location" class="where">XXXXXX</p>
-      <p class="timestamp">
-        <span class="stationTime"></span>, <span class="stationDate"></span>
-      </p>
+      <!-- placeholder label to a correct flex layout -->
+      <label class="emptyLabel">&nbsp;</label>
+      <p class="location">XXXXXX</p>
+      <p class="timestamp">TSSSSSS</p>
     </li>
 
     <li class="measure">
@@ -138,11 +147,12 @@
         </div>
       </div>
     </li>
-  </ul> <!-- measures-container -->
+  </ul> <!-- measures-group -->
 
-  <ul id="fiobbioMeasures" class="measures-container"></ul>
-  <ul id="mismaMeasures" class="measures-container"></ul>
-</div>
+  <ul id="fiobbioMeasures" class="measures-group"></ul>
+  <ul id="mismaMeasures" class="measures-group"></ul>
+
+</div> <!-- <div class="measures-container"> -->
 
 <div>
   <ul class="webcams-container">
@@ -256,14 +266,27 @@
         $.ajax({
           url      : "stationinfo.json",
           dataType : "json"
-        }).done( (data) => {
+        }).done( (jsonData) => {
 
           // we map 1:1 json key value with id name,
-          // so that data loading is trivial!
-          $.each(data, (key, val) => {
+          // so that jsonData loading is trivial!
+          $.each(jsonData, (key, val) => {
             $("#" + key).text(val);
           });
         });
+    }
+
+    function isToday(dateString) {
+      let today = new Date();
+      let dateTokens = dateString.split('/');
+
+      let dd = parseInt(dateTokens[0]);
+      let mm = parseInt(dateTokens[1]);
+      let yy = parseInt(dateTokens[2]);
+
+      return (today.getDate() == dd &&
+              (today.getMonth() + 1) == mm &&
+              (today.getFullYear() % 100) == yy);
     }
 
     function populateMeasures(locs) {
@@ -274,16 +297,24 @@
           url      : loc.url,
           dataType : "json"
 
-        }).done( (data) => {
+        }).done( (jsonData) => {
 
-          // Copy the HTML template into the actual element ID
+          // Copy the HTML template into the actual element ID with the given tgtId
           $("#" + loc.tgtId).html($("#measuresTemplate").html());
 
-          $("#" + loc.tgtId + " #location").text(loc.location);
+          $("#" + loc.tgtId + " .location").text(loc.location);
+
+          // Strip out seconds
+          jsonData.timestamp = jsonData.stationTime.split(':', 2).join(':');
+
+          // if not today, append full date
+          if (!isToday(jsonData.stationDate)) {
+            jsonData.timestamp += ' - ' + jsonData.stationDate;
+          }
 
           // we map 1:1 json key value with id name,
-          // so that data loading is trivial!
-          $.each(data, (key, val) => {
+          // so that jsonData loading is trivial!
+          $.each(jsonData, (key, val) => {
             $("#" + loc.tgtId + " ." + key).text(val);
           });
 
