@@ -26,7 +26,8 @@ server {
     # Redirect from old to new domain name
     #
 	if ($http_host = 'fiobbio.blogdns.net') {
-		rewrite ^(.*) http://meteo.fiobbio.com$1 redirect;
+		#rewrite ^(.*) http://meteo.fiobbio.com$1 redirect;
+		rewrite ^(.*) http://meteo.fiobbio.com/bad-domain.html permanent;
 	}
 
 	# SSL configuration
@@ -139,6 +140,7 @@ server {
    location ~ ^/ap/(.*)$ {
        proxy_pass http://192.168.1.254/$1;
    }
+
 
 }
 
