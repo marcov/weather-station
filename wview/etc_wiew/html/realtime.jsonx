@@ -46,5 +46,6 @@
     "apparentTemp" : "<!--apparentTemp-->",
     "windUnit" : "<!--windUnit-->",
     "barUnit"  : "<!--barUnit-->",
-    "rateUnit" : "<!--rateUnit-->"
+    "rateUnit" : "<!--rateUnit-->",
+    "solarRad" : "<!--solarRad-->"
 }
