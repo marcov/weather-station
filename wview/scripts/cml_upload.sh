@@ -29,6 +29,11 @@ declare -r cmlPngsPath="/tmp/cml-pngs"
 #
 declare -r ftpSendCmds="/tmp/cml_ftp_commands.txt"
 
+#
+# This is the default resolution for wview chargs, as specified in /etc/wview/graphics.conf
+#
+reqdPngResolution="300x180"
+
 ###############################################################################
 
 check_upload_needed() {
@@ -52,14 +57,13 @@ resize_pngs() {
     rm -rf "$cmlPngsPath"
     mkdir -p "$cmlPngsPath"
 
-    resolution="300x240"
 
     echo "Creating resized image for proper rendering on CML website"
     for img in `find /var/lib/wview/img -name "*day.png"`; do
         dst_small="${cmlPngsPath}/$(basename "$img")"
         set -x
         convert \
-            -resize ${resolution} \
+            -resize ${reqdPngResolution} \
             ${img} ${dst_small}
         set +x
     done
