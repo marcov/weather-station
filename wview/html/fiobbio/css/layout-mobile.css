@@ -124,4 +124,10 @@
       font-size: 66%;
   }
 
+  .grafana-chart {
+      width: 95vw;
+      height: 90vh;
+      border-width: 0;
+  }
+
 } /* KEEP THIS AS THE LAST LINE!  @media screen and (max-width: 600px)  */

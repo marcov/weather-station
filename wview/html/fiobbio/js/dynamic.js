@@ -108,10 +108,22 @@ $(function () {
     setTimeout(reloadCurrWeather, 150000);
   }
 
-
   function dynamicLoadInit() {
     loadedDivs = 0;
     loadEleminNewDiv(staticPages[0]);
+
+    //
+    // Load an extra div if there's still space
+    //
+    setTimeout(() => {
+      var contentHeigth = $(document.getElementsByClassName('maincolumn')).height();
+      var windowHeigth = $(window).height();
+
+      if (contentHeigth < windowHeigth) {
+        loadEleminNewDiv(staticPages[1]);
+      }
+    }, 500);
+
     setTimeout(reloadCurrWeather, 150000);
   }
 

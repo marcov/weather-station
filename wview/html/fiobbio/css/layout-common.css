@@ -1,7 +1,7 @@
 body {
   background-color: #323232;
   /*font-family: Verdana, Arial, Sans-Serif;*/
-  font-family: 'Baloo Tamma 2', cursive;
+  font-family: 'Baloo Tamma 2';
   color: whitesmoke;
   margin: 0;
   padding: 0;
@@ -379,9 +379,12 @@ iframe.meteoblue {
 .header {
   position: sticky;
   top: 0;
-  display: flex;
   flex-flow: row;
   justify-content: center;
+  display: flex;
+
+  /* HIDING IT HERE */
+  display: none;
 }
 
 .header li {
@@ -389,4 +392,11 @@ iframe.meteoblue {
   padding: .5rem 2rem .5rem 2rem;
   background-color: #5558;
   text-align: center;
+}
+
+.grafana-chart {
+    width: 1200px;
+    height: 600px;
+    border-width: 0;
+    border-color: whitesmoke;
 }
