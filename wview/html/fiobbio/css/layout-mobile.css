@@ -83,6 +83,10 @@
     padding-top: 0;
   }
 
+  .maincolumn {
+      margin: 1vw;
+  }
+
   .measure {
     flex-flow      : row;
     justify-content: space-evenly;
@@ -98,7 +102,7 @@
   }
 
   .measure  .curr {
-    font-size: 150%;
+    font-size: 110%;
     width: 5em;
   }
 
@@ -125,7 +129,7 @@
   }
 
   .grafana-chart {
-      width: 95vw;
+      min-width: 98vw;
       height: 90vh;
       border-width: 0;
   }

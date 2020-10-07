@@ -395,8 +395,10 @@ iframe.meteoblue {
 }
 
 .grafana-chart {
-    width: 1200px;
+    width: 100ch;
+    max-width: 98vw;
     height: 600px;
     border-width: 0;
     border-color: whitesmoke;
+    padding: 0.5rem;
 }
