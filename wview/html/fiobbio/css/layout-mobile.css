@@ -128,10 +128,17 @@
       font-size: 66%;
   }
 
-  .grafana-chart {
+  iframe.grafana {
       min-width: 98vw;
-      height: 90vh;
       border-width: 0;
+  }
+
+  iframe.grafana-chart {
+      height: 90vh;
+  }
+
+  iframe.grafana-table {
+      height: 33vh;
   }
 
 } /* KEEP THIS AS THE LAST LINE!  @media screen and (max-width: 600px)  */
