@@ -5,7 +5,7 @@ FROM ubuntu:18.04 as BUILDER
 
 RUN apt-get -y update; \
     \
-    apt-get -y install \
+    DEBIAN_FRONTEND=noninteractive apt-get -yq install \
       build-essential \
       git-core \
       libgd-dev \
@@ -40,7 +40,7 @@ FROM ubuntu:18.04
 
 RUN apt-get -y update; \
     \
-    apt-get -y install \
+    DEBIAN_FRONTEND=noninteractive apt-get -yq install \
       libgd3 \
       libsqlite3-0 \
       librad0 \

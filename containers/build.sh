@@ -8,40 +8,42 @@ declare -r wviewImage="wview:5.21.7"
 declare -r nginxImage="docker.io/library/nginx:latest"
 declare -r podName="wview-pod"
 declare -r wviewImgVolume="wview-img"
+declare -r ctrEngine="podman"
 
-build() {
-	#podman build -t "${rsyslogImage}" -f Dockerfile.rsyslog .
-	podman build -t "${wviewImage}" -f Dockerfile.wview .
+build_images() {
+	#${ctrEngine} build -t "${rsyslogImage}" -f Dockerfile.rsyslog .
+	${ctrEngine} build -t "${wviewImage}" -f Dockerfile.wview .
 }
 
-create() {
+build_pod() {
 	echo "Delete old pod"
-	podman pod rm \
+	${ctrEngine} pod rm \
 		-i -f "${podName}"
 
 	echo "Pod create"
-	podman pod create \
+	${ctrEngine} pod create \
 		--publish 8000:80 \
 		--name="${podName}"
 
 	echo "Rm old volume"
-	podman volume rm \
+	${ctrEngine} volume rm \
 		-f  \
 		"${wviewImgVolume}" || echo "Volume ${wviewImgVolume} not found"
 
 	echo "Create volume"
-	podman volume create \
+	${ctrEngine} volume create \
 		"${wviewImgVolume}"
 
-#	echo "Provision volume"
-#	podman run \
-#		--rm \
-#		--volume "${wviewImgVolume}":/mnt \
-#		"${wviewImage}" \
-#		find /usr/local/var/wview/img/ -exec cp -a '{}' '/mnt/' ';'
+	echo "Provision volume"
+	${ctrEngine} run \
+		--rm \
+		-t \
+		--volume "${wviewImgVolume}":/mnt \
+		"${wviewImage}" \
+		find /usr/local/var/wview/img/ -mindepth 1 -exec cp -a '{}' '/mnt/' ';'
 
 	#echo "Create rsyslog container"
-	#podman create \
+	#${ctrEngine} create \
 	#	--name=rsyslog \
 	#	--pod="${podName}" \
 	#	--volume /dev \
@@ -50,11 +52,11 @@ create() {
 
 	echo "Create wview container"
 	#--volumes-from "rsyslog"
-	podman create \
+	${ctrEngine} create \
 		--name=wview  \
 		--pod="${podName}" \
 		--volume $PWD/wview-conf.sdb:/usr/local/etc/wview/wview-conf.sdb \
-		--volume $PWD/wview-archive.sdb:/usr/local/var/wview/archive/wview-archive.sdb \
+		--volume $PWD/wview-archive:/usr/local/var/wview/archive \
 		--volume "${wviewImgVolume}":/usr/local/var/wview/img \
 		"${wviewImage}" \
 		/bin/sh -c "/etc/init.d/rsyslog restart \
@@ -62,12 +64,43 @@ create() {
 					&& tail -f /var/log/syslog"
 
 	echo "Create nginx container"
-	podman create \
+	${ctrEngine} create \
 		--name=nginx \
 		--pod="${podName}" \
 		--volume "${wviewImgVolume}":/usr/share/nginx/html \
 		"${nginxImage}"
 }
 
-build
-create
+usage() {
+	printf "
+Usage   : %s COMMAND
+
+Commands:
+    images :   Build container images
+    pod    :   Create and start the pod
+
+" $0
+	exit 2
+}
+
+[ $# -gt 0 ] || usage
+
+while [ $# -gt 0 ]
+do
+	case $1 in
+		images)
+			echo "INFO: building images"
+			build_images
+			;;
+		pod)
+			echo "INFO: building pod"
+			build_pod
+			echo "INFO: starting pod"
+			#${ctrEngine} pod start wview-pod
+			;;
+		*)
+			usage
+			;;
+	esac
+	shift
+done
