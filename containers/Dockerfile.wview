@@ -62,7 +62,12 @@ RUN apt-get -y update; \
       libssl1.0.0 \
       sqlite3 \
       rsyslog \
-      gawk; \
+      gawk \
+      moreutils \
+      bsdutils \
+      ftp \
+      imagemagick \
+      ; \
     \
     apt-get clean; \
     \
