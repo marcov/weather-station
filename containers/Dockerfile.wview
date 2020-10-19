@@ -28,7 +28,18 @@ RUN cd /; \
     git clone https://github.com/marcov/wview.git
 
 RUN cd /wview; \
-    ./configure; \
+    # 
+    # Pass the same configure options used for the Debian package.
+    # This is needed because wview and our config now depends on those paths.
+    #
+    ./configure $(CROSS) \
+        --prefix= \
+        --exec-prefix=/usr \
+        --sysconfdir=/etc \
+        --localstatedir=/var/lib \
+        --mandir=/usr/share/man \
+        --infodir=/usr/share/info \
+        --enable-install-dpkg=yes; \
     make -j4; \
     make install DESTDIR=/wview-install
 
@@ -62,5 +73,7 @@ COPY --from=BUILDER /wview/examples/Debian/wview /etc/init.d/wview
 
 RUN ln -s /usr/bin/radmrouted /usr/local/bin/; \
     \
-    echo "wviewd_vpro" > /usr/local/etc/wview/wview-binary
+    echo "wviewd_vpro" > /etc/wview/wview-binary
+
+
 
