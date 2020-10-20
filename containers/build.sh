@@ -3,56 +3,45 @@
 #
 set -euo pipefail
 
-#declare -r rsyslogImage="rsyslog:wview"
-declare -r wviewImage="wview:5.21.7"
+declare -r wviewImage="pullme/wview:5.21.7"
 declare -r nginxImage="docker.io/library/nginx:latest"
 declare -r podName="wview-pod"
 declare -r wviewImgVolume="wview-img"
-declare -r ctrEngine="podman"
+declare -r ctrEngine="${CONTAINER_ENGINE:-podman}"
 
 build_images() {
-	#${ctrEngine} build -t "${rsyslogImage}" -f Dockerfile.rsyslog .
 	${ctrEngine} build -t "${wviewImage}" -f Dockerfile.wview .
 }
 
 build_pod() {
 	echo "Delete old pod"
-	${ctrEngine} pod rm \
+	podman pod rm \
 		-i -f "${podName}"
 
 	echo "Pod create"
-	${ctrEngine} pod create \
+	podman pod create \
 		--publish 8000:80 \
 		--name="${podName}"
 
 	echo "Rm old volume"
-	${ctrEngine} volume rm \
+	podman volume rm \
 		-f  \
 		"${wviewImgVolume}" || echo "Volume ${wviewImgVolume} not found"
 
 	echo "Create volume"
-	${ctrEngine} volume create \
+	podman volume create \
 		"${wviewImgVolume}"
 
 	echo "Provision volume"
-	${ctrEngine} run \
+	podman run \
 		--rm \
 		-t \
 		--volume "${wviewImgVolume}":/mnt \
 		"${wviewImage}" \
 		find /usr/local/var/wview/img/ -mindepth 1 -exec cp -a '{}' '/mnt/' ';'
 
-	#echo "Create rsyslog container"
-	#${ctrEngine} create \
-	#	--name=rsyslog \
-	#	--pod="${podName}" \
-	#	--volume /dev \
-	#	"${rsyslogImage}" \
-	#	/usr/sbin/rsyslogd -n
-
 	echo "Create wview container"
-	#--volumes-from "rsyslog"
-	${ctrEngine} create \
+	podman create \
 		--name=wview  \
 		--pod="${podName}" \
 		--volume $PWD/wview-conf.sdb:/usr/local/etc/wview/wview-conf.sdb \
@@ -64,7 +53,7 @@ build_pod() {
 					&& tail -f /var/log/syslog"
 
 	echo "Create nginx container"
-	${ctrEngine} create \
+	podman create \
 		--name=nginx \
 		--pod="${podName}" \
 		--volume "${wviewImgVolume}":/usr/share/nginx/html \
@@ -76,8 +65,9 @@ usage() {
 Usage   : %s COMMAND
 
 Commands:
-    images :   Build container images
-    pod    :   Create and start the pod
+    images    :   Build container images
+    pod-build :   Create the wview pod
+    pod-build :   Create start the wview pod
 
 " $0
 	exit 2
@@ -92,11 +82,13 @@ do
 			echo "INFO: building images"
 			build_images
 			;;
-		pod)
+		pod-build)
 			echo "INFO: building pod"
 			build_pod
+			;;
+		pod-start)
 			echo "INFO: starting pod"
-			#${ctrEngine} pod start wview-pod
+			podman pod start ${podName}
 			;;
 		*)
 			usage
