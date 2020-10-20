@@ -79,6 +79,3 @@ COPY --from=BUILDER /wview/examples/Debian/wview /etc/init.d/wview
 RUN ln -s /usr/bin/radmrouted /usr/local/bin/; \
     \
     echo "wviewd_vpro" > /etc/wview/wview-binary
-
-
-

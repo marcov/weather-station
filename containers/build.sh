@@ -4,6 +4,7 @@
 set -euo pipefail
 
 declare -r wviewImage="pullme/wview:5.21.7"
+declare -r ser2netImage="pullme/ser2net:wview"
 declare -r nginxImage="docker.io/library/nginx:latest"
 declare -r podName="wview-pod"
 declare -r wviewImgVolume="wview-img"
@@ -11,6 +12,7 @@ declare -r ctrEngine="${CONTAINER_ENGINE:-podman}"
 
 build_images() {
 	${ctrEngine} build -t "${wviewImage}" -f Dockerfile.wview .
+	${ctrEngine} build -t "${ser2netImage}" -f Dockerfile.ser2net .
 }
 
 build_pod() {

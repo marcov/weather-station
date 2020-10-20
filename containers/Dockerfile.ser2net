@@ -1,0 +1,17 @@
+################################################################################
+#
+# ser2net container
+#
+FROM ubuntu:18.04
+
+RUN apt-get -y update; \
+    \
+    DEBIAN_FRONTEND=noninteractive apt-get -yq install \
+      ser2net \
+      ; \
+    \
+    apt-get clean; \
+    \
+    rm -rf /var/lib/apt/lists
+
+ENTRYPOINT ["/usr/sbin/ser2net", "-n", "-d", "-c", "/etc/ser2net.conf", "-P", "/run/ser2net.pid"]

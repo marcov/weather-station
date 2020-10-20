@@ -2,10 +2,22 @@
 
 set -euo pipefail
 
-#
-# Needs net=host, since config points to ser2net listening on localhost
-#
 set -x
+
+#
+# NOTE: --privileged for /dev/ttyUSB0 access
+#
+docker run \
+    -d --rm \
+    --privileged \
+    \
+    -v /home/pi/weather_station/ser2net/ser2net.conf:/etc/ser2net.conf \
+    -v /dev/ttyUSB0:/dev/ttyUSB0 \
+    \
+    --name=ser2net \
+    \
+    pullme/ser2net:wview
+
 docker run \
     -d --rm \
     \
@@ -26,7 +38,7 @@ docker run \
 docker run \
     -d --rm \
     \
-    --net=host \
+    --net=container:ser2net \
     \
     -v /var/lib/wview/archive:/var/lib/wview/archive \
     -v /var/lib/wview/img:/var/lib/wview/img \
