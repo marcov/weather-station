@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+declare -r repoDir="/home/pi/weather_station"
+
 set -x
 
 #
@@ -11,7 +13,7 @@ docker run \
     -d --rm \
     --privileged \
     \
-    -v /home/pi/weather_station/ser2net/ser2net.conf:/etc/ser2net.conf \
+    -v ${repoDir}/ser2net/ser2net.conf:/etc/ser2net.conf \
     -v /dev/ttyUSB0:/dev/ttyUSB0 \
     \
     --name=ser2net \
@@ -23,9 +25,9 @@ docker run \
     \
     --publish 80:80 \
     \
-    -v /var/lib/wview/img:/var/lib/wview/img \
-    -v /home/pi/weather_station/http_server/nginx_cfg:/etc/nginx/conf.d/default.conf \
-    -v /home/pi/weather_station/wview/html/fiobbio:/home/pi/weather_station/wview/html/fiobbio \
+    -v ${repoDir}/wview/fs/var/lib/wview/img:/var/lib/wview/img \
+    -v ${repoDir}/http_server/nginx_cfg:/etc/nginx/conf.d/default.conf \
+    -v ${repoDir}/wview/html/fiobbio:${repoDir}/wview/html/fiobbio \
     \
     -v /dev/log:/dev/log \
     -v /etc/timezone:/etc/timezone:ro \
@@ -40,13 +42,13 @@ docker run \
     \
     --net=container:ser2net \
     \
-    -v /var/lib/wview/archive:/var/lib/wview/archive \
-    -v /var/lib/wview/img:/var/lib/wview/img \
-    -v /var/lib/wview/conf:/var/lib/wview/conf \
-    -v /etc/wview:/etc/wview \
+    -v ${repoDir}/wview/fs/var/lib/wview/archive:/var/lib/wview/archive \
+    -v ${repoDir}/wview/fs/var/lib/wview/img:/var/lib/wview/img \
+    -v ${repoDir}/wview/fs/var/lib/wview/conf:/var/lib/wview/conf \
+    -v ${repoDir}/wview/fs/etc/wview:/etc/wview \
     -v /etc/cml_ftp_login_data.sh:/etc/cml_ftp_login_data.sh:ro \
     -v /etc/webcam_login_data.sh:/etc/webcam_login_data.sh:ro \
-    -v /home/pi/weather_station:/home/pi/weather_station \
+    -v ${repoDir}:${repoDir} \
     \
     -v /dev/log:/dev/log \
     -v /etc/timezone:/etc/timezone:ro \
