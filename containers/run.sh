@@ -3,6 +3,7 @@
 set -euo pipefail
 
 declare -r repoDir="/home/pi/weather_station"
+declare -r dataDir="/home/pi/wview-data"
 declare -r scriptStarted="/tmp/run-sh-started"
 declare -r scriptCompleted="/tmp/run-sh-completed"
 
@@ -22,7 +23,7 @@ docker run \
     --privileged \
     \
     -v ${repoDir}/ser2net/ser2net.conf:/etc/ser2net.conf \
-    -v /dev/ttyUSB0:/dev/ttyUSB0 \
+    --device=/dev/ttyUSB0 \
     \
     --name=ser2net \
     \
@@ -65,7 +66,7 @@ docker run \
     \
     --pid=host \
     \
-    --network=container:nginx \
+    --net=container:nginx \
     \
     --name=node-exporter \
     \
@@ -78,9 +79,9 @@ docker run \
     \
     --net=container:ser2net \
     \
-    -v ${repoDir}/wview/fs/var/lib/wview/archive:/var/lib/wview/archive \
+    -v ${dataDir}/archive:/var/lib/wview/archive \
     -v ${repoDir}/wview/fs/var/lib/wview/img:/var/lib/wview/img \
-    -v ${repoDir}/wview/fs/var/lib/wview/conf:/var/lib/wview/conf \
+    -v ${dataDir}/conf:/var/lib/wview/conf \
     -v ${repoDir}/wview/fs/etc/wview:/etc/wview \
     -v /etc/cml_ftp_login_data.sh:/etc/cml_ftp_login_data.sh:ro \
     -v /etc/webcam_login_data.sh:/etc/webcam_login_data.sh:ro \
