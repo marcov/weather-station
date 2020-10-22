@@ -3,8 +3,16 @@
 set -euo pipefail
 
 declare -r repoDir="/home/pi/weather_station"
+declare -r scriptStarted="/tmp/run-sh-started"
+declare -r scriptCompleted="/tmp/run-sh-completed"
+
+rm -f "$scriptCompleted"
+touch "$scriptStarted"
 
 set -x
+
+# Stop everything
+docker stop `docker ps -a -q` 2>/dev/null || { echo "No containers to stop"; }
 
 #
 # NOTE: --privileged for /dev/ttyUSB0 access
@@ -36,6 +44,34 @@ docker run \
     --name=nginx \
     \
     nginx:latest
+
+docker run \
+    -d --rm \
+    \
+    --net=container:nginx \
+    \
+    \
+    --name=nginx-exporter \
+    \
+    pullme/nginx-prometheus-exporter:raspi3 \
+    \
+    -nginx.scrape-uri http://127.0.0.1/stub_status
+
+
+docker run \
+    --rm -d \
+    \
+    -v "/:/host:ro,rslave" \
+    \
+    --pid=host \
+    \
+    --network=container:nginx \
+    \
+    --name=node-exporter \
+    \
+    quay.io/prometheus/node-exporter \
+    \
+    --path.rootfs=/host
 
 docker run \
     -d --rm \
