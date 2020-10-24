@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+. ../common_variables.sh
+
 declare -r repoDir="/home/pi/weather_station"
 declare -r dataDir="/home/pi/wview-data"
 declare -r scriptStarted="/tmp/run-sh-started"
@@ -14,6 +16,15 @@ set -x
 
 # Stop everything
 docker stop `docker ps -a -q` 2>/dev/null || { echo "No containers to stop"; }
+
+#
+# TODO: find a better way to store wview img in a tmpfs shared volume b/w host and containers!
+#
+# Provision img folder
+rm -rf "${wviewEphemeralImg}"
+cp -a "${repoDir}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static" "${wviewEphemeralImg}"
+mkdir "${wviewEphemeralImg}/NOAA"
+mkdir "${wviewEphemeralImg}/Archive"
 
 #
 # NOTE: --privileged for /dev/ttyUSB0 access
@@ -32,11 +43,36 @@ docker run \
 docker run \
     -d --rm \
     \
+    --net=container:ser2net \
+    \
+    -v ${dataDir}/archive:${WVIEW_DATA_DIR}/archive \
+    -v "${wviewEphemeralImg}":${WVIEW_DATA_DIR}/img \
+    -v ${repoDir}/wview/fs/${WVIEW_CONF_DIR}:${WVIEW_CONF_DIR} \
+    -v ${dataDir}/conf/wview-conf.sdb:${WVIEW_CONF_DIR}/wview-conf.sdb \
+    \
+    -v /etc/cml_ftp_login_data.sh:/etc/cml_ftp_login_data.sh:ro \
+    -v /etc/webcam_login_data.sh:/etc/webcam_login_data.sh:ro \
+    \
+    -v ${repoDir}:${repoDir} \
+    \
+    -v /dev/log:/dev/log \
+    -v /etc/timezone:/etc/timezone:ro \
+    -v /etc/localtime:/etc/localtime:ro \
+    \
+    --name=wview \
+    \
+    pullme/wview:5.21.7 \
+    \
+    sh -c "/etc/init.d/wview restart; while true; do sleep 9999; done"
+
+docker run \
+    -d --rm \
+    \
     --publish 80:80 \
     \
-    -v ${repoDir}/wview/fs/var/lib/wview/img:/var/lib/wview/img \
-    -v ${repoDir}/http_server/nginx_cfg:/etc/nginx/conf.d/default.conf \
-    -v ${repoDir}/wview/html/fiobbio:${repoDir}/wview/html/fiobbio \
+    -v "${wviewEphemeralImg}":${WVIEW_DATA_DIR}/img:ro \
+    -v ${repoDir}/http_server/nginx_cfg:/etc/nginx/conf.d/default.conf:ro \
+    -v ${repoDir}/wview/html/fiobbio:${repoDir}/wview/html/fiobbio:ro \
     \
     -v /dev/log:/dev/log \
     -v /etc/timezone:/etc/timezone:ro \
@@ -46,6 +82,22 @@ docker run \
     \
     nginx:latest
 
+#docker run \
+#    -d --rm \
+#    \
+#    -v ${repoDir}/crontabs/crontab:/var/spool/cron/crontabs \
+#    \
+#    -v /dev/log:/dev/log \
+#    -v /etc/timezone:/etc/timezone:ro \
+#    -v /etc/localtime:/etc/localtime:ro \
+#    \
+#    --name=crond \
+#    \
+#    alpine:latest \
+#    \
+#    /usr/sbin/crond -f -c /var/spool/cron/crontabs
+
+################################################################################
 docker run \
     -d --rm \
     \
@@ -74,27 +126,6 @@ docker run \
     \
     --path.rootfs=/host
 
-docker run \
-    -d --rm \
-    \
-    --net=container:ser2net \
-    \
-    -v ${dataDir}/archive:/var/lib/wview/archive \
-    -v ${repoDir}/wview/fs/var/lib/wview/img:/var/lib/wview/img \
-    -v ${dataDir}/conf:/var/lib/wview/conf \
-    -v ${repoDir}/wview/fs/etc/wview:/etc/wview \
-    -v /etc/cml_ftp_login_data.sh:/etc/cml_ftp_login_data.sh:ro \
-    -v /etc/webcam_login_data.sh:/etc/webcam_login_data.sh:ro \
-    -v ${repoDir}:${repoDir} \
-    \
-    -v /dev/log:/dev/log \
-    -v /etc/timezone:/etc/timezone:ro \
-    -v /etc/localtime:/etc/localtime:ro \
-    \
-    --name=wview \
-    \
-    pullme/wview:5.21.7 \
-    \
-    sh -c "/etc/init.d/wview restart; while true; do sleep 9999; done"
-
 set +x
+
+touch "$scriptCompleted"
