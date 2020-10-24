@@ -1,7 +1,7 @@
 #!/bin/sh
 # Create a set of symbolic links...
 
-repoRoot=/home/pi/weather_station
+repoRoot=/home/pi/weather-station
 wviewVar=/var/lib/wview
 
 #TODO dont run it twice!...

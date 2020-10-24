@@ -55,7 +55,7 @@ server {
 
     # = : exact match
     location  = / {
-        root /home/pi/weather_station/wview/html/fiobbio/;
+        root /weather-station/wview/html/fiobbio/;
         try_files $uri $uri/ =404;
 
         # kill cache
@@ -68,7 +68,7 @@ server {
 
     # ~ : regex
     location ~ ^/(index\.|js/|css/|html/) {
-        root /home/pi/weather_station/wview/html/fiobbio/;
+        root /weather-station/wview/html/fiobbio/;
         try_files $uri $uri/ =404;
 
         # kill cache

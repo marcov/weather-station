@@ -45,6 +45,6 @@ echo "INFO: iptables insert INPUT (match recent): jump LOGDROP"
 iptables -I INPUT -p tcp --dport 22222 -i eth0 -m state --state NEW -m recent --update --seconds $dropConnInterval --hitcount $dropConnCount -j LOGDROP
 
 echo "INFO: --HACK-- start the wview container here"
-/home/pi/weather_station/containers/run.sh
+/home/pi/weather-station/containers/run.sh
 
 exit 0

@@ -1,5 +1,5 @@
 #!/bin/sh
-cd /home/pi/weather_station/webcam/scripts 
+cd /home/pi/weather-station/webcam/scripts
 
 ./delete_ftp_pics.sh >/dev/null
 

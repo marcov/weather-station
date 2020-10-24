@@ -6,7 +6,7 @@
 
 set -euo pipefail
 
-declare -r scriptsPath="/home/pi/weather_station/wview/scripts"
+declare -r scriptsPath="/weather-station/wview/scripts"
 declare -r loggerTag="wview post-generate.sh"
 
 pushd "${scriptsPath}" > /dev/null || { logger -t "${loggerTag}" "Failed to pushd scripts path: ${scriptsPath}"; exit $?; }

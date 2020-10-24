@@ -4,7 +4,7 @@ set -euo pipefail
 
 . ../common_variables.sh
 
-declare -r repoDir="/home/pi/weather_station"
+declare -r repoDir="/home/pi/weather-station"
 declare -r dataDir="/home/pi/wview-data"
 declare -r scriptStarted="/tmp/run-sh-started"
 declare -r scriptCompleted="/tmp/run-sh-completed"
@@ -53,7 +53,7 @@ docker run \
     -v /etc/cml_ftp_login_data.sh:/etc/cml_ftp_login_data.sh:ro \
     -v /etc/webcam_login_data.sh:/etc/webcam_login_data.sh:ro \
     \
-    -v ${repoDir}:${repoDir} \
+    -v ${repoDir}:/weather-station \
     \
     -v /dev/log:/dev/log \
     -v /etc/timezone:/etc/timezone:ro \
@@ -72,7 +72,7 @@ docker run \
     \
     -v "${wviewEphemeralImg}":${WVIEW_DATA_DIR}/img:ro \
     -v ${repoDir}/http_server/nginx_cfg:/etc/nginx/conf.d/default.conf:ro \
-    -v ${repoDir}/wview/html/fiobbio:${repoDir}/wview/html/fiobbio:ro \
+    -v ${repoDir}/wview/html/fiobbio:/weather-station/wview/html/fiobbio:ro \
     \
     -v /dev/log:/dev/log \
     -v /etc/timezone:/etc/timezone:ro \
@@ -85,7 +85,7 @@ docker run \
 #docker run \
 #    -d --rm \
 #    \
-#    -v ${repoDir}/crontabs/crontab:/var/spool/cron/crontabs \
+#    -v ${repoDir}/host/crontab:/var/spool/cron/crontabs \
 #    \
 #    -v /dev/log:/dev/log \
 #    -v /etc/timezone:/etc/timezone:ro \
