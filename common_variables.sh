@@ -4,6 +4,9 @@
 
 declare -r scriptDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 declare -r repoRoot="${scriptDir}"
+declare -r WVIEW_CONF_DIR="/etc/wview"
+declare -r WVIEW_DATA_DIR="/var/lib/wview"
+declare -r wviewEphemeralImg="/tmp/wview-data-img"
 
 credentialFiles=( \
  "/etc/cml_ftp_login_data.sh" \
@@ -15,8 +18,6 @@ for c in "${credentialFiles[@]}"; do
 done
 
 ftp_upload_dir="/srv/ftp/upload"
-wview_html_dir="${repoRoot}/wview/fs/var/lib/wview/img"
-phantomjs_pi_path="/home/pi/bin/phantomjs-2.0.1-development-linux-armv6l/bin/phantomjs"
 
 fiobbioTempUrl="http://localhost/realtime.json"
 mismaTempUrl="http://localhost/misma/realtime.json"

@@ -59,7 +59,7 @@ getRawPicture() {
     name=$1
     srcType=$(echo $2 | cut -d" " -f 1)
 
-    dst=${wview_html_dir}/${webcam_raw_prefix}_${name}.jpg
+    dst=${wviewEphemeralImg}/${webcam_raw_prefix}_${name}.jpg
 
     if [ ${srcType} == "http" ]; then
         login=$(echo $2 | cut -d" " -f 2)

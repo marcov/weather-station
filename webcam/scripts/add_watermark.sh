@@ -11,14 +11,14 @@ addWatermark() {
     text=$3
     temperatureUrl=$4
 
-    temperature=$(curl ${temperatureUrl} | grep outsideTemp | sed -E "s/.+\"([-]?[0-9]+\.[0-9]+)\".+/\1/g")
+    temperature=$(curl -fsSL ${temperatureUrl} | grep outsideTemp | sed -E "s/.+\"([-]?[0-9]+\.[0-9]+)\".+/\1/g")
     ftplogin=$5
     resolution=$6
 
     text=$(echo ${text} | sed "s/_/ /g")
     text="${text}, `date +\"%d-%m-%Y  %T\"`. T: ${temperature}C"
 
-    src=${wview_html_dir}/${webcam_raw_prefix}_${name}.jpg
+    src=${wviewEphemeralImg}/${webcam_raw_prefix}_${name}.jpg
     dst=$(echo ${src} | sed "s/${webcam_raw_prefix}/${webcam_prefix}/g")
     dst_small=$(echo ${src} | sed "s/${webcam_raw_prefix}/${webcam_small_prefix}/g")
 

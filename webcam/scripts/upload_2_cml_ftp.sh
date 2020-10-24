@@ -21,7 +21,7 @@ ftpUpload() {
     suffix=$(echo $5 | cut -d " " -f 3)
 
 
-    src=${wview_html_dir}/${webcam_prefix}_${name}.jpg
+    src=${wviewEphemeralImg}/${webcam_prefix}_${name}.jpg
     src_small=$(echo ${src} | sed "s/${webcam_prefix}/${webcam_small_prefix}/g")
 
     if ! [[ -e ${src} ]] && ! [[ -e ${src_small} ]]; then

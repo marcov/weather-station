@@ -2,11 +2,11 @@
 
 . ../../common_variables.sh
 
-cd ${wview_html_dir} || exit $?
+pushd "${WVIEW_DATA_DIR}"/img >/dev/null || { echo "Failed to cd ${WVIEW_DATA_DIR}/img"; exit $?; }
 
 [ -e wview.htm ] || exit $?
 cat wview.htm >> wview.txt
 
-cd -
+popd >/dev/null
 
 exit 0

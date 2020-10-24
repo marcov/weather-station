@@ -29,6 +29,8 @@ declare -r cmlPngsPath="/tmp/cml-pngs"
 #
 declare -r ftpSendCmds="/tmp/cml_ftp_commands.txt"
 
+declare -r imgDir="${WVIEW_DATA_DIR}/img"
+
 #
 # This is the default resolution for wview chargs, as specified in /etc/wview/graphics.conf
 #
@@ -42,13 +44,13 @@ check_upload_needed() {
         exit 0
     fi
 
-    if ! true && [ -e "${wview_html_dir}"/tempday_last.png ]; then
-     cmp -s "${wview_html_dir}"/tempday.png "${wview_html_dir}"/tempday_last.png
+    if ! true && [ -e "${imgDir}"/tempday_last.png ]; then
+     cmp -s "${imgDir}"/tempday.png "${imgDir}"/tempday_last.png
      if [ $? -eq 0 ]; then
         echo "Content has not changed...exiting"
         exit 0
      else
-        cp "${wview_html_dir}"/tempday.png "${wview_html_dir}"/tempday_last.png
+        cp "${imgDir}"/tempday.png "${imgDir}"/tempday_last.png
      fi
     fi
 }
@@ -99,14 +101,14 @@ prepare_ftp_commands() {
         echo "cd private" >> ${ftpSendCmds}
 
         if [ $giorno -eq 1 ]; then
-          echo "put "${wview_html_dir}"/NOAA/NOAA-$pr_anno-$pr_mese.txt NOAA-$pr_anno-$pr_mese.txt" >> ${ftpSendCmds}
+          echo "put "${imgDir}"/NOAA/NOAA-$pr_anno-$pr_mese.txt NOAA-$pr_anno-$pr_mese.txt" >> ${ftpSendCmds}
           if [ $pr_anno -le $anno ]; then
-            echo "put "${wview_html_dir}"/NOAA/NOAA-$pr_anno.txt NOAA-$pr_anno.txt" >> ${ftpSendCmds}
+            echo "put "${imgDir}"/NOAA/NOAA-$pr_anno.txt NOAA-$pr_anno.txt" >> ${ftpSendCmds}
           fi
         else
-          echo "put "${wview_html_dir}"/NOAA/NOAA-$anno-$mese.txt NOAA-$anno-$mese.txt" >> ${ftpSendCmds}
+          echo "put "${imgDir}"/NOAA/NOAA-$anno-$mese.txt NOAA-$anno-$mese.txt" >> ${ftpSendCmds}
         fi
-        echo "put "${wview_html_dir}"/NOAA/NOAA-$anno.txt NOAA-$anno.txt" >> ${ftpSendCmds}
+        echo "put "${imgDir}"/NOAA/NOAA-$anno.txt NOAA-$anno.txt" >> ${ftpSendCmds}
         echo "cd .." >> ${ftpSendCmds}
 
     else
