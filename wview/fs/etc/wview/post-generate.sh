@@ -18,6 +18,9 @@ logger -t "${loggerTag}" "[start] CML FTP upload"
 chronic ./cml_upload.sh | logger -t "${loggerTag}"
 logger -t "${loggerTag}" "[done] CML FTP upload"
 
+logger -t "${loggerTag}" "[start] delete wview txt (if required)"
+chronic ./delete_wview_txt.sh | logger -t "${loggerTag}"
+
 popd > /dev/null
 
 exit 0
