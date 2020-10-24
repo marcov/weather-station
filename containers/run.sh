@@ -8,6 +8,7 @@ declare -r repoDir="/home/pi/weather-station"
 declare -r dataDir="/home/pi/wview-data"
 declare -r scriptStarted="/tmp/run-sh-started"
 declare -r scriptCompleted="/tmp/run-sh-completed"
+declare removeEphemeral=
 
 rm -f "$scriptCompleted"
 touch "$scriptStarted"
@@ -20,11 +21,13 @@ docker stop `docker ps -a -q` 2>/dev/null || { echo "No containers to stop"; }
 #
 # TODO: find a better way to store wview img in a tmpfs shared volume b/w host and containers!
 #
+if [ -n "${removeEphemeral}" ]; then
+    rm -rf "${wviewEphemeralImg}"
+fi
 # Provision img folder
-rm -rf "${wviewEphemeralImg}"
 cp -a "${repoDir}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static" "${wviewEphemeralImg}"
-mkdir "${wviewEphemeralImg}/NOAA"
-mkdir "${wviewEphemeralImg}/Archive"
+mkdir -p "${wviewEphemeralImg}/NOAA"
+mkdir -p "${wviewEphemeralImg}/Archive"
 
 #
 # NOTE: --privileged for /dev/ttyUSB0 access
@@ -53,7 +56,8 @@ docker run \
     -v /etc/cml_ftp_login_data.sh:/etc/cml_ftp_login_data.sh:ro \
     -v /etc/webcam_login_data.sh:/etc/webcam_login_data.sh:ro \
     \
-    -v ${repoDir}:/weather-station \
+    -v ${repoDir}/wview/scripts:/weather-station/wview/scripts:ro \
+    -v ${repoDir}/common_variables.sh:/weather-station/common_variables.sh:ro \
     \
     -v /dev/log:/dev/log \
     -v /etc/timezone:/etc/timezone:ro \
