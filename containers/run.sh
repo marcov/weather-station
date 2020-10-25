@@ -101,12 +101,16 @@ docker run \
 #    \
 #    /usr/sbin/crond -f -c /var/spool/cron/crontabs
 
+
+#
+# Run as daily cron script. Directly passing a crontab file does not work :-/
+#
 docker run \
     -d --rm \
     \
     -v ${dataDir}:/wview-data \
-    -v ${repoDir}/rclone/crontab:/var/spool/cron/crontabs/root \
-    -v ${repoDir}/rclone/backup.sh:/backup.sh \
+    -v /home/pi/secrets/rclone.conf:/config/rclone/rclone.conf \
+    -v ${repoDir}/rclone/backup:/etc/periodic/daily/backup \
     \
     -v /dev/log:/dev/log \
     -v /etc/timezone:/etc/timezone:ro \
@@ -115,6 +119,8 @@ docker run \
     --name=rclone \
     \
     pullme/rclone:latest
+
+#Not working: -v ${repoDir}/rclone/crontab:/var/spool/cron/crontabs/root
 
 ################################################################################
 docker run \

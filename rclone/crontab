@@ -1,6 +1,0 @@
-SHELL=/bin/sh
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-# Avoid sending mail
-MAILTO=""
-
-39 19 * * *    /backup.sh

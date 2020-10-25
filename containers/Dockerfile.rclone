@@ -1,7 +1,9 @@
 FROM rclone/rclone
 
 RUN \
-    apk add sqlite;
+    apk add \
+        bash \
+        sqlite;
 
-ENTRYPOINT ["/usr/sbin/crond", "-f"]
+ENTRYPOINT ["/usr/sbin/crond", "-f", "-d", "0"]
 
