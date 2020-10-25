@@ -89,7 +89,7 @@ docker run \
 #docker run \
 #    -d --rm \
 #    \
-#    -v ${repoDir}/host/crontab:/var/spool/cron/crontabs \
+#    -v ${repoDir}/host/crontab:/var/spool/cron/crontabs/root \
 #    \
 #    -v /dev/log:/dev/log \
 #    -v /etc/timezone:/etc/timezone:ro \
@@ -100,6 +100,21 @@ docker run \
 #    alpine:latest \
 #    \
 #    /usr/sbin/crond -f -c /var/spool/cron/crontabs
+
+docker run \
+    -d --rm \
+    \
+    -v ${dataDir}:/wview-data \
+    -v ${repoDir}/rclone/crontab:/var/spool/cron/crontabs/root \
+    -v ${repoDir}/rclone/backup.sh:/backup.sh \
+    \
+    -v /dev/log:/dev/log \
+    -v /etc/timezone:/etc/timezone:ro \
+    -v /etc/localtime:/etc/localtime:ro \
+    \
+    --name=rclone \
+    \
+    pullme/rclone:latest
 
 ################################################################################
 docker run \
