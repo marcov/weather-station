@@ -8,8 +8,6 @@ set -euo pipefail
 
 . ../../common_variables.sh
 
-. /etc/cml_ftp_login_data.sh
-
 declare -r CML_ftp_enabled=1
 declare -r ftpPort=21
 
