@@ -5,5 +5,8 @@ RUN \
         bash \
         sqlite;
 
-ENTRYPOINT ["/usr/sbin/crond", "-f", "-d", "0"]
+#
+# We need to override the default entrypoint, that's the "rclone" command
+#
+ENTRYPOINT ["/usr/sbin/crond", "-f"]
 
