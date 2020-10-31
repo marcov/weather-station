@@ -4,8 +4,15 @@
 
 declare -r scriptDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 declare -r repoRoot="${scriptDir}"
+#
+# Container only dir
+#
 declare -r WVIEW_CONF_DIR="/etc/wview"
 declare -r WVIEW_DATA_DIR="/var/lib/wview"
+
+#
+# Host dir
+#
 declare -r wviewEphemeralImg="/tmp/wview-data-img"
 
 credentialFiles=( \
