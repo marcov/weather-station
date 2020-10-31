@@ -11,40 +11,53 @@
 #
 # By default this script does nothing.
 
-# Print the IP address
-_IP=$(hostname -I) || true
-if [ "$_IP" ]; then
-  printf "My IP address is %s\n" "$_IP"
-fi
+start_iperf3 () {
+    [ "$(pgrep iperf3)" ] || { echo "INFO: killing iperf3"; pkill -9 iperf3; }
 
-pkill -9 iperf3
-nohup iperf3 -s 2>&1 > /var/log/iperf.log &
+    echo "INFO: starting IPERF3"
+    nohup iperf3 -s 2>&1 > /var/log/iperf.log &
+}
 
-# If more than $dropConnCount connection attempts are made in
-# $dropConnInterval seconds, drop them.
-dropConnCount=3
-dropConnInterval=240
+setup_iptables () {
+    # If more than $dropConnCount connection attempts are made in
+    # $dropConnInterval seconds, drop them.
+    declare -i dropConnCount=3
+    declare -i dropConnInterval=240
 
-echo "INFO: iptables delete chain LOGDROP"
-iptables -F LOGDROP
-sleep 2
+    echo "INFO: iptables delete chain LOGDROP"
+    iptables --zero INPUT
+    iptables --flush INPUT
+    iptables --zero LOGDROP
+    iptables --flush LOGDROP
+    sleep 1
+    iptables --delete-chain LOGDROP
 
-echo "INFO: iptables new chain LOGDROP"
-iptables -N LOGDROP
+    echo "INFO: iptables new chain LOGDROP"
+    iptables -N LOGDROP
 
-echo "INFO: iptables append LOGDROP: jump LOG"
-iptables -A LOGDROP -j LOG
+    echo "INFO: iptables append LOGDROP: jump LOG"
+    iptables -A LOGDROP -j LOG
 
-echo "INFO: iptables append LOGDROP: jump DROP"
-iptables -A LOGDROP -j DROP
+    echo "INFO: iptables append LOGDROP: jump DROP"
+    iptables -A LOGDROP -j DROP
 
-echo "INFO: iptables insert INPUT (match recent)"
-iptables -I INPUT -p tcp --dport 22222 -i eth0 -m state --state NEW -m recent --set
+    echo "INFO: iptables insert INPUT (match recent)"
+    iptables -I INPUT -p tcp --dport 22222 -i eth0 -m state --state NEW -m recent --set
 
-echo "INFO: iptables insert INPUT (match recent): jump LOGDROP"
-iptables -I INPUT -p tcp --dport 22222 -i eth0 -m state --state NEW -m recent --update --seconds $dropConnInterval --hitcount $dropConnCount -j LOGDROP
+    echo "INFO: iptables insert INPUT (match recent): jump LOGDROP"
+    iptables -I INPUT -p tcp --dport 22222 -i eth0 -m state --state NEW -m recent --update --seconds $dropConnInterval --hitcount $dropConnCount -j LOGDROP
+}
 
-echo "INFO: --HACK-- start the wview container here"
-/home/pi/weather-station/containers/run.sh
+start_containers () {
+    echo "INFO: --HACK-- start the wview container here"
+    /home/pi/weather-station/containers/run.sh
+}
+
+echo "INFO: setup iptables"
+setup_iptables
+#echo "INFO: setup iperf3"
+#start_iperf3
+echo "INFO: start containers"
+start_containers
 
 exit 0
