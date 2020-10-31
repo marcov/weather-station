@@ -16,7 +16,7 @@ addWatermark() {
     temperature="$(curl -fsSL "${temperatureUrl}" | jq -r .outsideTemp)"
     stationName="$(sed "s/_/ /g" <<< "${stationName}")"
     dateTime="$(date +"%H:%M %d-%m-%Y")"
-    watermarkText="${stationName}, ${temperature}°C [${dateTime}]"
+    watermarkText="${stationName}, ${temperature}°C - ${dateTime}"
 
     src=${wviewEphemeralImg}/${webcam_raw_prefix}_${name}.jpg
     dst=$(echo ${src} | sed "s/${webcam_raw_prefix}/${webcam_prefix}/g")
