@@ -8,41 +8,37 @@ set -euo pipefail
 addWatermark() {
     name=$1
     srcInfo=$2
-    text=$3
+    stationName=$3
     temperatureUrl=$4
-
-    temperature=$(curl -fsSL ${temperatureUrl} | grep outsideTemp | sed -E "s/.+\"([-]?[0-9]+\.[0-9]+)\".+/\1/g")
     ftplogin=$5
     resolution=$6
 
-    text=$(echo ${text} | sed "s/_/ /g")
-    text="${text}, `date +\"%d-%m-%Y  %T\"`. T: ${temperature}C"
+    temperature="$(curl -fsSL "${temperatureUrl}" | jq -r .outsideTemp)"
+    stationName="$(sed "s/_/ /g" <<< "${stationName}")"
+    dateTime="$(date +"%H:%M %d-%m-%Y")"
+    watermarkText="${stationName}, ${temperature}°C [${dateTime}]"
 
     src=${wviewEphemeralImg}/${webcam_raw_prefix}_${name}.jpg
     dst=$(echo ${src} | sed "s/${webcam_raw_prefix}/${webcam_prefix}/g")
     dst_small=$(echo ${src} | sed "s/${webcam_raw_prefix}/${webcam_small_prefix}/g")
 
-    if ! [[ -e ${src} ]]; then
-        echo "Source ${src} does not exists...nothing to do"
-        return
-    fi
+    [ -f "${src}" ] || { echo "ERR: ${src} does not exists, skip watermark"; return; }
 
-    echo "Source: ${src}"
-    echo "  With watermark: ${dst}"
-    echo "  Resized: ${dst_small}"
-    echo "  Watermark text: ${text}"
+    echo "SRC: ${src}"
+    echo "  Watermark text:  ${watermarkText}"
+    echo "  DST (watermark): ${dst}"
+    echo "  DST (scaled):    ${dst_small}"
 
-    echo "Adding watermark..."
-
+    echo "Adding watermark"
     convert -pointsize 32 \
         -fill white \
         -undercolor "rgba(0,0,0,0.6)" \
         -gravity northwest \
-        -draw "text 0,0 \"${text}\" " \
+        -draw "text 0,0 \"${watermarkText}\" " \
         ${src} ${dst} || return $?
     echo "Done"
 
-    echo "Creating resized image for faster loading..."
+    echo "Creating scaled image"
     convert \
         -resize ${resolution} \
         ${dst} ${dst_small} || return $?
@@ -56,4 +52,3 @@ addWatermark "${mismaCfg[@]}"
 addWatermark "${mismaPanoCfg[@]}"
 
 exit 0
-
