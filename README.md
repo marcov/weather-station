@@ -1,25 +1,35 @@
-# IoT Weather station
+# Weather station
 
-This repository hosts all the coded needed to run the weather station website at <http://fiobbio.blogdns.net>.
+This is (almost) all of the code required to setup and run the weather station website
+at [meteo.fiobbio.com](http://meteo.fiobbio.com).
+
+The main set of applications are now containerized and running using the
+Docker container engine. 
+The long term goal is to have everything running inside a container, 
+and to able to build the whole environment from this Git repository. Even better, use a 
+k8s-like platform to manage all containers.
 
 ## Hardware
-
 * Davis Vantage Pro2
 * Raspberry Pi 3
-* Cheap chinese webcam.
+* Cheap chinese webcam
 
 ## Software
-
 * Raspbian OS
-* [wview](http://www.wviewweather.com)
-* nginx
-* imagemagick, ... 
+* Docker
+* cron
+* imagemagick, for watermarking and scaling webcam images
+* _and other..._
 
-It would be cool at some point to build a docker image containing all this.
+### Containers
+* [wview](http://www.wviewweather.com): weather data logging
+* nginx
+* rclone for automated backups to Backblaze B2
+* Prometheus exporters
 
 ## Repository content
-
-* The website front end files
-* A set of bash scripts to automate periodic actions as webcam snapshots generation and post-processing
-* wview config files
+* Websites front end
+* Automation bash scripts to run periodic actions, e.g. webcam snapshots generation 
+  and post-processing
+* wview archive and config files
 * other misc configuration files
