@@ -4,6 +4,8 @@ set -euo pipefail
 
 source ../../common_variables.sh
 
+declare -i maxCurlTime=120
+
 httpGet() {
     login="$1"
     url="$2"
@@ -12,7 +14,7 @@ httpGet() {
     echo "INFO: HTTP GET"
     httpResponseHeaders=$(curl \
                              -fL \
-                             --max-time 30 \
+                             --max-time "$maxCurlTime" \
                              --basic -u "${login}" \
                              -o "${dst}" \
                              --dump-header /dev/stdout \
@@ -84,19 +86,25 @@ getRawPicture() {
 }
 
 for i in $(seq 0 ${fiobbioRetries}); do
-    sleep "$(( $i * 2 ))"
+    sleepTime=$(( $i * 2 ))
+    echo "INFO: sleeping $sleepTime"
+    sleep "$sleepTime"
     echo "INFO: get fiobbio $i"
     getRawPicture "${fiobbioCfg[@]}" && break || echo "ERR: failed to get fiobbio"
 done
 
 for i in $(seq 0 ${mismaRetries}); do
-    sleep $(($i * 2))
+    sleepTime=$(( $i * 2 ))
+    echo "INFO: sleeping $sleepTime"
+    sleep "$sleepTime"
     echo "INFO: get misma $i"
     getRawPicture "${mismaCfg[@]}" && break || echo "ERR: failed to get misma"
 done
 
 for i in $(seq 0 ${panoRetries}); do
-    sleep $(($i * 2))
+    sleepTime=$(( $i * 2 ))
+    echo "INFO: sleeping $sleepTime"
+    sleep "$sleepTime"
     echo "INFO: get misma pano $i"
     getRawPicture "${mismaPanoCfg[@]}" && break || echo "ERR: failed to get misma pano"
 done
