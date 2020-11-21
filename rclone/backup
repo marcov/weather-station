@@ -8,7 +8,7 @@ destDir="/data"
 
 declare -a filesList=($(find "${wviewDataPath}"/{archive,conf}/ -maxdepth 1 -type f -name "*sdb"))
 
-rm -rf -p "${destDir}/*sdb"
+rm -rf "${destDir}/*sdb"
 mkdir -p "${destDir}"
 
 set -x
