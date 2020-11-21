@@ -394,16 +394,19 @@ iframe.meteoblue {
   text-align: center;
 }
 
+li.grafana {
+    width: 45%;
+}
+
 iframe.grafana {
-    width: 100ch;
-    max-width: 98vw;
+    width: 100%;
     border-width: 0;
     border-color: whitesmoke;
     padding: 0.5rem;
 }
 
 iframe.grafana-chart {
-    height: 600px;
+    height: 400px;
 }
 
 iframe.grafana-table {
