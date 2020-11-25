@@ -14,6 +14,8 @@ declare -r WVIEW_DATA_DIR="/var/lib/wview"
 # Host dir
 #
 declare -r wviewEphemeralImg="/tmp/wview-data-img"
+declare -r hostWviewDataDir="/home/pi/wview-data"
+declare -r hostRepoRoot="${repoRoot}"
 
 credentialFiles=( \
  "/etc/cml_ftp_login_data.sh" \

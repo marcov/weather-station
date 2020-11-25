@@ -20,7 +20,11 @@ httpGet() {
                              --dump-header /dev/stdout \
                              "${url}")
 
-    [ "$?" = "0" ] || { echo "ERR: HTTP GET failed"; false; return; }
+    #
+    # Delete the image if it's not completely downloaded (should check err code 28)
+    # Call `false' so that return code is a failure
+    #
+    [ "$?" = "0" ] || { echo "ERR: cURL (HTTP GET) failed"; rm -f "${dst}"; false; return; }
 
     contentLength=$(grep -P -o -e "Content-Length: \K([0-9]+)" <<< "${httpResponseHeaders}")
     [ "$?" = "0" ] || { echo "ERR: detecting file size failed"; false; return; }
