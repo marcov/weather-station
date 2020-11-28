@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # upload webcam images from www data to cml ftp
 #

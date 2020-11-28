@@ -1,4 +1,6 @@
-# copy from ftp upload dir to weather station www data
+#!/bin/bash
+#
+# Get raw images from the webcam
 #
 set -euo pipefail
 

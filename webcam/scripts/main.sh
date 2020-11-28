@@ -19,6 +19,4 @@ echo "INFO: add watermark..."
 echo "INFO: uploading 2 CML FTP..."
 "${scriptDir}"/upload_2_cml_ftp.sh || { echo "Failed to upload 2 CML FTP: \"$?\""; }
 
-cd -
-
 exit 0

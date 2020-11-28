@@ -1,0 +1,30 @@
+#!/bin/bash
+
+. ../common_variables.sh
+
+set -x
+
+#
+# /tmp needed for:
+# - /tmp/webcam-lock
+# - /tmp/cml_ftp.log
+#
+docker run \
+    --rm \
+    \
+    -v ${hostRepoRoot}/common_variables.sh:/common_variables.sh:ro \
+    -v /home/pi/secrets/cml_ftp_login_data.sh:/etc/cml_ftp_login_data.sh:ro \
+    -v /home/pi/secrets/webcam_login_data.sh:/etc/webcam_login_data.sh:ro \
+    -v ${hostRepoRoot}/webcam/scripts:/webcam/scripts \
+    -v ${wviewEphemeralImg}:${wviewEphemeralImg} \
+    -v /tmp:/tmp \
+    \
+    -v /dev/log:/dev/log \
+    -v /etc/timezone:/etc/timezone:ro \
+    -v /etc/localtime:/etc/localtime:ro \
+    \
+    --name=webcam \
+    \
+    pullme/webcam:latest \
+    \
+    /webcam/scripts/main.sh

@@ -1,5 +1,5 @@
-#!/bin/sh
-#
+#!/bin/bash
+
 set -euo pipefail
 
 . ../../common_variables.sh
