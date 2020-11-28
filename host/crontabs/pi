@@ -1,0 +1,22 @@
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+# Avoid sending mail
+MAILTO=""
+
+# panorama: generate a panorama from the misma webcam
+#3 * * * *    cd /home/pi/panogen && chronic python3 panogen.py | logger -t panogen
+
+# wview-rrd: generate rrd graphs
+#*/10 * * * *  cd /var/lib/wview/archive && chronic /usr/local/bin/wview-rrd -m 2>&1  | logger -t wview-rrd
+
+# webshot: generate static images from selected webpages
+17 * * * *   cd /home/pi/weather-station/webshot && ./run-in-container.sh 2>&1 | logger -t webshot
+
+# webcam
+*/5 * * * *  cd /home/pi/weather-station/webcam && ./run-in-container.sh 2>&1 | logger -t webcam
+
+# backup wview-data
+0 2 * * *    cd /home/pi/weather-station/rclone && ./run-in-container.sh 2>&1 | logger -t rclone
+
+# update DDNS
+*/5 * * * *    cd /home/pi/nc-ddns && ./run-in-container.sh 2>&1 | logger -t ddns
