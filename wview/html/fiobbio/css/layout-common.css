@@ -395,7 +395,7 @@ iframe.meteoblue {
 }
 
 li.grafana {
-    width: 45%;
+    /*width: 45%;*/
 }
 
 iframe.grafana {
@@ -406,11 +406,11 @@ iframe.grafana {
 }
 
 iframe.grafana-chart {
-    height: 400px;
+    width: 500px;
+    height: 300px;
 }
 
 iframe.grafana-table {
-    width: 50ch;
-    height: 220px;
-    padding-top: 0;
+    width: 500px;
+    height: 19ch;
 }

@@ -129,7 +129,7 @@
   }
 
   li.grafana {
-      width: 100%;
+      /*width: 100%;*/
   }
 
   iframe.grafana {
@@ -138,11 +138,13 @@
   }
 
   iframe.grafana-chart {
+      width:  95%;
       height: 50vh;
   }
 
   iframe.grafana-table {
-      height: 40vh;
+      width:  95%;
+      height: 35vh;
   }
 
 } /* KEEP THIS AS THE LAST LINE!  @media screen and (max-width: 600px)  */
