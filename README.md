@@ -33,3 +33,8 @@ k8s-like platform to manage all containers.
   and post-processing
 * wview archive and config files
 * other misc configuration files
+
+## SSL Certificate
+```
+certbot certonly -d meteo.fiobbio.com --logs-dir /tmp --config-dir ~/secrets/letsencrypt --work-dir /tmp
+```

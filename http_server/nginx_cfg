@@ -18,9 +18,18 @@
 
 # Default server configuration
 #
+
 server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    server_name meteo.fiobbio.com;
+
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
 
     #
     # Redirect from old to new domain name
@@ -51,7 +60,10 @@ server {
     # Add index.php to the list if you are using PHP
     index index.html index.htm index.nginx-debian.html;
 
-    server_name _;
+    server_name meteo.fiobbio.com;
+
+    ssl_certificate /etc/letsencrypt/live/meteo.fiobbio.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/meteo.fiobbio.com/privkey.pem;
 
     # = : exact match
     location  = / {

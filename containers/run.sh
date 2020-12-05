@@ -9,10 +9,13 @@ set -euo pipefail
 declare -r scriptStarted="/tmp/run-sh-started"
 declare -r scriptCompleted="/tmp/run-sh-completed"
 declare removeEphemeral=
-declare interactive=
 
 rm -f "$scriptCompleted"
 touch "$scriptStarted"
+
+echo "NOTE: run with the env INTERACTIVE=1 for interactive startup!"
+echo "INFO: starting up in 2 seconds"
+sleep 2
 
 #
 # TODO: find a better way to store wview img in a tmpfs shared volume b/w host and containers!
@@ -25,7 +28,7 @@ cp -a "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static" "${wviewE
 mkdir -p "${wviewEphemeralImg}/NOAA"
 mkdir -p "${wviewEphemeralImg}/Archive"
 
-[ "${1:-}" = "-i" ] && { echo "INFO: interactive mode"; interactive=1; }
+[ "${1:-}" = "-i" ] && { echo "INFO: INTERACTIVE mode"; INTERACTIVE=1; }
 
 #
 # Return 0 -> container start is skipped
@@ -34,7 +37,7 @@ mkdir -p "${wviewEphemeralImg}/Archive"
 stop_start () {
     local ctrName="$1"
 
-    [ -n "${interactive:-}" ] || return 1
+    [ -n "${INTERACTIVE:-}" ] || return 1
 
     echo "Stop/start $ctrName? [y/n]"
     local answer=
@@ -53,7 +56,7 @@ set -x
 #
 # Stop everything
 #
-[ -n "${interactive:-}" ] || docker stop `docker ps -a -q` 2>/dev/null || { echo "No containers to stop"; }
+[ -n "${INTERACTIVE:-}" ] || docker stop `docker ps -a -q` 2>/dev/null || { echo "No containers to stop"; }
 
 #
 # NOTE: --privileged for /dev/ttyUSB0 access
@@ -99,10 +102,12 @@ stop_start nginx || docker run \
     -d --rm \
     \
     --publish 80:80 \
+    --publish 443:443 \
     \
     -v "${wviewEphemeralImg}":${WVIEW_DATA_DIR}/img:ro \
     -v ${hostRepoRoot}/http_server/nginx_cfg:/etc/nginx/conf.d/default.conf:ro \
     -v ${hostRepoRoot}/wview/html/fiobbio:/weather-station/wview/html/fiobbio:ro \
+    -v /home/pi/secrets/letsencrypt:/etc/letsencrypt:ro \
     \
     -v /dev/log:/dev/log \
     -v /etc/timezone:/etc/timezone:ro \
