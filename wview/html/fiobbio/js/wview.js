@@ -1,7 +1,7 @@
 "use strict";
 
 function createDaySelect(name) {
-  document.write("<select name=" + name + " size='1'>");
+  document.write("<select name=" + name + ">");
   var mydate = new Date();
   var myday = mydate.getDate();
   var daystring = "";
@@ -42,7 +42,7 @@ function createMonthlySelect(name) {
   var mymonth = mydate.getMonth();
   var monthstring = "";
 
-  document.write("<select name=" + name + " size='1'>");
+  document.write("<select name=" + name + ">");
 
   for (var i = 0; i < 12; ++i) {
     if (i < 9) {
@@ -65,7 +65,7 @@ function createYearlySelect(name) {
   var myyear = (mydate.getYear() % 1900) + 1900;
   var yearstring = "";
 
-  document.write("<select name=" + name + " size='1'>");
+  document.write("<select name=" + name + ">");
 
   for (var i = 0; i < 51; ++i) {
     if (i < 10) {

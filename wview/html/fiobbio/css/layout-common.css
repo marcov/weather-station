@@ -28,9 +28,9 @@ input {
   /*-webkit-appearance: none;*/
   color: whitesmoke;
   background: rgba(0, 0, 0, 0.5);
-  font-size: 1em;
-  padding: 0.5em;
-  /* Round button borders */
+  font-size: 100%;
+  padding: 0.2em;
+
   margin-left: 0.2em;
   margin-right: 0.2em;
   margin-top: 0.5em;
@@ -220,13 +220,18 @@ img.webcam {
 
 /***************************************************************/
 
-#noaatext {
-  font-size: 95%;
-  text-align: left;
-  padding-left: 1em;
+.preformatted {
   background: rgba(0, 0, 0, 0.3);
+  font-size: 110%;
+  font-family: monospace;
+  white-space: pre;
+  clear:both;
+  float:left;
 }
 
+select {
+    font-size: 110%;
+}
 
 /*****************************************************************/
 
