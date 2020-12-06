@@ -25,11 +25,11 @@ ftpUpload() {
     src_small=$(echo ${src} | sed "s/${webcam_prefix}/${webcam_small_prefix}/g")
 
     if ! [[ -e ${src} ]] && ! [[ -e ${src_small} ]]; then
-        echo "srcs do not exists...nothing to do"
+        echo "WARN: FTP src ${src} does not exist...nothing to do"
         return
     fi
 
-    echo "FTP upload for ${src} ${src_small}..." >> ${log_dest}
+    echo "INFO: FTP upload for ${src} ${src_small}..." >> ${log_dest}
 
     # vvv FTP commands starts here vvv
     ftp -n -v -p ${cml_ftp_server} >> ${cml_ftp_log_file} << EOF
@@ -44,14 +44,16 @@ EOF
 
     if [[ $? != 0 ]]
     then
-      echo "Failed FTP upload for ${src}!"
+      echo "ERR: Failed FTP upload for ${src}!"
       exit $?
     fi
 
-    rm ${src} ${src_small}
+    #
+    # Keep for local webserver
+    #
+    # rm ${src} ${src_small}
 
-    echo "Done" >> ${log_dest}
-
+    echo "INFO: FTP done" >> ${log_dest}
 }
 
 if [ ${cml_ftp_log_info} == "1" ]

@@ -35,16 +35,18 @@ addWatermark() {
         -undercolor "rgba(0,0,0,0.6)" \
         -gravity northwest \
         -draw "text 0,0 \"${watermarkText}\" " \
-        ${src} ${dst} || return $?
+        ${src} ${dst}.tmp || return $?
     echo "Done"
 
     echo "Creating scaled image"
     convert \
         -resize ${resolution} \
-        ${dst} ${dst_small} || return $?
+        ${dst} ${dst_small}.tmp || return $?
     echo "Done"
 
-    rm -f ${src}
+    mv ${dst}.tmp ${dst}
+    mv ${dst_small}.tmp ${dst_small}
+    rm -f ${src} ${dst}.tmp ${dst_small}.tmp
 }
 
 addWatermark "${fiobbioCfg[@]}"
