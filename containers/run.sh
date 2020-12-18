@@ -4,7 +4,9 @@
 #
 set -euo pipefail
 
-. ../common_variables.sh
+declare scriptDir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
+
+. ${scriptDir}/../common_variables.sh
 
 declare -r scriptStarted="/tmp/run-sh-started"
 declare -r scriptCompleted="/tmp/run-sh-completed"

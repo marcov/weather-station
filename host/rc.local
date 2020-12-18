@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash
 #
 # rc.local
 #
@@ -11,11 +11,14 @@
 #
 # By default this script does nothing.
 
-start_iperf3 () {
-    [ "$(pgrep iperf3)" ] || { echo "INFO: killing iperf3"; pkill -9 iperf3; }
+set -euo pipefail
 
-    echo "INFO: starting IPERF3"
-    nohup iperf3 -s 2>&1 > /var/log/iperf.log &
+set -x
+
+start_iperf3 () {
+    [ "$(pgrep iperf3)" ] && { echo "INFO: killing iperf3"; pkill -9 iperf3; }
+
+    start-stop-daemon -b -x /usr/bin/iperf3 -S -- -s
 }
 
 setup_iptables () {
@@ -30,7 +33,7 @@ setup_iptables () {
     iptables --zero LOGDROP
     iptables --flush LOGDROP
     sleep 1
-    iptables --delete-chain LOGDROP
+    iptables --delete-chain LOGDROP || { echo "WARN: delete chain LOGDROP failed"; }
 
     echo "INFO: iptables new chain LOGDROP"
     iptables -N LOGDROP
@@ -55,8 +58,8 @@ start_containers () {
 
 echo "INFO: setup iptables"
 setup_iptables
-#echo "INFO: setup iperf3"
-#start_iperf3
+echo "INFO: setup iperf3"
+start_iperf3
 echo "INFO: start containers"
 start_containers
 
