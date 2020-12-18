@@ -416,6 +416,6 @@ iframe.grafana-chart {
 }
 
 iframe.grafana-table {
-    width: 500px;
-    height: 19ch;
+    width: 450px;
+    height: 25ch;
 }
