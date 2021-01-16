@@ -5,7 +5,26 @@ set -euo pipefail
 . ../../common_variables.sh
 
 
-addWatermark() {
+getTemperature () {
+    url="$1"
+    jsonTmp=$(mktemp)
+
+    #
+    # Add the insecure flag, since it's a local IP but it's using TLS.
+    #
+    if curl -o "$jsonTmp" -k -fsSL "${temperatureUrl}"
+    then
+        read -r temperature <<< `jq -r .outsideTemp "$jsonTmp"`
+    else
+        temperature="N.A."
+    fi
+
+    rm -f $jsonTmp 2>&1 >> /dev/null
+
+    echo "$temperature"
+}
+
+addWatermark () {
     name=$1
     srcInfo=$2
     stationName=$3
@@ -13,10 +32,7 @@ addWatermark() {
     ftplogin=$5
     resolution=$6
 
-    #
-    # Add the insecure flag, since it's a local IP but it's using TLS.
-    #
-    temperature="$(curl -k -fsSL "${temperatureUrl}" | jq -r .outsideTemp)"
+    temperature=`getTemperature "${temperatureUrl}"`
     stationName="$(sed "s/_/ /g" <<< "${stationName}")"
     dateTime="$(date +"%H:%M %d-%m-%Y")"
     watermarkText="${stationName}, ${temperature}°C - ${dateTime}"
@@ -29,12 +45,12 @@ addWatermark() {
     dst_tmp="${dst}.tmp"
     dst_small_tmp="${dst_small}.tmp"
 
-    [ -f "${src}" ] || { echo "ERR: ${src} does not exists, skip watermark"; return; }
-
     echo "SRC: ${src}"
     echo "  Watermark text:  ${watermarkText}"
     echo "  DST (watermark): ${dst_tmp}"
     echo "  DST (scaled):    ${dst_small_tmp}"
+
+    [ -f "${src}" ] || { echo "ERR: ${src} does not exists, skip watermark"; return; }
 
     echo "Adding watermark"
     convert -pointsize 32 \

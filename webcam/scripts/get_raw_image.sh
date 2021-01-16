@@ -60,7 +60,10 @@ localGet() {
 
         echo "INFO: Copying..."
 
-        /bin/mv ${latest} ${dst} || { false; return; }
+        /bin/cp ${latest} ${dst} || { false; return; }
+
+        echo "INFO: Deleting ..."
+        rm -f ${latest} || false
 }
 
 getRawPicture() {
