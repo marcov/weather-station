@@ -144,6 +144,10 @@ server {
     location /metrics/node {
         proxy_pass http://localhost:9100/metrics;
     }
+
+    location /portainer/ {
+       proxy_pass http://localhost:9000/;
+    }
 }
 
 # Virtual Host configuration for example.com
