@@ -37,18 +37,20 @@ mkdir -p "${wviewEphemeralImg}/Archive"
 # Return 1 -> container start is run
 #
 stop_start () {
+    set +x
     local ctrName="$1"
 
-    [ -n "${INTERACTIVE:-}" ] || return 1
+    [ -n "${INTERACTIVE:-}" ] || { set -x; return 1; }
 
-    echo "Stop/start $ctrName? [y/n]"
+    echo -n "Stop/start $ctrName? [y/N] "
     local answer=
     read -e answer
 
-    [ "${answer:-}" != y ] && return 0
+    [ "${answer:-}" != y ] && { set -x; return 0; }
 
     docker stop ${ctrName}
 
+    set -x
     return 1
 }
 
@@ -105,6 +107,7 @@ stop_start nginx || docker run \
     \
     --publish 80:80 \
     --publish 443:443 \
+    --publish 9000:9000 \
     \
     -v "${wviewEphemeralImg}":${WVIEW_DATA_DIR}/img:ro \
     -v ${hostRepoRoot}/http_server/nginx_cfg:/etc/nginx/conf.d/default.conf:ro \
@@ -162,6 +165,23 @@ stop_start node-exporter || docker run \
     quay.io/prometheus/node-exporter \
     \
     --path.rootfs=/host
+
+if docker volume inspect portainer_data >/dev/null; then
+
+    stop_start portainer || docker run \
+        -d --rm \
+        \
+        --net=container:nginx \
+        \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        -v portainer_data:/data \
+        \
+        --name=portainer \
+        \
+        portainer/portainer-ce
+else
+    echo "WARN: skipping portainer because portainer_data volume wasn't found!"
+fi
 
 set +x
 
