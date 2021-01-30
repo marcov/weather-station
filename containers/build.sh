@@ -3,8 +3,9 @@
 #
 set -euo pipefail
 
-declare -r wviewImage="pullme/wview:5.21.7"
-declare -r ser2netImage="pullme/ser2net:wview"
+declare -r arch="$(arch)"
+declare -r wviewImage="pullme/${arch}-wview:5.21.7"
+declare -r ser2netImage="pullme/${arch}-ser2net:wview"
 declare -r nginxImage="docker.io/library/nginx:latest"
 declare -r podName="wview-pod"
 declare -r wviewImgVolume="wview-img"

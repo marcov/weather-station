@@ -10,6 +10,7 @@ declare scriptDir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
 
 declare -r scriptStarted="/tmp/run-sh-started"
 declare -r scriptCompleted="/tmp/run-sh-completed"
+declare -r arch="$(arch)"
 declare removeEphemeral=
 
 if [ "`id -u`" != 0 ]; then
@@ -102,7 +103,7 @@ stop_start wview || docker run \
     \
     --name=wview \
     \
-    pullme/wview:5.21.7 \
+    pullme/${arch}-wview:5.21.7 \
     \
     sh -c "/etc/init.d/wview restart; while true; do sleep 9999; done"
 
