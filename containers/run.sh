@@ -12,7 +12,11 @@ declare -r scriptStarted="/tmp/run-sh-started"
 declare -r scriptCompleted="/tmp/run-sh-completed"
 declare removeEphemeral=
 
-rm -f "$scriptCompleted"
+if [ "`id -u`" != 0 ]; then
+    asRoot="/usr/bin/sudo"
+fi
+
+"$asRoot" rm -f "$scriptStarted" "$scriptCompleted"
 touch "$scriptStarted"
 
 echo "NOTE: run with the env INTERACTIVE=1 for interactive startup!"
@@ -108,6 +112,7 @@ stop_start nginx || docker run \
     --publish 80:80 \
     --publish 443:443 \
     --publish 9000:9000 \
+    --publish 3000:3000 \
     \
     -v "${wviewEphemeralImg}":${WVIEW_DATA_DIR}/img:ro \
     -v ${hostRepoRoot}/http_server/nginx_cfg:/etc/nginx/conf.d/default.conf:ro \
@@ -166,7 +171,7 @@ stop_start node-exporter || docker run \
     \
     --path.rootfs=/host
 
-if docker volume inspect portainer_data >/dev/null; then
+if [ "${ENABLE_PORTAINER:-0}" = "1" ] && docker volume inspect portainer_data >/dev/null; then
 
     stop_start portainer || docker run \
         -d --rm \
@@ -180,7 +185,26 @@ if docker volume inspect portainer_data >/dev/null; then
         \
         portainer/portainer-ce
 else
-    echo "WARN: skipping portainer because portainer_data volume wasn't found!"
+    echo "WARN: skipping portainer because disabled / portainer_data volume wasn't found!"
+fi
+
+
+if docker volume inspect grafana-storage >/dev/null; then
+
+    stop_start grafana || docker run \
+        --rm -d \
+        \
+        --network=container:nginx \
+        \
+        -v grafana-storage:/var/lib/grafana \
+        -v ${hostRepoRoot}/grafana/grafana.ini:/etc/grafana/grafana.ini \
+        -v ${hostWviewDataDir}/archive/wview-archive.sdb:/wview-archive.sdb:ro \
+        \
+        --name=grafana \
+        \
+        grafana/grafana
+else
+    echo "WARN: skipping grafana because grafana-storage volume wasn't found!"
 fi
 
 set +x

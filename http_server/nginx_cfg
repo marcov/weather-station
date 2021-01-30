@@ -148,6 +148,10 @@ server {
     location /portainer/ {
        proxy_pass http://localhost:9000/;
     }
+
+    location /grafana/ {
+       proxy_pass http://localhost:3000/;
+    }
 }
 
 # Virtual Host configuration for example.com
