@@ -79,7 +79,7 @@ stop_start ser2net || docker run \
     \
     --name=ser2net \
     \
-    pullme/ser2net:wview
+    pullme/"${arch}"-ser2net:wview
 
 stop_start wview || docker run \
     -d --rm \
@@ -103,7 +103,7 @@ stop_start wview || docker run \
     \
     --name=wview \
     \
-    pullme/${arch}-wview:5.21.7 \
+    pullme/"${arch}"-wview:5.21.7 \
     \
     sh -c "/etc/init.d/wview restart; while true; do sleep 9999; done"
 
