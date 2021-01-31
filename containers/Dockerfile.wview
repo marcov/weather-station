@@ -65,6 +65,8 @@ RUN apt-get -y update; \
       gawk \
       moreutils \
       bsdutils \
+      imagemagick \
+      ftp \
       ; \
     \
     apt-get clean; \
