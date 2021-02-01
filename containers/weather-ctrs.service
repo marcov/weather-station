@@ -1,0 +1,10 @@
+[Unit]
+After=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/home/pi/weather-station/containers/run.sh
+RemainAfterExit=true
+
+[Install]
+WantedBy=default.target
