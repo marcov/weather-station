@@ -37,10 +37,10 @@ server {
     #
     # Redirect from old to new domain name
     #
-	if ($http_host = 'fiobbio.blogdns.net') {
-		#rewrite ^(.*) http://meteo.fiobbio.com$1 redirect;
-		rewrite ^(.*) http://meteo.fiobbio.com/bad-domain.html permanent;
-	}
+    if ($http_host = 'fiobbio.blogdns.net') {
+        #rewrite ^(.*) http://meteo.fiobbio.com$1 redirect;
+        rewrite ^(.*) http://meteo.fiobbio.com/bad-domain.html permanent;
+    }
 
     index index.html index.htm index.nginx-debian.html;
 
@@ -50,7 +50,7 @@ server {
     ssl_certificate_key /etc/letsencrypt/live/meteo.fiobbio.com/privkey.pem;
 
     # = : exact match
-    location  = / {
+    location = / {
         root /weather-station/wview/html/fiobbio/;
         try_files $uri $uri/ =404;
 
@@ -75,37 +75,15 @@ server {
         etag off;
     }
 
-    # TODO : enable php...
-    #location /wviewmgmt/ {
-    #    alias /var/lib/wviewmgmt/;
-    #    try_files $uri $uri/ =404;
-    #}
-
-
-	#CGI for perl
-	location /cgi-bin/ {
-		root /home/pi/wview-rrd/;
-		try_files $uri =404;
-		gzip off;
-		fastcgi_pass  127.0.0.1:8999;
-		fastcgi_index index.pl;
-		fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-		include fastcgi_params;
-	}
-
     # fallback
     location / {
-
-        # Temporary for test...
-        #proxy_pass http://192.168.1.200/weather/;
-
         root /var/lib/wview/img;
         #  # First attempt to serve request as file, then
         #  # as directory, then fall back to displaying a 404.
         try_files $uri $uri/ =404;
 
-        #  # Redirect old /weather path
-        rewrite ^/weather/(.+)$  /$1 last;
+        # Redirect old /weather path
+        rewrite ^/weather/(.+)$ /$1 last;
         rewrite ^/weather/?$ / permanent;
 
         # kill cache
@@ -116,33 +94,27 @@ server {
         etag off;
     }
 
+    # TODO : enable php...
+    #location /wviewmgmt/ {
+    #    alias /var/lib/wviewmgmt/;
+    #    try_files $uri $uri/ =404;
+    #}
 
-	# pass PHP scripts to FastCGI server
-	#
-	#location ~ \.php$ {
-	#	include snippets/fastcgi-php.conf;
-	#
-	#	# With php-fpm (or other unix sockets):
-	#	fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
-	#	# With php-cgi (or other tcp sockets):
-	#	fastcgi_pass 127.0.0.1:9000;
-	#}
+    #TODO: CGI for perl
+    #location /cgi-bin/ {
+    #    root /home/pi/wview-rrd/;
+    #    try_files $uri =404;
+    #    gzip off;
+    #    fastcgi_pass  127.0.0.1:8999;
+    #    fastcgi_index index.pl;
+    #    fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+    #    include fastcgi_params;
+    #}
 
-    # Reverse proxy for misma website
+    ########## Reverse proxies ##########
+
     location /misma/ {
        proxy_pass http://192.168.1.150:8080/;
-    }
-
-    location = /stub_status {
-        stub_status;
-    }
-
-    location /metrics/nginx {
-        proxy_pass http://localhost:9113/metrics;
-    }
-
-    location /metrics/node {
-        proxy_pass http://localhost:9100/metrics;
     }
 
     location /portainer/ {
@@ -152,23 +124,16 @@ server {
     location /grafana/ {
        proxy_pass http://localhost:3000/;
     }
-}
 
-# Virtual Host configuration for example.com
-#
-# You can move that to a different file under sites-available/ and symlink that
-# to sites-enabled/ to enable it.
-#
-#server {
-#	listen 80;
-#	listen [::]:80;
-#
-#	server_name example.com;
-#
-#	root /var/www/example.com;
-#	index index.html;
-#
-#	location / {
-#		try_files $uri $uri/ =404;
-#	}
-#}
+    #location = /stub_status {
+    #    stub_status;
+    #}
+
+    #location /metrics/nginx {
+    #    proxy_pass http://localhost:9113/metrics;
+    #}
+
+    #location /metrics/node {
+    #    proxy_pass http://localhost:9100/metrics;
+    #}
+}
