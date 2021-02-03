@@ -26,6 +26,6 @@ docker run \
     \
     --name=webcam \
     \
-    pullme/webcam:latest \
+    pullme/x86_64-webcam:latest \
     \
     /webcam/scripts/main.sh
