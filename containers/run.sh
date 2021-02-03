@@ -105,13 +105,16 @@ stop_start wview || docker run \
     \
     sh -c "/etc/init.d/wview restart; while true; do sleep 9999; done"
 
+
+# Extra publish options for debug
+#    --publish 9000:9000 \
+#    --publish 3000:3000 \
+#
 stop_start nginx || docker run \
     -d --rm \
     \
     --publish 80:80 \
     --publish 443:443 \
-    --publish 9000:9000 \
-    --publish 3000:3000 \
     \
     -v "${wviewEphemeralImg}":${WVIEW_DATA_DIR}/img:ro \
     -v ${hostRepoRoot}/http_server/nginx_cfg:/etc/nginx/conf.d/default.conf:ro \
@@ -143,7 +146,7 @@ stop_start nginx || docker run \
 
 ################################################################################
 
-# FIXME!
+# FIXME: nginx-exporter
 if false; then
 stop_start nginx-exporter || docker run \
     -d --rm \
@@ -190,8 +193,26 @@ else
     echo "WARN: skipping portainer because disabled / portainer_data volume wasn't found!"
 fi
 
-
 if docker volume inspect grafana-storage >/dev/null; then
+
+    # FIXME: grafana-image-renderer
+    if false; then
+        stop_start grafana-image-renderer || docker run \
+            --rm -d \
+            \
+            --network=container:nginx \
+            \
+            -v grafana-storage:/var/lib/grafana \
+            --env ENABLE_METRICS="true" \
+            \
+            --name=grafana-image-renderer \
+            \
+            grafana/grafana-image-renderer:latest
+    fi
+    #    --env GF_RENDERING_SERVER_URL="http://localhost:8081/render" \
+    #    --env GF_RENDERING_CALLBACK_URL="http://localhost:3000/" \
+    #    --env GF_LOG_FILTERS="rendering:debug" \
+    #
 
     stop_start grafana || docker run \
         --rm -d \
