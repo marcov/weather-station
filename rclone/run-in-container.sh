@@ -1,5 +1,7 @@
 #!/bin/bash
 
+declare -r arch="$(arch)"
+
 . ../common_variables.sh
 
 docker run \
@@ -15,6 +17,6 @@ docker run \
     \
     --name=rclone \
     \
-    pullme/rclone:latest \
+    pullme/"${arch}"-rclone:latest \
     \
     /backup

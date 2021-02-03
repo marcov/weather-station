@@ -2,7 +2,8 @@
 
 set -euo pipefail
 
-declare configFile="config.json"
+declare -r configFile="config.json"
+declare -r arch="$(arch)"
 
 . ../common_variables.sh
 
@@ -25,11 +26,12 @@ docker run \
     \
     -v /etc/timezone:/etc/timezone:ro \
     -v /etc/localtime:/etc/localtime:ro \
+    --add-host cdn.privacy-mgmt.com:0.0.0.0 \
     \
     \
     \
     --name=webshot \
     \
-    pullme/webshot:latest \
+    pullme/"${arch}"-webshot:latest \
     \
     /webshot/run.sh /config.json /destdir
