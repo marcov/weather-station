@@ -142,6 +142,9 @@ stop_start nginx || docker run \
 #    /usr/sbin/crond -f -c /var/spool/cron/crontabs
 
 ################################################################################
+
+# FIXME!
+if false; then
 stop_start nginx-exporter || docker run \
     -d --rm \
     \
@@ -153,7 +156,7 @@ stop_start nginx-exporter || docker run \
     pullme/nginx-prometheus-exporter:raspi3 \
     \
     -nginx.scrape-uri http://127.0.0.1/stub_status
-
+fi
 
 stop_start node-exporter || docker run \
     --rm -d \
