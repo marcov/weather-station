@@ -4,7 +4,9 @@
 #
 set -euo pipefail
 
-source ../../common_variables.sh
+declare scriptDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+source "${scriptDir}"/../config.sh
+source "${scriptDir}"/../../common_variables.sh
 
 declare -i maxCurlTime=120
 

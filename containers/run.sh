@@ -90,8 +90,7 @@ stop_start wview || docker run \
     -v ${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}:${WVIEW_CONF_DIR} \
     -v ${hostWviewDataDir}/conf/wview-conf.sdb:${WVIEW_CONF_DIR}/wview-conf.sdb \
     \
-    -v /home/pi/secrets/cml_ftp_login_data.sh:/etc/cml_ftp_login_data.sh:ro \
-    -v /home/pi/secrets/webcam_login_data.sh:/etc/webcam_login_data.sh:ro \
+    -v /home/pi/secrets/cml_ftp_login_data.sh:/home/pi/secrets/cml_ftp_login_data.sh:ro \
     \
     -v ${hostRepoRoot}/wview/scripts:/weather-station/wview/scripts:ro \
     -v ${hostRepoRoot}/common_variables.sh:/weather-station/common_variables.sh:ro \

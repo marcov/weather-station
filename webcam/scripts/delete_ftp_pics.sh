@@ -5,7 +5,7 @@
 #  This script is deleting folders recursively and may accidentaly delete things that shouldnt
 #
 
-. ../../common_variables.sh
+. ../config.sh
 
 CURDATE=$(/bin/date +%Y%m%d)
 
@@ -23,7 +23,7 @@ echo "OK"
 
 echo "Sanity check ok...!"
 
-for i in $(find $ftp_upload_dir -mindepth 1 -maxdepth 4 -type f -name "*.jpg" | grep -v $CURDATE) 
+for i in $(find $ftp_upload_dir -mindepth 1 -maxdepth 4 -type f -name "*.jpg" | grep -v $CURDATE)
 do
     echo "Removing $i..."
     /bin/rm -rf $i || exit $?

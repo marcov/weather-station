@@ -12,11 +12,12 @@ set -x
 docker run \
     --rm \
     \
-    -v ${hostRepoRoot}/common_variables.sh:/common_variables.sh:ro \
-    -v /home/pi/secrets/cml_ftp_login_data.sh:/etc/cml_ftp_login_data.sh:ro \
-    -v /home/pi/secrets/webcam_login_data.sh:/etc/webcam_login_data.sh:ro \
+    -v /home/pi/secrets/cml_ftp_login_data.sh:/home/pi/secrets/cml_ftp_login_data.sh:ro \
+    -v /home/pi/secrets/webcam_login_data.sh:/home/pi/secrets/webcam_login_data.sh:ro \
     -v /home/pi/panogen/out:/home/pi/panogen/out \
     -v ${hostRepoRoot}/webcam/scripts:/webcam/scripts:ro \
+    -v ${hostRepoRoot}/webcam/config.sh:/webcam/config.sh:ro \
+    -v ${hostRepoRoot}/common_variables.sh:/common_variables.sh:ro \
     -v ${wviewEphemeralImg}:${wviewEphemeralImg} \
     -v /tmp:/tmp \
     \
