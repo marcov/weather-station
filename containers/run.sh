@@ -17,7 +17,7 @@ if [ "`id -u`" != 0 ]; then
     asRoot="/usr/bin/sudo"
 fi
 
-"$asRoot" rm -f "$scriptStarted" "$scriptCompleted"
+${asRoot:-} rm -f "$scriptStarted" "$scriptCompleted"
 touch "$scriptStarted"
 
 echo "NOTE: run with the env INTERACTIVE=1 for interactive startup!"
@@ -58,7 +58,6 @@ stop_start () {
     set -x
     return 1
 }
-
 
 set -x
 
