@@ -28,7 +28,7 @@ RUN cd /; \
     git clone https://github.com/marcov/wview.git
 
 RUN cd /wview; \
-    # 
+    #
     # Pass the same configure options used for the Debian package.
     # This is needed because wview and our config now depends on those paths.
     #

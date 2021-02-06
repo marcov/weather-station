@@ -10,15 +10,6 @@ misma_pic_name="snap.jpg"
 misma_webcam_url=
 misma_pano_name="panorama.jpg"
 
-#
-# CML FTP config (note: login credentials are not here :P)
-#
-cml_ftp_log_file="/tmp/cml_ftp.log"
-cml_ftp_server="ftp.centrometeolombardo.com"
-cml_ftp_upload_folder="public"
-# Set to 1 to log ftp upload information to stdout
-cml_ftp_log_info=1
-
 webcam_prefix="webcam"
 webcam_raw_prefix="${webcam_prefix}_raw"
 webcam_small_prefix="${webcam_prefix}_small"

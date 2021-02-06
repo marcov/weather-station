@@ -79,7 +79,7 @@ prepare_ftp_commands() {
     echo "FTP upload now..."
 
     rm -f ${ftpSendCmds}
-    echo "user ${cml_ftp_user_fiobbio} ${cml_ftp_pwd_fiobbio}" >> ${ftpSendCmds}
+    echo "user ${cml_ftp_user} ${cml_ftp_pwd}" >> ${ftpSendCmds}
     cat ${ftpBaseCmds} >> ${ftpSendCmds}
 
     if [ $minuti -gt 10 -a $minuti -le 15 ]; then
