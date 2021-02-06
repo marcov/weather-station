@@ -22,7 +22,7 @@ docker run \
     --rm \
     \
     -v "${scriptDir}/${configFile}":/config.json \
-    -v "${webshotHostDir}":/destdir \
+    -v "${hostWebshotDir}":/destdir \
     \
     -v /etc/timezone:/etc/timezone:ro \
     -v /etc/localtime:/etc/localtime:ro \

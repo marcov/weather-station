@@ -28,12 +28,12 @@ sleep 2
 # TODO: find a better way to store wview img in a tmpfs shared volume b/w host and containers!
 #
 if [ -n "${removeEphemeral}" ]; then
-    rm -rf "${wviewEphemeralImg}"
+    rm -rf "${hostWviewImgDir}"
 fi
 # Provision img folder
-cp -a "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static" "${wviewEphemeralImg}"
-mkdir -p "${wviewEphemeralImg}/NOAA"
-mkdir -p "${wviewEphemeralImg}/Archive"
+cp -a "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static" "${hostWviewImgDir}"
+mkdir -p "${hostWviewImgDir}/NOAA"
+mkdir -p "${hostWviewImgDir}/Archive"
 
 [ "${1:-}" = "-i" ] && { echo "INFO: INTERACTIVE mode"; INTERACTIVE=1; }
 
@@ -86,7 +86,7 @@ stop_start wview || docker run \
     --net=container:ser2net \
     \
     -v ${hostWviewDataDir}/archive:${WVIEW_DATA_DIR}/archive \
-    -v "${wviewEphemeralImg}":${WVIEW_DATA_DIR}/img \
+    -v "${hostWviewImgDir}":${WVIEW_DATA_DIR}/img \
     -v ${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}:${WVIEW_CONF_DIR} \
     -v ${hostWviewDataDir}/conf/wview-conf.sdb:${WVIEW_CONF_DIR}/wview-conf.sdb \
     \
@@ -119,9 +119,9 @@ stop_start nginx || docker run \
     -v ${hostRepoRoot}/http_server/nginx_cfg:/etc/nginx/conf.d/default.conf:ro \
     -v /home/pi/secrets/letsencrypt:/etc/letsencrypt:ro \
     \
-    -v "${wviewEphemeralImg}":${WVIEW_DATA_DIR}/img:ro \
-    -v ${webcamHostDir}:/www/webcam:ro \
-    -v ${webshotHostDir}:/www/webshot:ro \
+    -v "${hostWviewImgDir}":${WVIEW_DATA_DIR}/img:ro \
+    -v ${hostWebcamDir}:/www/webcam:ro \
+    -v ${hostWebshotDir}:/www/webshot:ro \
     -v ${hostRepoRoot}/wview/html/fiobbio:/weather-station/wview/html/fiobbio:ro \
     -v ${hostRepoRoot}/wview/html/fiobbio:/weather-station/wview/html/fiobbio:ro \
     \

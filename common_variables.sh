@@ -13,8 +13,8 @@ declare -r WVIEW_DATA_DIR="/var/lib/wview"
 #
 # Host dir
 #
-declare -r wviewEphemeralImg="/tmp/wview-data-img"
+declare -r hostWviewImgDir="/tmp/wview-data-img"
 declare -r hostWviewDataDir="/home/pi/wview-data"
 declare -r hostRepoRoot="${repoRoot}"
-declare -r webcamHostDir="/tmp/webcam"
-declare -r webshotHostDir="/tmp/webshot"
+declare -r hostWebcamDir="/tmp/webcam"
+declare -r hostWebshotDir="/tmp/webshot"

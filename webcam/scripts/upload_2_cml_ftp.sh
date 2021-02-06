@@ -22,8 +22,8 @@ ftpUpload() {
     _ftp_password=$(echo $5 | cut -d " " -f 2)
     suffix=$(echo $5 | cut -d " " -f 3)
 
-    src=${webcamHostDir}/${webcam_prefix}_${name}.jpg
-    src_small=${webcamHostDir}/${webcam_small_prefix}_${name}.jpg
+    src="${hostWebcamDir}/${webcam_prefix}_${name}.jpg"
+    src_small="${hostWebcamDir}/${webcam_small_prefix}_${name}.jpg"
 
     if ! [[ -e ${src} ]] && ! [[ -e ${src_small} ]]; then
         echo "WARN: FTP src ${src} does not exist...nothing to do"
