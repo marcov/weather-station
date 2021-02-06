@@ -21,19 +21,28 @@ ${asRoot:-} rm -f "$scriptStarted" "$scriptCompleted"
 touch "$scriptStarted"
 
 echo "NOTE: run with the env INTERACTIVE=1 for interactive startup!"
-echo "INFO: starting up in 2 seconds"
-sleep 2
+echo "INFO: starting up in 1 seconds"
+sleep 1
 
 #
 # TODO: find a better way to store wview img in a tmpfs shared volume b/w host and containers!
 #
 if [ -n "${removeEphemeral}" ]; then
     rm -rf "${hostWviewImgDir}"
+    mkdir "${hostWviewImgDir}"
 fi
+
 # Provision img folder
-cp -a "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static" "${hostWviewImgDir}"
-mkdir -p "${hostWviewImgDir}/NOAA"
-mkdir -p "${hostWviewImgDir}/Archive"
+cp -a \
+    "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static" \
+    "${hostWviewImgDir}/fiobbio"
+
+cp -a \
+    "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static" \
+    "${hostWviewImgDir}/misma"
+
+mkdir -p "${hostWviewImgDir}"/{fiobbio,misma}/NOAA
+mkdir -p "${hostWviewImgDir}"/{fiobbio,misma}/Archive
 
 [ "${1:-}" = "-i" ] && { echo "INFO: INTERACTIVE mode"; INTERACTIVE=1; }
 
@@ -80,17 +89,21 @@ stop_start ser2net || docker run \
     \
     pullme/"${arch}"-ser2net:wview
 
-stop_start wview || docker run \
+################################################################################
+
+set -x
+. /home/pi/secrets/cml_ftp_login_data.sh
+set +x
+
+stop_start wview-fiobbio || docker run \
     -d --rm \
     \
     --net=container:ser2net \
     \
-    -v ${hostWviewDataDir}/archive:${WVIEW_DATA_DIR}/archive \
-    -v "${hostWviewImgDir}":${WVIEW_DATA_DIR}/img \
+    -v ${hostWviewDataDir}/fiobbio/archive:${WVIEW_DATA_DIR}/archive \
+    -v "${hostWviewImgDir}/fiobbio":${WVIEW_DATA_DIR}/img \
     -v ${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}:${WVIEW_CONF_DIR} \
-    -v ${hostWviewDataDir}/conf/wview-conf.sdb:${WVIEW_CONF_DIR}/wview-conf.sdb \
-    \
-    -v /home/pi/secrets/cml_ftp_login_data.sh:/home/pi/secrets/cml_ftp_login_data.sh:ro \
+    -v ${hostWviewDataDir}/fiobbio/conf/wview-conf.sdb:${WVIEW_CONF_DIR}/wview-conf.sdb \
     \
     -v ${hostRepoRoot}/wview/scripts:/weather-station/wview/scripts:ro \
     -v ${hostRepoRoot}/common_variables.sh:/weather-station/common_variables.sh:ro \
@@ -99,12 +112,43 @@ stop_start wview || docker run \
     -v /etc/timezone:/etc/timezone:ro \
     -v /etc/localtime:/etc/localtime:ro \
     \
-    --name=wview \
+    -e cml_ftp_user="$cml_ftp_user_fiobbio" \
+    -e cml_ftp_pwd="$cml_ftp_pwd_fiobbio" \
+    \
+    --name=wview-fiobbio \
     \
     pullme/"${arch}"-wview:5.21.7 \
     \
     sh -c "/etc/init.d/wview restart; while true; do sleep 9999; done"
 
+
+stop_start wview-misma || docker run \
+    -d --rm \
+    \
+    --net=container:ser2net \
+    \
+    -v ${hostWviewDataDir}/misma/archive:${WVIEW_DATA_DIR}/archive \
+    -v "${hostWviewImgDir}/misma":${WVIEW_DATA_DIR}/img \
+    -v ${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}:${WVIEW_CONF_DIR} \
+    -v ${hostWviewDataDir}/misma/conf/wview-conf.sdb:${WVIEW_CONF_DIR}/wview-conf.sdb \
+    \
+    -v ${hostRepoRoot}/wview/scripts:/weather-station/wview/scripts:ro \
+    -v ${hostRepoRoot}/common_variables.sh:/weather-station/common_variables.sh:ro \
+    \
+    -e cml_ftp_user="$cml_ftp_user_misma" \
+    -e cml_ftp_pwd="$cml_ftp_pwd_misma" \
+    \
+    -v /dev/log:/dev/log \
+    -v /etc/timezone:/etc/timezone:ro \
+    -v /etc/localtime:/etc/localtime:ro \
+    \
+    --name=wview-misma \
+    \
+    pullme/"${arch}"-wview:5.21.7 \
+    \
+    sh -c "/etc/init.d/wview restart; while true; do sleep 9999; done"
+
+################################################################################
 
 # Extra publish options for debug
 #    --publish 9000:9000 \
@@ -119,10 +163,10 @@ stop_start nginx || docker run \
     -v ${hostRepoRoot}/http_server/nginx_cfg:/etc/nginx/conf.d/default.conf:ro \
     -v /home/pi/secrets/letsencrypt:/etc/letsencrypt:ro \
     \
-    -v "${hostWviewImgDir}":${WVIEW_DATA_DIR}/img:ro \
+    -v "${hostWviewImgDir}/fiobbio":/www/wview-img/fiobbio:ro \
+    -v "${hostWviewImgDir}/misma":/www/wview-img/misma:ro \
     -v ${hostWebcamDir}:/www/webcam:ro \
     -v ${hostWebshotDir}:/www/webshot:ro \
-    -v ${hostRepoRoot}/wview/html/fiobbio:/weather-station/wview/html/fiobbio:ro \
     -v ${hostRepoRoot}/wview/html/fiobbio:/weather-station/wview/html/fiobbio:ro \
     \
     -v /dev/log:/dev/log \
@@ -207,16 +251,17 @@ if docker volume inspect grafana-storage >/dev/null; then
             --network=container:nginx \
             \
             -v grafana-storage:/var/lib/grafana \
+            \
             --env ENABLE_METRICS="true" \
             \
             --name=grafana-image-renderer \
             \
             grafana/grafana-image-renderer:latest
     fi
+
     #    --env GF_RENDERING_SERVER_URL="http://localhost:8081/render" \
     #    --env GF_RENDERING_CALLBACK_URL="http://localhost:3000/" \
-    #    --env GF_LOG_FILTERS="rendering:debug" \
-    #
+    #    \
 
     stop_start grafana || docker run \
         --rm -d \
@@ -225,7 +270,7 @@ if docker volume inspect grafana-storage >/dev/null; then
         \
         -v grafana-storage:/var/lib/grafana \
         -v ${hostRepoRoot}/grafana/grafana.ini:/etc/grafana/grafana.ini \
-        -v ${hostWviewDataDir}/archive/wview-archive.sdb:/wview-archive.sdb:ro \
+        -v ${hostWviewDataDir}/fiobbio/archive/wview-archive.sdb:/wview-archive.sdb:ro \
         \
         --name=grafana \
         \

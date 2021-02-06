@@ -79,7 +79,7 @@ server {
         rewrite ^(.*) http://meteo.fiobbio.com/bad-domain.html permanent;
     }
 
-    index index.html index.htm index.nginx-debian.html;
+    index index.html index.htm;
 
     server_name meteo.fiobbio.com;
 
@@ -115,9 +115,14 @@ server {
         try_files $uri $uri/ =404;
     }
 
+    location /misma/ {
+        alias /www/wview-img/misma/;
+        try_files $uri $uri/ =404;
+    }
+
     # fallback
     location / {
-        root /var/lib/wview/img;
+        root /www/wview-img/fiobbio;
         #  # First attempt to serve request as file, then
         #  # as directory, then fall back to displaying a 404.
         try_files $uri $uri/ =404;
@@ -125,6 +130,7 @@ server {
         # Redirect old /weather path
         rewrite ^/weather/(.+)$ /$1 last;
         rewrite ^/weather/?$ / permanent;
+        rewrite ^/misma$ /misma/ permanent;
     }
 
     # TODO : enable php...
@@ -146,9 +152,9 @@ server {
 
     ########## Reverse proxies ##########
 
-    location /misma/ {
-       proxy_pass http://192.168.1.150:8080/;
-    }
+    #location /misma/ {
+    #   proxy_pass http://192.168.1.150:8080/;
+    #}
 
     location /portainer/ {
        proxy_pass http://localhost:9000/;

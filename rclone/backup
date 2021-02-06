@@ -6,18 +6,27 @@ wviewDataPath=/wview-data
 #destDir="/data/$(date "+%Y-%m-%d_%H-%M-%S")"
 destDir="/data"
 
-declare -a filesList=($(find "${wviewDataPath}"/{archive,conf}/ -maxdepth 1 -type f -name "*sdb"))
+declare -a filesList=($(find "${wviewDataPath}" \
+                        -maxdepth 3 \
+                        -type f \
+                        -wholename "*/archive/*sdb" \
+                        -or \
+                        -wholename "*/conf/*sdb" \
+                        ))
 
-rm -rf "${destDir}/*sdb"
-mkdir -p "${destDir}"
+rm -rf "${destDir}"
 
 set -x
 for f in "${filesList[@]}"; do
     echo "INFO: backing up ${f}"
+    mkdir -p "${destDir}"/"$(dirname ${f})"
     sqlite3 \
         -cmd ".timeout 10000" \
         "${f}" \
-        ".backup ${destDir}/$(basename ${f})"
+        ".backup ${destDir}/${f}"
 done
 
-rclone sync "${destDir}" backblaze:weather-station
+echo "INFO: files to backup:\n"
+find ${destDir} -type f
+
+rclone sync -P "${destDir}" backblaze:weather-station
