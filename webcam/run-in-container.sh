@@ -18,7 +18,7 @@ docker run \
     -v ${hostRepoRoot}/webcam/scripts:/webcam/scripts:ro \
     -v ${hostRepoRoot}/webcam/config.sh:/webcam/config.sh:ro \
     -v ${hostRepoRoot}/common_variables.sh:/common_variables.sh:ro \
-    -v ${wviewEphemeralImg}:${wviewEphemeralImg} \
+    -v ${webcamHostDir}:${webcamHostDir} \
     -v /tmp:/tmp \
     \
     -v /dev/log:/dev/log \

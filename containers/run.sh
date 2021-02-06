@@ -120,8 +120,8 @@ stop_start nginx || docker run \
     -v /home/pi/secrets/letsencrypt:/etc/letsencrypt:ro \
     \
     -v "${wviewEphemeralImg}":${WVIEW_DATA_DIR}/img:ro \
-    -v /tmp/webcam:/www/webcam:ro \
-    -v /tmp/webshot:/www/webshot:ro \
+    -v ${webcamHostDir}:/www/webcam:ro \
+    -v ${webshotHostDir}:/www/webshot:ro \
     -v ${hostRepoRoot}/wview/html/fiobbio:/weather-station/wview/html/fiobbio:ro \
     -v ${hostRepoRoot}/wview/html/fiobbio:/weather-station/wview/html/fiobbio:ro \
     \

@@ -38,7 +38,7 @@ addWatermark () {
     dateTime="$(date +"%H:%M %d-%m-%Y")"
     watermarkText="${stationName}, ${temperature}°C - ${dateTime}"
 
-    src=${wviewEphemeralImg}/${webcam_raw_prefix}_${name}.jpg
+    src=${webcamHostDir}/${webcam_raw_prefix}_${name}.jpg
 
     dst=$(echo ${src} | sed "s/${webcam_raw_prefix}/${webcam_prefix}/g")
     dst_small=$(echo ${src} | sed "s/${webcam_raw_prefix}/${webcam_small_prefix}/g")

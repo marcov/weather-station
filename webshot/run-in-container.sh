@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-declare -r configFile="config.json"
+declare configFile="config.json"
 declare -r arch="$(arch)"
 
 . ../common_variables.sh
@@ -22,7 +22,7 @@ docker run \
     --rm \
     \
     -v "${scriptDir}/${configFile}":/config.json \
-    -v "${wviewEphemeralImg}":/destdir \
+    -v "${webshotHostDir}":/destdir \
     \
     -v /etc/timezone:/etc/timezone:ro \
     -v /etc/localtime:/etc/localtime:ro \

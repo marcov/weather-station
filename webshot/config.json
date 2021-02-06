@@ -15,7 +15,7 @@
         },
         {
            "url":      "http://cml.to/radar",
-           "waitTime": 30000,
+           "waitTime": 5000,
            "outFile":  "radar_lom.png",
            "viewSize": [1024, 800],
            "topLeft":  [0, 20],
@@ -31,6 +31,16 @@
            "topLeft":  [560, 0],
            "size":     [820, 510],
            "evalCode": "document.getElementById('sp_message_container_403677').style.display = 'none'; var collection = document.getElementsByClassName('adsbygoogle'); for (i = 1; i < collection.length; i++) {collection[0].parentNode.removeChild(collection[0]);}"
+        },
+        {
+           "url":      "https://www.yr.no/en/forecast/graph/2-8951344/Italy/Lombardy/Provincia%20di%20Bergamo/Fiobbio",
+           "waitTime": 2000,
+           "outFile":  "yr.png",
+           "viewSize": [1024, 768],
+           "info":     " v----v----- 1st value is pixels from TOP (y), 2nd value is pixels from left (x)",
+           "topLeft":  [550, 0],
+           "size":     [1024, 450],
+           "evalCode": ""
         }
     ]
 }
