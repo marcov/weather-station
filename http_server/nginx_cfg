@@ -16,7 +16,44 @@
 # Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
 ##
 
-# Default server configuration
+#
+# !!!!!!!!!!!!!!!!!!!!!!!!  WARNING WARNING WARNING !!!!!!!!!!!!!!!!!!!!!!!!
+#
+# Nice job! You are here trying to add a new location to your nginx server,
+# seems easy to just copy an existing location and change it, right?
+#
+# NNNNOOOOOOO!
+#
+# TLDR
+#   if you have:
+#
+#   location /foo {
+#     root /bar;
+#   }
+#
+#   nginx expect to find files to serve in: /foo/bar
+#
+#   Most of the time, what you want instead, is "when the path is /foo, serve
+#   files in /bar.
+#
+#   !!!!! This is obtained using 'alias', and not 'root' !!!!
+#
+#   location /foo {
+#     alias /bar;
+#   }
+#
+# !!!!!!!!!!!!!!!!!!!!!!!!  WARNING WARNING WARNING !!!!!!!!!!!!!!!!!!!!!!!!
+#
+# And now you have nginx running in a container, with a mount bind of this file
+# on the host, and expect to just change this file with Vim and  reload nginx with
+# `nginx -s reaload' to pick up the changes.
+#
+# THIS DOES NOT WORK, because every time you save this file, the inode number
+# changes, breaking the mount bind.
+#
+# A workaround is to `:set backupcopy=yes' in Vim
+#
+# !!!!!!!!!!!!!!!!!!!!!!!!  WARNING WARNING WARNING !!!!!!!!!!!!!!!!!!!!!!!!
 #
 
 server {
@@ -49,30 +86,33 @@ server {
     ssl_certificate /etc/letsencrypt/live/meteo.fiobbio.com/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/meteo.fiobbio.com/privkey.pem;
 
+    # Kill cache for all locations
+    add_header Last-Modified $date_gmt;
+    add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
+    if_modified_since off;
+    expires off;
+    etag off;
+
     # = : exact match
     location = / {
         root /weather-station/wview/html/fiobbio/;
         try_files $uri $uri/ =404;
-
-        # kill cache
-        add_header Last-Modified $date_gmt;
-        add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
-        if_modified_since off;
-        expires off;
-        etag off;
     }
 
     # ~ : regex
     location ~ ^/(index\.|js/|css/|html/) {
         root /weather-station/wview/html/fiobbio/;
         try_files $uri $uri/ =404;
+    }
 
-        # kill cache
-        add_header Last-Modified $date_gmt;
-        add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
-        if_modified_since off;
-        expires off;
-        etag off;
+    location /webcam/ {
+        alias /www/webcam/;
+        try_files $uri $uri/ =404;
+    }
+
+    location /webshot/ {
+        alias /www/webshot/;
+        try_files $uri $uri/ =404;
     }
 
     # fallback
@@ -85,13 +125,6 @@ server {
         # Redirect old /weather path
         rewrite ^/weather/(.+)$ /$1 last;
         rewrite ^/weather/?$ / permanent;
-
-        # kill cache
-        add_header Last-Modified $date_gmt;
-        add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
-        if_modified_since off;
-        expires off;
-        etag off;
     }
 
     # TODO : enable php...

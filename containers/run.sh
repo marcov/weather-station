@@ -116,10 +116,14 @@ stop_start nginx || docker run \
     --publish 80:80 \
     --publish 443:443 \
     \
-    -v "${wviewEphemeralImg}":${WVIEW_DATA_DIR}/img:ro \
     -v ${hostRepoRoot}/http_server/nginx_cfg:/etc/nginx/conf.d/default.conf:ro \
-    -v ${hostRepoRoot}/wview/html/fiobbio:/weather-station/wview/html/fiobbio:ro \
     -v /home/pi/secrets/letsencrypt:/etc/letsencrypt:ro \
+    \
+    -v "${wviewEphemeralImg}":${WVIEW_DATA_DIR}/img:ro \
+    -v /tmp/webcam:/www/webcam:ro \
+    -v /tmp/webshot:/www/webshot:ro \
+    -v ${hostRepoRoot}/wview/html/fiobbio:/weather-station/wview/html/fiobbio:ro \
+    -v ${hostRepoRoot}/wview/html/fiobbio:/weather-station/wview/html/fiobbio:ro \
     \
     -v /dev/log:/dev/log \
     -v /etc/timezone:/etc/timezone:ro \
