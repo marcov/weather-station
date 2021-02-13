@@ -32,6 +32,9 @@ if [ -n "${removeEphemeral}" ]; then
     mkdir "${hostWviewImgDir}"
 fi
 
+mkdir -p "${hostWviewImgDir}"/{fiobbio,misma}/NOAA
+mkdir -p "${hostWviewImgDir}"/{fiobbio,misma}/Archive
+
 # Provision img folder
 cp -a \
     "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static" \
@@ -40,9 +43,6 @@ cp -a \
 cp -a \
     "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static" \
     "${hostWviewImgDir}/misma"
-
-mkdir -p "${hostWviewImgDir}"/{fiobbio,misma}/NOAA
-mkdir -p "${hostWviewImgDir}"/{fiobbio,misma}/Archive
 
 [ "${1:-}" = "-i" ] && { echo "INFO: INTERACTIVE mode"; INTERACTIVE=1; }
 
@@ -270,7 +270,8 @@ if docker volume inspect grafana-storage >/dev/null; then
         \
         -v grafana-storage:/var/lib/grafana \
         -v ${hostRepoRoot}/grafana/grafana.ini:/etc/grafana/grafana.ini \
-        -v ${hostWviewDataDir}/fiobbio/archive/wview-archive.sdb:/wview-archive.sdb:ro \
+        -v ${hostWviewDataDir}/fiobbio/archive/wview-archive.sdb:/wview-archive-fiobbio.sdb:ro \
+        -v ${hostWviewDataDir}/misma/archive/wview-archive.sdb:/wview-archive-misma.sdb:ro \
         \
         --name=grafana \
         \
