@@ -57,6 +57,11 @@ if ! kubectl get secrets cml-ftp-login >/dev/null; then
     kubectl create secret generic cml-ftp-login --from-env-file=/home/pi/secrets/cml_ftp_login_data.sh
 fi
 
+kubectl delete --wait=true pod wview-fiobbio || echo "INFO: nothing to delete"
+kubectl delete --wait=true pod wview-misma || echo "INFO: nothing to delete"
+kubectl delete --wait=true deployment nginx || echo "INFO: nothing to delete"
+kubectl delete --wait=true deployment grafana || echo "INFO: nothing to delete"
+
 kubectl apply -f ${scriptDir}/wview.yaml
 kubectl apply -f ${scriptDir}/grafana-hostpath.yaml
 kubectl apply -f ${scriptDir}/nginx-no-ingress.yaml
