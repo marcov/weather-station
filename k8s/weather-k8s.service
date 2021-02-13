@@ -1,0 +1,12 @@
+[Unit]
+After=docker.service
+
+[Service]
+User=pi
+Group=pi
+Type=oneshot
+ExecStart=/home/pi/weather-station/k8s/run.sh
+RemainAfterExit=true
+
+[Install]
+WantedBy=default.target
