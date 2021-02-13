@@ -4,6 +4,9 @@
 #
 set -euo pipefail
 
+echo "DISABLED in favor of k8s!"
+exit 0
+
 declare scriptDir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
 
 . ${scriptDir}/../common_variables.sh
@@ -91,9 +94,9 @@ stop_start ser2net || docker run \
 
 ################################################################################
 
-set -x
-. /home/pi/secrets/cml_ftp_login_data.sh
 set +x
+. /home/pi/secrets/cml_ftp_login_data.sh
+set -x
 
 stop_start wview-fiobbio || docker run \
     -d --rm \

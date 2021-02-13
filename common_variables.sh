@@ -2,8 +2,8 @@
 # Common variables. Edit variables as needed
 #
 
-declare scriptDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-declare -r repoRoot="${scriptDir}"
+# repo root is this dir
+declare -r repoRoot="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 #
 # Container only dir
 #

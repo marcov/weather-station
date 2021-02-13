@@ -157,11 +157,11 @@ server {
     #}
 
     location /portainer/ {
-       proxy_pass http://localhost:9000/;
+       proxy_pass http://meteo.local:9000/;
     }
 
     location /grafana/ {
-       proxy_pass http://localhost:3000/;
+       proxy_pass http://meteo.local:3000/;
     }
 
     #location = /stub_status {
