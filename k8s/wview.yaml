@@ -1,0 +1,223 @@
+---
+# k create secret generic cml-ftp-login --from-env-file=/home/pi/secrets/cml_ftp_login_data.sh
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wview-fiobbio
+  labels:
+
+spec:
+  containers:
+    - name: ser2net
+      image: pullme/x86_64-ser2net:wview
+
+      securityContext:
+        privileged: true
+
+      volumeMounts:
+      - name: dev-ttyusb
+        mountPath: /dev/ttyUSB0
+
+      volumeMounts:
+      - name: ser2net-conf
+        mountPath: /etc/ser2net.conf
+        readOnly: true
+
+    - name: wview
+      image: pullme/x86_64-wview:5.21.7
+
+      env:
+      - name: cml_ftp_user
+        valueFrom:
+          secretKeyRef:
+            name: cml-ftp-login
+            key: cml_ftp_user_fiobbio
+
+      - name: cml_ftp_pwd
+        valueFrom:
+          secretKeyRef:
+            name: cml-ftp-login
+            key: cml_ftp_pwd_fiobbio
+
+      command: ["/bin/bash", "-c", "exec /weather-station/wview/scripts/startup.sh"]
+
+      volumeMounts:
+      - name: wview-archive
+        mountPath: /var/lib/wview/archive
+
+      - name: wview-etc
+        mountPath: /etc/wview
+        #readOnly: true
+
+      - name: wview-conf
+        mountPath: /etc/wview/wview-conf.sdb
+
+      - name: wview-img
+        mountPath: /var/lib/wview/img
+
+      - name: wview-scripts
+        mountPath: /weather-station/wview/scripts
+        readOnly: true
+
+      - name: wview-common-vars
+        mountPath: /weather-station/common_variables.sh
+        readOnly: true
+
+      - name: dev-log
+        mountPath: /dev/log
+
+      - name: tz-config
+        mountPath: /etc/localtime
+        readOnly: true
+
+  volumes:
+
+  - name: wview-archive
+    hostPath:
+      path: /home/pi/wview-data/fiobbio/archive
+      type: Directory
+
+  - name: wview-conf
+    hostPath:
+      path: /home/pi/wview-data/fiobbio/conf/wview-conf.sdb
+      type: File
+
+  - name: wview-etc
+    hostPath:
+      path: /home/pi/weather-station/wview/fs/etc/wview
+      type: Directory
+
+  - name: wview-img
+    hostPath:
+      path: /tmp/wview-data-img/fiobbio
+      type: Directory
+
+  - name: wview-scripts
+    hostPath:
+      path: /home/pi/weather-station/wview/scripts
+      type: Directory
+
+  - name: wview-common-vars
+    hostPath:
+      path: /home/pi/weather-station/common_variables.sh
+      type: File
+
+  - name: dev-log
+    hostPath:
+      path: /run/systemd/journal/dev-log
+      type: Socket
+
+  - name: dev-ttyusb
+    hostPath:
+      path: /dev/ttyUSB0
+      type: Socket
+
+  - name: ser2net-conf
+    hostPath:
+      path: /home/pi/weather-station/ser2net/ser2net.conf
+      type: File
+
+  - name: tz-config
+    hostPath:
+      path: /usr/share/zoneinfo/Europe/Rome
+      type: File
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wview-misma
+  labels:
+
+spec:
+  containers:
+    - name: wview
+      image: pullme/x86_64-wview:5.21.7
+
+      env:
+      - name: cml_ftp_user
+        valueFrom:
+          secretKeyRef:
+            name: cml-ftp-login
+            key: cml_ftp_user_misma
+
+      - name: cml_ftp_pwd
+        valueFrom:
+          secretKeyRef:
+            name: cml-ftp-login
+            key: cml_ftp_pwd_misma
+
+      command: ["/bin/bash", "-c", "exec /weather-station/wview/scripts/startup.sh"]
+
+      volumeMounts:
+      - name: wview-archive
+        mountPath: /var/lib/wview/archive
+
+      - name: wview-etc
+        mountPath: /etc/wview
+        #readOnly: true
+
+      - name: wview-conf
+        mountPath: /etc/wview/wview-conf.sdb
+
+      - name: wview-img
+        mountPath: /var/lib/wview/img
+
+      - name: wview-scripts
+        mountPath: /weather-station/wview/scripts
+        readOnly: true
+
+      - name: wview-common-vars
+        mountPath: /weather-station/common_variables.sh
+        readOnly: true
+
+      - name: dev-log
+        mountPath: /dev/log
+
+      - name: tz-config
+        mountPath: /etc/localtime
+        readOnly: true
+
+  volumes:
+
+  - name: wview-archive
+    hostPath:
+      path: /home/pi/wview-data/misma/archive
+      type: Directory
+
+  - name: wview-conf
+    hostPath:
+      path: /home/pi/wview-data/misma/conf/wview-conf.sdb
+      type: File
+
+  - name: wview-etc
+    hostPath:
+      path: /home/pi/weather-station/wview/fs/etc/wview
+      type: Directory
+
+  - name: wview-img
+    hostPath:
+      path: /tmp/wview-data-img/misma
+      type: Directory
+
+  - name: wview-scripts
+    hostPath:
+      path: /home/pi/weather-station/wview/scripts
+      type: Directory
+
+  - name: wview-common-vars
+    hostPath:
+      path: /home/pi/weather-station/common_variables.sh
+      type: File
+
+  - name: dev-log
+    hostPath:
+      path: /run/systemd/journal/dev-log
+      type: Socket
+
+  - name: tz-config
+    hostPath:
+      path: /usr/share/zoneinfo/Europe/Rome
+      type: File

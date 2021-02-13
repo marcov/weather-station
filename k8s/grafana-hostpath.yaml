@@ -1,0 +1,83 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+  labels:
+    app: grafana
+  name: grafana
+  namespace: default
+
+spec:
+  selector:
+    matchLabels:
+      app: grafana
+
+  replicas: 1
+
+  template:
+    metadata:
+      labels:
+        app: grafana
+
+    spec:
+      containers:
+        - name: grafana
+          image: docker.io/grafana/grafana:latest
+
+          ports:
+          - containerPort: 3000
+
+          volumeMounts:
+          - name: grafana-storage
+            mountPath: /var/lib/grafana
+
+          - name: grafana-ini
+            mountPath: /etc/grafana/grafana.ini
+            readOnly: true
+
+          - name: wview-archive-fiobbio
+            mountPath: /wview-archive-fiobbio.sdb
+            readOnly: true
+
+          - name: wview-archive-misma
+            mountPath: /wview-archive-misma.sdb
+            readOnly: true
+
+      volumes:
+      - name: grafana-storage
+        hostPath:
+          path: /home/pi/k8s/pv/grafana-pv-storage/
+          type: Directory
+
+      - name: grafana-ini
+        hostPath:
+          path: /home/pi/weather-station/grafana/grafana.ini
+          type: File
+
+      - name: wview-archive-fiobbio
+        hostPath:
+          path: /home/pi/wview-data/fiobbio/archive/wview-archive.sdb
+          type: File
+
+      - name: wview-archive-misma
+        hostPath:
+          path: /home/pi/wview-data/misma/archive/wview-archive.sdb
+          type: File
+
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: grafana
+
+spec:
+  type: NodePort
+  selector:
+    app: grafana
+  ports:
+      # By default and for convenience, the `targetPort` is set to the same value as the `port` field.
+    - port: 3000
+      nodePort: 3000
+
