@@ -13,6 +13,7 @@ spec:
     - name: ser2net
       image: pullme/x86_64-ser2net:wview
 
+      ## TODO FIXME privileged!
       securityContext:
         privileged: true
 
@@ -20,10 +21,30 @@ spec:
       - name: dev-ttyusb
         mountPath: /dev/ttyUSB0
 
-      volumeMounts:
       - name: ser2net-conf
         mountPath: /etc/ser2net.conf
         readOnly: true
+
+
+    - name: rsyslog
+      image: pullme/x86_64-rsyslog:wview
+
+      command: ["/bin/bash", "-c"]
+      args:
+      - touch /tmp/syslog/syslog;
+        chmod ugo+rw /tmp/syslog/syslog;
+        ln -s /tmp/syslog/syslog /var/log/syslog;
+        ln -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime;
+        /usr/sbin/rsyslogd -n;
+
+      volumeMounts:
+      - name: syslog-volume
+        mountPath: /tmp/syslog
+
+      - name: syslog-conf
+        mountPath: /etc/rsyslog.conf
+        readOnly: true
+
 
     - name: wview
       image: pullme/x86_64-wview:5.21.7
@@ -41,7 +62,7 @@ spec:
             name: cml-ftp-login
             key: cml_ftp_pwd_fiobbio
 
-      command: ["/bin/bash", "-c", "exec /weather-station/wview/scripts/startup.sh"]
+      command: ["/bin/bash", "-c", "exec /weather-station/wview/scripts/k8s-startup.sh"]
 
       volumeMounts:
       - name: wview-archive
@@ -65,15 +86,10 @@ spec:
         mountPath: /weather-station/common_variables.sh
         readOnly: true
 
-      - name: dev-log
-        mountPath: /dev/log
-
-      - name: tz-config
-        mountPath: /etc/localtime
-        readOnly: true
+      - name: syslog-volume
+        mountPath: /tmp/syslog
 
   volumes:
-
   - name: wview-archive
     hostPath:
       path: /home/pi/wview-data/fiobbio/archive
@@ -104,25 +120,23 @@ spec:
       path: /home/pi/weather-station/common_variables.sh
       type: File
 
-  - name: dev-log
-    hostPath:
-      path: /run/systemd/journal/dev-log
-      type: Socket
-
   - name: dev-ttyusb
     hostPath:
       path: /dev/ttyUSB0
-      type: Socket
+      type: CharDevice
 
   - name: ser2net-conf
     hostPath:
       path: /home/pi/weather-station/ser2net/ser2net.conf
       type: File
 
-  - name: tz-config
+  - name: syslog-conf
     hostPath:
-      path: /usr/share/zoneinfo/Europe/Rome
+      path: /home/pi/weather-station/rsyslog/rsyslog.conf
       type: File
+
+  - name: syslog-volume
+    emptyDir: {}
 
 ---
 apiVersion: v1
@@ -133,6 +147,26 @@ metadata:
 
 spec:
   containers:
+    - name: rsyslog
+      image: pullme/x86_64-rsyslog:wview
+
+      command: ["/bin/bash", "-c"]
+      args:
+      - touch /tmp/syslog/syslog;
+        chmod ugo+rw /tmp/syslog/syslog;
+        ln -s /tmp/syslog/syslog /var/log/syslog;
+        ln -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime;
+        /usr/sbin/rsyslogd -n;
+
+      volumeMounts:
+      - name: syslog-volume
+        mountPath: /tmp/syslog
+
+      - name: syslog-conf
+        mountPath: /etc/rsyslog.conf
+        readOnly: true
+
+
     - name: wview
       image: pullme/x86_64-wview:5.21.7
 
@@ -149,7 +183,7 @@ spec:
             name: cml-ftp-login
             key: cml_ftp_pwd_misma
 
-      command: ["/bin/bash", "-c", "exec /weather-station/wview/scripts/startup.sh"]
+      command: ["/bin/bash", "-c", "exec /weather-station/wview/scripts/k8s-startup.sh"]
 
       volumeMounts:
       - name: wview-archive
@@ -173,12 +207,8 @@ spec:
         mountPath: /weather-station/common_variables.sh
         readOnly: true
 
-      - name: dev-log
-        mountPath: /dev/log
-
-      - name: tz-config
-        mountPath: /etc/localtime
-        readOnly: true
+      - name: syslog-volume
+        mountPath: /tmp/syslog
 
   volumes:
 
@@ -212,12 +242,10 @@ spec:
       path: /home/pi/weather-station/common_variables.sh
       type: File
 
-  - name: dev-log
+  - name: syslog-conf
     hostPath:
-      path: /run/systemd/journal/dev-log
-      type: Socket
-
-  - name: tz-config
-    hostPath:
-      path: /usr/share/zoneinfo/Europe/Rome
+      path: /home/pi/weather-station/rsyslog/rsyslog.conf
       type: File
+
+  - name: syslog-volume
+    emptyDir: {}

@@ -61,12 +61,12 @@ RUN apt-get -y update; \
       libudev1 \
       libssl1.0.0 \
       sqlite3 \
-      rsyslog \
       gawk \
       moreutils \
       bsdutils \
       imagemagick \
       ftp \
+      tzdata \
       ; \
     \
     apt-get clean; \
