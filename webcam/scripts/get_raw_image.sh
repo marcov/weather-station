@@ -70,21 +70,20 @@ localGet() {
 
 getRawPicture() {
     name=$1
-    srcType=$(echo $2 | cut -d" " -f 1)
+    srcType=$(awk '{print $1}' <<< "$2")
 
     dst=${hostWebcamDir}/${webcam_raw_prefix}_${name}.jpg
 
     if [ ${srcType} == "http" ]; then
-        login=$(echo $2 | cut -d" " -f 2)
-        url=$(echo $2 | cut -d" " -f 3)
+        url=$(awk '{print $2}' <<< "$2")
+        login="$3"
 
         httpGet ${login} ${url} ${dst} || { false; return; }
     elif [ ${srcType} == "local" ]; then
-        srcDir=$(echo $2 | cut -d" " -f 2)
-        pattern=$(echo $2 | cut -d" " -f 3)
+        srcDir=$(awk '{print $2}' <<< "$2")
+        pattern=$(awk '{print $3}' <<< "$2")
 
         localGet ${srcDir} ${pattern} ${dst} || { false; return; }
-
     else
         echo "ERR: srcType is empty / invalid...nothing to do"
         false
@@ -101,7 +100,8 @@ for i in $(seq 0 ${fiobbioRetries}); do
     echo "INFO: sleeping $sleepTime"
     sleep "$sleepTime"
     echo "INFO: get fiobbio $i"
-    getRawPicture "${fiobbioCfg[@]}" && break || echo "ERR: failed to get fiobbio"
+    getRawPicture "${fiobbioCfg[0]}" "${fiobbioCfg[1]}" "${fiobbio_webcam_login}" && \
+        break || echo "ERR: failed to get fiobbio"
 done
 
 for i in $(seq 0 ${mismaRetries}); do
@@ -109,7 +109,8 @@ for i in $(seq 0 ${mismaRetries}); do
     echo "INFO: sleeping $sleepTime"
     sleep "$sleepTime"
     echo "INFO: get misma $i"
-    getRawPicture "${mismaCfg[@]}" && break || echo "ERR: failed to get misma"
+    getRawPicture "${mismaCfg[0]}" "${mismaCfg[1]}" "${misma_webcam_login}" && \
+        break || echo "ERR: failed to get misma"
 done
 
 for i in $(seq 0 ${panoRetries}); do

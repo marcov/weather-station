@@ -13,14 +13,11 @@ source "${scriptDir}"/../../common_variables.sh
 #
 
 ftpUpload() {
-    name=$1
-    srcInfo=$2
-    text=$3
-    temperatureUrl=$4
+    _ftp_username="$1"
+    _ftp_password="$2"
 
-    _ftp_username=$(echo $5 | cut -d " " -f 1)
-    _ftp_password=$(echo $5 | cut -d " " -f 2)
-    suffix=$(echo $5 | cut -d " " -f 3)
+    name="$3"
+    suffix="${8:-}"
 
     src="${hostWebcamDir}/${webcam_prefix}_${name}.jpg"
     src_small="${hostWebcamDir}/${webcam_small_prefix}_${name}.jpg"
@@ -67,9 +64,9 @@ fi
 # Reset ftp log file
 rm -f ${cml_ftp_log_file}
 
-ftpUpload "${fiobbioCfg[@]}"
-ftpUpload "${mismaCfg[@]}"
-ftpUpload "${mismaPanoCfg[@]}"
+ftpUpload ${cml_ftp_user_fiobbio} ${cml_ftp_pwd_fiobbio} "${fiobbioCfg[@]}"
+ftpUpload ${cml_ftp_user_misma} ${cml_ftp_pwd_misma} "${mismaCfg[@]}"
+ftpUpload ${cml_ftp_user_misma} ${cml_ftp_pwd_misma} "${mismaPanoCfg[@]}"
 
 exit 0
 

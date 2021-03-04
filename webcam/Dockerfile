@@ -12,6 +12,7 @@ RUN apt-get -y update; \
       ftp \
       imagemagick \
       jq \
+      tzdata \
       ; \
     \
     apt-get clean; \

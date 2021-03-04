@@ -30,8 +30,7 @@ addWatermark () {
     srcInfo=$2
     stationName=$3
     temperatureUrl=$4
-    ftplogin=$5
-    resolution=$6
+    resolution=$5
 
     temperature=`getTemperature "${temperatureUrl}"`
     stationName="$(sed "s/_/ /g" <<< "${stationName}")"
