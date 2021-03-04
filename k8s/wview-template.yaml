@@ -1,0 +1,150 @@
+---
+# k create secret generic cml-ftp-login --from-env-file=/home/pi/secrets/cml_ftp_login_data.sh
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: wview-$WVIEW_INSTANCE_NAME
+spec:
+  selector:
+    matchLabels:
+      app: wview-$WVIEW_INSTANCE_NAME # has to match .spec.template.metadata.labels
+  serviceName: wview-$WVIEW_INSTANCE_NAME
+  replicas: 1 # by default is 1
+  template:
+    metadata:
+      labels:
+        app: wview-$WVIEW_INSTANCE_NAME # has to match .spec.selector.matchLabels
+
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: ser2net
+        image: pullme/x86_64-ser2net:wview
+
+        ## TODO FIXME privileged!
+        securityContext:
+          privileged: true
+
+        volumeMounts:
+        - name: dev-ttyusb
+          mountPath: /dev/ttyUSB0
+
+        - name: ser2net-conf
+          mountPath: /etc/ser2net.conf
+          readOnly: true
+
+
+      - name: rsyslog
+        image: pullme/x86_64-rsyslog:wview
+
+        command: ["/bin/bash", "-c"]
+        args:
+        - touch /tmp/syslog/syslog;
+          chmod ugo+rw /tmp/syslog/syslog;
+          ln -s /tmp/syslog/syslog /var/log/syslog;
+          ln -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime;
+          /usr/sbin/rsyslogd -n;
+
+        volumeMounts:
+        - name: syslog-volume
+          mountPath: /tmp/syslog
+
+        - name: syslog-conf
+          mountPath: /etc/rsyslog.conf
+          readOnly: true
+
+
+      - name: wview
+        image: pullme/x86_64-wview:5.21.7
+
+        env:
+        - name: cml_ftp_user
+          valueFrom:
+            secretKeyRef:
+              name: cml-ftp-login
+              key: cml_ftp_user_$WVIEW_INSTANCE_NAME
+
+        - name: cml_ftp_pwd
+          valueFrom:
+            secretKeyRef:
+              name: cml-ftp-login
+              key: cml_ftp_pwd_$WVIEW_INSTANCE_NAME
+
+        command: ["/bin/bash", "-c", "exec /weather-station/wview/scripts/k8s-startup.sh"]
+
+        volumeMounts:
+        - name: wview-archive
+          mountPath: /var/lib/wview/archive
+
+        - name: wview-etc
+          mountPath: /etc/wview
+          #readOnly: true
+
+        - name: wview-conf
+          mountPath: /etc/wview/wview-conf.sdb
+
+        - name: wview-img
+          mountPath: /var/lib/wview/img
+
+        - name: wview-scripts
+          mountPath: /weather-station/wview/scripts
+          readOnly: true
+
+        - name: wview-common-vars
+          mountPath: /weather-station/common_variables.sh
+          readOnly: true
+
+        - name: syslog-volume
+          mountPath: /tmp/syslog
+
+      volumes:
+      - name: wview-archive
+        hostPath:
+          path: /home/pi/wview-data/$WVIEW_INSTANCE_NAME/archive
+          type: Directory
+
+      - name: wview-conf
+        hostPath:
+          path: /home/pi/wview-data/$WVIEW_INSTANCE_NAME/conf/wview-conf.sdb
+          type: File
+
+      - name: wview-etc
+        hostPath:
+          path: /home/pi/weather-station/wview/fs/etc/wview
+          type: Directory
+
+      - name: wview-img
+        hostPath:
+          path: /tmp/wview-data-img/$WVIEW_INSTANCE_NAME
+          type: Directory
+
+      - name: wview-scripts
+        hostPath:
+          path: /home/pi/weather-station/wview/scripts
+          type: Directory
+
+      - name: wview-common-vars
+        hostPath:
+          path: /home/pi/weather-station/common_variables.sh
+          type: File
+
+      - name: dev-ttyusb
+        hostPath:
+          path: /dev/ttyUSB0
+          type: CharDevice
+
+      - name: ser2net-conf
+        hostPath:
+          path: /home/pi/weather-station/ser2net/ser2net.conf
+          type: File
+
+      - name: syslog-conf
+        hostPath:
+          path: /home/pi/weather-station/rsyslog/rsyslog.conf
+          type: File
+
+      - name: syslog-volume
+        emptyDir: {}
+

@@ -1,0 +1,114 @@
+---
+# k create secret generic cml-ftp-login --from-env-file=/home/pi/secrets/cml_ftp_login_data.sh
+# k create secret generic webcam-login --from-env-file=/home/pi/secrets/webcam_login_data.sh
+
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: webcam
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Replace
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+
+          containers:
+          - name: webcam
+            image: pullme/x86_64-webcam:latest
+            imagePullPolicy: IfNotPresent
+
+            command: ["/bin/bash", "-c"]
+            args:
+            - ln -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime;
+              /webcam/scripts/main.sh
+
+            env:
+            - name: fiobbio_webcam_login
+              valueFrom:
+                secretKeyRef:
+                  name: webcam-login
+                  key: fiobbio_webcam_login
+
+            - name: misma_webcam_login
+              valueFrom:
+                secretKeyRef:
+                  name: webcam-login
+                  key: misma_webcam_login
+
+            - name: cml_ftp_user_fiobbio
+              valueFrom:
+                secretKeyRef:
+                  name: cml-ftp-login
+                  key: cml_ftp_user_fiobbio
+
+            - name: cml_ftp_pwd_fiobbio
+              valueFrom:
+                secretKeyRef:
+                  name: cml-ftp-login
+                  key: cml_ftp_pwd_fiobbio
+
+            - name: cml_ftp_user_misma
+              valueFrom:
+                secretKeyRef:
+                  name: cml-ftp-login
+                  key: cml_ftp_user_misma
+
+            - name: cml_ftp_pwd_misma
+              valueFrom:
+                secretKeyRef:
+                  name: cml-ftp-login
+                  key: cml_ftp_pwd_misma
+
+            volumeMounts:
+
+            - name: webcam-destdir
+              mountPath: /tmp/webcam
+
+            - name: panogen-out
+              mountPath: /home/pi/panogen/out
+              readOnly: true
+
+            - name: webcam-scripts
+              mountPath: /webcam/scripts
+              readOnly: true
+
+            - name: webcam-config
+              mountPath: /webcam/config.sh
+              readOnly: true
+
+            - name: common-variables
+              mountPath: /common_variables.sh
+              readOnly: true
+
+          volumes:
+          - name: webcam-destdir
+            hostPath:
+              path: /tmp/webcam
+              type: Directory
+
+          - name: panogen-out
+            hostPath:
+              path: /home/pi/panogen/out
+              type: Directory
+
+          - name: webcam-scripts
+            hostPath:
+              path: /home/pi/weather-station/webcam/scripts
+              type: Directory
+
+          - name: webcam-config
+            hostPath:
+              path: /home/pi/weather-station/webcam/config.sh
+              type: File
+
+          - name: common-variables
+            hostPath:
+              path: /home/pi/weather-station/common_variables.sh
+              type: File
+

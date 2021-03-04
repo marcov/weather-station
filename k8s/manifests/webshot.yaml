@@ -1,0 +1,48 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: webshot
+spec:
+  schedule: "17 * * * *"
+  concurrencyPolicy: Replace
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+
+          hostAliases:
+          - ip: "0.0.0.0"
+            hostnames:
+            - "cdn.privacy-mgmt.com"
+
+          containers:
+          - name: webshot
+            image: pullme/x86_64-webshot:latest
+            imagePullPolicy: IfNotPresent
+            args:
+            - /webshot/run.sh
+            - /config.json
+            - /destdir
+
+            volumeMounts:
+            - name: webshot-conf
+              mountPath: /config.json
+              readOnly: true
+
+            - name: webshot-destdir
+              mountPath: /destdir
+
+          volumes:
+          - name: webshot-destdir
+            hostPath:
+              path: /tmp/webshot
+              type: Directory
+
+          - name: webshot-conf
+            hostPath:
+              path: /home/pi/weather-station/webshot/config.json
+              type: File
+

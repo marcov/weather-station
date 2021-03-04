@@ -21,10 +21,6 @@ fi
 ${asRoot:-} rm -f "$scriptStarted" "$scriptCompleted"
 touch "$scriptStarted"
 
-echo "NOTE: run with the env INTERACTIVE=1 for interactive startup!"
-echo "INFO: starting up in 1 seconds"
-sleep 1
-
 #
 # TODO: find a better way to store wview img in a tmpfs shared volume b/w host and containers!
 #
@@ -33,13 +29,16 @@ if [ -n "${removeEphemeral}" ]; then
     mkdir "${hostWviewImgDir}"
 fi
 
-mkdir -p "${hostWviewImgDir}"/{fiobbio,misma}/NOAA
-mkdir -p "${hostWviewImgDir}"/{fiobbio,misma}/Archive
-
 # Provision webcam,webhost folders
 mkdir -p /tmp/{webcam,webshot}
 
 # Provision img folder
+mkdir -p "${hostWviewImgDir}"
+
+# Create the ddns ip cache file
+touch /tmp/ddns-ip
+chmod 666 /tmp/ddns-ip
+
 cp -a \
     "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static" \
     "${hostWviewImgDir}/fiobbio"
@@ -48,23 +47,31 @@ cp -a \
     "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static" \
     "${hostWviewImgDir}/misma"
 
-[ "${1:-}" = "-i" ] && { echo "INFO: INTERACTIVE mode"; INTERACTIVE=1; }
+cp \
+    "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/chart_bg_bigger.png" \
+    "${hostWviewImgDir}/fiobbio/chart_bg.png"
+
+cp \
+    "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/chart_bg_bigger.png" \
+    "${hostWviewImgDir}/misma/chart_bg.png"
+
+mkdir -p "${hostWviewImgDir}"/{fiobbio,misma}/NOAA
+mkdir -p "${hostWviewImgDir}"/{fiobbio,misma}/Archive
 
 set -x
 minikube status || minikube start --extra-config=apiserver.service-node-port-range=1-65535
+
+# TODO: generate or commit files?
+#cat ${scriptDir}/manifests/wview-template.yaml | WVIEW_INSTANCE_NAME=fiobbio envsubst '$WVIEW_INSTANCE_NAME' > /tmp/wview-fiobbio-generated.yaml
+#cat ${scriptDir}/manifests/wview-template.yaml | WVIEW_INSTANCE_NAME=misma envsubst '$WVIEW_INSTANCE_NAME' > /tmp/wview-misma-generated.yaml
 
 if ! kubectl get secrets cml-ftp-login >/dev/null; then
     kubectl create secret generic cml-ftp-login --from-env-file=/home/pi/secrets/cml_ftp_login_data.sh
 fi
 
-kubectl delete --wait=true pod wview-fiobbio || echo "INFO: nothing to delete"
-kubectl delete --wait=true pod wview-misma || echo "INFO: nothing to delete"
-kubectl delete --wait=true deployment nginx || echo "INFO: nothing to delete"
-kubectl delete --wait=true deployment grafana || echo "INFO: nothing to delete"
+kubectl delete --wait=true -f ${scriptDir}/manifests/ || echo "WARN: ignoring kubectl error on delete"
 
-kubectl apply -f ${scriptDir}/wview.yaml
-kubectl apply -f ${scriptDir}/grafana-hostpath.yaml
-kubectl apply -f ${scriptDir}/nginx-no-ingress.yaml
+kubectl apply -f ${scriptDir}/manifests/
 
 set +x
 

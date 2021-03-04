@@ -1,0 +1,63 @@
+---
+# k create secret generic backblaze-info --from-env-file=/home/pi/secrets/backblaze
+---
+
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: rclone
+spec:
+  schedule: "0 2 * * *"
+  concurrencyPolicy: Replace
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+
+          containers:
+          - name: rclone
+            image: pullme/x86_64-rclone:latest
+            imagePullPolicy: IfNotPresent
+
+            command: ["/bin/bash", "-c"]
+            args:
+            - ln -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime;
+              rclone config create backblaze b2 account $BACKBLAZE_ACCOUNT key $BACKBLAZE_KEY;
+              /backup
+
+            env:
+            - name: BACKBLAZE_ACCOUNT
+              valueFrom:
+                secretKeyRef:
+                  name: backblaze-info
+                  key: BACKBLAZE_ACCOUNT
+
+            - name: BACKBLAZE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: backblaze-info
+                  key: BACKBLAZE_KEY
+
+            volumeMounts:
+            - name: backup-script
+              mountPath: /backup
+              readOnly: true
+
+            - name: wview-data
+              mountPath: /wview-data
+              readOnly: true
+
+          volumes:
+          - name: backup-script
+            hostPath:
+              path: /home/pi/weather-station/rclone/backup
+              type: File
+
+          - name: wview-data
+            hostPath:
+              path: /home/pi/wview-data
+              type: Directory
+

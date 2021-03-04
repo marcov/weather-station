@@ -25,6 +25,16 @@ spec:
         - name: grafana
           image: docker.io/grafana/grafana:latest
 
+          env:
+          - name: GF_RENDERING_SERVER_URL
+            value: http://localhost:8081/render
+
+          - name: GF_RENDERING_CALLBACK_URL
+            value: http://localhost:3000/
+
+          - name: GF_LOG_FILTERS
+            value: rendering:debug
+
           ports:
           - containerPort: 3000
 
@@ -43,6 +53,16 @@ spec:
           - name: wview-archive-misma
             mountPath: /wview-archive-misma.sdb
             readOnly: true
+
+        - name: renderer
+          image: docker.io/grafana/grafana-image-renderer:latest
+
+          env:
+          - name: ENABLE_METRICS
+            value: "true"
+
+          ports:
+          - containerPort: 8081
 
       volumes:
       - name: grafana-storage

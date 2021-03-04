@@ -1,0 +1,65 @@
+---
+# k create secret generic ddns-info --from-env-file=/home/pi/nc-ddns/ddns-info.txt
+
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: ddns
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Replace
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+
+          containers:
+          - name: ddns
+            image: pullme/x86_64-nc-ddns:latest
+            imagePullPolicy: IfNotPresent
+
+            args:
+            - /nc-ddns/nc-ddns.sh
+            - -d
+
+            env:
+            - name: NC_DDNS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: ddns-info
+                  key: NC_DDNS_HOST
+
+            - name: NC_DDNS_DOMAIN
+              valueFrom:
+                secretKeyRef:
+                  name: ddns-info
+                  key: NC_DDNS_DOMAIN
+
+            - name: NC_DDNS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ddns-info
+                  key: NC_DDNS_PASSWORD
+
+            volumeMounts:
+            - name: nc-ddns
+              mountPath: /nc-ddns
+              readOnly: true
+
+            - name: ddns-ip
+              mountPath: /tmp/ddns-ip
+
+          volumes:
+          - name: nc-ddns
+            hostPath:
+              path: /home/pi/nc-ddns
+              type: Directory
+
+          - name: ddns-ip
+            hostPath:
+              path: /tmp/ddns-ip
+              type: File
