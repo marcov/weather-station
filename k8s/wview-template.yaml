@@ -35,7 +35,6 @@ spec:
           mountPath: /etc/ser2net.conf
           readOnly: true
 
-
       - name: rsyslog
         image: pullme/x86_64-rsyslog:wview
 

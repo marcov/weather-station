@@ -32,11 +32,10 @@ sleep 1
 #
 if [ -n "${removeEphemeral}" ]; then
     rm -rf "${hostWviewImgDir}"
-    mkdir "${hostWviewImgDir}"
 fi
 
-mkdir -p "${hostWviewImgDir}"/{fiobbio,misma}/NOAA
-mkdir -p "${hostWviewImgDir}"/{fiobbio,misma}/Archive
+# Provision img folder
+mkdir -p "${hostWviewImgDir}"
 
 # Provision img folder
 cp -a \
@@ -46,6 +45,10 @@ cp -a \
 cp -a \
     "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static" \
     "${hostWviewImgDir}/misma"
+
+mkdir -p "${hostWviewImgDir}"/{fiobbio,misma}/NOAA
+mkdir -p "${hostWviewImgDir}"/{fiobbio,misma}/Archive
+
 
 [ "${1:-}" = "-i" ] && { echo "INFO: INTERACTIVE mode"; INTERACTIVE=1; }
 
