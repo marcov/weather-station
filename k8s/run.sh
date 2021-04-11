@@ -36,8 +36,8 @@ mkdir -p /tmp/{webcam,webshot}
 mkdir -p "${hostWviewImgDir}"
 
 # Create the ddns ip cache file
-touch /tmp/ddns-ip
-chmod 666 /tmp/ddns-ip
+${asRoot} touch /tmp/ddns-ip
+${asRoot} chmod 666 /tmp/ddns-ip
 
 cp -a \
     "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static" \
@@ -61,15 +61,18 @@ mkdir -p "${hostWviewImgDir}"/{fiobbio,misma}/Archive
 set -x
 minikube status || minikube start --extra-config=apiserver.service-node-port-range=1-65535
 
-# TODO: generate or commit files?
-#cat ${scriptDir}/manifests/wview-template.yaml | WVIEW_INSTANCE_NAME=fiobbio envsubst '$WVIEW_INSTANCE_NAME' > /tmp/wview-fiobbio-generated.yaml
-#cat ${scriptDir}/manifests/wview-template.yaml | WVIEW_INSTANCE_NAME=misma envsubst '$WVIEW_INSTANCE_NAME' > /tmp/wview-misma-generated.yaml
+# TODO: commit files?
+cat ${scriptDir}/wview-template.yaml | WVIEW_INSTANCE_NAME=fiobbio envsubst '$WVIEW_INSTANCE_NAME' > ${scriptDir}/manifests/wview-fiobbio-generated.yaml
+cat ${scriptDir}/wview-template.yaml | WVIEW_INSTANCE_NAME=misma envsubst '$WVIEW_INSTANCE_NAME' > ${scriptDir}/manifests/wview-misma-generated.yaml
 
 if ! kubectl get secrets cml-ftp-login >/dev/null; then
     kubectl create secret generic cml-ftp-login --from-env-file=/home/pi/secrets/cml_ftp_login_data.sh
 fi
 
-kubectl delete --wait=true -f ${scriptDir}/manifests/ || echo "WARN: ignoring kubectl error on delete"
+# TODO all the other secrets needs to be created
+
+# TODO: needs to be deleted?
+#kubectl delete --wait=true -f ${scriptDir}/manifests/ || echo "WARN: ignoring kubectl error on delete"
 
 kubectl apply -f ${scriptDir}/manifests/
 
