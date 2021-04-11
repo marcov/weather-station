@@ -30,7 +30,7 @@ spec:
             value: http://localhost:8081/render
 
           - name: GF_RENDERING_CALLBACK_URL
-            value: http://localhost:3000/
+            value: http://localhost:3000/grafana/
 
           - name: GF_LOG_FILTERS
             value: rendering:debug
@@ -61,6 +61,8 @@ spec:
           - name: ENABLE_METRICS
             value: "true"
 
+          - name: IGNORE_HTTPS_ERRORS
+            value: "true"
           ports:
           - containerPort: 8081
 
