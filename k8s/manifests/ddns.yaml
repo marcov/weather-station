@@ -11,6 +11,8 @@ spec:
   concurrencyPolicy: Replace
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 1
+  # The default looks to be 100. Increase it.
+  startingDeadlineSeconds: 300
   jobTemplate:
     spec:
       template:
