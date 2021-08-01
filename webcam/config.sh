@@ -12,7 +12,8 @@ webcam_prefix="webcam"
 webcam_raw_prefix="${webcam_prefix}_raw"
 webcam_small_prefix="${webcam_prefix}_small"
 
-httpServerHostname="192.168.1.200"
+#httpServerHostname="192.168.1.200"
+httpServerHostname="nginx"
 #
 # cfg format:
 #
