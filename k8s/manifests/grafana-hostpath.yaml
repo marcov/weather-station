@@ -32,8 +32,8 @@ spec:
           - name: GF_RENDERING_CALLBACK_URL
             value: http://localhost:3000/grafana/
 
-          - name: GF_LOG_FILTERS
-            value: rendering:debug
+          #- name: GF_LOG_FILTERS
+          #  value: rendering:debug
 
           ports:
           - containerPort: 3000
@@ -46,8 +46,12 @@ spec:
             mountPath: /etc/grafana/grafana.ini
             readOnly: true
 
-          - name: wview-archive-fiobbio
-            mountPath: /wview-archive-fiobbio.sdb
+          - name: wview-archive-fiobbio1
+            mountPath: /wview-archive-fiobbio1.sdb
+            readOnly: true
+
+          - name: wview-archive-fiobbio2
+            mountPath: /wview-archive-fiobbio2.sdb
             readOnly: true
 
           - name: wview-archive-misma
@@ -58,11 +62,24 @@ spec:
           image: docker.io/grafana/grafana-image-renderer:latest
 
           env:
-          - name: ENABLE_METRICS
-            value: "true"
+          #- name: ENABLE_METRICS
+          #  value: "true"
+
+          #- name: LOG_LEVEL
+          # value: debug
 
           - name: IGNORE_HTTPS_ERRORS
             value: "true"
+
+          #- name: RENDERING_VERBOSE_LOGGING
+          #  value: "true"
+
+          #- name: RENDERING_DUMPIO
+          #  value: "true"
+
+          - name: RENDERING_ARGS
+            value: --no-sandbox,--disable-setuid-sandbox,--disable-dev-shm-usage,--disable-accelerated-2d-canvas,--disable-gpu,--window-size=1280x758
+
           ports:
           - containerPort: 8081
 
@@ -77,9 +94,14 @@ spec:
           path: /home/pi/weather-station/grafana/grafana.ini
           type: File
 
-      - name: wview-archive-fiobbio
+      - name: wview-archive-fiobbio1
         hostPath:
-          path: /home/pi/wview-data/fiobbio/archive/wview-archive.sdb
+          path: /home/pi/wview-data/fiobbio1/archive/wview-archive.sdb
+          type: File
+
+      - name: wview-archive-fiobbio2
+        hostPath:
+          path: /home/pi/wview-data/fiobbio2/archive/wview-archive.sdb
           type: File
 
       - name: wview-archive-misma
