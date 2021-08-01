@@ -36,7 +36,13 @@ fi
 radmrouted 1 /var/lib/wview &
 sleep 2
 
-wviewd_bin="/usr/bin/`cat /etc/wview/wview-binary`"
+#wviewd_bin="/usr/bin/`cat /etc/wview/wview-binary`"
+wviewd_bin="/usr/bin/wviewd_${WVIEW_STATION_TYPE}"
+if ! [ -x ${wviewd_bin} ]; then
+    echo "ERR: invalid WVIEW_STATION_TYPE \"${WVIEW_STATION_TYPE}\": \"${wviewd_bin}\" is not a valid executable!"
+    exit -1
+fi
+
 "${wviewd_bin}" &
 sleep 1
 

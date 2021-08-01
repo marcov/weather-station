@@ -313,12 +313,12 @@ iframe.meteoblue {
     margin-bottom: .5rem;
 }
 
-#mismaMeasures {
+fiobbio2Measures, #mismaMeasures {
   margin-top 0;
   padding-top: 0;
 }
 
-#mismaMeasures > li > label {
+#fiobbio2Measures > li > label, #mismaMeasures > li > label {
   display: none;
 }
 

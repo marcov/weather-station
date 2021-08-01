@@ -40,30 +40,48 @@ ${asRoot} touch /tmp/ddns-ip
 ${asRoot} chmod 666 /tmp/ddns-ip
 
 cp -a \
-    "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static" \
-    "${hostWviewImgDir}/fiobbio"
+    "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static/" \
+    "${hostWviewImgDir}/fiobbio1"
 
 cp -a \
-    "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static" \
+    "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static/" \
     "${hostWviewImgDir}/misma"
+
+cp -a \
+    "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static/" \
+    "${hostWviewImgDir}/fiobbio2"
 
 cp \
     "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/chart_bg_bigger.png" \
-    "${hostWviewImgDir}/fiobbio/chart_bg.png"
+    "${hostWviewImgDir}/fiobbio1/chart_bg.png"
+
+cp \
+    "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/chart_bg_bigger.png" \
+    "${hostWviewImgDir}/fiobbio2/chart_bg.png"
 
 cp \
     "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/chart_bg_bigger.png" \
     "${hostWviewImgDir}/misma/chart_bg.png"
 
-mkdir -p "${hostWviewImgDir}"/{fiobbio,misma}/NOAA
-mkdir -p "${hostWviewImgDir}"/{fiobbio,misma}/Archive
+mkdir -p "${hostWviewImgDir}"/{fiobbio1,misma,fiobbio2}/NOAA
+mkdir -p "${hostWviewImgDir}"/{fiobbio1,misma,fiobbio2}/Archive
 
 set -x
 minikube status || minikube start --extra-config=apiserver.service-node-port-range=1-65535
 
 # TODO: commit files?
-cat ${scriptDir}/wview-template.yaml | WVIEW_INSTANCE_NAME=fiobbio envsubst '$WVIEW_INSTANCE_NAME' > ${scriptDir}/manifests/wview-fiobbio-generated.yaml
-cat ${scriptDir}/wview-template.yaml | WVIEW_INSTANCE_NAME=misma envsubst '$WVIEW_INSTANCE_NAME' > ${scriptDir}/manifests/wview-misma-generated.yaml
+# TODO fix cml ftp login info
+cat ${scriptDir}/wview-template.yaml | \
+    WVIEW_INSTANCE_NAME=fiobbio1 WVIEW_STATION_TYPE=vpro \
+    envsubst '$WVIEW_INSTANCE_NAME $WVIEW_STATION_TYPE' > ${scriptDir}/manifests/wview-fiobbio1-generated.yaml
+
+cat ${scriptDir}/wview-template.yaml | \
+    WVIEW_INSTANCE_NAME=misma WVIEW_STATION_TYPE=vpro \
+    envsubst '$WVIEW_INSTANCE_NAME $WVIEW_STATION_TYPE' > ${scriptDir}/manifests/wview-misma-generated.yaml
+
+cat ${scriptDir}/wview-template.yaml | \
+    WVIEW_INSTANCE_NAME=fiobbio2 WVIEW_STATION_TYPE=wxt510 \
+    envsubst '$WVIEW_INSTANCE_NAME $WVIEW_STATION_TYPE' > ${scriptDir}/manifests/wview-fiobbio2-generated.yaml
 
 if ! kubectl get secrets cml-ftp-login >/dev/null; then
     kubectl create secret generic cml-ftp-login --from-env-file=/home/pi/secrets/cml_ftp_login_data.sh

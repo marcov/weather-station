@@ -110,7 +110,7 @@
    flex-flow: column nowrap;
  }
 
-  #mismaMeasures > .measure > label {
+  #fiobbio2Measures > .measure > label, #mismaMeasures > .measure > label {
     display: inherit;
   }
 

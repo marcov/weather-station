@@ -42,12 +42,8 @@ spec:
           mountPath: /etc/letsencrypt
           readOnly: true
 
-        - name: wview-img-fiobbio
-          mountPath: /www/wview-img/fiobbio
-          readOnly: true
-
-        - name: wview-img-misma
-          mountPath: /www/wview-img/misma
+        - name: wview-data-img
+          mountPath: /www/wview-img
           readOnly: true
 
         - name: webcam
@@ -77,14 +73,9 @@ spec:
           path: /home/pi/secrets/letsencrypt
           type: Directory
 
-      - name: wview-img-fiobbio
+      - name: wview-data-img
         hostPath:
-          path: /tmp/wview-data-img/fiobbio
-          type: Directory
-
-      - name: wview-img-misma
-        hostPath:
-          path: /tmp/wview-data-img/misma
+          path: /tmp/wview-data-img
           type: Directory
 
       - name: webcam

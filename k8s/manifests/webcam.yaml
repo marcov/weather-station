@@ -12,6 +12,8 @@ spec:
   concurrencyPolicy: Replace
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 1
+  # The default looks to be 100. Increase it.
+  startingDeadlineSeconds: 300
   jobTemplate:
     spec:
       template:
@@ -45,13 +47,13 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: cml-ftp-login
-                  key: cml_ftp_user_fiobbio
+                  key: cml_ftp_user_fiobbio1
 
             - name: cml_ftp_pwd_fiobbio
               valueFrom:
                 secretKeyRef:
                   name: cml-ftp-login
-                  key: cml_ftp_pwd_fiobbio
+                  key: cml_ftp_pwd_fiobbio1
 
             - name: cml_ftp_user_misma
               valueFrom:

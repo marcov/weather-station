@@ -115,14 +115,24 @@ server {
         try_files $uri $uri/ =404;
     }
 
+    location /fiobbio1/ {
+        alias /www/wview-img/fiobbio1/;
+        try_files $uri $uri/ =404;
+    }
+
     location /misma/ {
         alias /www/wview-img/misma/;
         try_files $uri $uri/ =404;
     }
 
+    location /fiobbio2/ {
+        alias /www/wview-img/fiobbio2/;
+        try_files $uri $uri/ =404;
+    }
+
     # fallback
     location / {
-        root /www/wview-img/fiobbio;
+        root /www/wview-img/fiobbio1;
         #  # First attempt to serve request as file, then
         #  # as directory, then fall back to displaying a 404.
         try_files $uri $uri/ =404;
@@ -131,6 +141,8 @@ server {
         rewrite ^/weather/(.+)$ /$1 last;
         rewrite ^/weather/?$ / permanent;
         rewrite ^/misma$ /misma/ permanent;
+        rewrite ^/fiobbio1$ /fiobbio1/ permanent;
+        rewrite ^/fiobbio2$ /fiobbio2/ permanent;
     }
 
     # TODO : enable php...
