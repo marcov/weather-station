@@ -1,0 +1,166 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus
+  labels:
+    app: prometheus
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/component: prometheus
+spec:
+  ports:
+    # Exposes `http` and `TCP` ports `9090` using the default `ClusterIP` Service type
+    - name: http
+      port: 9090
+      protocol: TCP
+      targetPort: 9090
+  # Ensures clients are routed to the same Prometheus Pod, which is necessary to get consistent dashboards in a highly-available setup.
+  # To learn more about Prometheus high availability,
+  # consult https://github.com/coreos/prometheus-operator/blob/master/Documentation/high-availability.md#prometheus
+  sessionAffinity: ClientIP
+  selector:
+    app: prometheus
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: prometheus-config
+  labels:
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/component: prometheus
+data:
+  prometheus.yaml: |-
+    global:
+      scrape_interval: 60s
+      scrape_timeout: 10s
+      evaluation_interval: 1m
+    alerting:
+      alertmanagers:
+      - static_configs:
+        - targets:
+          # TODO
+          #
+    rule_files:
+      #- /etc/config/rules.yaml
+      #- /etc/config/alerts.yaml
+
+    scrape_configs:
+    - job_name: wview-fiobbio1
+      honor_timestamps: true
+      scrape_interval: 60s
+      scrape_timeout: 10s
+      metrics_path: /fiobbio1/metrics.prom
+      static_configs:
+
+      - targets: ['nginx']
+
+      scheme: https
+      tls_config:
+        insecure_skip_verify: true
+
+      relabel_configs:
+      - source_labels: [__address__]
+        regex: '.*'
+        target_label: instance
+        replacement: 'fiobbio1'
+
+    - job_name: wview-fiobbio2
+      honor_timestamps: true
+      scrape_interval: 60s
+      scrape_timeout: 10s
+      metrics_path: /fiobbio2/metrics.prom
+
+      static_configs:
+      - targets: ['nginx']
+
+      scheme: https
+      tls_config:
+        insecure_skip_verify: true
+
+      relabel_configs:
+      - source_labels: [__address__]
+        regex: '.*'
+        target_label: instance
+        replacement: 'fiobbio2'
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: prometheus
+  labels: &Labels
+    app: prometheus
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/component: prometheus
+spec:
+  serviceName: prometheus
+  replicas: 1
+  #podManagementPolicy: "Parallel"
+  #updateStrategy:
+  #  type: "RollingUpdate"
+  selector:
+    matchLabels: *Labels
+  template:
+    metadata:
+      labels: *Labels
+    spec:
+      # `chown` the Prometheus  `/data` directory so that Prometheus can write to it
+      initContainers:
+      - name: "init-chown-data"
+        image: debian:9
+        imagePullPolicy: Always
+        command: ["chown", "-R", "65534:65534", "/data"]
+        volumeMounts:
+        - name: prometheus-data
+          mountPath: /data
+          subPath: ""
+      containers:
+        - name: prometheus-server
+          # Use the `quay.io/prometheus/prometheus:v2.11.1` image
+          image: quay.io/prometheus/prometheus:v2.11.1
+          imagePullPolicy: IfNotPresent
+          args:
+            - --config.file=/etc/config/prometheus.yaml
+            - --storage.tsdb.path=/data
+          ports:
+            - containerPort: 9090
+          # Probe the `/-/ready` and `/-/healthy` endpoints
+          readinessProbe:
+            httpGet:
+              path: /-/ready
+              port: 9090
+            initialDelaySeconds: 30
+            timeoutSeconds: 30
+          livenessProbe:
+            httpGet:
+              path: /-/healthy
+              port: 9090
+            initialDelaySeconds: 30
+            timeoutSeconds: 30
+          # Based on 10 running nodes with 30 pods each
+          # Resource requests of `200m` of CPU and `1000Mi` of memory
+          #resources:
+          #  requests:
+          #    cpu: 200m
+          #    memory: 1000Mi
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/config
+            - name: prometheus-data
+              mountPath: /data
+              subPath: ""
+      terminationGracePeriodSeconds: 300
+
+      volumes:
+        # The Prometheus ConfigMap is mounted into the Pods as a volume at `/etc/config`
+        - name: config-volume
+          configMap:
+            name: prometheus-config
+
+        - name: prometheus-data
+          hostPath:
+            path: /home/pi/k8s/pv/prometheus-pv-storage
+            type: Directory
+
