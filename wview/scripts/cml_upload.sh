@@ -57,7 +57,6 @@ resize_pngs() {
     rm -rf "$cmlPngsPath"
     mkdir -p "$cmlPngsPath"
 
-
     echo "Creating resized image for proper rendering on CML website"
     for img in `find /var/lib/wview/img -name "*day.png"`; do
         dst_small="${cmlPngsPath}/$(basename "$img")"
