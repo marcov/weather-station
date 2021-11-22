@@ -130,7 +130,7 @@ function openURL(urlname)
 
 </head>
 <body
- style="background-image: url(above-clouds.jpg);">
+ style="background-image: url(Clouds.jpg);">
 <form method="post">
 <div align="center">
 
