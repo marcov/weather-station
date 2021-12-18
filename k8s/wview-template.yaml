@@ -75,6 +75,16 @@ spec:
 
         command: ["/bin/bash", "-c", "exec /weather-station/wview/scripts/k8s-startup.sh"]
 
+        livenessProbe:
+          periodSeconds: 300
+          initialDelaySeconds: 600
+          timeoutSeconds: 10
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - '[ "`find /var/lib/wview/img -mmin -2 | wc -l`" != "0" ]'
+
         volumeMounts:
         - name: wview-archive
           mountPath: /var/lib/wview/archive
