@@ -30,22 +30,21 @@
            "waitTime": 5000,
            "outFile":  "wz_meteogram.png",
            "viewSize": [820, 1180],
-           "topLeft":  [560, 0],
+           "topLeft":  [850, 0],
            "size":     [820, 510],
            "evalCode": "document.getElementById('sp_message_container_403677').style.display = 'none'; var collection = document.getElementsByClassName('adsbygoogle'); for (i = 1; i < collection.length; i++) {collection[0].parentNode.removeChild(collection[0]);}",
            "Enabled": true
         },
 
         {
-           "url":      "https://www.yr.no/en/forecast/graph/2-8951344/Italy/Lombardy/Provincia%20di%20Bergamo/Fiobbio",
-           "waitTime": 2000,
-           "outFile":  "yr.png",
-           "viewSize": [1024, 768],
-           "info":     " v----v----- 1st value is pixels from TOP (y), 2nd value is pixels from left (x)",
-           "topLeft":  [550, 0],
-           "size":     [1024, 450],
-           "evalCode": "",
-           "Enabled": false
+           "url":      "https://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=gfs&var=201&run=12&lid=ENS&bw=",
+           "waitTime": 5000,
+           "outFile":  "wz_ensemble.png",
+           "viewSize": [820, 1180],
+           "topLeft":  [870, 0],
+           "size":     [820, 595],
+           "evalCode": "document.getElementById('sp_message_container_403677').style.display = 'none'; var collection = document.getElementsByClassName('adsbygoogle'); for (i = 1; i < collection.length; i++) {collection[0].parentNode.removeChild(collection[0]);}",
+           "Enabled": true
         }
     ]
 }
