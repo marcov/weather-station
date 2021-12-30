@@ -20,21 +20,6 @@ spec:
     spec:
       terminationGracePeriodSeconds: 10
       containers:
-      - name: ser2net
-        image: pullme/x86_64-ser2net:wview
-
-        ## TODO FIXME privileged!
-        securityContext:
-          privileged: true
-
-        volumeMounts:
-        - name: dev-ttyusb
-          mountPath: /dev/ttyUSB0
-
-        - name: ser2net-conf
-          mountPath: /etc/ser2net.conf
-          readOnly: true
-
       - name: rsyslog
         image: pullme/x86_64-rsyslog:wview
 
@@ -76,14 +61,16 @@ spec:
         command: ["/bin/bash", "-c", "exec /weather-station/wview/scripts/k8s-startup.sh"]
 
         livenessProbe:
+          # Every 5m, check for liveness.
+          # If for 3 times liveness fails, set pod unhealthy.
+          # Unhealthy after 15 min
           periodSeconds: 300
           initialDelaySeconds: 600
           timeoutSeconds: 10
+          #failureThreshold: 3
+          #successThreshold: 1
           exec:
-            command:
-            - /bin/sh
-            - -c
-            - '[ "`find /var/lib/wview/img -mmin -2 | wc -l`" != "0" ]'
+            command: ["/bin/bash", "-c", "exec /weather-station/wview/scripts/health-check.sh"]
 
         volumeMounts:
         - name: wview-archive
@@ -139,16 +126,6 @@ spec:
       - name: wview-common-vars
         hostPath:
           path: /home/pi/weather-station/common_variables.sh
-          type: File
-
-      - name: dev-ttyusb
-        hostPath:
-          path: /dev/ttyUSB0
-          type: CharDevice
-
-      - name: ser2net-conf
-        hostPath:
-          path: /home/pi/weather-station/ser2net/ser2net.conf
           type: File
 
       - name: syslog-conf

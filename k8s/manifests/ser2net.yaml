@@ -1,0 +1,79 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ser2net-fiobbio1
+  labels:
+    app: ser2net-fiobbio1
+    app.kubernetes.io/name: ser2net-fiobbio1
+    app.kubernetes.io/component: ser2net-fiobbio1
+spec:
+  type: ClusterIP
+  ports:
+      # Note: A Service can map any incoming port to a targetPort.
+      # By default and for convenience, the targetPort is set to the same value as the port field.
+    - name: serial-over-tcp
+      port: 2233
+      protocol: TCP
+  selector:
+    app: ser2net-fiobbio1
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ser2net-fiobbio1
+spec:
+  selector:
+    matchLabels:
+      app: ser2net-fiobbio1 # has to match .spec.template.metadata.labels
+  serviceName: ser2net-fiobbio1
+  replicas: 1 # by default is 1
+  template:
+    metadata:
+      labels:
+        app: ser2net-fiobbio1 # has to match .spec.selector.matchLabels
+
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: ser2net
+        image: pullme/x86_64-ser2net:wview
+
+        ## TODO FIXME privileged!
+        securityContext:
+          privileged: true
+
+        volumeMounts:
+        - name: dev-ttyusb
+          mountPath: /dev/ttyUSB0
+
+        - name: ser2net-conf
+          mountPath: /etc/ser2net.conf
+          readOnly: true
+
+        ports:
+        - containerPort: 2233
+
+        readinessProbe:
+          tcpSocket:
+            port:
+              2233
+
+          #livenessProbe:
+          #   exec:
+          #     command:
+          #     - /bin/bash
+          #     - -c
+          #     - '[[ "$(ls -l /proc/1/fd)" =~ /dev/ttyUSB0 ]]'
+
+      volumes:
+      - name: dev-ttyusb
+        hostPath:
+          path: /dev/ttyUSB0
+          type: CharDevice
+
+      - name: ser2net-conf
+        hostPath:
+          path: /home/pi/weather-station/ser2net/ser2net.conf
+          type: File
