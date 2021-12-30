@@ -53,7 +53,6 @@ data:
       scrape_timeout: 10s
       metrics_path: /fiobbio1/metrics.prom
       static_configs:
-
       - targets: ['nginx']
 
       scheme: https
@@ -71,7 +70,6 @@ data:
       scrape_interval: 60s
       scrape_timeout: 10s
       metrics_path: /fiobbio2/metrics.prom
-
       static_configs:
       - targets: ['nginx']
 
@@ -85,6 +83,30 @@ data:
         target_label: instance
         replacement: 'fiobbio2'
 
+    - job_name: wview-misma
+      honor_timestamps: true
+      scrape_interval: 60s
+      scrape_timeout: 10s
+      metrics_path: /misma/metrics.prom
+      static_configs:
+      - targets: ['nginx']
+
+      scheme: https
+      tls_config:
+        insecure_skip_verify: true
+
+      relabel_configs:
+      - source_labels: [__address__]
+        regex: '.*'
+        target_label: instance
+        replacement: 'misma'
+
+    # Note: deploy before on k8s with:
+    # git clone https://github.com/kubernetes/kube-state-metrics.git
+    # kubectl apply -f examples/standard
+    - job_name: 'kube-state-metrics'
+      static_configs:
+      - targets: ['kube-state-metrics.kube-system.svc.cluster.local:8080']
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -94,6 +116,7 @@ metadata:
     app: prometheus
     app.kubernetes.io/name: prometheus
     app.kubernetes.io/component: prometheus
+
 spec:
   serviceName: prometheus
   replicas: 1
@@ -102,9 +125,11 @@ spec:
   #  type: "RollingUpdate"
   selector:
     matchLabels: *Labels
+
   template:
     metadata:
       labels: *Labels
+
     spec:
       # `chown` the Prometheus  `/data` directory so that Prometheus can write to it
       initContainers:
@@ -124,8 +149,12 @@ spec:
           args:
             - --config.file=/etc/config/prometheus.yaml
             - --storage.tsdb.path=/data
+            # Serve under a sub-path via a reverse proxy: NOTE: you need to update the probes paths too
+            #- --web.external-url=/prometheus/
+
           ports:
             - containerPort: 9090
+
           # Probe the `/-/ready` and `/-/healthy` endpoints
           readinessProbe:
             httpGet:
