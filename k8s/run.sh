@@ -69,20 +69,9 @@ mkdir -p "${hostWviewImgDir}"/{fiobbio1,misma,fiobbio2}/Archive
 set -x
 minikube status || minikube start --extra-config=apiserver.service-node-port-range=1-65535
 
-# TODO: commit files?
+${scriptDir}/template-gen.sh
+
 # TODO fix cml ftp login info
-cat ${scriptDir}/wview-template.yaml | \
-    WVIEW_INSTANCE_NAME=fiobbio1 WVIEW_STATION_TYPE=vpro \
-    envsubst '$WVIEW_INSTANCE_NAME $WVIEW_STATION_TYPE' > ${scriptDir}/manifests/wview-fiobbio1-generated.yaml
-
-cat ${scriptDir}/wview-template.yaml | \
-    WVIEW_INSTANCE_NAME=misma WVIEW_STATION_TYPE=vpro \
-    envsubst '$WVIEW_INSTANCE_NAME $WVIEW_STATION_TYPE' > ${scriptDir}/manifests/wview-misma-generated.yaml
-
-cat ${scriptDir}/wview-template.yaml | \
-    WVIEW_INSTANCE_NAME=fiobbio2 WVIEW_STATION_TYPE=wxt510 \
-    envsubst '$WVIEW_INSTANCE_NAME $WVIEW_STATION_TYPE' > ${scriptDir}/manifests/wview-fiobbio2-generated.yaml
-
 if ! kubectl get secrets cml-ftp-login >/dev/null; then
     kubectl create secret generic cml-ftp-login --from-env-file=/home/pi/secrets/cml_ftp_login_data.sh
 fi
