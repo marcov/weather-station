@@ -49,3 +49,6 @@ rain_rate <!--rainRate-->
 # HELP rain_storm Storm rain rate in mm/h
 # TYPE rain_storm gauge
 rain_storm <!--stormRain-->
+# HELP unhealthy 0 = healthy, unhealthy otherwise
+# TYPE unhealthy gauge
+unhealthy 0
