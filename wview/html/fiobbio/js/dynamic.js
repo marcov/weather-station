@@ -28,7 +28,6 @@ $(function () {
 
       staticPages.some(function (e) {
         if ("link_" + e.name == target.id) {
-
           canLoadMore = false;
           console.log("is a known element!");
           if (e.location === null) {
@@ -103,7 +102,7 @@ $(function () {
 
   function reloadCurrWeather () {
     console.log("Reloading current weather section...");
-    var curr = staticPages[0]
+    var curr = staticPages[0];
     $(curr.location).load(getUrl(curr.name));
     setTimeout(reloadCurrWeather, 150000);
   }
