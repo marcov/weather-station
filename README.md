@@ -3,11 +3,17 @@
 This is (almost) all of the code required to setup and run the weather station website
 at [meteo.fiobbio.com](http://meteo.fiobbio.com).
 
-The main set of applications are now containerized and running using the
-Docker container engine.
-The long term goal is to have everything running inside a container,
-and to able to build the whole environment from this Git repository. Even better, use a
-k8s-like platform to manage all containers.
+> **Old**:
+> The main set of applications are now containerized and running using the
+> Docker container engine.
+> The long term goal is to have everything running inside a container,
+> and to able to build the whole environment from this Git repository. Even better, use a
+> k8s-like platform to manage all containers.
+
+**Update**:
+All applications are not containerized and running in a kubernetes cluster!
+For simplicity the cluster is a local minikube instance created with the driver
+**none** (bare-metal).
 
 ## Hardware
 * Davis Vantage Pro2
@@ -17,12 +23,10 @@ k8s-like platform to manage all containers.
 ## Software
 * Raspbian OS
 * Docker
-* cron
-* imagemagick, for watermarking and scaling webcam images
-* _and other..._
+* minikube
 
 ### Containers
-* [wview](http://www.wviewweather.com): weather data logging
+* [wview](http://www.wviewweather.com): weather data logging + ser2net, rsyslog
 * nginx
 * rclone for automated backups to Backblaze B2
 * Prometheus exporters
