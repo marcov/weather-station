@@ -9,8 +9,7 @@ declare -a wviewPids=
 
 sighandler() {
     trap - SIGINT SIGTERM ERR EXIT
-    script cleanup here
-    echo "sighandler: exiting now!"
+    echo "sighandler: trapped signal, exiting now!"
 
     kill -KILL ${wviewPids[@]} $tailPid
     exit 0
@@ -78,4 +77,4 @@ done
 kill -TERM "$tailPid"
 wait
 
-echo "k8s wview completed!"
+echo "k8s wview exiting"
