@@ -9,7 +9,7 @@
            "outFile":  "meteoblue.png",
            "viewSize": [1024, 1024],
            "info":     " v----v----- 1st value is pixels from TOP (y), 2nd value is pixels from left (x)",
-           "topLeft":  [227, 220],
+           "topLeft":  [199, 220],
            "size":     [590, 290],
            "evalCode": "document.getElementsByClassName('gdpr-message')[0].style.visibility='hidden';",
            "Enabled": true
