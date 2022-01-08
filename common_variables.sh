@@ -19,6 +19,8 @@ declare -r hostRepoRoot="${repoRoot}"
 declare -r hostWebcamDir="/tmp/webcam"
 declare -r hostWebshotDir="/tmp/webshot"
 
+declare -r websiteUrl="meteo.fiobbio.com"
+
 #
 # CML FTP config (note: login credentials are not here :P)
 #

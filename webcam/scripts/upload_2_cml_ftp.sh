@@ -13,14 +13,12 @@ source "${scriptDir}"/../../common_variables.sh
 #
 
 ftpUpload() {
-    _ftp_username="$1"
-    _ftp_password="$2"
+    local _ftp_username="$1"
+    local _ftp_password="$2"
+    local -n cfgRef="$3"
 
-    name="$3"
-    suffix="${8:-}"
-
-    src="${hostWebcamDir}/${webcam_prefix}_${name}.jpg"
-    src_small="${hostWebcamDir}/${webcam_small_prefix}_${name}.jpg"
+    src="${hostWebcamDir}/${webcam_prefix}_${cfgRef[name]}.jpg"
+    src_small="${hostWebcamDir}/${webcam_small_prefix}_${cfgRef[name]}.jpg"
 
     if ! [[ -e ${src} ]] && ! [[ -e ${src_small} ]]; then
         echo "WARN: FTP src ${src} does not exist...nothing to do"
@@ -34,8 +32,8 @@ ftpUpload() {
 user ${_ftp_username} ${_ftp_password}
 binary
 cd ${cml_ftp_upload_folder}
-put ${src} ${webcam_prefix}${suffix}.jpg
-put ${src_small} ${webcam_small_prefix}${suffix}.jpg
+put ${src} ${webcam_prefix}${cfgRef[suffix]}.jpg
+put ${src_small} ${webcam_small_prefix}${cfgRef[suffix]}.jpg
 quit
 EOF
 # ^^^ FTP commands ends here ^^^
@@ -64,9 +62,9 @@ fi
 # Reset ftp log file
 rm -f ${cml_ftp_log_file}
 
-ftpUpload ${cml_ftp_user_fiobbio} ${cml_ftp_pwd_fiobbio} "${fiobbioCfg[@]}"
-ftpUpload ${cml_ftp_user_misma} ${cml_ftp_pwd_misma} "${mismaCfg[@]}"
-ftpUpload ${cml_ftp_user_misma} ${cml_ftp_pwd_misma} "${mismaPanoCfg[@]}"
+ftpUpload ${cml_ftp_user_fiobbio} ${cml_ftp_pwd_fiobbio} fiobbioCfg
+ftpUpload ${cml_ftp_user_misma} ${cml_ftp_pwd_misma} mismaCfg
+ftpUpload ${cml_ftp_user_misma} ${cml_ftp_pwd_misma} mismaPanoCfg
 
 exit 0
 

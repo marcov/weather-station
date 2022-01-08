@@ -69,19 +69,19 @@ localGet() {
 }
 
 getRawPicture() {
-    name=$1
-    srcType=$(awk '{print $1}' <<< "$2")
+    local -n cfgRef="$1"
+    local login="${2:-}"
+    local srcType=$(awk '{print $1}' <<< "${cfgRef[url]}")
 
-    dst=${hostWebcamDir}/${webcam_raw_prefix}_${name}.jpg
+    local dst=${hostWebcamDir}/${webcam_raw_prefix}_${cfgRef[name]}.jpg
 
     if [ ${srcType} == "http" ]; then
-        url=$(awk '{print $2}' <<< "$2")
-        login="$3"
+        url=$(awk '{print $2}' <<< "${cfgRef[url]}")
 
         httpGet ${login} ${url} ${dst} || { false; return; }
     elif [ ${srcType} == "local" ]; then
-        srcDir=$(awk '{print $2}' <<< "$2")
-        pattern=$(awk '{print $3}' <<< "$2")
+        srcDir=$(awk '{print $2}' <<< "${cfgRef[url]}")
+        pattern=$(awk '{print $3}' <<< "${cfgRef[url]}")
 
         localGet ${srcDir} ${pattern} ${dst} || { false; return; }
     else
@@ -95,30 +95,30 @@ getRawPicture() {
     echo "INFO: Done"
 }
 
-for i in $(seq 0 ${fiobbioRetries}); do
+for i in $(seq 0 ${fiobbioCfg[retries]}); do
     sleepTime=$(( $i * 2 ))
     echo "INFO: sleeping $sleepTime"
     sleep "$sleepTime"
     echo "INFO: get fiobbio $i"
-    getRawPicture "${fiobbioCfg[0]}" "${fiobbioCfg[1]}" "${fiobbio_webcam_login}" && \
+    getRawPicture fiobbioCfg "${fiobbio_webcam_login}" && \
         break || echo "ERR: failed to get fiobbio"
 done
 
-for i in $(seq 0 ${mismaRetries}); do
+for i in $(seq 0 ${mismaCfg[retries]}); do
     sleepTime=$(( $i * 2 ))
     echo "INFO: sleeping $sleepTime"
     sleep "$sleepTime"
     echo "INFO: get misma $i"
-    getRawPicture "${mismaCfg[0]}" "${mismaCfg[1]}" "${misma_webcam_login}" && \
+    getRawPicture mismaCfg "${misma_webcam_login}" && \
         break || echo "ERR: failed to get misma"
 done
 
-for i in $(seq 0 ${panoRetries}); do
+for i in $(seq 0 ${mismaPanoCfg[retries]}); do
     sleepTime=$(( $i * 2 ))
     echo "INFO: sleeping $sleepTime"
     sleep "$sleepTime"
     echo "INFO: get misma pano $i"
-    getRawPicture "${mismaPanoCfg[@]}" && break || echo "ERR: failed to get misma pano"
+    getRawPicture mismaPanoCfg && break || echo "ERR: failed to get misma pano"
 done
 
 exit $?

@@ -7,13 +7,13 @@ source "${scriptDir}"/../config.sh
 source "${scriptDir}"/../../common_variables.sh
 
 getTemperature () {
-    url="$1"
-    jsonTmp=$(mktemp)
+    local url="$1"
+    local jsonTmp=$(mktemp)
 
     #
     # Add the insecure flag, since it's a local IP but it's using TLS.
     #
-    if curl -o "$jsonTmp" -k -fsSL "${temperatureUrl}"
+    if curl -o "$jsonTmp" -k -fsSL "${url}"
     then
         read -r temperature <<< `jq -r .outsideTemp "$jsonTmp"`
     else
@@ -26,18 +26,15 @@ getTemperature () {
 }
 
 addWatermark () {
-    name=$1
-    srcInfo=$2
-    stationName=$3
-    temperatureUrl=$4
-    resolution=$5
+    local -n cfgRef="$1"
 
-    temperature=`getTemperature "${temperatureUrl}"`
-    stationName="$(sed "s/_/ /g" <<< "${stationName}")"
+    temperature=`getTemperature "${cfgRef[tsource]}"`
+    stationName="$(sed "s/_/ /g" <<< "${cfgRef[watermark]}")"
     dateTime="$(date +"%H:%M %d/%m/%y")"
-    watermarkText="${stationName}, ${temperature}°C, ${dateTime}"
 
-    src=${hostWebcamDir}/${webcam_raw_prefix}_${name}.jpg
+    watermarkText="${stationName}, ${temperature}°C, ${dateTime} - ${websiteUrl}"
+
+    src=${hostWebcamDir}/${webcam_raw_prefix}_${cfgRef[name]}.jpg
 
     dst=$(echo ${src} | sed "s/${webcam_raw_prefix}/${webcam_prefix}/g")
     dst_small=$(echo ${src} | sed "s/${webcam_raw_prefix}/${webcam_small_prefix}/g")
@@ -63,7 +60,7 @@ addWatermark () {
 
     echo "Creating scaled image"
     convert \
-        -resize ${resolution} \
+        -resize ${cfgRef[size]} \
         ${dst_tmp} ${dst_small_tmp} || return $?
     echo "Done"
 
@@ -73,8 +70,8 @@ addWatermark () {
     rm -f ${src} ${dst_tmp} ${dst_small_tmp}
 }
 
-addWatermark "${fiobbioCfg[@]}"
-addWatermark "${mismaCfg[@]}"
-addWatermark "${mismaPanoCfg[@]}"
+for cfg in fiobbioCfg mismaCfg mismaPanoCfg; do
+    addWatermark "$cfg"
+done
 
 exit 0
