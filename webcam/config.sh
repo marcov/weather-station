@@ -30,7 +30,6 @@ fiobbioCfg=( "fiobbio" \
              "http://${httpServerHostname}/realtime.json" \
              "800x600" )
 
-
 declare -i fiobbioRetries=1
 declare -i mismaRetries=6
 declare -i panoRetries=0

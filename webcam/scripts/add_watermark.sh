@@ -34,8 +34,8 @@ addWatermark () {
 
     temperature=`getTemperature "${temperatureUrl}"`
     stationName="$(sed "s/_/ /g" <<< "${stationName}")"
-    dateTime="$(date +"%H:%M %d-%m-%Y")"
-    watermarkText="${stationName}, ${temperature}°C - ${dateTime}"
+    dateTime="$(date +"%H:%M %d/%m/%y")"
+    watermarkText="${stationName}, ${temperature}°C, ${dateTime}"
 
     src=${hostWebcamDir}/${webcam_raw_prefix}_${name}.jpg
 
