@@ -16,6 +16,7 @@ spec:
     metadata:
       labels:
         app: wview-$WVIEW_INSTANCE_NAME # has to match .spec.selector.matchLabels
+        station: $WVIEW_INSTANCE_NAME
 
     spec:
       terminationGracePeriodSeconds: 10
@@ -29,7 +30,7 @@ spec:
           chmod ugo+rw /tmp/syslog/syslog;
           ln -s /tmp/syslog/syslog /var/log/syslog;
           ln -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime;
-          /usr/sbin/rsyslogd -n;
+          exec /usr/sbin/rsyslogd -n;
 
         volumeMounts:
         - name: syslog-volume
@@ -59,6 +60,17 @@ spec:
           value: $WVIEW_STATION_TYPE
 
         command: ["/bin/bash", "-c", "exec /weather-station/wview/scripts/k8s-startup.sh"]
+
+        startupProbe:
+          # Allow a 2 minutes startup
+          periodSeconds: 10
+          failureThreshold: 12
+          exec:
+            # Don't monitor wvhttpd for now
+            command:
+            - /bin/bash
+            - -c
+            - _=$(pidof -s wviewd_$WVIEW_STATION_TYPE && pidof -s htmlgend && pidof -s wvpmond)
 
         livenessProbe:
           # Every 5m, check for liveness.
