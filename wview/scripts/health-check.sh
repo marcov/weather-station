@@ -1,16 +1,23 @@
 #!/bin/bash
+#
+# (optional) arg1 is an alternative wview img dir to use
+#
 set -euo pipefail
 
-declare -i checkMinutes=2
-#wviewImgDir="/tmp/wview-data-img/misma"
+declare -r -i checkMinutes=4
+
 wviewImgDir="/var/lib/wview/img"
-# NOTE: check a file we do not change afterwards :-)
-expectedFiles=( \
+
+if [[ $# = 1 ]]; then
+    wviewImgDir=$1
+    echo "INFO: overridden wview img dir with input argument: ${wviewImgDir}"
+fi
+
+# NOTE: remember to check a file WE DO NOT change afterwards :-)
+declare -ra expectedFiles=( \
     realtime.json \
     tempdaycomp.png \
 )
-
-###
 
 [ -d ${wviewImgDir} ] || { echo "ERR: ${wviewImgDir} is not a dir"; exit 2; }
 
