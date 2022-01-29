@@ -81,6 +81,7 @@ fi
 # TODO: needs to be deleted?
 #kubectl delete --wait=true -f ${scriptDir}/manifests/ || echo "WARN: ignoring kubectl error on delete"
 
+# TODO helm charts in helm-charts.md
 kubectl apply -f ${scriptDir}/manifests/
 
 set +x

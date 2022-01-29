@@ -106,7 +106,7 @@ data:
     # kubectl apply -f examples/standard
     - job_name: 'kube-state-metrics'
       static_configs:
-      - targets: ['kube-state-metrics.kube-system.svc.cluster.local:8080']
+      - targets: ['kube-state-metrics.default.svc.cluster.local:8080']
 ---
 apiVersion: apps/v1
 kind: StatefulSet
