@@ -37,8 +37,8 @@
     <li class="">
       <!-- placeholder label to a correct flex layout -->
       <label class="emptyLabel">&nbsp;</label>
-      <p class="location">XXXXXX</p>
-      <p class="timestamp">TSSSSSS</p>
+      <p class="location"></p>
+      <p class="timestamp"></p>
     </li>
 
     <li class="measure">
@@ -353,17 +353,18 @@
           // so that jsonData loading is trivial!
           $.each(jsonData, (key, val) => {
             $("#" + loc.tgtId + " ." + key).text(val);
+            if (key == 'timestamp') {
+              //$("#" + loc.tgtId + " ." + key).css("background-color","green");
+            }
           });
-
         }); // ajax..done
-
       }); // forEach
     }
 
     $(document).ready(() => {
       const locations = [
         {
-          url   : "realtime.json" ,
+          url   : "/fiobbio1/realtime.json" ,
           tgtId : "fiobbioMeasures",
           location : "Fiobbio 1"
         },
@@ -381,8 +382,6 @@
 
       populateStationInfo();
       populateMeasures(locations);
-
     });
-
   });
 </script>
