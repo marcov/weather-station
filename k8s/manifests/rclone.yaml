@@ -2,7 +2,7 @@
 # k create secret generic backblaze-info --from-env-file=/home/pi/secrets/backblaze
 ---
 
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: rclone

@@ -3,7 +3,7 @@
 # k create secret generic webcam-login --from-env-file=/home/pi/secrets/webcam_login_data.sh
 
 ---
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: webcam
