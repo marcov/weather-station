@@ -100,7 +100,7 @@ server {
     }
 
     # ~ : regex
-    location ~ ^/(index\.|js/|css/|html/) {
+    location ~ ^/(index\.|js/|css/|html/|sitemap.xml|robots.txt) {
         root /weather-station/wview/html/fiobbio/;
         try_files $uri $uri/ =404;
     }
