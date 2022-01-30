@@ -1,0 +1,9 @@
+User-agent: *
+Disallow:
+
+User-agent: *
+Disallow: /fiobbio1/
+Disallow: /fiobbio2/
+Disallow: /misma/
+
+Sitemap: https://meteo.fiobbio.com/sitemap.xml
