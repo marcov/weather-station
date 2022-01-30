@@ -6,10 +6,10 @@
         {
            "url":      "https://www.meteoblue.com/en/weather/week/fiobbio_italy_8951344",
            "waitTime": 2000,
-           "outFile":  "meteoblue.png",
+           "outFile":  "meteoblue.jpg",
            "viewSize": [1024, 1024],
            "info":     " v----v----- 1st value is pixels from TOP (y), 2nd value is pixels from left (x)",
-           "topLeft":  [199, 220],
+           "topLeft":  [227, 220],
            "size":     [590, 290],
            "evalCode": "document.getElementsByClassName('gdpr-message')[0].style.visibility='hidden';",
            "Enabled": true
@@ -17,7 +17,7 @@
         {
            "url":      "http://cml.to/radar",
            "waitTime": 5000,
-           "outFile":  "radar_lom.png",
+           "outFile":  "radar_lom.jpg",
            "viewSize": [1024, 800],
            "topLeft":  [0, 20],
            "size":     [960, 800],
@@ -28,7 +28,7 @@
         {
            "url":      "http://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=gfs&var=93&run=0&lid=OP&bw=",
            "waitTime": 5000,
-           "outFile":  "wz_meteogram.png",
+           "outFile":  "wz_meteogram.jpg",
            "viewSize": [820, 1180],
            "topLeft":  [850, 0],
            "size":     [820, 510],
@@ -39,7 +39,7 @@
         {
            "url":      "https://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=gfs&var=201&run=12&lid=ENS&bw=",
            "waitTime": 5000,
-           "outFile":  "wz_ensemble.png",
+           "outFile":  "wz_ensemble.jpg",
            "viewSize": [820, 1180],
            "topLeft":  [870, 0],
            "size":     [820, 595],
