@@ -381,24 +381,6 @@ fiobbio2Measures, #mismaMeasures {
   line-height: 2em;
 }
 
-.header {
-  position: sticky;
-  top: 0;
-  flex-flow: row;
-  justify-content: center;
-  display: flex;
-
-  /* HIDING IT HERE */
-  display: none;
-}
-
-.header li {
-  font-size: 110%;
-  padding: .5rem 2rem .5rem 2rem;
-  background-color: #5558;
-  text-align: center;
-}
-
 li.grafana {
     /*width: 45%;*/
 }

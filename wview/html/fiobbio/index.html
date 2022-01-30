@@ -3,18 +3,13 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Stazione Meteo di Fiobbio di Albino (BG)</title>
-
-  <link rel="alternate" type="application/rss+xml" title="Stazione Meteo di Fiobbio di Albino (BG)" href="wxrss.xml">
+  <title>Meteo, Prevision e Webcam Fiobbio di Albino</title>
 
   <!-- the following is needed for the media queries to work correctly -->
   <meta name="viewport" content="width=device-width">
   <link type="text/css" rel="stylesheet" href="css/menu.css" />
   <link type="text/css" rel="stylesheet" href="css/layout.css" />
   <link type="text/css" rel="stylesheet" href="css/featherlight.min.css" />
-  <!-- enable snow:
-  <link type="text/css" rel="stylesheet" href="css/snow.css" />
-  -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Inconsolata|Major+Mono+Display|Share+Tech+Mono|Oxygen+Mono|Baloo+Tamma+2:wght@400;700;800">
 
@@ -34,17 +29,6 @@
 </head>
 
 <body>
-  <!-- enable snow:
-  <canvas id="snowcanvas"></canvas>
-  -->
-  <ul class="header">
-      <li>
-      <span style="text-decoration-line:line-through; color: #a0a0a0;">fiobbio.blogdns.net</span>
-      &nbsp;&rarr;&nbsp;
-      <a href="http://meteo.fiobbio.com" style="font-size: 110%; font-weight: 800; color: orange; text-decoration-line: none;">meteo.fiobbio.com</a>
-      </li>
-  </ul>
-
   <div class="maincolumn">
     <div class="menu">
       <div class="hamburger-menu-wrapper">
@@ -62,11 +46,6 @@
 
         <a href="/grafana/"><b>Grafici alta risoluzione</b></a>
 
-        <!--
-        <a href="/cgi-bin/weather?graphtime=1" class="indented">Temperatura</a><br>
-        <a href="/cgi-bin/weather?graphtime=3" class="indented">Umidita'</a><br>
-        <a href="/cgi-bin/weather?graphtime=11" class="indented">Pioggia</a><br>
-        -->
         <a href="#" id="link_currweather">Inzio</a><br>
         <!-- <a href="#" id="link_extrastas">Stazioni vicine</a><br> -->
         <a href="#" id="link_forecast">Previsioni</a><br>
@@ -125,11 +104,6 @@
   </script>
   <script src="js/dynamic.js"></script>
   <script src="js/featherlight.min.js"></script>
-  <script src="js/wview.js"></script>
-  <!-- enable snow:
-  <script src="js/snow.js"></script>
-  -->
-
   <!-- Histats.com  START  (async)
   <script>
     var _Hasync = _Hasync || [];
