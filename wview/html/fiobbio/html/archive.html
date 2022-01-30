@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="cache-control" content="no-cache" />
+
+    <title>Archivio Dati</title>
+
+    <script type="text/javascript" src="../js/wview.js"></script>
+
+    <!-- the following is needed for the media queries to work correctly -->
+    <meta name="viewport" content="width=device-width">
+    <link type="text/css" rel="stylesheet" href="../css/menu.css" />
+    <link type="text/css" rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Inconsolata|Major+Mono+Display|Share+Tech+Mono|Oxygen+Mono|Baloo+Tamma+2:wght@400;700;800">
+  </head>
+
+  <body>
+
+    <div class="maincolumn">
+
+      <div style="margin: auto; border: 0px solid red;">
+
+        <h3>Archivio Dati</h3>
+        <form action="#" method="post" style="font-size:120%;">
+
+          <p style="text-align: center;">
+            <script type="text/javascript">
+              createDaySelect("day");
+            </script>
+            <span> </span>
+            <script type="text/javascript">
+              createMonthlySelect("month");
+            </script>
+            <span> </span>
+            <script type="text/javascript">
+              createYearlySelect("year");
+            </script>
+          </p>
+
+          <p style="text-align: center;">
+              <input type="button" value="Mostra giorno" onclick="openARCFile(this.form.day.value, this.form.month.value, this.form.year.value)">
+              <input type="button" value="Mostra mese" onclick="openNoaaFile(this.form.month.value, this.form.year.value)">
+              <input type="button" value="Mostra anno" onclick="openNoaaFile('',this.form.year.value)">
+          </p>
+        </form>
+
+        <div style="display: flex; flex-flow: row; justify-content: center;">
+          <p id="noaatext" class="preformatted"> </p>
+        </div>
+      </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+  </body>
+</html>
