@@ -46,13 +46,6 @@
 
         <a href="/grafana/"><b>Grafici alta risoluzione</b></a>
 
-        <a href="#" id="link_currweather">Inzio</a><br>
-        <!-- <a href="#" id="link_extrastas">Stazioni vicine</a><br> -->
-        <a href="#" id="link_forecast">Previsioni</a><br>
-        <a href="#" id="link_satellite">Satellite</a><br>
-        <a href="#" id="link_radar">Radar</a><br>
-        <!-- <a href="#" id="link_maps">Mappe</a><br> -->
-        <br>
         <a href="mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com">Contatti</a><br>
         <span style="font-size: 90%;">
             <b>Pagine wview</b>
@@ -67,20 +60,368 @@
     </div>
     <!-- div..menu-->
 
-    <div id="slot0"></div>
+    <div class="heading">
+      <div class="topRightBanner">
+        <!--<span id="stationTime"></span>, <span id="stationDate"></span>-->
+      </div>
+
+      <div class="title">
+        Meteo Fiobbio
+      </div>
+      <ul class="subTitle">
+        <li>
+          &#9650; <span id="stationElevation"></span>
+        </li>
+        <li> &nbsp;&#8211;&nbsp; </li>
+
+        <li>
+          <span id="stationLatitude"></span>&#8210;<span id="stationLongitude"></span>
+        </li>
+        <li> &nbsp;&#8211;&nbsp; </li>
+
+        <li>
+          &#9788;&UpperRightArrow;<span id="sunriseTime"></span>&nbsp;&LowerRightArrow;<span id="sunsetTime"></span>
+        </li>
+        <li> &nbsp;&#8211;&nbsp; </li>
+
+        <li>
+            &#9789; <span id="moonPhase"></span>
+        </li>
+
+      </ul>
+      <!-- HEADER END -->
+    </div>
+
+    <div class="measures-container">
+      <!-- NOTE: this is actually just a template, being used for the 2 containers below -->
+      <ul id="measuresTemplate" class="measures-group" style="display: none;">
+        <li class="">
+          <!-- placeholder label to a correct flex layout -->
+          <label class="emptyLabel">&nbsp;</label>
+          <p class="location"></p>
+          <p class="timestamp"></p>
+        </li>
+
+        <li class="measure">
+          <label>Temperatura (&deg;C)</label>
+          <div>
+            <div class="min">
+              <div><span class="lowOutsideTemp"></span></div>
+              <div class="sub"><span class="lowOutsideTempTime"></span></div>
+            </div>
+            <div class="curr">
+              <span class="outsideTemp"></span>
+              <span style="font-size: 50%;"> Feels&nbsp;</span><span style="font-size: 80%;" class="apparentTemp"></span>
+            </div>
+            <div class="max">
+              <div><span class="hiOutsideTemp"></span></div>
+              <div class="sub"><span class="hiOutsideTempTime"></span></div>
+            </div>
+          </div>
+        </li>
+
+        <li class="measure">
+          <label>Vento (km/h)</label>
+          <div>
+            <div class="other">
+              <div><span class="windGustSpeed"></span></div>
+              <div class="sub">
+                Raff
+              </div>
+            </div>
+            <div class="curr">
+              <span class="windSpeed"></span>
+              <div style="font-size:50%">
+                <span class="windDirection"></span>
+              </div>
+            </div>
+            <div class="max">
+              <div><span class="hiWindSpeed"></span></div>
+              <div class="sub"><span class="hiWindSpeedTime"></span></div>
+            </div>
+          </div>
+        </li>
+
+        <li class="measure">
+          <label>Umidit&agrave; (%)</label>
+          <div>
+            <div class="min">
+              <div><span class="lowHumidity"></span></div>
+              <div class="sub"><span class="lowHumTime"></span></div>
+            </div>
+            <div class="curr narrow">
+              <span class="outsideHumidity"></span>
+              <div style="font-size: 50%">&nbsp;</div>
+            </div>
+            <div class="max">
+              <div><span class="hiHumidity"></span></div>
+              <div class="sub"><span class="hiHumTime"></span></div>
+            </div>
+          </div>
+        </li>
+
+    <!--
+        <li class="measure">
+          <label>Pressione</label>
+          <div>
+            <div class="min">
+              <div><span class="lowBarometer"></span></div>
+              <div class="sub"><span class="lowBarometerTime"></span></div>
+            </div>
+            <div class="curr">
+              <span class="barometer"></span><label class="unit"><span class="barUnit"></span></label>
+              <div style="font-size:50%">
+                Tendenza&nbsp;<span class="baromtrend"></span>
+              </div>
+            </div>
+            <div class="max">
+              <div><span class="hiBarometer"></span></div>
+              <div class="sub"><span class="hiBarometerTime"></span></div>
+            </div>
+          </div>
+        </li>
+    -->
+
+        <li class="measure">
+          <label>Pioggia (mm/h)</label>
+          <div>
+            <div class="other">
+              <div>
+                <span class="dailyRain"></span>
+              </div>
+              <div class="sub">
+                Accum
+              </div>
+            </div>
+            <div class="curr">
+              <span class="rainRate"></span>
+              <div style="font-size:50%">
+              </div>
+            </div>
+            <div class="max">
+              <div>
+                <span class="stormRain"></span>
+              </div>
+              <div class="sub">
+                Storm
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul> <!-- measures-group -->
+
+      <ul id="fiobbioMeasures" class="measures-group"></ul>
+      <ul id="fiobbio2Measures" class="measures-group"></ul>
+      <ul id="mismaMeasures" class="measures-group"></ul>
+
+    </div> <!-- <div class="measures-container"> -->
+
+    <div>
+      <ul class="webcams-container">
+        <!-- CML does not use HTTPS :-O :-( :-X
+        <li>
+          <a href="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam.jpg" data-featherlight="image">
+            <img class="webcam" alt="webcam_small" src="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam_small.jpg" />
+          </a>
+        </li>
+        <li>
+          <a href="http://rete.centrometeolombardo.com/bergamo/montemisma/public/webcam.jpg" data-featherlight="image">
+            <img class="webcam" alt="webcam_small" src="http://rete.centrometeolombardo.com/bergamo/montemisma/public/webcam_small.jpg" />
+          </a>
+        </li>
+        -->
+
+        <li>
+          <a href="/webcam/webcam_fiobbio.jpg" data-featherlight="image">
+            <img class="webcam" alt="webcam_small" src="/webcam/webcam_small_fiobbio.jpg" />
+          </a>
+        </li>
+        <li>
+          <a href="/webcam/webcam_misma.jpg" data-featherlight="image">
+            <img class="webcam" alt="webcam_small" src="/webcam/webcam_small_misma.jpg" />
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- credits: https://css-tricks.com/infinite-all-css-scrolling-slideshow/ -->
+    <div class="panorama-scroll" style="display:none;">
+      <!-- <div class="sliding-background"></div> -->
+      <div class="still-background"></div>
+    </div>
+
+    <div>
+      <ul class="graph-container">
+        <li>
+          <img class="wviewgraph" alt="wview image" src="tempdaycomp.png">
+        </li>
+        <li>
+          <img alt="wview image" src="wspeeddaycomp.png">
+        </li>
+        <li>
+          <img alt="wview image" src="radiationDay.png ">
+        </li>
+      </ul>
+
+      <ul class="graph-container">
+        <li>
+          <img alt="wview image" src="rainday.png">
+        </li>
+        <li>
+          <img alt="wview image" src="baromday.png">
+        </li>
+        <li>
+          <img alt="wview image" src="humidday.png">
+        </li>
+      </ul>
+
+      <!-- All radiation + rain -->
+      <ul class="graph-container" style="display:none;">
+        <li>
+          <img class="wviewbar" alt="wview image" src="radiation.png">
+        </li>
+        <li>
+          <img class="wviewbar" alt="wview image" src="dayrain.png">
+        </li>
+        <li>
+          <img class="wviewbar" alt="wview image" src="stormrain.png">
+        </li>
+        <li>
+          <img class="wviewbar" alt="wview image" src="rainrate.png">
+        </li>
+        <li>
+          <img class="wviewbar" alt="wview image" src="monthrain.png">
+        </li>
+        <li>
+          <img class="wviewbar" alt="wview image" src="yearrain.png">
+        </li>
+      </ul>
+
+      <!-- All wind -->
+      <ul class="graph-container" style="display:none;">
+        <li>
+          <img class="round" alt="wview image" src="windroseday.png">
+        </li>
+        <li>
+          <img class="round" alt="wview image" src="windroseweek.png">
+        </li>
+        <li>
+          <img class="round" alt="wview image" src="windroseyear.png">
+        </li>
+      </ul>
+
+      <!-- Wind / rain mix -->
+      <ul class="graph-container">
+        <li>
+          <img class="round" alt="wview image" src="windroseday.png">
+        </li>
+
+        <li>
+          <img class="wviewbar" alt="wview image" src="dayrain.png">
+        </li>
+        <li>
+          <img class="wviewbar" alt="wview image" src="monthrain.png">
+        </li>
+        <li>
+          <img class="wviewbar" alt="wview image" src="yearrain.png">
+        </li>
+
+        <li>
+          <img class="round" alt="wview image" src="windroseyear.png">
+        </li>
+      </ul>
+
+    </div>
+    <!-- WEATHER IMAGES END -->
+
     <div class="bottombanner">
       <span style="font-weight: bold;">Marcello Alborghetti</span>
       <span style="font-size:80%;">&nbsp;(HW)&nbsp; - &nbsp;</span>
       <span style="font-weight: bold; font-size:102%; letter-spacing:.15rem;">Marco Vedovati</span>
       <span style="font-size:80%;">&nbsp;(SW)</span>
     </div>
-    <div id="slot1"></div>
-    <div id="slot2"></div>
-    <div id="slot3"></div>
-    <div id="slot4"></div>
-    <div id="slot5"></div>
-    <!-- <div id="histats_counter"></div> -->
 
+    <h3>Previsioni</h3>
+    <ul class="flex-container">
+      <li>
+        <a href="https://www.meteoblue.com/en/weather/week/albino_italy_3183316/" title="Large image">
+          <img style="height: 15em;" src="/webshot/meteoblue.png" alt="Meteoblue 7 days" title="Meteoblue 7 days" />
+        </a>
+      </li>
+    </ul>
+
+    <ul class="flex-container">
+      <li>
+        <a href="http://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=gfs&var=93&run=0&lid=OP&bw=" title="Large image">
+          <img style="height: 25em;" src="/webshot/wz_meteogram.png" alt="Meteogram 10d wetterzentrale" title="Meteogram 10d" />
+        </a>
+      </li>
+
+      <li>
+        <a href="https://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=gfs&var=201&run=12&lid=ENS&bw=" title="Large image">
+          <img style="height: 25em;" src="/webshot/wz_ensemble.png" alt="Meteogram 10d wetterzentrale" title="Ensemble 10d" />
+        </a>
+      </li>
+    </ul>
+
+    <h3>Sat</h3>
+    <ul class="flex-container">
+      <li>
+        <a href="https://www.sat24.com/images.php?country=alps&sat=&1198352062421" title="Large image" data-featherlight="image">
+          <img alt="sat24.com" class="satellite" src="https://www.sat24.com/images.php?country=alps&sat=&1198352062421" title="Small image" />
+        </a>
+      </li>
+      <li>
+        <a href="https://eumetview.eumetsat.int/static-images/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg" title="Large image" data-featherlight="image">
+          <img class="satellite" alt="eumetsat.org" src="https://eumetview.eumetsat.int/static-images/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg" title="Small image" />
+        </a>
+      </li>
+      <li>
+        <a href="https://www.sat24.com/image.ashx?country=eu&type=zoom&format=640x480001001&sat=ir" title="Large image" data-featherlight="image">
+          <img class="satellite" alt="sat24.com" src="https://www.sat24.com/image.ashx?country=eu&type=zoom&format=640x480001001&sat=ir" title="Small image" />
+        </a>
+      </li>
+    </ul>
+
+    <h3>Radar</h3>
+    <ul class="flex-container">
+      <li>
+        <!--
+        <a href="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" title="Large image" data-featherlight="image">
+          <img class="satellite" alt="arpa.piemonte.it" src="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" title="EMCWF 500hPa" />
+        </a>
+        -->
+        <a href="/webshot/radar_lom.png" title="Large image" data-featherlight="image">
+          <img class="satellite" alt="radar cml" src="/webshot/radar_lom.png" title="radar cml" />
+        </a>
+      </li>
+      <!--
+      <li>
+        <a href="radar_ch.png" title="Large image" data-featherlight="image">
+          <img class="satellite" alt="radar met" src="radar_ch.png" title="radar met" />
+        </a>
+      </li>
+      <li>
+        <a href="radar_ch_detailed.png" title="Large image" data-featherlight="image">
+          <img class="satellite" alt="radar met zoomed" src="radar_ch_detailed.png" title="radar met zoomed" />
+        </a>
+      </li>
+
+    </ul>
+
+    <ul class="flex-container">
+      -->
+      <li>
+        <a href="http://www.meteox.com/images.aspx?jaar=-3&voor=&soort=loop3uur" title="Large image" data-featherlight="image">
+          <img alt="clouds" class="satellite" src="http://www.meteox.com/images.aspx?jaar=-3&voor=&soort=loop3uur" title="Clouds" />
+        </a>
+      </li>
+      <li>
+        <a href="http://www.astrogeo.va.it/fulmini/fulmini.jpg" title="Large image" data-featherlight="image">
+          <img alt="va.it" class="satellite" src="http://www.astrogeo.va.it/fulmini/fulmini.jpg" title="EMCWF 500hPa" />
+        </a>
+      </li>
+    </ul>
   </div>
   <!-- div..maincolumn -->
 
@@ -102,8 +443,6 @@
       });
     })();
   </script>
-  <script src="js/dynamic.js"></script>
-  <script src="js/featherlight.min.js"></script>
   <!-- Histats.com  START  (async)
   <script>
     var _Hasync = _Hasync || [];
@@ -121,11 +460,97 @@
   <noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?1781036&101" alt="counter" border="0"></a></noscript>
   Histats.com  END  -->
 
+  <script src="js/featherlight.min.js"></script>
   <script>
     $(function() {
       $.featherlight.defaults.loading = "Caricamento immagine in corso...";
     });
   </script>
+
+  <script>
+    $(() => {
+      function populateStationInfo() {
+          $.ajax({
+            url      : "stationinfo.json",
+            dataType : "json"
+          }).done( (jsonData) => {
+            // we map 1:1 json key value with id name,
+            // so that jsonData loading is trivial!
+            $.each(jsonData, (key, val) => {
+              $("#" + key).text(val);
+            });
+          });
+      }
+
+      function isToday(dateString) {
+        let today = new Date();
+        let dateTokens = dateString.split('/');
+
+        let dd = parseInt(dateTokens[0]);
+        let mm = parseInt(dateTokens[1]);
+        let yy = parseInt(dateTokens[2]);
+
+        return (today.getDate() == dd &&
+                (today.getMonth() + 1) == mm &&
+                (today.getFullYear() % 100) == yy);
+      }
+
+      function populateMeasures(locs) {
+        locs.forEach((loc) => {
+          $.ajax({
+            url      : loc.url,
+            dataType : "json"
+          }).done( (jsonData) => {
+            // Copy the HTML template into the actual element ID with the given tgtId
+            $("#" + loc.tgtId).html($("#measuresTemplate").html());
+
+            $("#" + loc.tgtId + " .location").text(loc.location);
+
+            // Strip out seconds
+            jsonData.timestamp = jsonData.stationTime.split(':', 2).join(':');
+
+            // if not today, append full date
+            if (!isToday(jsonData.stationDate)) {
+              jsonData.timestamp += ' - ' + jsonData.stationDate;
+            }
+
+            // we map 1:1 json key value with id name,
+            // so that jsonData loading is trivial!
+            $.each(jsonData, (key, val) => {
+              $("#" + loc.tgtId + " ." + key).text(val);
+              if (key == 'timestamp') {
+                //$("#" + loc.tgtId + " ." + key).css("background-color","green");
+              }
+            });
+          }); // ajax..done
+        }); // forEach
+      }
+
+      $(document).ready(() => {
+        const locations = [
+          {
+            url   : "/fiobbio1/realtime.json" ,
+            tgtId : "fiobbioMeasures",
+            location : "Fiobbio 1"
+          },
+          {
+            url   : "/misma/realtime.json",
+            tgtId : "mismaMeasures",
+            location : "Misma"
+          },
+          {
+            url   : "/fiobbio2/realtime.json",
+            tgtId : "fiobbio2Measures",
+            location : "Fiobbio 2"
+          }
+        ];
+
+        populateStationInfo();
+        populateMeasures(locations);
+      });
+    });
+  </script>
+
 </body>
 
 </html>
