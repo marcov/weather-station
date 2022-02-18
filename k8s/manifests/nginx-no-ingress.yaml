@@ -34,7 +34,7 @@ spec:
         - containerPort: 80
 
         volumeMounts:
-        - name: nginx-cfg
+        - name: nginx-conf
           mountPath: /etc/nginx/conf.d/default.conf
           readOnly: true
 
@@ -63,9 +63,9 @@ spec:
           readOnly: true
 
       volumes:
-      - name: nginx-cfg
+      - name: nginx-conf
         hostPath:
-          path: /home/pi/weather-station/http_server/nginx_cfg
+          path: /home/pi/weather-station/nginx/nginx.conf
           type: File
 
       - name: ssl-certs
