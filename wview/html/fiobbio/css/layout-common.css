@@ -3,25 +3,40 @@ body {
   /*font-family: Verdana, Arial, Sans-Serif;*/
   font-family: 'Baloo Tamma 2';
   color: whitesmoke;
-  margin: 0;
   padding: 0;
   border: none;
+  /* Center the body */
+  margin: 0 auto;
+  /* Make the body width fit the content width */
+  display: table;
 }
 
-div {
+body div, body h3 {
   /* background-color: #004d90; */
   /* background-color: #25425a; */
   background-color: #173b58;
-  /* border: 1px solid yellow; */
+  /*border: 1px solid yellow;*/
 }
 
 h3 {
-  font-size: 1.8em;
+  font-size: 1em;
   text-align: center;
+  margin: 0;
 }
 
 a {
   color: inherit;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+p {
+  margin: 0;
 }
 
 input {
@@ -37,7 +52,6 @@ input {
   margin-bottom: 0.5em;
 }
 
-
 img {
   max-width: 100%;
   border-radius: .3em;
@@ -45,8 +59,9 @@ img {
 }
 
 ul {
-  margin: 0;
   padding-left: 0;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 li {
@@ -55,6 +70,16 @@ li {
 }
 
 /***************************************************************/
+
+.bottombanner {
+  font-size: 110%;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: .5em;
+  display: table;
+  margin: 0 auto;
+  padding: .2em;
+  line-height: 2em;
+}
 
 .topRightBanner {
   float: right;
@@ -76,7 +101,6 @@ li {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  background-color: rgba(50, 50, 50, 0.8);
   padding-top: 0.5rem;
   padding-left: 0.2rem;
   padding-right: 0.2rem;
@@ -89,8 +113,9 @@ li {
   justify-content: space-between;
   margin-bottom: 1rem;
   padding-left: 0.2rem;
+  margin-left: 0;
   padding-right: 0.2rem;
-  width: 22ch;
+  /*border: 1px solid yellow;*/
 }
 
 .measure > label {
@@ -112,8 +137,6 @@ li {
 
 .measure .curr {
   font-size: 130%;
-  padding-left: 0.3rem;
-  padding-right: 0.4rem;
   width: 5rem;
   font-weight: bold;
 }
@@ -145,7 +168,6 @@ li {
   font-size: 80%;
 }
 
-
 .wider {
   width: 24ch;
 }
@@ -165,11 +187,12 @@ li {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
+  padding: 0;
+  margin: 0;
 }
 
 .webcams-container > li {
-  margin-left: 0.5em;
-  margin-right: 0.5em;
+  margin: 0.2rem;
 }
 
 /***************************************************************/
@@ -193,23 +216,32 @@ img.webcam {
 }
 
 .heading {
-  text-align: center;
-}
-
-.heading > .title {
-  font-size: 3.5rem;
-  letter-spacing: 0.2em;
-  margin: 0 auto;
-  line-height: 2rem;
-  font-weight: 800;
-  padding-top: 1.5rem;
-}
-
-.subTitle {
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
-  font-size: 90%;
+  align-items: center;
+  justify-content: left;
+  white-space: nowrap;
+}
+
+.heading ul {
+    margin: 0;
+    padding: 0;
+}
+
+.heading p {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.title {
+  font-size: 2rem;
+  letter-spacing: 0.2em;
+  font-weight: 800;
+}
+
+.stationData, .links {
+  display: flex;
+  flex-flow: row wrap;
 }
 
 #histats_counter div {
@@ -228,38 +260,6 @@ img.webcam {
   clear:both;
   float:left;
 }
-
-select {
-    font-size: 110%;
-}
-
-/*****************************************************************/
-
-.meteoblue {
-  width: 340px;
-  height: 480px;
-  /*background: rgba(0, 0, 0, 0.5);*/
-  padding: 0;
-  border: 0;
-  /* Disable scrolling */
-  overflow-x: hidden;
-  overflow-y: hidden;
-  overflow: hidden;
-}
-
-/*  Enable the following to scale the iframe! */
-
-/*
-iframe.meteoblue {
-  -ms-zoom: 0.85;
-  -moz-transform: scale(0.85);
-  -moz-transform-origin: 0 0;
-  -o-transform: scale(0.85);
-  -o-transform-origin: 0 0;
-  -webkit-transform: scale(0.85);
-  -webkit-transform-origin: 0 0;
-}
-*/
 
 /******************************************************************/
 
@@ -291,6 +291,9 @@ iframe.meteoblue {
 }
 
 .measures-group .location, .measures-group .timestamp {
+  font-family: 'Baloo Tamma 2';
+  color: whitesmoke;
+
   font-weight: bold;
   text-align: left;
   width: 8rem;
@@ -307,10 +310,8 @@ iframe.meteoblue {
     padding: 0;
 }
 
-.measures-container {
-    display: table;
-    margin: 0 auto;
-    margin-bottom: .5rem;
+.measures-container * {
+    background-color: #202020;
 }
 
 fiobbio2Measures, #mismaMeasures {
@@ -359,7 +360,6 @@ fiobbio2Measures, #mismaMeasures {
   animation-play-state: paused;
 }
 
-
 @keyframes slide {
   0%{
     transform: translate3d(0, 0, 0);
@@ -369,35 +369,3 @@ fiobbio2Measures, #mismaMeasures {
   }
 }
 
-.bottombanner {
-  font-size: 110%;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: .5em;
-  display: table;
-  margin: 0 auto;
-  margin-top: 0.2em;
-  margin-bottom: 0.2em;
-  padding: .2em;
-  line-height: 2em;
-}
-
-li.grafana {
-    /*width: 45%;*/
-}
-
-iframe.grafana {
-    width: 100%;
-    border-width: 0;
-    border-color: whitesmoke;
-    padding: 0.5rem;
-}
-
-iframe.grafana-chart {
-    width: 500px;
-    height: 300px;
-}
-
-iframe.grafana-table {
-    width: 450px;
-    height: 25ch;
-}

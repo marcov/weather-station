@@ -5,22 +5,37 @@
     font-size: 90%;
   }
 
-  .heading > .title {
-    font-size: 200%;
-    padding-top: .5rem;
+  body div, body ul, body h3 {
+    margin-left: .1rem;
+    margin-right: .1rem;
   }
 
-  img.satellite
+  .title {
+    font-size: 1.5em;
+    letter-spacing: 0.6em;
+  }
+
+  .heading {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+  }
+
+  .stationData {
+    font-size: 0.8em;
+  }
+
+  .links {
+    font-size: 1em;
+    justify-content: center;
+  }
+
+  img.webcam, img.satellite
   {
-    width: 90%;
-    max-width:100%;
+    width: 100vw;
+    max-height: 100vw;
+    max-width: 100vw;
     height: auto;
-  }
-
-  #menutop {
-    clear:both;
-    max-width: 85%;
-    text-align: center;
   }
 
   .internlink, .externlink {
@@ -41,39 +56,6 @@
     font-size: 0.5em;
   }
 
-
-  iframe.meteo,   img.meteo
-  {
-    min-width: 100%;
-    margin-left: 0px;
-    padding-left: 0px;
-  }
-
-  select
-  {
-    font-size: 90%;
-  }
-
-  div.heading {
-    margin-bottom: 0em;
-  }
-
-  .menu {
-    position: absolute;
-    margin-top: 0em;
-    padding-top: 0em;
-    max-height: 2em;
-  }
-
-  .hamburger-menu-wrapper, .hamburger-menu {
-    margin-top: 0em;
-    padding-top: 0em;
-  }
-
-  .menu-list {
-    margin-top: 0.5em;
-  }
-
   .measures-group {
     flex-flow: column nowrap;
     padding: 0;
@@ -90,14 +72,15 @@
   .measure {
     flex-flow      : row;
     justify-content: space-evenly;
-    margin-bottom: 0.4em;
+    margin-bottom: 0;
     width: 99%;
+    font-size: .8rem;
   }
 
   .measure > label {
     margin-left: 0;
     padding-left: 0;
-    width: 25%;
+    width: 50%;
     text-align: left;
   }
 
@@ -106,7 +89,20 @@
     width: 5em;
   }
 
+  .measure  .min, .curr, .max {
+      margin-left: .1rem;
+      margin-right: .1rem;
+  }
+
+  .measure  > div {
+    width: 50%;
+  }
+
+ .webcams-container li {
+   margin: 0;
+ }
  .webcams-container {
+   margin: 0;
    flex-flow: column nowrap;
  }
 
@@ -120,12 +116,6 @@
 
   .emptyLabel {
     display: none;
-  }
-
-  .subTitle {
-      padding: 0;
-      line-height: 1rem;
-      font-size: 66%;
   }
 
   li.grafana {

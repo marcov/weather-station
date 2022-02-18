@@ -3,11 +3,10 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Meteo, Prevision e Webcam Fiobbio di Albino</title>
+  <title>Meteo, Webcam e Previsioni Fiobbio di Albino</title>
 
   <!-- the following is needed for the media queries to work correctly -->
   <meta name="viewport" content="width=device-width">
-  <link type="text/css" rel="stylesheet" href="css/menu.css" />
   <link type="text/css" rel="stylesheet" href="css/layout.css" />
   <link type="text/css" rel="stylesheet" href="css/featherlight.min.css" />
   <link rel="stylesheet"
@@ -23,55 +22,55 @@
     gtag('config', 'G-KCSTMYF26E');
   </script>
 
-  <!-- AdSense -->
+  <!-- AdSense
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8303716244658891"
      crossorigin="anonymous"></script>
+  -->
 </head>
 
 <body>
   <div class="maincolumn">
-    <div class="menu">
-      <div class="hamburger-menu-wrapper">
-        <div style="margin: 0em; padding: 0em;">
-          <button class="hamburger-menu">
-              <span></span>
-            </button>
-        </div>
-      </div>
-      <div class="menu-list">
-
-        <a href="/fiobbio2">Stazione Fiobbio 2</a><br>
-
-        <a href="/misma">Stazione Mt. Misma</a><br>
-
-        <a href="/grafana/"><b>Grafici alta risoluzione</b></a>
-
-        <a href="mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com">Contatti</a><br>
-        <span style="font-size: 90%;">
-            <b>Pagine wview</b>
-            <a href="html/archive.html" class="indented">Archivio Dati</a><br>
-            <a href="almanac.htm" class="indented">Almanacco</a><br>
-            <a href="Daily.htm" class="indented">24h</a><br>
-            <a href="Monthly.htm" class="indented">Mese in corso</a><br>
-            <a href="Yearly.htm" class="indented">Anno in corso</a><br>
-            <br>
-        </span>
-      </div>
-    </div>
-    <!-- div..menu-->
 
     <div class="heading">
-      <div class="topRightBanner">
-        <!--<span id="stationTime"></span>, <span id="stationDate"></span>-->
-      </div>
+      <ul>
 
-      <div class="title">
-        Meteo Fiobbio
-      </div>
-      <ul class="subTitle">
+      <li class="title"> Meteo Fiobbio </li>
+
+      </ul>
+
+      <p> | </p>
+
+      <ul class="links">
         <li>
-          &#9650; <span id="stationElevation"></span>
+        <a href="/grafana/"><b>Grafici alta risoluzione</b></a>
         </li>
+        <li> &nbsp;&#8211;&nbsp; </li>
+        <a href="html/archive.html" class="indented">Archivio Dati</a>
+        </li>
+        <li> &nbsp;&#8211;&nbsp; </li>
+        <li>
+        <a href="mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com">Contatti</a>
+        </li>
+        <!--
+        <a href="/fiobbio2">Fiobbio 2</a>
+        &nbsp;&#8211;&nbsp;
+        <a href="/misma">Mt. Misma</a>
+        &nbsp;&#8211;&nbsp;
+        <a href="almanac.htm" class="indented">Almanacco</a>
+        &nbsp;&#8211;&nbsp;
+        <a href="Daily.htm" class="indented">24h</a>
+        &nbsp;&#8211;&nbsp;
+        <a href="Monthly.htm" class="indented">Mese in corso</a>
+        &nbsp;&#8211;&nbsp;
+        <a href="Yearly.htm" class="indented">Anno in corso</a>
+        &nbsp;&#8211;&nbsp;
+        -->
+      </ul>
+
+      <p> | </p>
+
+      <ul class="stationData">
+        <li> &#9650; <span id="stationElevation"></span> </li>
         <li> &nbsp;&#8211;&nbsp; </li>
 
         <li>
@@ -80,26 +79,27 @@
         <li> &nbsp;&#8211;&nbsp; </li>
 
         <li>
-          &#9788;&UpperRightArrow;<span id="sunriseTime"></span>&nbsp;&LowerRightArrow;<span id="sunsetTime"></span>
+          &UpperRightArrow;<span id="sunriseTime"></span>&nbsp;&LowerRightArrow;<span id="sunsetTime"></span>
         </li>
         <li> &nbsp;&#8211;&nbsp; </li>
 
         <li>
             &#9789; <span id="moonPhase"></span>
         </li>
-
       </ul>
-      <!-- HEADER END -->
+
     </div>
 
     <div class="measures-container">
       <!-- NOTE: this is actually just a template, being used for the 2 containers below -->
       <ul id="measuresTemplate" class="measures-group" style="display: none;">
-        <li class="">
+
+        <li class="" style="min-width: 10rem;">
           <!-- placeholder label to a correct flex layout -->
           <label class="emptyLabel">&nbsp;</label>
-          <p class="location"></p>
-          <p class="timestamp"></p>
+          <div>
+              <a class="location"></a>&nbsp;-&nbsp;<label class="timestamp"></label>
+          </div>
         </li>
 
         <li class="measure">
@@ -334,11 +334,13 @@
     </div>
     <!-- WEATHER IMAGES END -->
 
-    <div class="bottombanner">
-      <span style="font-weight: bold;">Marcello Alborghetti</span>
-      <span style="font-size:80%;">&nbsp;(HW)&nbsp; - &nbsp;</span>
-      <span style="font-weight: bold; font-size:102%; letter-spacing:.15rem;">Marco Vedovati</span>
-      <span style="font-size:80%;">&nbsp;(SW)</span>
+    <div>
+        <div class="bottombanner">
+          <span style="font-weight: bold;">Marcello Alborghetti</span>
+          <span style="font-size:80%;">&nbsp;(HW)&nbsp; - &nbsp;</span>
+          <span style="font-weight: bold; font-size:102%; letter-spacing:.15rem;">Marco Vedovati</span>
+          <span style="font-size:80%;">&nbsp;(SW)</span>
+        </div>
     </div>
 
     <h3>Previsioni</h3>
@@ -498,13 +500,14 @@
       function populateMeasures(locs) {
         locs.forEach((loc) => {
           $.ajax({
-            url      : loc.url,
+            url      : loc.Path + "realtime.json",
             dataType : "json"
           }).done( (jsonData) => {
             // Copy the HTML template into the actual element ID with the given tgtId
             $("#" + loc.tgtId).html($("#measuresTemplate").html());
 
             $("#" + loc.tgtId + " .location").text(loc.location);
+            $("#" + loc.tgtId + " .location").attr('href', loc.Path);
 
             // Strip out seconds
             jsonData.timestamp = jsonData.stationTime.split(':', 2).join(':');
@@ -529,17 +532,17 @@
       $(document).ready(() => {
         const locations = [
           {
-            url   : "/fiobbio1/realtime.json" ,
+            Path   : "/fiobbio1/",
             tgtId : "fiobbioMeasures",
             location : "Fiobbio 1"
           },
           {
-            url   : "/misma/realtime.json",
+            Path   : "/misma/",
             tgtId : "mismaMeasures",
             location : "Misma"
           },
           {
-            url   : "/fiobbio2/realtime.json",
+            Path   : "/fiobbio2/",
             tgtId : "fiobbio2Measures",
             location : "Fiobbio 2"
           }
