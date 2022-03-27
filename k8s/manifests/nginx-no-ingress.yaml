@@ -55,7 +55,7 @@ spec:
           readOnly: true
 
         - name: wview-html-static
-          mountPath: /weather-station/wview/html/fiobbio
+          mountPath: /weather-station/wview/html/
           readOnly: true
 
         - name: tz-config
@@ -90,7 +90,7 @@ spec:
 
       - name: wview-html-static
         hostPath:
-          path: /home/pi/weather-station/wview/html/fiobbio
+          path: /home/pi/weather-station/wview/html/
           type: Directory
 
       - name: tz-config

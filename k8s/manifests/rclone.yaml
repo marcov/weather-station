@@ -6,6 +6,8 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: rclone
+  labels:
+      app: rclone
 spec:
   schedule: "0 2 * * *"
   concurrencyPolicy: Replace

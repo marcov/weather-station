@@ -1,11 +1,13 @@
 ---
 # k create secret generic ddns-info --from-env-file=/home/pi/nc-ddns/ddns-info.txt
-
 ---
+
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: ddns
+  labels:
+      app: ddns
 spec:
   schedule: "*/5 * * * *"
   concurrencyPolicy: Replace

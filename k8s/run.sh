@@ -11,8 +11,13 @@ declare -r scriptDir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P
 
 declare -r scriptStarted="/tmp/run-sh-started"
 declare -r scriptCompleted="/tmp/run-sh-completed"
-declare -r arch="$(arch)"
+declare -r secretsDir="/home/pi/secrets"
 declare removeEphemeral=
+declare -r -a stations=( \
+    fiobbio1 \
+    fiobbio2 \
+    misma \
+)
 
 if [ "`id -u`" != 0 ]; then
     asRoot="/usr/bin/sudo"
@@ -39,50 +44,42 @@ mkdir -p "${hostWviewImgDir}"
 ${asRoot} touch /tmp/ddns-ip
 ${asRoot} chmod 666 /tmp/ddns-ip
 
-cp -a \
-    "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static/" \
-    "${hostWviewImgDir}/fiobbio1"
+for sta in ${stations[@]}; do
+    cp -a \
+        "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static/" \
+        "${hostWviewImgDir}/${sta}"
 
-cp -a \
-    "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static/" \
-    "${hostWviewImgDir}/misma"
+    cp \
+        "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/chart_bg_bigger.png" \
+        "${hostWviewImgDir}/${sta}/chart_bg.png"
 
-cp -a \
-    "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static/" \
-    "${hostWviewImgDir}/fiobbio2"
-
-cp \
-    "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/chart_bg_bigger.png" \
-    "${hostWviewImgDir}/fiobbio1/chart_bg.png"
-
-cp \
-    "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/chart_bg_bigger.png" \
-    "${hostWviewImgDir}/fiobbio2/chart_bg.png"
-
-cp \
-    "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/chart_bg_bigger.png" \
-    "${hostWviewImgDir}/misma/chart_bg.png"
-
-mkdir -p "${hostWviewImgDir}"/{fiobbio1,misma,fiobbio2}/NOAA
-mkdir -p "${hostWviewImgDir}"/{fiobbio1,misma,fiobbio2}/Archive
+    mkdir -p "${hostWviewImgDir}"/${sta}/NOAA
+    mkdir -p "${hostWviewImgDir}"/${sta}/Archive
+done
 
 set -x
-minikube status || minikube start --extra-config=apiserver.service-node-port-range=1-65535
+minikube status || minikube start --driver none --extra-config=apiserver.service-node-port-range=1-65535
 
 ${scriptDir}/template-gen.sh
 
-# TODO fix cml ftp login info
-if ! kubectl get secrets cml-ftp-login >/dev/null; then
-    kubectl create secret generic cml-ftp-login --from-env-file=/home/pi/secrets/cml_ftp_login_data.sh
-fi
-
-# TODO all the other secrets needs to be created
+# all secrets
+kubectl create secret generic cml-ftp-login --from-env-file=${secretsDir}/cml_ftp_login_data.sh
+kubectl create secret generic webcam-login --from-env-file=${secretsDir}/webcam_login_data.sh
+kubectl create secret generic backblaze-info --from-env-file=${secretsDir}/backblaze
+kubectl create secret generic ddns-info --from-env-file=${secretsDir}/ddns-info.txt
 
 # TODO: needs to be deleted?
 #kubectl delete --wait=true -f ${scriptDir}/manifests/ || echo "WARN: ignoring kubectl error on delete"
 
+kubectl apply -f ${scriptDir}/manifests/ || echo "WARN: kubectl create got some errors (may be OK)..."
+
 # TODO helm charts in helm-charts.md
-kubectl apply -f ${scriptDir}/manifests/
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm upgrade --install promtail grafana/promtail --set "config.lokiAddress=http://loki:3100/loki/api/v1/push"
+helm upgrade --install loki grafana/loki
+helm upgrade --install kube-state-metrics prometheus-community/kube-state-metrics
 
 set +x
 

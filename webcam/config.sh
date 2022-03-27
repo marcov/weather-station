@@ -19,7 +19,7 @@ declare -r -A fiobbioCfg=( \
     [name]="fiobbio" \
     [url]="http http://192.168.1.178/cgi-bin/snapshot.cgi?stream=0" \
     [watermark]="Fiobbio" \
-    [tsource]="http://${httpServerHostname}/realtime.json" \
+    [tsource]="http://${httpServerHostname}/fiobbio1/realtime.json" \
     [size]="800x600" \
     [retries]=1 \
     [suffix]="" \
