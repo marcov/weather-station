@@ -19,20 +19,20 @@ body div, body h3 {
 }
 
 h3 {
-  font-size: 1em;
+  font-size: 1.5em;
   text-align: center;
   margin: 0;
 }
 
 a {
+  text-decoration:none;
   color: inherit;
-  text-decoration: none;
-  font-weight: bold;
+  font-size: 110%;
+  font-weight: 1000;
 }
 
 a:hover {
   text-decoration: underline;
-  font-weight: bold;
 }
 
 p {
@@ -233,10 +233,12 @@ img.webcam {
     margin-right: 1em;
 }
 
-.title {
+.title * {
   font-size: 2rem;
   letter-spacing: 0.2em;
   font-weight: 800;
+  margin: 0;
+  margin-left: 1rem;
 }
 
 .stationData, .links {
