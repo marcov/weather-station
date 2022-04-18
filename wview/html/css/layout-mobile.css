@@ -112,6 +112,11 @@
     display: inherit;
   }
 
+  .forecast-img {
+      max-width: 100%;
+      height: 25em;
+  }
+
   .bottombanner {
     font-size: 90%;
   }

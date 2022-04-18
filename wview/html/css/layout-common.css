@@ -313,6 +313,11 @@ fiobbio2Measures, #mismaMeasures {
   display: none;
 }
 
+.forecast-img {
+    max-width: 600px;
+    height: 25em;
+}
+
 /* credits: https://css-tricks.com/infinite-all-css-scrolling-slideshow/ */
 /* https://css-tricks.com/books/volume-i/infinite-scrolling-background-image/ */
 .panorama-scroll {
