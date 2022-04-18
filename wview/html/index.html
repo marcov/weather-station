@@ -4,12 +4,13 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Meteo, Webcam e Previsioni Fiobbio di Albino</title>
-  <meta name="description" content="Dati in tempo reale dalle stazioni meteo
-              collocate a Fiobbio di Albino e sul Monte Misma.
-              Immagini in diretta delle webcam sul Monte Misma e nel paese di
-              Fiobbio di Albino.
+  <meta name="description"
+     content="Dati in tempo reale delle stazioni meteo di Fiobbio di Albino e
+              del Monte Misma.
+              Immagini in diretta webcam Fiobbio di Albino.
+              Immagini in diretta webcam Monte Misma.
               Previsioni meteo per Albino (BG).
-              Archivio storico dei dati meteo di Albino.
+              Archivio dati meteo di Albino.
               Fiobbio è un paese situato nella Valle del Lujo,
               nella media Val Seriana, in provincia di Bergamo, Lombardia. ">
 
@@ -121,7 +122,7 @@
               <div><span class="lowOutsideTemp"></span></div>
               <div class="sub"><span class="lowOutsideTempTime"></span></div>
             </div>
-            <div class="curr">
+            <div class="curr tempCurr">
               <span class="outsideTemp"></span>
               <span style="font-size: 50%;"> Feels&nbsp;</span><span style="font-size: 80%;" class="apparentTemp"></span>
             </div>
@@ -143,8 +144,8 @@
             </div>
             <div class="curr">
               <span class="windSpeed"></span>
-              <div style="font-size:50%">
-                <span class="windDirection"></span>
+              <div class="sub" style="font-size:50%">
+              Dir <span class="windDirection"></span>
               </div>
             </div>
             <div class="max">
@@ -367,13 +368,13 @@
     <ul class="flex-container">
       <li>
         <a href="http://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=gfs&var=93&run=0&lid=OP&bw=" title="Large image">
-          <img style="height: 25em;" src="/webshot/wz_meteogram.jpg" alt="Meteogram 10d wetterzentrale" title="Meteogram 10d" />
+          <img style="max-width: 40vw; height: 25em;" src="/webshot/wz_meteogram.jpg" alt="Meteogram 10d wetterzentrale" title="Meteogram 10d" />
         </a>
       </li>
 
       <li>
         <a href="https://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=gfs&var=201&run=12&lid=ENS&bw=" title="Large image">
-          <img style="height: 25em;" src="/webshot/wz_ensemble.jpg" alt="Meteogram 10d wetterzentrale" title="Ensemble 10d" />
+          <img style="max-width: 40vw; height: 25em;" src="/webshot/wz_ensemble.jpg" alt="Meteogram 10d wetterzentrale" title="Ensemble 10d" />
         </a>
       </li>
     </ul>
@@ -457,22 +458,6 @@
       });
     })();
   </script>
-  <!-- Histats.com  START  (async)
-  <script>
-    var _Hasync = _Hasync || [];
-    _Hasync.push(['Histats.start', '1,1781036,4,4015,112,61,00011111']);
-    _Hasync.push(['Histats.fasi', '1']);
-    _Hasync.push(['Histats.track_hits', '']);
-    (function() {
-      var hs = document.createElement('script');
-      hs.async = true;
-      hs.src = ('//s10.histats.com/js15_as.js');
-      document.getElementsByTagName('body')[0].appendChild(hs);
-    })();
-
-  </script>
-  <noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?1781036&101" alt="counter" border="0"></a></noscript>
-  Histats.com  END  -->
 
   <script src="js/featherlight.min.js"></script>
   <script>

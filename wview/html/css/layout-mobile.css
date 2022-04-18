@@ -1,5 +1,5 @@
-@media screen and (max-width: 600px) {
-
+@media screen and (max-width: 999px)
+{
   body
   {
     font-size: 90%;
@@ -85,9 +85,10 @@
     text-align: left;
   }
 
-  .measure  .curr {
+  .measure .curr {
     font-size: 110%;
     width: 5em;
+    height: 2rem;
   }
 
   .measure  .min, .curr, .max {
@@ -136,6 +137,10 @@
   iframe.grafana-table {
       width:  95%;
       height: 35vh;
+  }
+
+  .measures-container * {
+    width: 100%;
   }
 
 } /* KEEP THIS AS THE LAST LINE!  @media screen and (max-width: 600px)  */

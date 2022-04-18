@@ -94,6 +94,8 @@ li {
   float: none;
   /*Make column large exactly as content */
   overflow: auto;
+
+  max-width: 1280px;
 }
 
 .measures-group {
@@ -132,13 +134,18 @@ li {
 
 .measure div {
   background-color: inherit;
-  text-align: right;
+  text-align: left;
 }
 
 .measure .curr {
   font-size: 130%;
-  width: 5rem;
+  width: 4rem;
   font-weight: bold;
+  height: 3rem;
+}
+
+.measure .tempCurr {
+  width: 5rem;
 }
 
 .measure .max {
@@ -166,19 +173,6 @@ li {
 
 .measure .sub {
   font-size: 80%;
-}
-
-.wider {
-  width: 24ch;
-}
-
-.wider .curr {
-  width: 5rem;
-}
-
-.wider .min,
-.wider .max {
-  width: 4rem;
 }
 
 /***************************************************************/
@@ -246,12 +240,6 @@ img.webcam {
   flex-flow: row wrap;
 }
 
-#histats_counter div {
-  margin: 0 auto;
-  margin-top: 1em;
-  text-align: center;
-}
-
 /***************************************************************/
 
 .preformatted {
@@ -297,7 +285,6 @@ img.webcam {
   color: whitesmoke;
 
   font-weight: bold;
-  text-align: left;
   width: 8rem;
   padding-top: 0;
   padding-bottom: 0;
@@ -314,6 +301,7 @@ img.webcam {
 
 .measures-container * {
     background-color: #202020;
+    width: fit-content;
 }
 
 fiobbio2Measures, #mismaMeasures {
