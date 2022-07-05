@@ -124,7 +124,7 @@
             </div>
             <div class="curr tempCurr">
               <span class="outsideTemp"></span>
-              <span style="font-size: 50%;"> Feels&nbsp;</span><span style="font-size: 80%;" class="apparentTemp"></span>
+              <span style="font-size: 50%;"> Feels&nbsp;</span><span style="font-size: 60%;" class="apparentTemp"></span>
             </div>
             <div class="max">
               <div><span class="hiOutsideTemp"></span></div>
@@ -441,25 +441,9 @@
   <!-- div..maincolumn -->
 
   <script src="js/jquery-3.3.1.min.js"></script>
-  <script>
-    (function () {
-      'use strict';
-      $('.hamburger-menu-wrapper').click(function (e) {
-        e.preventDefault();
-        if ($(this).hasClass('active')) {
-          $(this).removeClass('active');
-          $('.menu-overlay').fadeToggle('fast', 'linear');
-          $('.menu .menu-list').slideToggle('slow', 'swing');
-        } else {
-          $(this).addClass('active');
-          $('.menu-overlay').fadeToggle('fast', 'linear');
-          $('.menu .menu-list').slideToggle('slow', 'swing');
-        }
-      });
-    })();
-  </script>
 
   <script src="js/featherlight.min.js"></script>
+
   <script>
     $(function() {
       $.featherlight.defaults.loading = "Caricamento immagine in corso...";
