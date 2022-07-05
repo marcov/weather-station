@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x -e -u -o pipefail
+set -x -u -o pipefail
 
 kubectl delete service nginx || { echo "No nginx service, already deleted?"; }
 
