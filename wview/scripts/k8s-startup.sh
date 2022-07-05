@@ -7,8 +7,8 @@ set -uo pipefail
 trap sighandler SIGINT SIGTERM
 
 declare -i tailPid=
-declare -a wviewPids=
-declare -i nprocs=
+declare -a allWviewPids=
+declare -i procsStartCount=
 
 sighandler () {
     trap - SIGINT SIGTERM ERR EXIT
@@ -19,7 +19,7 @@ sighandler () {
         sleep 1
     done
 
-    kill -KILL ${wviewPids[@]} $tailPid
+    kill -KILL ${allWviewPids[@]} $tailPid
     exit 0
 }
 
@@ -51,64 +51,70 @@ tail -n0 --follow --retry /tmp/syslog/syslog &
 tailPid="$!"
 
 start_all_procs() {
-    nprocs=0
+    procsStartCount=0
 
     if ! pidof -s radmrouted>/dev/null; then
         rm -f /var/lib/wview/radmrouted.pid
         radmrouted 1 /var/lib/wview &
         sleep 2
-        echo "radmrouted PID: $(pidof -s radmrouted)"
+        echo "radmrouted PIDs: $(pidof radmrouted)"
     fi
-    nprocs+=1
+    procsStartCount+=1
 
     if ! pidof -s ${wviewd_bin}>/dev/null; then
         rm -f /var/lib/wview/${wviewd_bin}.pid
         "${wviewd_bin}" &
         sleep 1
-        echo "INFO: wviewd_${WVIEW_STATION_TYPE} PID: $(pidof -s wviewd_${WVIEW_STATION_TYPE})"
+        echo "INFO: wviewd_${WVIEW_STATION_TYPE} PIDs: $(pidof wviewd_${WVIEW_STATION_TYPE})"
     fi
-    nprocs+=1
+    procsStartCount+=1
 
     if ! pidof -s htmlgend>/dev/null; then
         rm -f /var/lib/wview/htmlgend.pid
         htmlgend &
         sleep 1
-        echo "INFO: htmlgend PID: $(pidof -s htmlgend)"
+        echo "INFO: htmlgend PIDs: $(pidof htmlgend)"
     fi
-    nprocs+=1
+    procsStartCount+=1
 
     # Ignore wvhttpd, it's optional and not a vital process anyway
     if ! pidof -s wvhttpd>/dev/null; then
         rm -f /var/lib/wview/wvhttpd.pid
         wvhttpd &
         sleep 1
-        echo "INFO: wvhttpd PID: $(pidof -s wvhttpd)"
+        echo "INFO: wvhttpd PIDs: $(pidof wvhttpd)"
     fi
 
     if ! pidof -s wvpmond>/dev/null; then
         rm -f /var/lib/wview/wvpmond.pid
         wvpmond &
         sleep 1
-        echo "INFO: wvpmond PID: $(pidof -s wvpmond)"
+        echo "INFO: wvpmond PIDs: $(pidof wvpmond)"
     fi
-    nprocs+=1
+    procsStartCount+=1
 }
 
 start_all_procs
 
 while true; do
-    wviewPids=( \
-        $(pidof -s radmrouted) \
-        $(pidof -s ${wviewd_bin}) \
-        $(pidof -s htmlgend) \
-        $(pidof -s wvpmond) \
-    )
 
-    if ! [[ ${#wviewPids[@]} = ${nprocs} ]]; then
-        echo "INFO: PIDs count mismatch ${#wviewPids[@]} vs ${nprocs}, retrying startup..."
+    onePidPerProcs=( $(pidof -s radmrouted ${wviewd_bin} htmlgend wvpmond) )
+
+    allWviewPids=($(pidof radmrouted ${wviewd_bin} htmlgend wvpmond))
+
+    if ! [[ ${#onePidPerProcs[@]} = ${procsStartCount} ]]; then
+        echo "INFO: Procs count mismatch:
+  Running ${#onePidPerProcs[@]} vs started ${procsStartCount}
+  All running PIDs: ${allWviewPids[@]})
+  Retrying startup..."
+
+        kill -KILL ${allWviewPids[@]}
+        rm -f /var/lib/wview/*.pid
+        procsStartCount=0
+
         start_all_procs
     else
-        echo "INFO: Running PIDs: ${wviewPids[@]}"
+        echo "INFO: All running PIDs: ${allWviewPids[@]}"
         sleep 10
     fi
 done
