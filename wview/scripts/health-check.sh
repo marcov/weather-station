@@ -4,7 +4,8 @@
 #
 set -euo pipefail
 
-declare -r -i checkMinutes=4
+# htmlgend runs every 5 minutes, so use 5' + 50%
+declare -r -i checkMinutes=8
 
 wviewImgDir="/var/lib/wview/img"
 
@@ -24,13 +25,14 @@ declare -ra expectedFiles=( \
 declare -i filesCount=0
 for f in ${expectedFiles[@]}; do
     filesCount+="$(find "${wviewImgDir}" -mmin -${checkMinutes} -name "${f}" | wc -l)"
+    echo "INFO: file count after checking ${f}: ${filesCount}"
 done
 
 declare -i unhealthy=
-[ "${filesCount}" = "${#expectedFiles[@]}" ] && unhealthy=0 || unhealthy=1
+(( ${filesCount} == ${#expectedFiles[@]} )) && unhealthy=0 || unhealthy=1
 
 # Update health status
 sed -E -i "s,^unhealthy [01]$,unhealthy ${unhealthy}," "${wviewImgDir}/metrics.prom"
 
 echo "INFO: expected files count = ${#expectedFiles[@]} - found = ${filesCount} - unhealthy = ${unhealthy}"
-[ "${unhealthy}" = 1 ] && exit 1 || exit 0
+(( ${unhealthy} == 1 )) && exit 1 || exit 0
