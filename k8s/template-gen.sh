@@ -3,15 +3,26 @@ set -euo pipefail
 
 set -x
 declare -r scriptDir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
+declare -r manifestsDir="$1"
 
-cat ${scriptDir}/wview-template.yaml | \
-    WVIEW_INSTANCE_NAME=fiobbio1 WVIEW_STATION_TYPE=vpro \
-    envsubst '$WVIEW_INSTANCE_NAME $WVIEW_STATION_TYPE' > ${scriptDir}/manifests/wview-fiobbio1-generated.yaml
+declare -A stationsMap=(
+    [fiobbio1]=vpro
+    [fiobbio2]=wxt510
+    [misma]=vpro
+)
 
-cat ${scriptDir}/wview-template.yaml | \
-    WVIEW_INSTANCE_NAME=misma WVIEW_STATION_TYPE=vpro \
-    envsubst '$WVIEW_INSTANCE_NAME $WVIEW_STATION_TYPE' > ${scriptDir}/manifests/wview-misma-generated.yaml
+rm -rf ${manifestsDir}
+mkdir -p ${manifestsDir}
 
-cat ${scriptDir}/wview-template.yaml | \
-    WVIEW_INSTANCE_NAME=fiobbio2 WVIEW_STATION_TYPE=wxt510 \
-    envsubst '$WVIEW_INSTANCE_NAME $WVIEW_STATION_TYPE' > ${scriptDir}/manifests/wview-fiobbio2-generated.yaml
+for sta in "${!stationsMap[@]}"; do
+    cat > ${manifestsDir}/wview-${sta}.yaml << EOF
+#
+# Generated from a template using "${BASH_SOURCE[@]}"
+#
+EOF
+
+    cat ${scriptDir}/wview-template.yaml | \
+        WVIEW_INSTANCE_NAME="${sta}" \
+        WVIEW_STATION_TYPE="${stationsMap[${sta}]}" \
+        envsubst '$WVIEW_INSTANCE_NAME $WVIEW_STATION_TYPE' >> "${manifestsDir}/wview-${sta}.yaml"
+done

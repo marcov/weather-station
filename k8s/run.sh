@@ -12,6 +12,7 @@ declare -r scriptDir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P
 declare -r scriptStarted="/tmp/run-sh-started"
 declare -r scriptCompleted="/tmp/run-sh-completed"
 declare -r secretsDir="/home/pi/secrets"
+declare -r genManifestsDir="/tmp/k8s_manifests"
 declare removeEphemeral=
 declare -r -a stations=( \
     fiobbio1 \
@@ -60,7 +61,7 @@ done
 set -x
 minikube status || minikube start --driver none --extra-config=apiserver.service-node-port-range=1-65535
 
-${scriptDir}/template-gen.sh
+${scriptDir}/template-gen.sh ${genManifestsDir}
 
 # all secrets
 kubectl create secret generic cml-ftp-login --from-env-file=${secretsDir}/cml_ftp_login_data.sh
@@ -68,12 +69,9 @@ kubectl create secret generic webcam-login --from-env-file=${secretsDir}/webcam_
 kubectl create secret generic backblaze-info --from-env-file=${secretsDir}/backblaze
 kubectl create secret generic ddns-info --from-env-file=${secretsDir}/ddns-info.txt
 
-# TODO: needs to be deleted?
-#kubectl delete --wait=true -f ${scriptDir}/manifests/ || echo "WARN: ignoring kubectl error on delete"
+kubectl apply -f ${scriptDir}/manifests/ ${genManifestsDir} || echo "WARN: kubectl create got some errors (may be OK)..."
 
-kubectl apply -f ${scriptDir}/manifests/ || echo "WARN: kubectl create got some errors (may be OK)..."
-
-# TODO helm charts in helm-charts.md
+# FIXME: network needs to be up for this to work!
 helm repo add grafana https://grafana.github.io/helm-charts
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
