@@ -69,7 +69,8 @@ kubectl create secret generic webcam-login --from-env-file=${secretsDir}/webcam_
 kubectl create secret generic backblaze-info --from-env-file=${secretsDir}/backblaze
 kubectl create secret generic ddns-info --from-env-file=${secretsDir}/ddns-info.txt
 
-kubectl apply -f ${scriptDir}/manifests/ ${genManifestsDir} || echo "WARN: kubectl create got some errors (may be OK)..."
+kubectl apply -f ${genManifestsDir} || echo "WARN: kubectl create got some errors (may be OK)..."
+kubectl apply -f ${scriptDir}/manifests/ || echo "WARN: kubectl create got some errors (may be OK)..."
 
 # FIXME: network needs to be up for this to work!
 helm repo add grafana https://grafana.github.io/helm-charts
