@@ -26,7 +26,7 @@
         },
 
         {
-           "url":      "http://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=gfs&var=93&run=0&lid=OP&bw=",
+           "url":      "http://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=ecm&var=93&run=0&lid=OP&bw=",
            "waitTime": 5000,
            "outFile":  "wz_meteogram.jpg",
            "viewSize": [820, 1180],
@@ -37,11 +37,11 @@
         },
 
         {
-           "url":      "https://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=gfs&var=201&run=12&lid=ENS&bw=",
+           "url":      "https://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=ecm&var=201&run=12&lid=ENS&bw=",
            "waitTime": 5000,
            "outFile":  "wz_ensemble.jpg",
            "viewSize": [820, 1180],
-           "topLeft":  [870, 0],
+           "topLeft":  [850, 0],
            "size":     [820, 595],
            "evalCode": "document.getElementById('sp_message_container_403677').style.display = 'none'; var collection = document.getElementsByClassName('adsbygoogle'); for (i = 1; i < collection.length; i++) {collection[0].parentNode.removeChild(collection[0]);}",
            "Enabled": true
