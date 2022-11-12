@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Don't set -e: the script should run to completion so that nginx is always
+# restarted, even on error.
 set -x -u -o pipefail
 
 kubectl delete service nginx || { echo "No nginx service, already deleted?"; }
