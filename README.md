@@ -43,11 +43,15 @@ For simplicity the cluster is a local minikube instance created with the driver
 certbot certonly -d meteo.fiobbio.com --logs-dir /tmp --config-dir ~/secrets/letsencrypt --work-dir /tmp
 ```
 
-## SQLite config update
+## SQLite
+### Config Update
+
 ```
 $ sqlite3 .../wview-conf.sdb
+```
 
-> select name,value from config where name="STATION_HOST";
+```sql
+select name,value from config where name="STATION_HOST";
 STATION_HOST|ser2net-fiobbio1.default.svc.cluster.local
 ```
 
@@ -55,4 +59,21 @@ Or using `wviewconfig` in a container:
 ```
 $ docker run -it --rm -v .../wview-conf.sdb:/etc/wview/wview-conf.sdb pullme/x86_64-wview:5.21.7
 # wviewconfig
+```
+
+### Removing bad database entries
+
+Bad entries are normally caused by no record. That cause temperature (outTemp)
+to show as "-17.8 C" -- i.e. "0 F".
+
+Show where there is no record for `outTemp` with:
+
+```sql
+select *, datetime (DATETIME(dateTime, 'unixepoch', 'localtime')), outTemp from archive where outTemp is null;
+```
+
+Delete:
+
+```sql
+delete from archive where outTemp is null;
 ```
