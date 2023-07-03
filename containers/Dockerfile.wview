@@ -1,7 +1,7 @@
 #
 # wview builder container
 #
-FROM ubuntu:18.04 as BUILDER
+FROM ubuntu:20.04 as BUILDER
 
 RUN apt-get -y update; \
     \
@@ -47,7 +47,7 @@ RUN cd /wview; \
 #
 # wview container
 #
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 RUN apt-get -y update; \
     \
@@ -59,7 +59,7 @@ RUN apt-get -y update; \
       libusb-1.0-0 \
       libcurl4 \
       libudev1 \
-      libssl1.0.0 \
+      libssl1.1 \
       sqlite3 \
       gawk \
       moreutils \
