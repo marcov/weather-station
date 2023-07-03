@@ -10,16 +10,25 @@
     margin-right: .1rem;
   }
 
-  .title * {
-    font-size: 1.5em;
-    letter-spacing: 0.6em;
-    margin: 0;
+  .heading {
+    margin: none;
+    padding: none;
+    overflow: hidden;
   }
 
-  .heading {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
+  .heading ul {
+    width: 100vw;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .title h1 {
+    font-size: 1.5em;
+    letter-spacing: 0.6em;
+  }
+
+  .heading-separator {
+      display: none;
   }
 
   .stationData {
@@ -28,7 +37,6 @@
 
   .links {
     font-size: 1em;
-    justify-content: center;
   }
 
   img.webcam, img.satellite
