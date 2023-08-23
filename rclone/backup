@@ -24,6 +24,8 @@ for f in "${filesList[@]}"; do
         -cmd ".timeout 10000" \
         "${f}" \
         ".backup ${destDir}/${f}"
+
+    bzip2 -z "${destDir}/${f}"
 done
 
 echo "INFO: files to backup:\n"
