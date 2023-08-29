@@ -3,16 +3,19 @@
 set -euo pipefail
 
 wviewDataPath=/wview-data
-#destDir="/data/$(date "+%Y-%m-%d_%H-%M-%S")"
 destDir="/data"
 
-declare -a filesList=($(find "${wviewDataPath}" \
-                        -maxdepth 3 \
-                        -type f \
-                        -wholename "*/archive/*sdb" \
-                        -or \
-                        -wholename "*/conf/*sdb" \
-                        ))
+# We only need to backup wview-archive and wview-conf. All the other files are
+# generated.
+declare -a filesList=(
+    $(find "${wviewDataPath}" \
+        -maxdepth 3 \
+        -type f \
+        -wholename "*/archive/wview-archive.sdb" \
+        -or \
+        -wholename "*/conf/wview-conf.sdb" \
+        )
+)
 
 rm -rf "${destDir}"
 

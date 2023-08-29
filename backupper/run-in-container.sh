@@ -9,7 +9,7 @@ docker run \
     \
     -v ${hostWviewDataDir}:/wview-data \
     -v /home/pi/secrets/rclone.conf:/config/rclone/rclone.conf \
-    -v ${hostRepoRoot}/rclone/backup:/backup \
+    -v ${hostRepoRoot}/rclone/run-backup:/run-backup \
     \
     -v /dev/log:/dev/log \
     -v /etc/timezone:/etc/timezone:ro \
@@ -19,4 +19,4 @@ docker run \
     \
     pullme/"${arch}"-rclone:latest \
     \
-    /backup
+    /run-backup

@@ -5,9 +5,9 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: rclone
+  name: backupper
   labels:
-      app: rclone
+      app: backupper
 spec:
   schedule: "0 2 * * *"
   concurrencyPolicy: Replace
@@ -20,7 +20,7 @@ spec:
           restartPolicy: OnFailure
 
           containers:
-          - name: rclone
+          - name: backupper
             image: pullme/x86_64-rclone:latest
             imagePullPolicy: IfNotPresent
 
@@ -28,7 +28,7 @@ spec:
             args:
             - ln -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime;
               rclone config create backblaze b2 account $BACKBLAZE_ACCOUNT key $BACKBLAZE_KEY;
-              /backup
+              /run-backup
 
             env:
             - name: BACKBLAZE_ACCOUNT
@@ -45,7 +45,7 @@ spec:
 
             volumeMounts:
             - name: backup-script
-              mountPath: /backup
+              mountPath: /run-backup
               readOnly: true
 
             - name: wview-data
@@ -55,7 +55,7 @@ spec:
           volumes:
           - name: backup-script
             hostPath:
-              path: /home/pi/weather-station/rclone/backup
+              path: /home/pi/weather-station/backupper/run-backup
               type: File
 
           - name: wview-data
