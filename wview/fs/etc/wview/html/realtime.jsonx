@@ -47,5 +47,6 @@
     "windUnit" : "<!--windUnit-->",
     "barUnit"  : "<!--barUnit-->",
     "rateUnit" : "<!--rateUnit-->",
-    "solarRad" : "<!--solarRad-->"
+    "solarRad" : "<!--solarRad-->",
+    "rxCheckPct" : "<!--rxCheckPercent-->"
 }

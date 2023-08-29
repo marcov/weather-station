@@ -16,9 +16,15 @@ barometer <!--barometer-->
 # HELP dew_point Humidity in C
 # TYPE dew_point gauge
 dew_point <!--outsideDewPt-->
+
 # HELP heat_index Heat Index
 # TYPE heat_index gauge
 heat_index <!--outsideHeatIndex-->
+
+# HELP wind_chill Wind chill in C
+# TYPE wind_chill gauge
+wind_chill <!--windChill-->
+
 # HELP wind_speed Wind Speed in km/h
 # TYPE wind_speed gauge
 wind_speed <!--windSpeed-->
@@ -46,9 +52,18 @@ rain_total <!--totalRain-->
 # HELP rain_rate Rain rate in mm/h
 # TYPE rain_rate gauge
 rain_rate <!--rainRate-->
-# HELP rain_storm Storm rain rate in mm/h
+# HELP rain_storm Storm rain total in mm
 # TYPE rain_storm gauge
 rain_storm <!--stormRain-->
+
+# HELP solar_radiation Solar radiation in watt
+# TYPE solar_radiation gauge
+solar_radiation <!--solarRad-->
+
+# HELP rx_signal_quality Reception wireless signal quality in %
+# TYPE rx_signal_quality gauge
+rx_signal_quality <!--rxCheckPercent-->
+
 # HELP unhealthy 0 = healthy, unhealthy otherwise
 # TYPE unhealthy gauge
 unhealthy 0
