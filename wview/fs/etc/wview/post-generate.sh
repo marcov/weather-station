@@ -4,10 +4,10 @@
 # chronic will _only_ print to stdout if the command fails.
 # When that happens, send stdout to logger.
 
-set -euo pipefail
+set -uo pipefail
 
 declare -r scriptsPath="/weather-station/wview/scripts"
-declare -r loggerTag="wview post-generate.sh"
+declare -r loggerTag="wview-post-generate.sh"
 
 pushd "${scriptsPath}" > /dev/null || { logger -t "${loggerTag}" "Failed to pushd scripts path: ${scriptsPath}"; exit $?; }
 
