@@ -1,0 +1,112 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: weewx-$WEEWX_INSTANCE_NAME
+spec:
+  selector:
+    matchLabels:
+      app: weewx-$WEEWX_INSTANCE_NAME # has to match .spec.template.metadata.labels
+  serviceName: weewx-$WEEWX_INSTANCE_NAME
+  replicas: 1 # by default is 1
+  template:
+    metadata:
+      labels:
+        app: weewx-$WEEWX_INSTANCE_NAME # has to match .spec.selector.matchLabels
+        station: $WEEWX_INSTANCE_NAME
+
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+
+      - name: weewx
+        image: pullme/weewx:latest
+
+        command: ["weewxd"]
+
+        startupProbe:
+          # Allow a 2 minutes startup
+          periodSeconds: 10
+          failureThreshold: 12
+          exec:
+            # fixme, this is a trueism :-)
+            command: ["/bin/bash", "-c", "[ -d /proc/1 ]"]
+
+        livenessProbe:
+          # Every 5m, check for liveness.
+          # If for 3 times liveness fails, set pod unhealthy.
+          # Unhealthy after 15 min
+          periodSeconds: 300
+          initialDelaySeconds: 600
+          timeoutSeconds: 10
+          #failureThreshold: 3
+          #successThreshold: 1
+          exec:
+            command: ["/bin/bash", "-c", "exec /scripts/health-check.sh /var/www/html/weewx"]
+            #command: ["/bin/true"]
+
+        volumeMounts:
+        - name: scripts
+          mountPath: /scripts
+
+        - name: weewx-db
+          mountPath: /var/lib/weewx
+
+        - name: weewx-skins-seasons-conf
+          mountPath: /etc/weewx/skins/Seasons/skin.conf
+
+        - name: realtime-json-tmpl
+          mountPath: /etc/weewx/skins/Seasons/realtime.json.tmpl
+
+        - name: metrics-prom-tmpl
+          mountPath: /etc/weewx/skins/Seasons/metrics.prom.tmpl
+
+        - name: weewx-conf
+          mountPath: /etc/weewx/weewx.conf
+
+        - name: weewx-html
+          mountPath: /var/www/html/weewx
+
+        - name: etc-localtime
+          mountPath: /etc/localtime
+
+      volumes:
+      - name: scripts
+        hostPath:
+          path: /home/pi/weather-station/weewx/scripts
+          type: Directory
+
+      - name: weewx-db
+        hostPath:
+          path: /home/pi/wview-data/$WEEWX_INSTANCE_NAME/archive
+          type: Directory
+
+      - name: weewx-conf
+        hostPath:
+          path: /home/pi/wview-data/$WEEWX_INSTANCE_NAME/conf/weewx.conf
+          type: File
+
+      - name: etc-localtime
+        hostPath:
+          path: /etc/localtime
+          type: File
+
+      - name: weewx-skins-seasons-conf
+        hostPath:
+          path: /home/pi/weather-station/weewx/skins/Seasons/skin.conf
+          type: File
+
+      - name: realtime-json-tmpl
+        hostPath:
+          path: /home/pi/weather-station/weewx/skins/Seasons/realtime.json.tmpl
+          type: File
+
+      - name: metrics-prom-tmpl
+        hostPath:
+          path: /home/pi/weather-station/weewx/skins/Seasons/metrics.prom.tmpl
+          type: File
+
+      - name: weewx-html
+        hostPath:
+          path: /tmp/wview-data-img/$WEEWX_INSTANCE_NAME
+          type: Directory

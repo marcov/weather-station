@@ -1,0 +1,35 @@
+#
+# weewx builder container
+#
+FROM alpine:latest as BUILDER
+
+RUN apk add gnupg curl
+RUN curl -fL https://weewx.com/keys.html | gpg --dearmor --output /tmp/weewx.gpg
+RUN curl -fL -o /tmp/weewx.list https://weewx.com/apt/weewx-python3.list
+
+RUN curl -fL -o /tmp/weewx.list https://weewx.com/apt/weewx-python3.list
+ADD "https://api.github.com/repos/marcov/weewx-wxt5x0/commits?per_page=1" latest_commit
+RUN curl -fL -o tmp/weewx-wxt5x0.zip https://github.com/marcov/weewx-wxt5x0/archive/net.zip
+
+################################################################################
+#
+# weewx container
+#
+FROM debian:12
+
+COPY --from=BUILDER /tmp/weewx.gpg /etc/apt/trusted.gpg.d/weewx.gpg
+COPY --from=BUILDER /tmp/weewx.list /etc/apt/sources.list.d/weewx.list
+
+RUN apt-get -y update; \
+    \
+    DEBIAN_FRONTEND=noninteractive apt-get -yq --no-install-recommends install \
+      weewx \
+      ; \
+    \
+    apt-get clean; \
+    \
+    rm -rf /var/lib/apt/lists
+
+COPY --from=BUILDER  /tmp/weewx-wxt5x0.zip /tmp/weewx-wxt5x0.zip
+
+RUN wee_extension --install /tmp/weewx-wxt5x0.zip

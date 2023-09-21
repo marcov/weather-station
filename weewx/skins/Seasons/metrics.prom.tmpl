@@ -1,0 +1,67 @@
+# HELP temperature Temperature in C
+# TYPE temperature gauge
+temperature $current.outTemp.round(2).json
+
+# HELP temperature_apparent Apparent temperature in C
+# TYPE temperature_apparent gauge
+temperature_apparent $current.appTemp.round(2).json
+
+# HELP humidity Humidity in %
+# TYPE humidity gauge
+humidity $current.outHumidity.round(2).json
+
+# HELP barometer Barometer in mb
+# TYPE barometer gauge
+barometer $current.barometer.round(2).json
+
+## HELP barometer_trend Barometer trend in mb
+## TYPE barometer_trend histogram
+##barometer_trend <!--baromtrend-->
+# HELP dew_point Humidity in C
+# TYPE dew_point gauge
+dew_point $current.dewpoint.round(2).json
+
+# HELP heat_index Heat Index
+# TYPE heat_index gauge
+heat_index $current.heatindex.round(2).json
+
+# HELP wind_speed Wind Speed in km/h
+# TYPE wind_speed gauge
+wind_speed $current.windSpeed.round(2).json
+
+# HELP wind_speed_gust Gust Wind Speed in km/h
+# TYPE wind_speed_gust gauge
+wind_speed_gust $current.windGust.round(2).json
+
+## HELP wind_direction Wind Direction
+## TYPE wind_direction histogram
+##wind_direction <!--windDirection-->
+
+# HELP wind_direction_degrees Wind Direction
+# TYPE wind_direction_degrees gauge
+wind_direction_degrees $current.windDir.round(2).json
+
+# HELP rain_daily Daily rain in mm
+# TYPE rain_daily counter
+rain_daily $day.rain.sum.round(2).json
+
+# HELP rain_monthly Monthly rain in mm
+# TYPE rain_monthly counter
+rain_monthly $month.rain.sum.round(2).json
+
+# HELP rain_total Total rain in mm
+# TYPE rain_total counter
+rain_total $year.rain.sum.round(2).json
+
+# HELP rain_rate Rain rate in mm/h
+# TYPE rain_rate gauge
+rain_rate $current.rainRate.round(2).json
+
+# HELP rain_storm Storm rain rate in mm/h
+# TYPE rain_storm gauge
+rain_storm 0
+
+# HELP unhealthy 0 = healthy, unhealthy otherwise
+# TYPE unhealthy gauge
+# This gets set to 1 by the health check script
+unhealthy 0
