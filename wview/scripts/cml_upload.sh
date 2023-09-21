@@ -36,17 +36,22 @@ reqdPngResolution="300x180"
 
 ###############################################################################
 
-check_upload_needed() {
+upload_needed_or_exit() {
+    if [[ -z ${cml_ftp_user} ]] || [[ -z ${cml_ftp_pwd} ]]; then
+        echo "No FTP upload credentials -- nothing to do"
+        exit 1
+    fi
+
     if ! [ ${CML_ftp_enabled} -eq 1 ]; then
-        echo "FTP upload disabled..exiting"
-        exit 0
+        echo "FTP upload disabled -- exiting"
+        exit 1
     fi
 
     if ! true && [ -e "${imgDir}"/tempday_last.png ]; then
      cmp -s "${imgDir}"/tempday.png "${imgDir}"/tempday_last.png
      if [ $? -eq 0 ]; then
-        echo "Content has not changed...exiting"
-        exit 0
+        echo "Content has not changed -- exiting"
+        exit 1
      else
         cp "${imgDir}"/tempday.png "${imgDir}"/tempday_last.png
      fi
@@ -120,7 +125,7 @@ ftp_upload() {
         -n -v -i ${cml_ftp_server} ${ftpPort} < ${ftpSendCmds}
 }
 
-check_upload_needed
+upload_needed_or_exit
 resize_pngs
 prepare_ftp_commands
 ftp_upload
