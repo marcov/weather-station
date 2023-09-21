@@ -30,4 +30,4 @@ MAILTO=""
 0 3 * * 1  cd /home/pi/weather-station && ./misc/letsencrypt-renew.sh 2>&1 | logger -t letsencrypt-renew
 
 # Delete unhealthy pods
-*/5 * * * *  cd /home/pi/weather-station && ./misc/pod-deleter.sh 2>&1 | logger -t webcam
+*/5 * * * *  cd /home/pi/weather-station && ./misc/pod-deleter.sh 2>&1 | logger -t pod-deleter
