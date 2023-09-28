@@ -73,11 +73,12 @@ kubectl apply -f ${genManifestsDir} || echo "WARN: kubectl create got some error
 kubectl apply -f ${scriptDir}/manifests/ || echo "WARN: kubectl create got some errors (may be OK)..."
 
 # FIXME: network needs to be up for this to work!
-helm repo add grafana https://grafana.github.io/helm-charts
+#helm repo add grafana https://grafana.github.io/helm-charts
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
-helm upgrade --install promtail grafana/promtail --set "config.lokiAddress=http://loki:3100/loki/api/v1/push"
-helm upgrade --install loki grafana/loki
+#helm upgrade --install promtail grafana/promtail --set "config.lokiAddress=http://loki:3100/loki/api/v1/push"
+#helm install --values ${scriptDir}/loki-values.yaml --set "loki.auth_enabled=false" loki grafana/loki
+
 helm upgrade --install kube-state-metrics prometheus-community/kube-state-metrics
 
 set +x
