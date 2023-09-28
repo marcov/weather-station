@@ -1,3 +1,5 @@
+# vim: ft=conf
+
 # HELP temperature Temperature in C
 # TYPE temperature gauge
 temperature $current.outTemp.round(2).json
@@ -57,9 +59,18 @@ rain_total $year.rain.sum.round(2).json
 # TYPE rain_rate gauge
 rain_rate $current.rainRate.round(2).json
 
+# HELP hail_rate Hail rate in mm/h
+# TYPE hail_rate gauge
+hail_rate $current.hailRate.round(2).json
+
+# HELP supply_voltage Supply voltage in volt
+# TYPE supply_voltage gauge
+supply_voltage $current.supplyVoltage.json
+
+#### REMOVE ME!
 # HELP rain_storm Storm rain rate in mm/h
 # TYPE rain_storm gauge
-rain_storm 0
+rain_storm $current.rainRate.round(2).json
 
 # HELP unhealthy 0 = healthy, unhealthy otherwise
 # TYPE unhealthy gauge
