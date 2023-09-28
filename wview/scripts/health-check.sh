@@ -1,7 +1,9 @@
 #!/bin/bash
 #
+# Check that the program is healthy by expecting a list of well-known generated
+# files to have a recent "last modified" timestamp.
 # (optional) arg1 is an alternative wview img dir to use
-#
+
 set -euo pipefail
 
 # htmlgend runs every 5 minutes, so use 5' + 50%
@@ -25,7 +27,7 @@ declare -ra expectedFiles=( \
 declare -i filesCount=0
 for f in ${expectedFiles[@]}; do
     filesCount+="$(find "${wviewImgDir}" -mmin -${checkMinutes} -name "${f}" | wc -l)"
-    echo "INFO: file count after checking ${f}: ${filesCount}"
+    echo "INFO: files count after checking ${f}: ${filesCount}"
 done
 
 declare -i unhealthy=
