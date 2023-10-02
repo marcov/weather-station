@@ -87,6 +87,7 @@ prepare_ftp_commands() {
     cat ${ftpBaseCmds} >> ${ftpSendCmds}
 
     if [ $minuti -gt 10 -a $minuti -le 15 ]; then
+        # Get prev month and prev year
         if [ $mese -eq 1 ]; then
           pr_mese="12"
           pr_anno=`expr $anno - 1`
@@ -102,6 +103,7 @@ prepare_ftp_commands() {
 
         echo "cd private" >> ${ftpSendCmds}
 
+        # On day 1, upload prev month NOAA data.
         if [ $giorno -eq 1 ]; then
           echo "put "${imgDir}"/NOAA/NOAA-$pr_anno-$pr_mese.txt NOAA-$pr_anno-$pr_mese.txt" >> ${ftpSendCmds}
           if [ $pr_anno -le $anno ]; then
@@ -110,7 +112,9 @@ prepare_ftp_commands() {
         else
           echo "put "${imgDir}"/NOAA/NOAA-$anno-$mese.txt NOAA-$anno-$mese.txt" >> ${ftpSendCmds}
         fi
+
         echo "put "${imgDir}"/NOAA/NOAA-$anno.txt NOAA-$anno.txt" >> ${ftpSendCmds}
+
         echo "cd .." >> ${ftpSendCmds}
 
     else
