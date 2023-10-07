@@ -9,7 +9,7 @@ declare -r -i max_file_size=20480
 pushd "${data_dir}"
 
 if ! [ -e wview.htm ]; then
-    echo "ERR: NO wview.html found!"
+    echo "ERR: NO wview.htm found!"
     exit 1
 fi
 
