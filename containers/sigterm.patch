@@ -1,0 +1,14 @@
+diff --git a/bin/weewxd b/bin/weewxd
+index 62ad2a71..01510ede 100755
+--- a/bin/weewxd
++++ b/bin/weewxd
+@@ -212,7 +212,7 @@ def main():
+             log.info("Terminating weewx version %s", weewx.__version__)
+             weeutil.logger.log_traceback(log.debug, "    ****  ")
+             signal.signal(signal.SIGTERM, signal.SIG_DFL)
+-            os.kill(0, signal.SIGTERM)
++            sys.exit(0)
+ 
+         # Catch any keyboard interrupts and log them
+         except KeyboardInterrupt:
+
