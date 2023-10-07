@@ -13,13 +13,14 @@ if ! [ -e wview.htm ]; then
     exit 1
 fi
 
-cat wview.htm >> wview.txt
+touch wview.txt
+declare -r -i file_size="$(wc -c wview.txt | awk '{print $1;}')"
 
-declare -i -r file_size="$(wc -c wview.txt | awk '{print $1;}')"
-
-if [[ ${file_size} > ${max_file_size} ]]; then
+if (( ${file_size} >= ${max_file_size} )); then
     echo "INFO: wview.txt size ${file_size} is over the max size ${max_file_size} - removing it."
     rm wview.txt
 fi
+
+cat wview.htm >> wview.txt
 
 popd

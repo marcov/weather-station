@@ -1,0 +1,80 @@
+
+# k create secret generic cml-ftp-login --from-env-file=/home/pi/secrets/cml_ftp_login_data.sh
+# k create secret generic webcam-login --from-env-file=/home/pi/secrets/webcam_login_data.sh
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cml
+
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Replace
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  # The default looks to be 100. Increase it.
+  startingDeadlineSeconds: 300
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: cml
+              image: pullme/x86_64-webcam:latest
+              imagePullPolicy: IfNotPresent
+              command: ["/bin/bash", "-c"]
+              args:
+                - |
+                  export cml_ftp_user="${cml_ftp_user_fiobbio}"
+                  export cml_ftp_pwd="${cml_ftp_pwd_fiobbio}"
+                  /scripts/main.sh /data/fiobbio1
+
+                  export cml_ftp_user="${cml_ftp_user_misma}"
+                  export cml_ftp_pwd="${cml_ftp_pwd_misma}"
+                  /scripts/main.sh /data/misma
+
+              env:
+                - name: cml_ftp_user_fiobbio
+                  valueFrom:
+                    secretKeyRef:
+                      name: cml-ftp-login
+                      key: cml_ftp_user_fiobbio1
+
+                - name: cml_ftp_pwd_fiobbio
+                  valueFrom:
+                    secretKeyRef:
+                      name: cml-ftp-login
+                      key: cml_ftp_pwd_fiobbio1
+
+                - name: cml_ftp_user_misma
+                  valueFrom:
+                    secretKeyRef:
+                      name: cml-ftp-login
+                      key: cml_ftp_user_misma
+
+                - name: cml_ftp_pwd_misma
+                  valueFrom:
+                    secretKeyRef:
+                      name: cml-ftp-login
+                      key: cml_ftp_pwd_misma
+
+              volumeMounts:
+                - name: scripts
+                  mountPath: /scripts
+                  readOnly: true
+
+                - name: data
+                  mountPath: /data
+                  readOnly: false
+
+          volumes:
+            - name: scripts
+              hostPath:
+                path: /home/pi/weather-station/cml
+                type: Directory
+
+            - name: data
+              hostPath:
+                path: /tmp/wview-data-img
+                type: Directory

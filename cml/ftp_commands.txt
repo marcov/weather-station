@@ -1,0 +1,16 @@
+debug
+binary
+passive
+cd dati
+put realtime.htm realtime.txt
+cd ..
+cd immagini
+put cml-upload/tempday.png tempday.png
+put cml-upload/dewday.png dewday.png
+put cml-upload/baromday.png baromday.png
+put cml-upload/humidday.png humidday.png
+put cml-upload/wspeedday.png wspeedday.png
+put cml-upload/hiwspeedday.png hiwspeedday.png
+put cml-upload/wdirday.png wdirday.png
+put cml-upload/rainday.png rainday.png
+cd ..

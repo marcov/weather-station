@@ -6,8 +6,9 @@ set -euo pipefail
 # Uploads on CML FTP server wview-generated data
 #
 
-. ../../common_variables.sh
+declare -r scripts_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
+declare -r cml_ftp_server="ftp.centrometeolombardo.com"
 declare -i -r ftp_port=21
 
 declare -r data_dir="${1}"
@@ -16,12 +17,12 @@ declare -r data_dir="${1}"
 # The base set of FTP commands. These are the files always uploaded, and
 # FTP setup commands.
 #
-declare -r ftpBaseCmds="ftp_commands.txt"
+declare -r ftpBaseCmds="${scripts_dir}/ftp_commands.txt"
 
 #
 # NOTE: make sure this matches the paths specified in ftpBaseCmds!
 #
-declare -r resized_png_path="/tmp/cml-pngs"
+declare -r cml_upload_path="${data_dir}/cml-upload"
 #
 # The full set of FTP commands, login info + base upload + NOAA upload + quit
 # NOAA are sent only periodically.
@@ -34,11 +35,6 @@ declare -r ftpSendCmds="/tmp/cml_ftp_commands.txt"
 reqdPngResolution="300x180"
 
 ################################################################################
-
-if ! [[ -d ${data_dir} ]]; then
-    echo "ERR: invalid data dir: ${data_dir}"
-    exit 1
-fi
 
 upload_needed_or_exit() {
     if [[ -z ${cml_ftp_user} ]] || [[ -z ${cml_ftp_pwd} ]]; then
@@ -55,26 +51,21 @@ upload_needed_or_exit() {
 }
 
 resize_pngs() {
-    rm -rf "$resized_png_path"
-    mkdir -p "$resized_png_path"
-
     echo "Creating resized image for proper rendering on CML website"
     for img in `find "${data_dir}" -name "*day.png"`; do
-        dst_small="${resized_png_path}/$(basename "$img")"
-        set -x
+        dst_small="${cml_upload_path}/$(basename "$img")"
         convert \
             -resize ${reqdPngResolution} \
             ${img} ${dst_small}
-        set +x
     done
 }
 
 prepare_ftp_commands() {
-    declare -r -i anno=`date +"%Y"`
-    declare -r -i mese=`date +"%m"`
-    declare -r -i giorno=`date +"%d"`
-    declare -r -i ore=`date +"%H"`
-    declare -r -i minuti=`date +"%M"`
+    declare -r anno=`date +"%Y"`
+    declare -r mese=`date +"%m"`
+    declare -r giorno=`date +"%d"`
+    declare -r ore=`date +"%H"`
+    declare -r minuti=`date +"%M"`
 
     echo "FTP upload now..."
 
@@ -82,7 +73,8 @@ prepare_ftp_commands() {
     echo "user ${cml_ftp_user} ${cml_ftp_pwd}" >> ${ftpSendCmds}
     cat ${ftpBaseCmds} >> ${ftpSendCmds}
 
-    if [[ $ore == 0 ]] && [[ $minuti > 10 ]] && [[ $minuti < 16 ]]; then
+    # This assumes the script runs every 5 minutes ...
+    if [[ $ore == 0 ]] && [[ $minuti > 10 ]] && [[ $minuti < 18 ]]; then
 
         # Get prev month and prev year
         if [ $mese -eq 1 ]; then
@@ -102,15 +94,15 @@ prepare_ftp_commands() {
 
         # On day 1, upload prev month NOAA data.
         if [ $giorno -eq 1 ]; then
-          echo "put "${imgDir}"/NOAA/NOAA-$pr_anno-$pr_mese.txt NOAA-$pr_anno-$pr_mese.txt" >> ${ftpSendCmds}
+          echo "put NOAA/NOAA-$pr_anno-$pr_mese.txt NOAA-$pr_anno-$pr_mese.txt" >> ${ftpSendCmds}
           if [ $pr_anno -le $anno ]; then
-            echo "put "${imgDir}"/NOAA/NOAA-$pr_anno.txt NOAA-$pr_anno.txt" >> ${ftpSendCmds}
+            echo "put NOAA/NOAA-$pr_anno.txt NOAA-$pr_anno.txt" >> ${ftpSendCmds}
           fi
         else
-          echo "put "${imgDir}"/NOAA/NOAA-$anno-$mese.txt NOAA-$anno-$mese.txt" >> ${ftpSendCmds}
+          echo "put NOAA/NOAA-$anno-$mese.txt NOAA-$anno-$mese.txt" >> ${ftpSendCmds}
         fi
 
-        echo "put "${imgDir}"/NOAA/NOAA-$anno.txt NOAA-$anno.txt" >> ${ftpSendCmds}
+        echo "put NOAA/NOAA-$anno.txt NOAA-$anno.txt" >> ${ftpSendCmds}
 
         echo "cd .." >> ${ftpSendCmds}
 
@@ -121,8 +113,22 @@ prepare_ftp_commands() {
     echo "quit" >> ${ftpSendCmds}
 }
 
+################################################################################
+
+if ! [[ -d ${data_dir} ]]; then
+    echo "ERR: invalid data dir: ${data_dir}"
+    exit 1
+fi
+
 upload_needed_or_exit
+
+rm -rf "$cml_upload_path"
+mkdir -p "$cml_upload_path"
+
 resize_pngs
 prepare_ftp_commands
 
+# Commands are relative to data dir
+pushd ${data_dir}
 ftp -n -v -i ${cml_ftp_server} ${ftp_port} < ${ftpSendCmds}
+popd
