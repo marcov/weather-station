@@ -1,26 +1,15 @@
 #!/bin/bash
-#
-# NOTE:
-# chronic will _only_ print to stdout if the command fails.
-# When that happens, send stdout to logger.
 
 set -uo pipefail
 
-declare -r scriptsPath="/weather-station/wview/scripts"
-declare -r loggerTag="wview-post-generate.sh"
+declare -r scripts_path="/weather-station/wview/scripts"
+declare -r data_dir="/var/lib/wview/img"
 
-pushd "${scriptsPath}" > /dev/null || { logger -t "${loggerTag}" "Failed to pushd scripts path: ${scriptsPath}"; exit $?; }
+set -x
 
-logger -t "${loggerTag}" "[start] generate wview txt"
-chronic ./generate_wview_txt.sh | logger -t "${loggerTag}"
-
-logger -t "${loggerTag}" "[start] CML FTP upload"
-chronic ./cml_upload.sh | logger -t "${loggerTag}"
-logger -t "${loggerTag}" "[done] CML FTP upload"
-
-logger -t "${loggerTag}" "[start] delete wview txt (if required)"
-chronic ./delete_wview_txt.sh | logger -t "${loggerTag}"
-
-popd > /dev/null
+pushd "${scripts_path}"
+./cml-upload.sh "${data_dir}"
+./update-wview-txt.sh "${data_dir}"
+popd
 
 exit 0

@@ -8,8 +8,9 @@ set -euo pipefail
 
 . ../../common_variables.sh
 
-declare -r CML_ftp_enabled=1
-declare -r ftpPort=21
+declare -i -r ftp_port=21
+
+declare -r data_dir="${1}"
 
 #
 # The base set of FTP commands. These are the files always uploaded, and
@@ -20,21 +21,24 @@ declare -r ftpBaseCmds="ftp_commands.txt"
 #
 # NOTE: make sure this matches the paths specified in ftpBaseCmds!
 #
-declare -r cmlPngsPath="/tmp/cml-pngs"
+declare -r resized_png_path="/tmp/cml-pngs"
 #
 # The full set of FTP commands, login info + base upload + NOAA upload + quit
 # NOAA are sent only periodically.
 #
 declare -r ftpSendCmds="/tmp/cml_ftp_commands.txt"
 
-declare -r imgDir="${WVIEW_DATA_DIR}/img"
-
 #
-# This is the default resolution for wview chargs, as specified in /etc/wview/graphics.conf
+# This is the default resolution for wview charts, as specified in /etc/wview/graphics.conf
 #
 reqdPngResolution="300x180"
 
-###############################################################################
+################################################################################
+
+if ! [[ -d ${data_dir} ]]; then
+    echo "ERR: invalid data dir: ${data_dir}"
+    exit 1
+fi
 
 upload_needed_or_exit() {
     if [[ -z ${cml_ftp_user} ]] || [[ -z ${cml_ftp_pwd} ]]; then
@@ -42,29 +46,21 @@ upload_needed_or_exit() {
         exit 1
     fi
 
-    if ! [ ${CML_ftp_enabled} -eq 1 ]; then
-        echo "FTP upload disabled -- exiting"
+    if cmp -s "${data_dir}"/tempday.png "${data_dir}"/tempday_last.png; then
+        echo "Content has not changed -- nothing to do"
         exit 1
     fi
 
-    if ! true && [ -e "${imgDir}"/tempday_last.png ]; then
-     cmp -s "${imgDir}"/tempday.png "${imgDir}"/tempday_last.png
-     if [ $? -eq 0 ]; then
-        echo "Content has not changed -- exiting"
-        exit 1
-     else
-        cp "${imgDir}"/tempday.png "${imgDir}"/tempday_last.png
-     fi
-    fi
+    cp "${data_dir}"/tempday.png "${data_dir}"/tempday_last.png
 }
 
 resize_pngs() {
-    rm -rf "$cmlPngsPath"
-    mkdir -p "$cmlPngsPath"
+    rm -rf "$resized_png_path"
+    mkdir -p "$resized_png_path"
 
     echo "Creating resized image for proper rendering on CML website"
-    for img in `find /var/lib/wview/img -name "*day.png"`; do
-        dst_small="${cmlPngsPath}/$(basename "$img")"
+    for img in `find "${data_dir}" -name "*day.png"`; do
+        dst_small="${resized_png_path}/$(basename "$img")"
         set -x
         convert \
             -resize ${reqdPngResolution} \
@@ -74,11 +70,11 @@ resize_pngs() {
 }
 
 prepare_ftp_commands() {
-    declare -r anno=`date +"%Y"`
-    declare -r mese=`date +"%m"`
-    declare -r giorno=`date +"%d"`
-    declare -r ore=`date +"%H"`
-    declare -r minuti=`date +"%M"`
+    declare -r -i anno=`date +"%Y"`
+    declare -r -i mese=`date +"%m"`
+    declare -r -i giorno=`date +"%d"`
+    declare -r -i ore=`date +"%H"`
+    declare -r -i minuti=`date +"%M"`
 
     echo "FTP upload now..."
 
@@ -86,7 +82,8 @@ prepare_ftp_commands() {
     echo "user ${cml_ftp_user} ${cml_ftp_pwd}" >> ${ftpSendCmds}
     cat ${ftpBaseCmds} >> ${ftpSendCmds}
 
-    if [ $minuti -gt 10 -a $minuti -le 15 ]; then
+    if [[ $ore == 0 ]] && [[ $minuti > 10 ]] && [[ $minuti < 16 ]]; then
+
         # Get prev month and prev year
         if [ $mese -eq 1 ]; then
           pr_mese="12"
@@ -124,12 +121,8 @@ prepare_ftp_commands() {
     echo "quit" >> ${ftpSendCmds}
 }
 
-ftp_upload() {
-    /usr/bin/ftp \
-        -n -v -i ${cml_ftp_server} ${ftpPort} < ${ftpSendCmds}
-}
-
 upload_needed_or_exit
 resize_pngs
 prepare_ftp_commands
-ftp_upload
+
+ftp -n -v -i ${cml_ftp_server} ${ftp_port} < ${ftpSendCmds}
