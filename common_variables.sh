@@ -24,8 +24,10 @@ declare -r websiteUrl="meteo.fiobbio.com"
 #
 # CML FTP config (note: login credentials are not here :P)
 #
-cml_ftp_log_file="/tmp/cml_ftp.log"
 cml_ftp_server="ftp.centrometeolombardo.com"
+
+# webcam use only
+cml_ftp_log_file="/tmp/cml_ftp.log"
 cml_ftp_upload_folder="public"
 # Set to 1 to log ftp upload information to stdout
 cml_ftp_log_info=1
