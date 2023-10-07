@@ -130,5 +130,5 @@ prepare_ftp_commands
 
 # Commands are relative to data dir
 pushd ${data_dir}
-ftp -n -v -i ${cml_ftp_server} ${ftp_port} < ${ftpSendCmds}
+ftp -n -i ${cml_ftp_server} ${ftp_port} < ${ftpSendCmds}
 popd
