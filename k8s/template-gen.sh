@@ -6,8 +6,6 @@ declare -r scriptDir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P
 declare -r manifestsDir="$1"
 
 declare -A wview_stations_map=(
-    [fiobbio1]=vpro
-    [misma]=vpro
 )
 
 rm -rf ${manifestsDir}
@@ -31,7 +29,9 @@ done
 ################################################################################
 
 declare -A weewx_stations_map=(
+    [fiobbio1]=vpro
     [fiobbio2]=wxt510
+    [misma]=vpro
 )
 
 for sta in "${!weewx_stations_map[@]}"; do
