@@ -1,0 +1,10 @@
+{
+    "stationDate" : "$current.dateTime.format("%d/%m/%y")",
+    "stationTime" : "$current.dateTime.format("%H:%M:%S")",
+    "stationLatitude"  : "$station.latitude[0] $station.latitude[2]",
+    "stationLongitude" : "$station.longitude[0] $station.longitude[2]",
+    "sunriseTime"      : "$almanac.sun.rise.format("%H:%M")",
+    "sunsetTime"       : "$almanac.sun.set.format("%H:%M")",
+    "moonPhase"        : "$almanac.moon_phase",
+    "stationElevation" : "$station.altitude.format(format_string="%d m", add_label=False)"
+}

@@ -2,61 +2,61 @@
     "stationDate" : "$current.dateTime.format("%d/%m/%y")",
     "stationTime" : "$current.dateTime.format("%H:%M:%S")",
 
-    "outsideTemp" : "$current.outTemp.round(2).json",
-    "hiOutsideTemp" : "$day.outTemp.max.round(2).json",
+    "outsideTemp" : "$current.outTemp.round(1).json",
+    "hiOutsideTemp" : "$day.outTemp.max.round(1).json",
     "hiOutsideTempTime" : "$day.outTemp.maxtime.format("%H:%M")",
-    "lowOutsideTemp" : "$day.outTemp.min.round(2).json",
+    "lowOutsideTemp" : "$day.outTemp.min.round(1).json",
     "lowOutsideTempTime" : "$day.outTemp.mintime.format("%H:%M")",
 
-    "outsideHumidity" : "$current.outHumidity.round(2).json",
-    "hiHumidity" : "$day.outHumidity.max.round(2).json",
+    "outsideHumidity" : "$current.outHumidity.round(1).json",
+    "hiHumidity" : "$day.outHumidity.max.round(1).json",
     "hiHumTime" : "$day.outHumidity.maxtime.format("%H:%M")",
-    "lowHumidity" : "$day.outHumidity.min.round(2).json",
+    "lowHumidity" : "$day.outHumidity.min.round(1).json",
     "lowHumTime" : "$day.outHumidity.mintime.format("%H:%M")",
 
-    "outsideDewPt" : "$current.dewpoint.round(2).json",
+    "outsideDewPt" : "$current.dewpoint.round(1).json",
 
-    "hiDewpoint" : "$day.dewpoint.max.round(2).json",
+    "hiDewpoint" : "$day.dewpoint.max.round(1).json",
     "hiDewpointTime" : "$day.dewpoint.maxtime.format("%H:%M")",
-    "lowDewpoint" : "$day.dewpoint.min.round(2).json",
+    "lowDewpoint" : "$day.dewpoint.min.round(1).json",
     "lowDewpointTime" : "$day.dewpoint.mintime.format("%H:%M")",
 
-    "windChill" : "$current.windchill.round(2).json",
-    "lowWindchill" : "$day.windchill.min.round(2).json",
+    "windChill" : "$current.windchill.round(1).json",
+    "lowWindchill" : "$day.windchill.min.round(1).json",
     "lowWindchillTime" : "$day.windchill.mintime.format("%H:%M")",
 
-    "apparentTemp" : "$current.appTemp.round(2).json",
+    "apparentTemp" : "$current.appTemp.round(1).json",
 
-    "outsideHeatIndex" : "$current.heatindex.round(2).json",
-    "hiHeatindex" : "$day.heatindex.max.round(2).json",
+    "outsideHeatIndex" : "$current.heatindex.round(1).json",
+    "hiHeatindex" : "$day.heatindex.max.round(1).json",
     "hiHeatindexTime" : "$day.heatindex.maxtime.format("%H:%M")",
 
-    "windSpeed" : "$current.windSpeed.round(2).json",
+    "windSpeed" : "$current.windSpeed.round(1).json",
     "windBeaufortScale" : "$current.windSpeed.beaufort",
-    "hiWindSpeed" : "$day.windSpeed.max.round(2).json",
+    "hiWindSpeed" : "$day.windSpeed.max.round(1).json",
     "hiWindSpeedTime" : "$day.windSpeed.maxtime.format("%H:%M")",
 
-    "windGustSpeed" : "$current.windGust.round(2).json",
+    "windGustSpeed" : "$current.windGust.round(1).json",
 
-    "windDirectionDegrees" : "$current.windDir.round(2).json",
+    "windDirectionDegrees" : "$current.windDir.round(1).json",
     "windDirection" : "$current.windDir.ordinal_compass",
 
-    "barometer" : "$current.barometer.round(2).json",
-    "baromtrend" : "$trend.barometer.round(2).json",
-    "hiBarometer" : "$day.barometer.max.round(2).json",
+    "barometer" : "$current.barometer.round(1).json",
+    "baromtrend" : "$trend.barometer.round(1).json",
+    "hiBarometer" : "$day.barometer.max.round(1).json",
     "hiBarometerTime" : "$day.barometer.maxtime.format("%H:%M")",
-    "lowBarometer" : "$day.barometer.min.round(2).json",
+    "lowBarometer" : "$day.barometer.min.round(1).json",
     "lowBarometerTime" : "$day.barometer.mintime.format("%H:%M")",
 
-    "dailyRain" : "$day.rain.sum.round(2).json",
-    "monthlyRain" : "$month.rain.sum.round(2).json",
-    "totalRain" : "$year.rain.sum.round(2).json",
+    "dailyRain" : "$day.rain.sum.round(1).json",
+    "monthlyRain" : "$month.rain.sum.round(1).json",
+    "totalRain" : "$year.rain.sum.round(1).json",
 
-    "stormRain" : "$current.rainRate.round(2).json",
-    "rainRate" : "$current.rainRate.round(2).json",
+    "stormRain" : "$current.rainRate.round(1).json",
+    "rainRate" : "$current.rainRate.round(1).json",
 
-    "hiRainRate" : "$day.rainRate.max.round(2).json",
+    "hiRainRate" : "$day.rainRate.max.round(1).json",
     "hiRainRateTime" : "$day.rainRate.maxtime.format("%H:%M")",
 
-    "solarRad" : "$current.radiation.round(2).json"
+    "solarRad" : "$current.radiation.round(1).json"
 }
