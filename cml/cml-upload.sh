@@ -32,7 +32,7 @@ declare -r ftpSendCmds="/tmp/cml_ftp_commands.txt"
 #
 # This is the default resolution for wview charts, as specified in /etc/wview/graphics.conf
 #
-reqdPngResolution="300x180"
+declare -r scaled_resolution=300x180
 
 ################################################################################
 
@@ -54,9 +54,8 @@ resize_pngs() {
     echo "Creating resized image for proper rendering on CML website"
     for img in `find "${data_dir}" -name "*day.png"`; do
         dst_small="${cml_upload_path}/$(basename "$img")"
-        convert \
-            -resize ${reqdPngResolution} \
-            ${img} ${dst_small}
+
+        convert -resize "${scaled_resolution}" "${img}" "${dst_small}"
     done
 }
 
