@@ -22,7 +22,13 @@ spec:
       - name: weewx
         image: pullme/weewx:latest
 
-        command: ["weewxd"]
+        command: [ "/bin/bash",  "-c" ]
+        args:
+            - |
+                set -x
+                [ -e /var/lib/weewx/weewx.sdb ] || ln -s wview-archive.sdb /var/lib/weewx/weewx.sdb
+                cp -a /skins/Seasons/* /etc/weewx/skins/Seasons/
+                exec weewxd
 
         startupProbe:
           # Allow a 2 minutes startup
@@ -43,32 +49,29 @@ spec:
           #successThreshold: 1
           exec:
             command: ["/bin/bash", "-c", "exec /scripts/health-check.sh /var/www/html/weewx"]
-            #command: ["/bin/true"]
 
         volumeMounts:
         - name: scripts
           mountPath: /scripts
+          readOnly: true
 
-        - name: weewx-db
+        - name: database
           mountPath: /var/lib/weewx
 
-        - name: weewx-skins-seasons-conf
-          mountPath: /etc/weewx/skins/Seasons/skin.conf
-
-        - name: realtime-json-tmpl
-          mountPath: /etc/weewx/skins/Seasons/realtime.json.tmpl
-
-        - name: metrics-prom-tmpl
-          mountPath: /etc/weewx/skins/Seasons/metrics.prom.tmpl
+        - name: skins
+          mountPath: /skins
+          readOnly: true
 
         - name: weewx-conf
           mountPath: /etc/weewx/weewx.conf
+          readOnly: true
 
         - name: weewx-html
           mountPath: /var/www/html/weewx
 
         - name: etc-localtime
           mountPath: /etc/localtime
+          readOnly: true
 
       volumes:
       - name: scripts
@@ -76,7 +79,7 @@ spec:
           path: /home/pi/weather-station/weewx/scripts
           type: Directory
 
-      - name: weewx-db
+      - name: database
         hostPath:
           path: /home/pi/wview-data/$WEEWX_INSTANCE_NAME/archive
           type: Directory
@@ -91,20 +94,10 @@ spec:
           path: /etc/localtime
           type: File
 
-      - name: weewx-skins-seasons-conf
+      - name: skins
         hostPath:
-          path: /home/pi/weather-station/weewx/skins/Seasons/skin.conf
-          type: File
-
-      - name: realtime-json-tmpl
-        hostPath:
-          path: /home/pi/weather-station/weewx/skins/Seasons/realtime.json.tmpl
-          type: File
-
-      - name: metrics-prom-tmpl
-        hostPath:
-          path: /home/pi/weather-station/weewx/skins/Seasons/metrics.prom.tmpl
-          type: File
+          path: /home/pi/weather-station/weewx/skins
+          type: Directory
 
       - name: weewx-html
         hostPath:
