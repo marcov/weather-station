@@ -74,17 +74,16 @@ prepare_ftp_commands() {
 
     # This assumes the script runs every 5 minutes ...
     if [[ $ore == 0 ]] && [[ $minuti > 10 ]] && [[ $minuti < 18 ]]; then
-
         # Get prev month and prev year
         if [ $mese -eq 1 ]; then
-          pr_mese="12"
-          pr_anno=`expr $anno - 1`
+            pr_mese="12"
+            pr_anno=`expr $anno - 1`
         else
-          pr_mese=`expr $mese - 1`
-          if [ $pr_mese -lt 10 ]; then
-           pr_mese="0$pr_mese"
-          fi
-          pr_anno=$anno;
+            pr_mese=`expr $mese - 1`
+            if [ $pr_mese -lt 10 ]; then
+                pr_mese="0$pr_mese"
+            fi
+            pr_anno=$anno;
         fi
 
         echo "NOAA Archive Upload"
@@ -93,12 +92,12 @@ prepare_ftp_commands() {
 
         # On day 1, upload prev month NOAA data.
         if [ $giorno -eq 1 ]; then
-          echo "put NOAA/NOAA-$pr_anno-$pr_mese.txt NOAA-$pr_anno-$pr_mese.txt" >> ${ftpSendCmds}
-          if [ $pr_anno -le $anno ]; then
-            echo "put NOAA/NOAA-$pr_anno.txt NOAA-$pr_anno.txt" >> ${ftpSendCmds}
-          fi
+            echo "put NOAA/NOAA-$pr_anno-$pr_mese.txt NOAA-$pr_anno-$pr_mese.txt" >> ${ftpSendCmds}
+            if [ $pr_anno -le $anno ]; then
+                echo "put NOAA/NOAA-$pr_anno.txt NOAA-$pr_anno.txt" >> ${ftpSendCmds}
+            fi
         else
-          echo "put NOAA/NOAA-$anno-$mese.txt NOAA-$anno-$mese.txt" >> ${ftpSendCmds}
+            echo "put NOAA/NOAA-$anno-$mese.txt NOAA-$anno-$mese.txt" >> ${ftpSendCmds}
         fi
 
         echo "put NOAA/NOAA-$anno.txt NOAA-$anno.txt" >> ${ftpSendCmds}
@@ -106,7 +105,7 @@ prepare_ftp_commands() {
         echo "cd .." >> ${ftpSendCmds}
 
     else
-        echo "Normal ftp upload"
+            echo "Normal ftp upload"
     fi
 
     echo "quit" >> ${ftpSendCmds}
