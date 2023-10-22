@@ -30,7 +30,7 @@ spec:
             value: http://localhost:8081/render
 
           - name: GF_RENDERING_CALLBACK_URL
-            value: http://localhost:3000/grafana/
+            value: http://localhost:3000/
 
           #- name: GF_LOG_FILTERS
           #  value: rendering:debug
