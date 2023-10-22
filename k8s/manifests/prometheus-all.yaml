@@ -143,8 +143,7 @@ spec:
           subPath: ""
       containers:
         - name: prometheus-server
-          # Use the `quay.io/prometheus/prometheus:v2.11.1` image
-          image: quay.io/prometheus/prometheus:v2.11.1
+          image: quay.io/prometheus/prometheus:latest
           imagePullPolicy: IfNotPresent
           args:
             - --config.file=/etc/config/prometheus.yaml
