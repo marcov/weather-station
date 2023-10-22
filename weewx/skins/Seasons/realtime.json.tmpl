@@ -32,11 +32,12 @@
     "hiHeatindexTime" : "$day.heatindex.maxtime.format("%H:%M")",
 
     "windSpeed" : "$current.windSpeed.round(1).json",
-    "windBeaufortScale" : "$current.windSpeed.beaufort",
-    "hiWindSpeed" : "$day.windSpeed.max.round(1).json",
-    "hiWindSpeedTime" : "$day.windSpeed.maxtime.format("%H:%M")",
-
     "windGustSpeed" : "$current.windGust.round(1).json",
+
+    "windBeaufortScale" : "$current.windSpeed.beaufort",
+
+    "hiWindSpeed" : "$day.windGust.max.round(1).json",
+    "hiWindSpeedTime" : "$day.windGust.maxtime.format("%H:%M")",
 
     "windDirectionDegrees" : "$current.windDir.round(1).json",
     "windDirection" : "$current.windDir.ordinal_compass",
