@@ -60,52 +60,64 @@ resize_pngs() {
 }
 
 prepare_ftp_commands() {
+    local fname=
     declare -r anno=`date +"%Y"`
     declare -r mese=`date +"%m"`
     declare -r giorno=`date +"%d"`
     declare -r ore=`date +"%H"`
     declare -r minuti=`date +"%M"`
 
-    echo "FTP upload now..."
+    echo "Preparing FTP upload: $ore:$minuti - $giorno/$mese/$anno"
 
     rm -f ${ftpSendCmds}
     echo "user ${cml_ftp_user} ${cml_ftp_pwd}" >> ${ftpSendCmds}
     cat ${ftpBaseCmds} >> ${ftpSendCmds}
 
     # This assumes the script runs every 5 minutes ...
-    if [[ $ore == 0 ]] && [[ $minuti > 10 ]] && [[ $minuti < 18 ]]; then
-        # Get prev month and prev year
-        if [ $mese -eq 1 ]; then
-            pr_mese="12"
-            pr_anno=`expr $anno - 1`
-        else
-            pr_mese=`expr $mese - 1`
-            if [ $pr_mese -lt 10 ]; then
-                pr_mese="0$pr_mese"
-            fi
-            pr_anno=$anno;
-        fi
-
-        echo "NOAA Archive Upload"
+    if (( $ore == 0 )) && (( $minuti > 10 )) && (( $minuti < 18 )); then
+        echo "Daily NOAA data upload: $ore:$minuti"
 
         echo "cd private" >> ${ftpSendCmds}
 
-        # On day 1, upload prev month NOAA data.
-        if [ $giorno -eq 1 ]; then
-            echo "put NOAA/NOAA-$pr_anno-$pr_mese.txt NOAA-$pr_anno-$pr_mese.txt" >> ${ftpSendCmds}
-            if [ $pr_anno -le $anno ]; then
-                echo "put NOAA/NOAA-$pr_anno.txt NOAA-$pr_anno.txt" >> ${ftpSendCmds}
+        # On day 1, ALSO upload prev month NOAA data.
+        if (( $giorno == 1 )); then
+
+            # Get prev month and prev year
+            if (( $mese == 1 )); then
+                yesterday_month="12"
+                yesterday_year=`expr $anno - 1`
+            else
+                yesterday_month=`expr $mese - 1`
+                if (( $yesterday_month < 10 )); then
+                    yesterday_month="0$yesterday_month"
+                fi
+                yesterday_year=$anno
             fi
+
+            echo "NOAA data upload prev month: $ore:$minuti - $yesterday_month/$yesterday_year"
+
+            fname="NOAA-$yesterday_year-$yesterday_month.txt"
+            echo "put NOAA/${fname} ${fname} " >> ${ftpSendCmds}
+            touch /tmp/${fname}.stamp
+
+            fname="NOAA-$yesterday_year.txt"
+            echo "put NOAA/${fname} ${fname}" >> ${ftpSendCmds}
+            touch /tmp/${fname}.stamp
         else
-            echo "put NOAA/NOAA-$anno-$mese.txt NOAA-$anno-$mese.txt" >> ${ftpSendCmds}
+            echo "NOAA data upload curr month: $ore:$minuti - $mese/$anno"
+            fname="NOAA-$anno-$mese.txt"
+            echo "put NOAA/${fname} ${fname}" >> ${ftpSendCmds}
+            touch /tmp/${fname}.stamp
         fi
 
-        echo "put NOAA/NOAA-$anno.txt NOAA-$anno.txt" >> ${ftpSendCmds}
+        fname="NOAA-$anno.txt"
+        echo "put NOAA/${fname} ${fname}" >> ${ftpSendCmds}
+        touch /tmp/${fname}.stamp
 
         echo "cd .." >> ${ftpSendCmds}
 
     else
-            echo "Normal ftp upload"
+        echo "Normal upload - no NOAA: $ore:$minuti"
     fi
 
     echo "quit" >> ${ftpSendCmds}
