@@ -54,6 +54,10 @@ spec:
           mountPath: /www/webshot
           readOnly: true
 
+        - name: grafana-snaps
+          mountPath: /www/grafana-snaps
+          readOnly: true
+
         - name: wview-html-static
           mountPath: /weather-station/wview/html/
           readOnly: true
@@ -86,6 +90,11 @@ spec:
       - name: webshot
         hostPath:
           path: /tmp/webshot
+          type: Directory
+
+      - name: grafana-snaps
+        hostPath:
+          path: /tmp/grafana-snaps
           type: Directory
 
       - name: wview-html-static
