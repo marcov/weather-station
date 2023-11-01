@@ -68,6 +68,10 @@ spec:
                   mountPath: /data
                   readOnly: false
 
+                - name: etc-localtime
+                  mountPath: /etc/localtime
+                  readOnly: true
+
           volumes:
             - name: scripts
               hostPath:
@@ -78,3 +82,8 @@ spec:
               hostPath:
                 path: /tmp/wview-data-img
                 type: Directory
+
+            - name: etc-localtime
+              hostPath:
+                path: /etc/localtime
+                type: File
