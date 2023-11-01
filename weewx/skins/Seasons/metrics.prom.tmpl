@@ -71,11 +71,6 @@ supply_voltage $current.supplyVoltage.format(format_string="%.2f", add_label=Fal
 # TYPE rx_signal_quality gauge
 rx_signal_quality $current.rxCheckPercent.format(format_string="%.2f", add_label=False, None_string="0.00")
 
-#### REMOVE ME!
-# HELP rain_storm Storm rain rate in mm/h
-# TYPE rain_storm gauge
-rain_storm $current.rainRate.format(format_string="%.2f", add_label=False, None_string="0.00")
-
 # HELP unhealthy 0 = healthy, unhealthy otherwise
 # TYPE unhealthy gauge
 # This gets set to 1 by the health check script

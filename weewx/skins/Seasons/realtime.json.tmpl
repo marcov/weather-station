@@ -53,8 +53,8 @@
     "monthlyRain" : "$month.rain.sum.round(1).json",
     "totalRain" : "$year.rain.sum.round(1).json",
 
-    "stormRain" : "$current.rainRate.round(1).json",
     "rainRate" : "$current.rainRate.round(1).json",
+    "stormRain" : "$day.rainRate.max.round(1).json",
 
     "hiRainRate" : "$day.rainRate.max.round(1).json",
     "hiRainRateTime" : "$day.rainRate.maxtime.format("%H:%M")",
