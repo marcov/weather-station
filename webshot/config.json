@@ -7,7 +7,7 @@
            "url":      "https://www.meteoblue.com/en/weather/week/fiobbio_italy_8951344",
            "waitTime": 2000,
            "outFile":  "meteoblue.jpg",
-           "viewSize": [800, 500],
+           "viewSize": [650, 500],
            "info":     " v----v----- 1st value is pixels from TOP (y), 2nd value is pixels from left (x)",
            "topLeft":  [180, 0],
            "size":     [800, 305],
@@ -30,7 +30,7 @@
            "waitTime": 5000,
            "outFile":  "wz_meteogram.jpg",
            "viewSize": [800, 1400],
-           "topLeft":  [586, 0],
+           "topLeft":  [636, 0],
            "size":     [800, 505],
            "evalCode": "document.getElementById('sp_message_container_403677').style.display = 'none'; var collection = document.getElementsByClassName('adsbygoogle'); for (i = 1; i < collection.length; i++) {collection[0].parentNode.removeChild(collection[0]);}",
            "Enabled": true
@@ -41,7 +41,7 @@
            "waitTime": 5000,
            "outFile":  "wz_ensemble.jpg",
            "viewSize": [800, 1400],
-           "topLeft":  [615, 0],
+           "topLeft":  [665, 0],
            "size":     [800, 583],
            "evalCode": "document.getElementById('sp_message_container_403677').style.display = 'none'; var collection = document.getElementsByClassName('adsbygoogle'); for (i = 1; i < collection.length; i++) {collection[0].parentNode.removeChild(collection[0]);}",
            "Enabled": true
