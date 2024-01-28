@@ -9,9 +9,9 @@
            "outFile":  "meteoblue.jpg",
            "viewSize": [650, 500],
            "info":     " v----v----- 1st value is pixels from TOP (y), 2nd value is pixels from left (x)",
-           "topLeft":  [180, 0],
+           "topLeft":  [300, 0],
            "size":     [800, 305],
-           "evalCode": "document.getElementsByClassName('gdpr-message')[0].style.visibility='hidden';",
+           "evalCode": "document.getElementsByClassName('fc-cta-consent')[0].click();document.getElementsByClassName('unblock')[0].setAttribute('class', '')",
            "Enabled": true
         },
         {
