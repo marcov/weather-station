@@ -34,6 +34,3 @@ MAILTO=""
 
 # Delete unhealthy pods
 */5 * * * *  set -o pipefail; cd /home/pi/weather-station && ./misc/pod-deleter.sh 2>&1 | logger -t pod-deleter
-
-# Grafana snaps
-11 * * * *  set -o pipefail; cd /home/pi/weather-station && ./grafana/snaps.sh 2>&1 | logger -t grafana-snaps

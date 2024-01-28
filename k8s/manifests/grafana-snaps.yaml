@@ -1,0 +1,45 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: grafana-snaps
+
+spec:
+  schedule: "*/15 * * * *"
+  concurrencyPolicy: Replace
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  # The default looks to be 100. Increase it.
+  startingDeadlineSeconds: 300
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: grafana-snaps
+              image: pullme/x86_64-webcam:latest
+              imagePullPolicy: IfNotPresent
+              command:
+              - /snaps.sh
+
+              volumeMounts:
+                - name: script
+                  mountPath: /snaps.sh
+                  readOnly: true
+
+                - name: outdir
+                  mountPath: /tmp/grafana-snaps
+                  readOnly: false
+
+          volumes:
+            - name: script
+              hostPath:
+                path: /home/pi/weather-station/grafana/snaps.sh
+                type: File
+
+            - name: outdir
+              hostPath:
+                path: /tmp/grafana-snaps
+                type: Directory
+
