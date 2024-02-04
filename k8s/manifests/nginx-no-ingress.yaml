@@ -54,8 +54,8 @@ spec:
           mountPath: /www/webshot
           readOnly: true
 
-        - name: grafana-snaps
-          mountPath: /www/grafana-snaps
+        - name: downloader
+          mountPath: /www/downloader
           readOnly: true
 
         - name: wview-html-static
@@ -92,9 +92,9 @@ spec:
           path: /tmp/webshot
           type: Directory
 
-      - name: grafana-snaps
+      - name: downloader
         hostPath:
-          path: /tmp/grafana-snaps
+          path: /tmp/downloader
           type: Directory
 
       - name: wview-html-static

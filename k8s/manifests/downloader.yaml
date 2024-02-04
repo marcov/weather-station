@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: grafana-snaps
+  name: downloader
 
 spec:
   schedule: "*/15 * * * *"
@@ -17,29 +17,29 @@ spec:
         spec:
           restartPolicy: OnFailure
           containers:
-            - name: grafana-snaps
+            - name: downloader
               image: pullme/x86_64-webcam:latest
               imagePullPolicy: IfNotPresent
               command:
-              - /snaps.sh
+              - /run.sh
 
               volumeMounts:
                 - name: script
-                  mountPath: /snaps.sh
+                  mountPath: /run.sh
                   readOnly: true
 
                 - name: outdir
-                  mountPath: /tmp/grafana-snaps
+                  mountPath: /tmp/downloader
                   readOnly: false
 
           volumes:
             - name: script
               hostPath:
-                path: /home/pi/weather-station/grafana/snaps.sh
+                path: /home/pi/weather-station/downloader/run.sh
                 type: File
 
             - name: outdir
               hostPath:
-                path: /tmp/grafana-snaps
+                path: /tmp/downloader
                 type: Directory
 

@@ -35,10 +35,10 @@ if [ -n "${removeEphemeral}" ]; then
     mkdir "${hostWviewImgDir}"
 fi
 
-# Provision webcam,webhost folders
-mkdir -p /tmp/{webcam,webshot}
+# Create required dirs
+mkdir -p /tmp/{webcam,webshot,downloader}
 
-# Provision img folder
+# Create img folder
 mkdir -p "${hostWviewImgDir}"
 
 # Create the ddns ip cache file
