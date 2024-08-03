@@ -18,7 +18,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: downloader
-              image: pullme/x86_64-webcam:latest
+              image: docker.io/library/python:3.12
               imagePullPolicy: IfNotPresent
               command:
               - /run.sh
