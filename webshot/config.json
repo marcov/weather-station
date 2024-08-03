@@ -4,7 +4,7 @@
     "info" : "Use coordinates extension on Chrome for getting pixels positions",
     "websites" : [
         {
-           "url":      "https://www.meteoblue.com/en/weather/week/fiobbio_italy_8951344",
+           "url":      "https://www.meteoblue.com/it/tempo/settimana/fiobbio_italia_8951344",
            "waitTime": 2000,
            "outFile":  "meteoblue.jpg",
            "viewSize": [650, 500],
