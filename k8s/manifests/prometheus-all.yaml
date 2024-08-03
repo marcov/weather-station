@@ -107,6 +107,11 @@ data:
     - job_name: 'kube-state-metrics'
       static_configs:
       - targets: ['kube-state-metrics.default.svc.cluster.local:8080']
+
+    - job_name: node
+      scrape_interval: 15s
+      static_configs:
+      - targets: ['prometheus-node-exporter.default.svc.cluster.local:9100']
 ---
 apiVersion: apps/v1
 kind: StatefulSet

@@ -89,6 +89,7 @@ helm repo update
 #helm install --values ${scriptDir}/loki-values.yaml --set "loki.auth_enabled=false" loki grafana/loki
 
 helm upgrade --install kube-state-metrics prometheus-community/kube-state-metrics
+helm upgrade --install prometheus-node-exporter prometheus-community/prometheus-node-exporter
 
 set +x
 
