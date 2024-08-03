@@ -13,21 +13,6 @@ mkdir -p ${manifestsDir}
 
 ################################################################################
 
-for sta in "${!wview_stations_map[@]}"; do
-    cat > ${manifestsDir}/wview-${sta}.yaml << EOF
-#
-# Generated from a template using "${BASH_SOURCE[@]}"
-#
-EOF
-
-    cat ${scriptDir}/wview-template.yaml | \
-        WVIEW_INSTANCE_NAME="${sta}" \
-        WVIEW_STATION_TYPE="${wview_stations_map[${sta}]}" \
-        envsubst '$WVIEW_INSTANCE_NAME $WVIEW_STATION_TYPE' >> "${manifestsDir}/wview-${sta}.yaml"
-done
-
-################################################################################
-
 declare -A weewx_stations_map=(
     [fiobbio1]=vpro
     [fiobbio2]=wxt510
