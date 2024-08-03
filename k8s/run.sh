@@ -63,11 +63,20 @@ minikube status || minikube start --driver none --extra-config=apiserver.service
 
 ${scriptDir}/template-gen.sh ${genManifestsDir}
 
-# all secrets
-kubectl create secret generic cml-ftp-login --from-env-file=${secretsDir}/cml_ftp_login_data.sh
-kubectl create secret generic webcam-login --from-env-file=${secretsDir}/webcam_login_data.sh
-kubectl create secret generic backblaze-info --from-env-file=${secretsDir}/backblaze
-kubectl create secret generic ddns-info --from-env-file=${secretsDir}/ddns-info.txt
+declare -r -A secrets_list=(
+    [cml-ftp-login]="cml_ftp_login_data.sh"
+    [webcam-login]="webcam_login_data.sh"
+    [backblaze-info]="backblaze"
+    [ddns-info]="ddns-info.txt"
+)
+
+for sname in ${!secrets_list[@]}
+do
+    sfpath="${secretsDir}/${secrets_list[${sname}]}"
+    echo "Checking and creating secret ${sname} -> ${sfpath}"
+    # Do not do anything if secret already exists
+    kubectl create secret generic ${sname} --from-env-file=${sfpath} --dry-run=client -o yaml | kubectl apply -f -
+done
 
 kubectl apply -f ${genManifestsDir} || echo "WARN: kubectl create got some errors (may be OK)..."
 kubectl apply -f ${scriptDir}/manifests/ || echo "WARN: kubectl create got some errors (may be OK)..."
