@@ -7,14 +7,16 @@ metadata:
     app: ser2net-fiobbio1
     app.kubernetes.io/name: ser2net-fiobbio1
     app.kubernetes.io/component: ser2net-fiobbio1
+
 spec:
-  type: ClusterIP
+
   ports:
       # Note: A Service can map any incoming port to a targetPort.
       # By default and for convenience, the targetPort is set to the same value as the port field.
     - name: serial-over-tcp
       port: 2233
       protocol: TCP
+
   selector:
     app: ser2net-fiobbio1
 
@@ -28,6 +30,7 @@ spec:
     matchLabels:
       app: ser2net-fiobbio1 # has to match .spec.template.metadata.labels
   serviceName: ser2net-fiobbio1
+
   replicas: 1 # by default is 1
   template:
     metadata:
