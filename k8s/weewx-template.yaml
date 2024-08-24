@@ -81,12 +81,12 @@ spec:
 
       - name: database
         hostPath:
-          path: /home/pi/wview-data/$WEEWX_INSTANCE_NAME/archive
+          path: /home/pi/station-data/$WEEWX_INSTANCE_NAME/archive
           type: Directory
 
       - name: weewx-conf
         hostPath:
-          path: /home/pi/wview-data/$WEEWX_INSTANCE_NAME/conf/weewx.conf
+          path: /home/pi/station-data/$WEEWX_INSTANCE_NAME/conf/weewx.conf
           type: File
 
       - name: etc-localtime
@@ -101,5 +101,5 @@ spec:
 
       - name: weewx-html
         hostPath:
-          path: /tmp/wview-data-img/$WEEWX_INSTANCE_NAME
+          path: /tmp/station-data-img/$WEEWX_INSTANCE_NAME
           type: Directory

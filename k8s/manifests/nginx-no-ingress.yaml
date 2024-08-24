@@ -42,7 +42,7 @@ spec:
           mountPath: /etc/letsencrypt
           readOnly: true
 
-        - name: wview-data-img
+        - name: station-data-img
           mountPath: /www/wview-img
           readOnly: true
 
@@ -77,9 +77,9 @@ spec:
           path: /home/pi/secrets/letsencrypt
           type: Directory
 
-      - name: wview-data-img
+      - name: station-data-img
         hostPath:
-          path: /tmp/wview-data-img
+          path: /tmp/station-data-img
           type: Directory
 
       - name: webcam

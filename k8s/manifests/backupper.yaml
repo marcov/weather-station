@@ -48,8 +48,8 @@ spec:
               mountPath: /run-backup
               readOnly: true
 
-            - name: wview-data
-              mountPath: /wview-data
+            - name: station-data
+              mountPath: /station-data
               readOnly: true
 
           volumes:
@@ -58,8 +58,8 @@ spec:
               path: /home/pi/weather-station/backupper/run-backup
               type: File
 
-          - name: wview-data
+          - name: station-data
             hostPath:
-              path: /home/pi/wview-data
+              path: /home/pi/station-data
               type: Directory
 

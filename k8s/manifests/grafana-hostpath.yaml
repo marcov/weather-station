@@ -96,17 +96,17 @@ spec:
 
       - name: wview-archive-fiobbio1
         hostPath:
-          path: /home/pi/wview-data/fiobbio1/archive/wview-archive.sdb
+          path: /home/pi/station-data/fiobbio1/archive/wview-archive.sdb
           type: File
 
       - name: wview-archive-fiobbio2
         hostPath:
-          path: /home/pi/wview-data/fiobbio2/archive/wview-archive.sdb
+          path: /home/pi/station-data/fiobbio2/archive/wview-archive.sdb
           type: File
 
       - name: wview-archive-misma
         hostPath:
-          path: /home/pi/wview-data/misma/archive/wview-archive.sdb
+          path: /home/pi/station-data/misma/archive/wview-archive.sdb
           type: File
 
 ---

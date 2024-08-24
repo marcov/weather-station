@@ -80,7 +80,7 @@ spec:
 
             - name: data
               hostPath:
-                path: /tmp/wview-data-img
+                path: /tmp/station-data-img
                 type: Directory
 
             - name: etc-localtime

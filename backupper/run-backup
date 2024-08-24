@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-wviewDataPath=/wview-data
+wviewDataPath=/station-data
 destDir="/data"
 
 is_db_file() {

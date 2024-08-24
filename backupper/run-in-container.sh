@@ -7,7 +7,7 @@ declare -r arch="$(arch)"
 docker run \
     --rm \
     \
-    -v ${hostWviewDataDir}:/wview-data \
+    -v ${hostWviewDataDir}:/station-data \
     -v /home/pi/secrets/rclone.conf:/config/rclone/rclone.conf \
     -v ${hostRepoRoot}/rclone/run-backup:/run-backup \
     \

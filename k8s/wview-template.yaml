@@ -112,12 +112,12 @@ spec:
       volumes:
       - name: wview-archive
         hostPath:
-          path: /home/pi/wview-data/$WVIEW_INSTANCE_NAME/archive
+          path: /home/pi/station-data/$WVIEW_INSTANCE_NAME/archive
           type: Directory
 
       - name: wview-conf
         hostPath:
-          path: /home/pi/wview-data/$WVIEW_INSTANCE_NAME/conf/wview-conf.sdb
+          path: /home/pi/station-data/$WVIEW_INSTANCE_NAME/conf/wview-conf.sdb
           type: File
 
       - name: wview-etc
@@ -127,7 +127,7 @@ spec:
 
       - name: wview-img
         hostPath:
-          path: /tmp/wview-data-img/$WVIEW_INSTANCE_NAME
+          path: /tmp/station-data-img/$WVIEW_INSTANCE_NAME
           type: Directory
 
       - name: wview-scripts
