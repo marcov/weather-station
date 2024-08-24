@@ -3,7 +3,7 @@ After=docker.service
 
 [Service]
 Type=oneshot
-ExecStart=/home/pi/weather-station/containers/run.sh
+ExecStart=/home/pi/weather-station/docker/run.sh
 RemainAfterExit=true
 
 [Install]

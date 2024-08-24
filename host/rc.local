@@ -53,7 +53,7 @@ setup_iptables () {
 
 start_containers () {
     echo "INFO: --HACK-- start the wview container here"
-    /home/pi/weather-station/containers/run.sh
+    /home/pi/weather-station/docker/run.sh
 }
 
 echo "INFO: setup iptables"
