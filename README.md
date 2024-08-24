@@ -17,25 +17,25 @@ For simplicity the cluster is a local minikube instance created with the driver
 
 ## Hardware
 * Davis Vantage Pro2
-* Raspberry Pi 3
+* Vaisala WXT520
 * Cheap chinese webcam
 
 ## Software
-* Raspbian OS
+Base:
+* Ubuntu
 * Docker
 * minikube
 
-### Containers
-* [wview](http://www.wviewweather.com): weather data logging + ser2net, rsyslog
+Apps:
+* weewx
 * nginx
-* rclone for automated backups to Backblaze B2
-* Prometheus exporters
+* rclone -- automated backups to Backblaze B2
+* Prometheus / Grafana
 
 ## Repository content
 * Websites front end
-* Automation bash scripts to run periodic actions, e.g. webcam snapshots generation
-  and post-processing
-* wview archive and config files
+* Automation bash scripts to run periodic actions, e.g. webcam snapshots
+  generation and post-processing.
 * other misc configuration files
 
 ## SSL Certificate
@@ -43,9 +43,9 @@ For simplicity the cluster is a local minikube instance created with the driver
 certbot certonly -d meteo.fiobbio.com --logs-dir /tmp --config-dir ~/secrets/letsencrypt --work-dir /tmp
 ```
 
-## SQLite
-### Config Update
+## Self-notes on SQLite
 
+### Config Update
 ```
 $ sqlite3 .../wview-conf.sdb
 ```
