@@ -69,7 +69,7 @@ spec:
       volumes:
       - name: nginx-conf
         hostPath:
-          path: /home/pi/weather-station/nginx/nginx.conf
+          path: /home/pi/weather-station/apps/nginx/nginx.conf
           type: File
 
       - name: ssl-certs

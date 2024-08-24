@@ -55,7 +55,7 @@ spec:
           volumes:
           - name: backup-script
             hostPath:
-              path: /home/pi/weather-station/backupper/run-backup
+              path: /home/pi/weather-station/apps/backupper/run-backup
               type: File
 
           - name: station-data

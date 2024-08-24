@@ -76,7 +76,7 @@ spec:
       volumes:
       - name: scripts
         hostPath:
-          path: /home/pi/weather-station/weewx/scripts
+          path: /home/pi/weather-station/apps/weewx/scripts
           type: Directory
 
       - name: database
@@ -96,7 +96,7 @@ spec:
 
       - name: skins
         hostPath:
-          path: /home/pi/weather-station/weewx/skins
+          path: /home/pi/weather-station/apps/weewx/skins
           type: Directory
 
       - name: weewx-html

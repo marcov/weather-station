@@ -75,7 +75,7 @@ spec:
           volumes:
             - name: scripts
               hostPath:
-                path: /home/pi/weather-station/cml
+                path: /home/pi/weather-station/apps/cml
                 type: Directory
 
             - name: data

@@ -47,11 +47,11 @@ ${asRoot} chmod 666 /tmp/ddns-ip
 
 for sta in ${stations[@]}; do
     cp -a \
-        "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/classic/static/" \
+        "${hostRepoRoot}/apps/wview/fs/${WVIEW_CONF_DIR}/html/classic/static/" \
         "${hostWviewImgDir}/${sta}"
 
     cp \
-        "${hostRepoRoot}/wview/fs/${WVIEW_CONF_DIR}/html/chart_bg_bigger.png" \
+        "${hostRepoRoot}/apps/wview/fs/${WVIEW_CONF_DIR}/html/chart_bg_bigger.png" \
         "${hostWviewImgDir}/${sta}/chart_bg.png"
 
     mkdir -p "${hostWviewImgDir}"/${sta}/NOAA

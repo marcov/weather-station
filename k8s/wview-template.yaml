@@ -122,7 +122,7 @@ spec:
 
       - name: wview-etc
         hostPath:
-          path: /home/pi/weather-station/wview/fs/etc/wview
+          path: /home/pi/weather-station/apps/wview/fs/etc/wview
           type: Directory
 
       - name: wview-img
@@ -132,7 +132,7 @@ spec:
 
       - name: wview-scripts
         hostPath:
-          path: /home/pi/weather-station/wview/scripts
+          path: /home/pi/weather-station/apps/wview/scripts
           type: Directory
 
       - name: wview-common-vars

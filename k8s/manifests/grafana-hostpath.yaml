@@ -91,7 +91,7 @@ spec:
 
       - name: grafana-ini
         hostPath:
-          path: /home/pi/weather-station/grafana/grafana.ini
+          path: /home/pi/weather-station/apps/grafana/grafana.ini
           type: File
 
       - name: wview-archive-fiobbio1

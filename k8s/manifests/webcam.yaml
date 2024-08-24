@@ -101,12 +101,12 @@ spec:
 
           - name: webcam-scripts
             hostPath:
-              path: /home/pi/weather-station/webcam/scripts
+              path: /home/pi/weather-station/apps/webcam/scripts
               type: Directory
 
           - name: webcam-config
             hostPath:
-              path: /home/pi/weather-station/webcam/config.sh
+              path: /home/pi/weather-station/apps/webcam/config.sh
               type: File
 
           - name: common-variables

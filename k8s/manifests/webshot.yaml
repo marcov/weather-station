@@ -43,6 +43,6 @@ spec:
 
           - name: webshot-conf
             hostPath:
-              path: /home/pi/weather-station/webshot/config.json
+              path: /home/pi/weather-station/apps/webshot/config.json
               type: File
 

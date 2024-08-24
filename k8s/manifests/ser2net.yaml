@@ -75,5 +75,5 @@ spec:
 
       - name: ser2net-conf
         hostPath:
-          path: /home/pi/weather-station/ser2net/ser2net.conf
+          path: /home/pi/weather-station/apps/ser2net/ser2net.conf
           type: File
