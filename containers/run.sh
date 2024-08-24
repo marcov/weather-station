@@ -173,7 +173,7 @@ stop_start nginx || docker run \
     -v "${hostWviewImgDir}/misma":/www/wview-img/misma:ro \
     -v ${hostWebcamDir}:/www/webcam:ro \
     -v ${hostWebshotDir}:/www/webshot:ro \
-    -v ${hostRepoRoot}/wview/html/fiobbio:/weather-station/wview/html/fiobbio:ro \
+    -v ${hostRepoRoot}/html/fiobbio:/weather-station/html/fiobbio:ro \
     \
     -v /dev/log:/dev/log \
     -v /etc/timezone:/etc/timezone:ro \

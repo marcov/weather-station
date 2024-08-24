@@ -59,7 +59,7 @@ spec:
           readOnly: true
 
         - name: wview-html-static
-          mountPath: /weather-station/wview/html/
+          mountPath: /weather-station/html/
           readOnly: true
 
         - name: tz-config
@@ -99,7 +99,7 @@ spec:
 
       - name: wview-html-static
         hostPath:
-          path: /home/pi/weather-station/wview/html/
+          path: /home/pi/weather-station/html/
           type: Directory
 
       - name: tz-config
