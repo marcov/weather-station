@@ -30,7 +30,7 @@ MAILTO=""
 # /dev/log is broken for some reason.
 
 # letsencrypt
-0 3 * * 1  set -o pipefail; cd /home/pi/weather-station && ./misc/letsencrypt-renew.sh 2>&1 | logger -t letsencrypt-renew
+0 3 * * 1  set -o pipefail; cd /home/pi/weather-station/host && ./letsencrypt-renew.sh 2>&1 | logger -t letsencrypt-renew
 
 # Delete unhealthy pods
-*/5 * * * *  set -o pipefail; cd /home/pi/weather-station && ./misc/pod-deleter.sh 2>&1 | logger -t pod-deleter
+*/5 * * * *  set -o pipefail; cd /home/pi/weather-station/host && ./pod-deleter.sh 2>&1 | logger -t pod-deleter
