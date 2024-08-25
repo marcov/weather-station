@@ -35,9 +35,10 @@ declare -r -A mismaCfg=( \
     [suffix]="" \
 )
 
+# FIXME: panogen dir is unknown !?!?
 declare -r -A mismaPanoCfg=( \
     [name]="mismapano" \
-    [url]="local /home/pi/panogen/out/panorama.jpg" \
+    [url]="local /tmp/panogen/out/panorama.jpg" \
     [watermark]="Mt_Misma_360" \
     [tsource]="http://${httpServerHostname}/misma/realtime.json" \
     [size]="2048x1536" \

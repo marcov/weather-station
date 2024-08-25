@@ -70,10 +70,6 @@ spec:
                   key: cml_ftp_pwd_misma
 
             volumeMounts:
-            - name: panogen-out
-              mountPath: /home/pi/panogen/out
-              readOnly: true
-
             - name: ws-code
               mountPath: /webcam
               subPath: apps/webcam
@@ -89,11 +85,6 @@ spec:
               readOnly: true
 
           volumes:
-          - name: panogen-out
-            hostPath:
-              path: /home/pi/panogen/out
-              type: Directory
-
           - name: ws-code
             persistentVolumeClaim:
                 claimName: ws-code-claim

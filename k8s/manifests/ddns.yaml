@@ -26,9 +26,7 @@ spec:
             image: pullme/x86_64-nc-ddns:latest
             imagePullPolicy: IfNotPresent
 
-            args:
-            - /nc-ddns/nc-ddns.sh
-            - -d
+            command: ["/nc-ddns.sh", "-d"]
 
             env:
             - name: NC_DDNS_HOST
@@ -50,10 +48,6 @@ spec:
                   key: NC_DDNS_PASSWORD
 
             volumeMounts:
-            - name: nc-ddns
-              mountPath: /nc-ddns
-              readOnly: true
-
             # For weird reasons we cannot mount a single file subpath as R/W
             # (/tmp/ddns-ip)
             - name: ws-shared
@@ -61,11 +55,6 @@ spec:
               readOnly: false
 
           volumes:
-          - name: nc-ddns
-            hostPath:
-              path: /home/pi/nc-ddns
-              type: Directory
-
           - name: ws-shared
             persistentVolumeClaim:
-                claimName: ws-shared-claim
+              claimName: ws-shared-claim

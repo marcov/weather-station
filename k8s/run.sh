@@ -50,22 +50,33 @@ minikube status || minikube start --driver none --extra-config=apiserver.service
 
 ${scriptDir}/template-gen.sh ${genManifestsDir}
 
-declare -r -A secrets_list=(
+declare -r -A k8s_create_secrets=(
     [cml-ftp-login]="cml_ftp_login_data.sh"
     [webcam-login]="webcam_login_data.sh"
     [backblaze-info]="backblaze"
     [ddns-info]="ddns-info.txt"
 )
 
-for sname in ${!secrets_list[@]}
+for sname in ${!k8s_create_secrets[@]}
 do
-    sfpath="${secretsDir}/${secrets_list[${sname}]}"
+    sfpath="${secretsDir}/${k8s_create_secrets[${sname}]}"
     echo "Checking and creating secret ${sname} -> ${sfpath}"
     # Do not do anything if secret already exists
-    kubectl create secret generic ${sname} --from-env-file=${sfpath} --dry-run=client -o yaml | kubectl apply -f -
+    kubectl create secret generic ${sname} --from-env-file=${sfpath} \
+        --dry-run=client -o yaml | kubectl apply -f -
 done
 
-kubectl create configmap config-localtime --from-file=etc-localtime=/etc/localtime
+${asRoot} chmod o+r /home/pi/secrets/letsencrypt/live/meteo.fiobbio.com/privkey.pem
+kubectl create secret tls tls-meteo-fiobbio-com \
+    --cert=/home/pi/secrets/letsencrypt/live/meteo.fiobbio.com/fullchain.pem \
+    --key=/home/pi/secrets/letsencrypt/live/meteo.fiobbio.com/privkey.pem \
+     --dry-run=client -o yaml | kubectl apply -f -
+
+${asRoot} chmod o-r /home/pi/secrets/letsencrypt/live/meteo.fiobbio.com/privkey.pem
+
+kubectl create configmap config-localtime \
+    --from-file=etc-localtime=/etc/localtime \
+    --dry-run=client -o yaml | kubectl apply -f -
 
 kubectl apply -f ${genManifestsDir} || echo "WARN: kubectl create got some errors (may be OK)..."
 kubectl apply -f ${scriptDir}/manifests/ || echo "WARN: kubectl create got some errors (may be OK)..."
