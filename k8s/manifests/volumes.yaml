@@ -6,7 +6,7 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: manual
+  storageClassName: ""
   capacity:
     storage: 5Gi
   accessModes:
@@ -19,7 +19,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: ws-code-claim
 spec:
-  storageClassName: manual
+  storageClassName: ""
   accessModes:
     - ReadOnlyMany
   resources:
@@ -34,7 +34,7 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: manual
+  storageClassName: ""
   capacity:
     storage: 5Gi
   accessModes:
@@ -47,7 +47,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: ws-data-claim
 spec:
-  storageClassName: manual
+  storageClassName: ""
   accessModes:
     - ReadWriteMany
   resources:
@@ -62,7 +62,7 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: manual
+  storageClassName: ""
   capacity:
     storage: 5Gi
   accessModes:
@@ -75,7 +75,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: ws-shared-claim
 spec:
-  storageClassName: manual
+  storageClassName: ""
   accessModes:
     - ReadWriteMany
   resources:
@@ -90,7 +90,7 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: manual
+  storageClassName: ""
   capacity:
     storage: 5Gi
   accessModes:
@@ -103,7 +103,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: grafana-data-claim
 spec:
-  storageClassName: manual
+  storageClassName: ""
   accessModes:
     - ReadWriteMany
   resources:
@@ -118,7 +118,7 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: manual
+  storageClassName: ""
   capacity:
     storage: 5Gi
   accessModes:
@@ -131,7 +131,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: prometheus-data-claim
 spec:
-  storageClassName: manual
+  storageClassName: ""
   accessModes:
     - ReadWriteMany
   resources:
