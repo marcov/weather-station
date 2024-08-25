@@ -7,6 +7,8 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: webcam
+  labels:
+      app: webcam
 spec:
   schedule: "*/5 * * * *"
   concurrencyPolicy: Replace
@@ -68,7 +70,6 @@ spec:
                   key: cml_ftp_pwd_misma
 
             volumeMounts:
-
             - name: panogen-out
               mountPath: /home/pi/panogen/out
               readOnly: true
@@ -81,6 +82,11 @@ spec:
             - name: ws-shared
               mountPath: /tmp/webcam
               subPath: webcam
+
+            - name: localtime
+              mountPath: /etc/localtime
+              subPath: etc-localtime
+              readOnly: true
 
           volumes:
           - name: panogen-out
@@ -95,3 +101,7 @@ spec:
           - name: ws-shared
             persistentVolumeClaim:
                 claimName: ws-shared-claim
+
+          - name: localtime
+            configMap:
+              name: config-localtime

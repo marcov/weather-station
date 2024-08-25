@@ -69,8 +69,9 @@ spec:
           mountPath: /var/www/html/weewx
           subPath: stations/$WEEWX_INSTANCE_NAME
 
-        - name: etc-localtime
+        - name: localtime
           mountPath: /etc/localtime
+          subPath: etc-localtime
           readOnly: true
 
       volumes:
@@ -86,7 +87,6 @@ spec:
         persistentVolumeClaim:
             claimName: ws-shared-claim
 
-      - name: etc-localtime
-        hostPath:
-          path: /etc/localtime
-          type: File
+      - name: localtime
+        configMap:
+          name: config-localtime

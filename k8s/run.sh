@@ -65,6 +65,8 @@ do
     kubectl create secret generic ${sname} --from-env-file=${sfpath} --dry-run=client -o yaml | kubectl apply -f -
 done
 
+kubectl create configmap config-localtime --from-file=etc-localtime=/etc/localtime
+
 kubectl apply -f ${genManifestsDir} || echo "WARN: kubectl create got some errors (may be OK)..."
 kubectl apply -f ${scriptDir}/manifests/ || echo "WARN: kubectl create got some errors (may be OK)..."
 

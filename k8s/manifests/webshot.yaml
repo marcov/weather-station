@@ -2,6 +2,8 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: webshot
+  labels:
+      app: webshot
 spec:
   schedule: "17 * * * *"
   concurrencyPolicy: Replace
