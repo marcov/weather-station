@@ -142,10 +142,12 @@ spec:
         image: debian:9
         imagePullPolicy: Always
         command: ["chown", "-R", "65534:65534", "/data"]
+
         volumeMounts:
+
         - name: prometheus-data
           mountPath: /data
-          subPath: ""
+
       containers:
         - name: prometheus-server
           image: quay.io/prometheus/prometheus:latest
@@ -179,11 +181,13 @@ spec:
           #    cpu: 200m
           #    memory: 1000Mi
           volumeMounts:
+
             - name: config-volume
               mountPath: /etc/config
+
             - name: prometheus-data
               mountPath: /data
-              subPath: ""
+
       terminationGracePeriodSeconds: 300
 
       volumes:
@@ -193,7 +197,6 @@ spec:
             name: prometheus-config
 
         - name: prometheus-data
-          hostPath:
-            path: /home/pi/k8s/pv/prometheus-pv-storage
-            type: Directory
+          persistentVolumeClaim:
+              claimName: prometheus-data-claim
 

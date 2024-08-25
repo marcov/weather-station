@@ -54,8 +54,11 @@ spec:
               mountPath: /nc-ddns
               readOnly: true
 
-            - name: ddns-ip
-              mountPath: /tmp/ddns-ip
+            # For weird reasons we cannot mount a single file subpath as R/W
+            # (/tmp/ddns-ip)
+            - name: ws-shared
+              mountPath: /tmp
+              readOnly: false
 
           volumes:
           - name: nc-ddns
@@ -63,7 +66,6 @@ spec:
               path: /home/pi/nc-ddns
               type: Directory
 
-          - name: ddns-ip
-            hostPath:
-              path: /tmp/ddns-ip
-              type: File
+          - name: ws-shared
+            persistentVolumeClaim:
+                claimName: ws-shared-claim

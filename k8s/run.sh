@@ -7,7 +7,8 @@ set -euo pipefail
 set -x
 declare -r scriptDir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
 
-declare -r generatedDataPath="/tmp/station-data-img"
+# Used to store data shared among pods
+declare -r k8s_pv_shared_path=/tmp/k8s-pv-shared
 
 declare -r scriptStarted="/tmp/run-sh-started"
 declare -r scriptCompleted="/tmp/run-sh-completed"
@@ -27,27 +28,21 @@ fi
 ${asRoot:-} rm -f "$scriptStarted" "$scriptCompleted"
 touch "$scriptStarted"
 
-#
-# TODO: find a better way to store wview img in a tmpfs shared volume b/w host and containers!
-#
 if [ -n "${removeEphemeral}" ]; then
-    rm -rf "${generatedDataPath}"
-    mkdir "${generatedDataPath}"
+    rm -rf "${k8s_pv_shared_path}"
+    mkdir "${k8s_pv_shared_path}"
 fi
 
-# Create required dirs
-mkdir -p /tmp/{webcam,webshot,downloader}
-
-# Create img folder
-mkdir -p "${generatedDataPath}"
+# Create pv shared subdirs
+mkdir -p "${k8s_pv_shared_path}"/{webcam,webshot,downloader,stations}
 
 # Create the ddns ip cache file
-${asRoot} touch /tmp/ddns-ip
-${asRoot} chmod 666 /tmp/ddns-ip
+${asRoot} touch "${k8s_pv_shared_path}"/ddns-ip
+${asRoot} chmod 666 "${k8s_pv_shared_path}"/ddns-ip
 
 for sta in ${stations[@]}; do
-    mkdir -p "${generatedDataPath}"/${sta}/NOAA
-    mkdir -p "${generatedDataPath}"/${sta}/Archive
+    mkdir -p "${k8s_pv_shared_path}"/stations/"${sta}"/NOAA
+    mkdir -p "${k8s_pv_shared_path}"/stations/"${sta}"/Archive
 done
 
 set -x
@@ -73,7 +68,7 @@ done
 kubectl apply -f ${genManifestsDir} || echo "WARN: kubectl create got some errors (may be OK)..."
 kubectl apply -f ${scriptDir}/manifests/ || echo "WARN: kubectl create got some errors (may be OK)..."
 
-# FIXME: network needs to be up for this to work!
+# FIXME: make sure network is up -- if not, running this will fail!
 #helm repo add grafana https://grafana.github.io/helm-charts
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update

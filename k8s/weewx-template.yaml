@@ -56,15 +56,18 @@ spec:
           subPath: apps/weewx
           readOnly: true
 
-        - name: database
+        - name: ws-data
           mountPath: /var/lib/weewx
+          subPath: $WEEWX_INSTANCE_NAME/archive
 
-        - name: weewx-conf
+        - name: ws-data
           mountPath: /etc/weewx/weewx.conf
+          subPath: $WEEWX_INSTANCE_NAME/conf/weewx.conf
           readOnly: true
 
-        - name: weewx-html
+        - name: ws-shared
           mountPath: /var/www/html/weewx
+          subPath: stations/$WEEWX_INSTANCE_NAME
 
         - name: etc-localtime
           mountPath: /etc/localtime
@@ -75,22 +78,15 @@ spec:
         persistentVolumeClaim:
           claimName: ws-code-claim
 
-      - name: database
-        hostPath:
-          path: /home/pi/station-data/$WEEWX_INSTANCE_NAME/archive
-          type: Directory
+      - name: ws-data
+        persistentVolumeClaim:
+            claimName: ws-data-claim
 
-      - name: weewx-conf
-        hostPath:
-          path: /home/pi/station-data/$WEEWX_INSTANCE_NAME/conf/weewx.conf
-          type: File
+      - name: ws-shared
+        persistentVolumeClaim:
+            claimName: ws-shared-claim
 
       - name: etc-localtime
         hostPath:
           path: /etc/localtime
           type: File
-
-      - name: weewx-html
-        hostPath:
-          path: /tmp/station-data-img/$WEEWX_INSTANCE_NAME
-          type: Directory

@@ -65,8 +65,9 @@ spec:
                   subPath: apps/cml
                   readOnly: true
 
-                - name: data
+                - name: ws-shared
                   mountPath: /data
+                  subPath: stations
                   readOnly: false
 
                 - name: etc-localtime
@@ -78,10 +79,9 @@ spec:
               persistentVolumeClaim:
                   claimName: ws-code-claim
 
-            - name: data
-              hostPath:
-                path: /tmp/station-data-img
-                type: Directory
+            - name: ws-shared
+              persistentVolumeClaim:
+                  claimName: ws-shared-claim
 
             - name: etc-localtime
               hostPath:

@@ -69,9 +69,6 @@ spec:
 
             volumeMounts:
 
-            - name: webcam-destdir
-              mountPath: /tmp/webcam
-
             - name: panogen-out
               mountPath: /home/pi/panogen/out
               readOnly: true
@@ -81,17 +78,11 @@ spec:
               subPath: apps/webcam
               readOnly: true
 
-            - name: ws-code
-              mountPath: /common_variables.sh
-              subPath: common_variables.sh
-              readOnly: true
+            - name: ws-shared
+              mountPath: /tmp/webcam
+              subPath: webcam
 
           volumes:
-          - name: webcam-destdir
-            hostPath:
-              path: /tmp/webcam
-              type: Directory
-
           - name: panogen-out
             hostPath:
               path: /home/pi/panogen/out
@@ -100,3 +91,7 @@ spec:
           - name: ws-code
             persistentVolumeClaim:
                 claimName: ws-code-claim
+
+          - name: ws-shared
+            persistentVolumeClaim:
+                claimName: ws-shared-claim

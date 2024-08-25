@@ -33,16 +33,16 @@ spec:
               subPath: apps/webshot
               readOnly: true
 
-            - name: webshot-destdir
+            - name: ws-shared
               mountPath: /destdir
+              subPath: webshot
+              readOnly: false
 
           volumes:
-          - name: webshot-destdir
-            hostPath:
-              path: /tmp/webshot
-              type: Directory
-
           - name: ws-code
             persistentVolumeClaim:
                 claimName: ws-code-claim
 
+          - name: ws-shared
+            persistentVolumeClaim:
+                claimName: ws-shared-claim

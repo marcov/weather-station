@@ -49,8 +49,8 @@ spec:
               subPath: apps/backupper
               readOnly: true
 
-            - name: station-data
-              mountPath: /station-data
+            - name: ws-data
+              mountPath: /data
               readOnly: true
 
           volumes:
@@ -58,8 +58,6 @@ spec:
             persistentVolumeClaim:
                 claimName: ws-code-claim
 
-          - name: station-data
-            hostPath:
-              path: /home/pi/station-data
-              type: Directory
-
+          - name: ws-data
+            persistentVolumeClaim:
+                claimName: ws-data-claim

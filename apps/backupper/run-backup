@@ -2,8 +2,9 @@
 
 set -euo pipefail
 
-wviewDataPath=/station-data
-destDir="/data"
+dataDir=/data
+# Intermediate data dir
+tmpDir=/tmp/data
 
 is_db_file() {
     local -r file=${1}
@@ -17,7 +18,7 @@ is_db_file() {
 # weewx.conf.
 # All the other files are generated.
 declare -a filesList=(
-    $(find "${wviewDataPath}" \
+    $(find "${dataDir}" \
         -maxdepth 3 \
         -type f \
         -wholename "*/archive/wview-archive.sdb" \
@@ -28,26 +29,26 @@ declare -a filesList=(
         )
 )
 
-rm -rf "${destDir}"
+rm -rf "${tmpDir}"
 
 set -x
 for f in "${filesList[@]}"; do
     echo "INFO: backing up ${f}"
-    mkdir -p "${destDir}"/"$(dirname ${f})"
+    mkdir -p "${tmpDir}"/"$(dirname ${f})"
 
     if $(is_db_file "${f}"); then
         sqlite3 \
             -cmd ".timeout 10000" \
             "${f}" \
-            ".backup ${destDir}/${f}"
+            ".backup ${tmpDir}/${f}"
      else
-        install -D "${f}" "${destDir}/${f}"
+        install -D "${f}" "${tmpDir}/${f}"
     fi
 
-    bzip2 -z "${destDir}/${f}"
+    bzip2 -z "${tmpDir}/${f}"
 done
 
 echo "INFO: files to backup:\n"
-find ${destDir} -type f
+find ${tmpDir} -type f
 
-rclone sync -P "${destDir}" backblaze:weather-station
+rclone sync -P "${tmpDir}" backblaze:weather-station

@@ -39,7 +39,7 @@ spec:
           - containerPort: 3000
 
           volumeMounts:
-          - name: grafana-storage
+          - name: grafana-data
             mountPath: /var/lib/grafana
 
           - name: ws-code
@@ -47,16 +47,19 @@ spec:
             subPath: apps/grafana/grafana.ini
             readOnly: true
 
-          - name: wview-archive-fiobbio1
+          - name: ws-data
             mountPath: /wview-archive-fiobbio1.sdb
+            subPath: fiobbio1/archive/wview-archive.sdb
             readOnly: true
 
-          - name: wview-archive-fiobbio2
+          - name: ws-data
             mountPath: /wview-archive-fiobbio2.sdb
+            subPath: fiobbio2/archive/wview-archive.sdb
             readOnly: true
 
-          - name: wview-archive-misma
+          - name: ws-data
             mountPath: /wview-archive-misma.sdb
+            subPath: misma/archive/wview-archive.sdb
             readOnly: true
 
         - name: renderer
@@ -85,29 +88,17 @@ spec:
           - containerPort: 8081
 
       volumes:
-      - name: grafana-storage
-        hostPath:
-          path: /home/pi/k8s/pv/grafana-pv-storage/
-          type: Directory
-
       - name: ws-code
         persistentVolumeClaim:
             claimName: ws-code-claim
 
-      - name: wview-archive-fiobbio1
-        hostPath:
-          path: /home/pi/station-data/fiobbio1/archive/wview-archive.sdb
-          type: File
+      - name: ws-data
+        persistentVolumeClaim:
+            claimName: ws-data-claim
 
-      - name: wview-archive-fiobbio2
-        hostPath:
-          path: /home/pi/station-data/fiobbio2/archive/wview-archive.sdb
-          type: File
-
-      - name: wview-archive-misma
-        hostPath:
-          path: /home/pi/station-data/misma/archive/wview-archive.sdb
-          type: File
+      - name: grafana-data
+        persistentVolumeClaim:
+            claimName: grafana-data-claim
 
 ---
 apiVersion: v1

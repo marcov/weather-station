@@ -4,7 +4,6 @@ set -euo pipefail
 
 declare scriptDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 source "${scriptDir}"/../config.sh
-source "${scriptDir}"/../../common_variables.sh
 
 getTemperature () {
     local url="$1"

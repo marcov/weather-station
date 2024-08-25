@@ -1,0 +1,139 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ws-code
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadOnlyMany
+  hostPath:
+    path: "/home/pi/weather-station"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ws-code-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 4Gi
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ws-data
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/home/pi/station-data"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ws-data-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 4Gi
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ws-shared
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/tmp/k8s-pv-shared"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ws-shared-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 4Gi
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: grafana-data
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/home/pi/k8s-pv/grafana-data"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: grafana-data-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 4Gi
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: prometheus-data
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/home/pi/k8s-pv/prometheus-data"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prometheus-data-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 4Gi

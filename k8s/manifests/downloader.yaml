@@ -29,17 +29,15 @@ spec:
                   subPath: apps/downloader
                   readOnly: true
 
-                - name: outdir
+                - name: ws-shared
                   mountPath: /tmp/downloader
-                  readOnly: false
+                  subPath: downloader
 
           volumes:
             - name: ws-code
               persistentVolumeClaim:
                   claimName: ws-code-claim
 
-            - name: outdir
-              hostPath:
-                path: /tmp/downloader
-                type: Directory
-
+            - name: ws-shared
+              persistentVolumeClaim:
+                  claimName: ws-shared-claim

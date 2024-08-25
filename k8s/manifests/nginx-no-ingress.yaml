@@ -48,20 +48,24 @@ spec:
           mountPath: /etc/letsencrypt
           readOnly: true
 
-        - name: station-data-img
-          mountPath: /www/wview-img
+        - name: ws-shared
+          mountPath: /www/stations
+          subPath: stations
           readOnly: true
 
-        - name: webcam
+        - name: ws-shared
           mountPath: /www/webcam
+          subPath: webcam
           readOnly: true
 
-        - name: webshot
+        - name: ws-shared
           mountPath: /www/webshot
+          subPath: webshot
           readOnly: true
 
-        - name: downloader
+        - name: ws-shared
           mountPath: /www/downloader
+          subPath: downloader
           readOnly: true
 
         - name: tz-config
@@ -73,29 +77,13 @@ spec:
         persistentVolumeClaim:
             claimName: ws-code-claim
 
+      - name: ws-shared
+        persistentVolumeClaim:
+            claimName: ws-shared-claim
+
       - name: ssl-certs
         hostPath:
           path: /home/pi/secrets/letsencrypt
-          type: Directory
-
-      - name: station-data-img
-        hostPath:
-          path: /tmp/station-data-img
-          type: Directory
-
-      - name: webcam
-        hostPath:
-          path: /tmp/webcam
-          type: Directory
-
-      - name: webshot
-        hostPath:
-          path: /tmp/webshot
-          type: Directory
-
-      - name: downloader
-        hostPath:
-          path: /tmp/downloader
           type: Directory
 
       - name: tz-config
