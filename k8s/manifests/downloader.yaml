@@ -21,11 +21,12 @@ spec:
               image: docker.io/library/python:3.12
               imagePullPolicy: IfNotPresent
               command:
-              - /run.sh
+              - /downloader/run.sh
 
               volumeMounts:
-                - name: script
-                  mountPath: /run.sh
+                - name: ws-code
+                  mountPath: /downloader
+                  subPath: apps/downloader
                   readOnly: true
 
                 - name: outdir
@@ -33,10 +34,9 @@ spec:
                   readOnly: false
 
           volumes:
-            - name: script
-              hostPath:
-                path: /home/pi/weather-station/apps/downloader/run.sh
-                type: File
+            - name: ws-code
+              persistentVolumeClaim:
+                  claimName: ws-code-claim
 
             - name: outdir
               hostPath:

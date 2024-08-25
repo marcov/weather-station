@@ -51,8 +51,9 @@ spec:
         - name: dev-ttyusb
           mountPath: /dev/ttyUSB0
 
-        - name: ser2net-conf
+        - name: ws-code
           mountPath: /etc/ser2net.conf
+          subPath: apps/ser2net/ser2net.conf
           readOnly: true
 
         ports:
@@ -76,7 +77,6 @@ spec:
           path: /dev/ttyUSB0
           type: CharDevice
 
-      - name: ser2net-conf
-        hostPath:
-          path: /home/pi/weather-station/apps/ser2net/ser2net.conf
-          type: File
+      - name: ws-code
+        persistentVolumeClaim:
+            claimName: ws-code-claim

@@ -76,16 +76,14 @@ spec:
               mountPath: /home/pi/panogen/out
               readOnly: true
 
-            - name: webcam-scripts
-              mountPath: /webcam/scripts
+            - name: ws-code
+              mountPath: /webcam
+              subPath: apps/webcam
               readOnly: true
 
-            - name: webcam-config
-              mountPath: /webcam/config.sh
-              readOnly: true
-
-            - name: common-variables
+            - name: ws-code
               mountPath: /common_variables.sh
+              subPath: common_variables.sh
               readOnly: true
 
           volumes:
@@ -99,18 +97,6 @@ spec:
               path: /home/pi/panogen/out
               type: Directory
 
-          - name: webcam-scripts
-            hostPath:
-              path: /home/pi/weather-station/apps/webcam/scripts
-              type: Directory
-
-          - name: webcam-config
-            hostPath:
-              path: /home/pi/weather-station/apps/webcam/config.sh
-              type: File
-
-          - name: common-variables
-            hostPath:
-              path: /home/pi/weather-station/common_variables.sh
-              type: File
-
+          - name: ws-code
+            persistentVolumeClaim:
+                claimName: ws-code-claim

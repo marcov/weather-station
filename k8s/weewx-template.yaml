@@ -27,7 +27,7 @@ spec:
             - |
                 set -x
                 [ -e /var/lib/weewx/weewx.sdb ] || ln -s wview-archive.sdb /var/lib/weewx/weewx.sdb
-                cp -a /skins/Seasons/* /etc/weewx/skins/Seasons/
+                cp -a /weewx/skins/Seasons/* /etc/weewx/skins/Seasons/
                 exec weewxd
 
         startupProbe:
@@ -48,19 +48,16 @@ spec:
           #failureThreshold: 3
           #successThreshold: 1
           exec:
-            command: ["/bin/bash", "-c", "exec /scripts/health-check.sh /var/www/html/weewx"]
+            command: ["/bin/bash", "-c", "exec /weewx/scripts/health-check.sh /var/www/html/weewx"]
 
         volumeMounts:
-        - name: scripts
-          mountPath: /scripts
+        - name: ws-code
+          mountPath: /weewx
+          subPath: apps/weewx
           readOnly: true
 
         - name: database
           mountPath: /var/lib/weewx
-
-        - name: skins
-          mountPath: /skins
-          readOnly: true
 
         - name: weewx-conf
           mountPath: /etc/weewx/weewx.conf
@@ -74,10 +71,9 @@ spec:
           readOnly: true
 
       volumes:
-      - name: scripts
-        hostPath:
-          path: /home/pi/weather-station/apps/weewx/scripts
-          type: Directory
+      - name: ws-code
+        persistentVolumeClaim:
+          claimName: ws-code-claim
 
       - name: database
         hostPath:
@@ -93,11 +89,6 @@ spec:
         hostPath:
           path: /etc/localtime
           type: File
-
-      - name: skins
-        hostPath:
-          path: /home/pi/weather-station/apps/weewx/skins
-          type: Directory
 
       - name: weewx-html
         hostPath:

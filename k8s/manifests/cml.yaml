@@ -28,11 +28,11 @@ spec:
                 - |
                   export cml_ftp_user="${cml_ftp_user_fiobbio}"
                   export cml_ftp_pwd="${cml_ftp_pwd_fiobbio}"
-                  /scripts/main.sh /data/fiobbio1
+                  /cml/main.sh /data/fiobbio1
 
                   export cml_ftp_user="${cml_ftp_user_misma}"
                   export cml_ftp_pwd="${cml_ftp_pwd_misma}"
-                  /scripts/main.sh /data/misma
+                  /cml/main.sh /data/misma
 
               env:
                 - name: cml_ftp_user_fiobbio
@@ -60,8 +60,9 @@ spec:
                       key: cml_ftp_pwd_misma
 
               volumeMounts:
-                - name: scripts
-                  mountPath: /scripts
+                - name: ws-code
+                  mountPath: /cml
+                  subPath: apps/cml
                   readOnly: true
 
                 - name: data
@@ -73,10 +74,9 @@ spec:
                   readOnly: true
 
           volumes:
-            - name: scripts
-              hostPath:
-                path: /home/pi/weather-station/apps/cml
-                type: Directory
+            - name: ws-code
+              persistentVolumeClaim:
+                  claimName: ws-code-claim
 
             - name: data
               hostPath:

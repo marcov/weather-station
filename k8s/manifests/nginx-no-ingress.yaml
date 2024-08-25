@@ -34,8 +34,14 @@ spec:
         - containerPort: 80
 
         volumeMounts:
-        - name: nginx-conf
+        - name: ws-code
           mountPath: /etc/nginx/conf.d/default.conf
+          subPath: apps/nginx/nginx.conf
+          readOnly: true
+
+        - name: ws-code
+          mountPath: /usr/share/nginx/html
+          subPath: html
           readOnly: true
 
         - name: ssl-certs
@@ -58,19 +64,14 @@ spec:
           mountPath: /www/downloader
           readOnly: true
 
-        - name: wview-html-static
-          mountPath: /weather-station/html/
-          readOnly: true
-
         - name: tz-config
           mountPath: /etc/localtime
           readOnly: true
 
       volumes:
-      - name: nginx-conf
-        hostPath:
-          path: /home/pi/weather-station/apps/nginx/nginx.conf
-          type: File
+      - name: ws-code
+        persistentVolumeClaim:
+            claimName: ws-code-claim
 
       - name: ssl-certs
         hostPath:
@@ -95,11 +96,6 @@ spec:
       - name: downloader
         hostPath:
           path: /tmp/downloader
-          type: Directory
-
-      - name: wview-html-static
-        hostPath:
-          path: /home/pi/weather-station/html/
           type: Directory
 
       - name: tz-config

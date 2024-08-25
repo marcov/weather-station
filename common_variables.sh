@@ -14,20 +14,5 @@ declare -r WVIEW_DATA_DIR="/var/lib/wview"
 # Host dir
 #
 declare -r hostWviewImgDir="/tmp/station-data-img"
-declare -r hostWviewDataDir="/home/pi/station-data"
 declare -r hostRepoRoot="${repoRoot}"
-declare -r hostWebcamDir="/tmp/webcam"
-declare -r hostWebshotDir="/tmp/webshot"
 
-declare -r websiteUrl="meteo.fiobbio.com"
-
-#
-# CML FTP config (note: login credentials are not here :P)
-#
-cml_ftp_server="ftp.centrometeolombardo.com"
-
-# webcam use only
-cml_ftp_log_file="/tmp/cml_ftp.log"
-cml_ftp_upload_folder="public"
-# Set to 1 to log ftp upload information to stdout
-cml_ftp_log_info=1

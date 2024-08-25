@@ -28,7 +28,7 @@ spec:
             args:
             - ln -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime;
               rclone config create backblaze b2 account $BACKBLAZE_ACCOUNT key $BACKBLAZE_KEY;
-              /run-backup
+              /backuppper/run-backup
 
             env:
             - name: BACKBLAZE_ACCOUNT
@@ -44,8 +44,9 @@ spec:
                   key: BACKBLAZE_KEY
 
             volumeMounts:
-            - name: backup-script
-              mountPath: /run-backup
+            - name: ws-code
+              mountPath: /backupper
+              subPath: apps/backupper
               readOnly: true
 
             - name: station-data
@@ -53,10 +54,9 @@ spec:
               readOnly: true
 
           volumes:
-          - name: backup-script
-            hostPath:
-              path: /home/pi/weather-station/apps/backupper/run-backup
-              type: File
+          - name: ws-code
+            persistentVolumeClaim:
+                claimName: ws-code-claim
 
           - name: station-data
             hostPath:

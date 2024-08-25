@@ -24,12 +24,13 @@ spec:
             imagePullPolicy: IfNotPresent
             args:
             - /webshot/run.sh
-            - /config.json
+            - /webshot-conf/config.json
             - /destdir
 
             volumeMounts:
-            - name: webshot-conf
-              mountPath: /config.json
+            - name: ws-code
+              mountPath: /webshot-conf
+              subPath: apps/webshot
               readOnly: true
 
             - name: webshot-destdir
@@ -41,8 +42,7 @@ spec:
               path: /tmp/webshot
               type: Directory
 
-          - name: webshot-conf
-            hostPath:
-              path: /home/pi/weather-station/apps/webshot/config.json
-              type: File
+          - name: ws-code
+            persistentVolumeClaim:
+                claimName: ws-code-claim
 

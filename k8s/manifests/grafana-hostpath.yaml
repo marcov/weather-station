@@ -42,8 +42,9 @@ spec:
           - name: grafana-storage
             mountPath: /var/lib/grafana
 
-          - name: grafana-ini
+          - name: ws-code
             mountPath: /etc/grafana/grafana.ini
+            subPath: apps/grafana/grafana.ini
             readOnly: true
 
           - name: wview-archive-fiobbio1
@@ -89,10 +90,9 @@ spec:
           path: /home/pi/k8s/pv/grafana-pv-storage/
           type: Directory
 
-      - name: grafana-ini
-        hostPath:
-          path: /home/pi/weather-station/apps/grafana/grafana.ini
-          type: File
+      - name: ws-code
+        persistentVolumeClaim:
+            claimName: ws-code-claim
 
       - name: wview-archive-fiobbio1
         hostPath:

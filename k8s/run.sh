@@ -7,7 +7,7 @@ set -euo pipefail
 set -x
 declare -r scriptDir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
 
-. ${scriptDir}/../common_variables.sh
+declare -r generatedDataPath="/tmp/station-data-img"
 
 declare -r scriptStarted="/tmp/run-sh-started"
 declare -r scriptCompleted="/tmp/run-sh-completed"
@@ -31,31 +31,23 @@ touch "$scriptStarted"
 # TODO: find a better way to store wview img in a tmpfs shared volume b/w host and containers!
 #
 if [ -n "${removeEphemeral}" ]; then
-    rm -rf "${hostWviewImgDir}"
-    mkdir "${hostWviewImgDir}"
+    rm -rf "${generatedDataPath}"
+    mkdir "${generatedDataPath}"
 fi
 
 # Create required dirs
 mkdir -p /tmp/{webcam,webshot,downloader}
 
 # Create img folder
-mkdir -p "${hostWviewImgDir}"
+mkdir -p "${generatedDataPath}"
 
 # Create the ddns ip cache file
 ${asRoot} touch /tmp/ddns-ip
 ${asRoot} chmod 666 /tmp/ddns-ip
 
 for sta in ${stations[@]}; do
-    cp -a \
-        "${hostRepoRoot}/apps/wview/fs/${WVIEW_CONF_DIR}/html/classic/static/" \
-        "${hostWviewImgDir}/${sta}"
-
-    cp \
-        "${hostRepoRoot}/apps/wview/fs/${WVIEW_CONF_DIR}/html/chart_bg_bigger.png" \
-        "${hostWviewImgDir}/${sta}/chart_bg.png"
-
-    mkdir -p "${hostWviewImgDir}"/${sta}/NOAA
-    mkdir -p "${hostWviewImgDir}"/${sta}/Archive
+    mkdir -p "${generatedDataPath}"/${sta}/NOAA
+    mkdir -p "${generatedDataPath}"/${sta}/Archive
 done
 
 set -x
