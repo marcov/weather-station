@@ -2,10 +2,15 @@
 
 set -euo pipefail
 
-dataDir=/data
-# Intermediate data dir
-tmpDir=/tmp/data
+declare -r dataDir=/data
+# Intermediate data dir collecting all files to sync
+declare -r tmpDir=/tmp/data
 
+# This is in bytes/s, can use B|K|M|...
+declare -r upload_bw=100k
+declare -r download_bw=2M
+
+################################################################################
 is_db_file() {
     local -r file=${1}
 
@@ -51,4 +56,4 @@ done
 echo "INFO: files to backup:\n"
 find ${tmpDir} -type f
 
-rclone sync -P "${tmpDir}" backblaze:weather-station
+rclone --bwlimit "${upload_bw}":"${download_bw}" sync -P "${tmpDir}" backblaze:weather-station

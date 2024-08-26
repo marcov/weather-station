@@ -28,7 +28,7 @@ spec:
             args:
             - ln -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime;
               rclone config create backblaze b2 account $BACKBLAZE_ACCOUNT key $BACKBLAZE_KEY;
-              /backuppper/run-backup
+              /backupper/run-backup
 
             env:
             - name: BACKBLAZE_ACCOUNT
