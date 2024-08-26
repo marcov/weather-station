@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -31,9 +32,9 @@ spec:
           volumeMounts:
             - name: grafana-data
               mountPath: /var/lib/grafana
-            - name: ws-code
+            - name: config-file
               mountPath: /etc/grafana/grafana.ini
-              subPath: apps/grafana/grafana.ini
+              subPath: grafana.ini
               readOnly: true
             - name: ws-data
               mountPath: /wview-archive-fiobbio1.sdb
@@ -67,15 +68,15 @@ spec:
           ports:
             - containerPort: 8081
       volumes:
-        - name: ws-code
-          persistentVolumeClaim:
-            claimName: ws-code-claim
         - name: ws-data
           persistentVolumeClaim:
             claimName: ws-data-claim
         - name: grafana-data
           persistentVolumeClaim:
             claimName: grafana-data-claim
+        - name: config-file
+          secret:
+            secretName: grafana-config
 ---
 apiVersion: v1
 kind: Service

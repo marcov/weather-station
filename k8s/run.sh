@@ -50,19 +50,32 @@ minikube status || minikube start --driver none --extra-config=apiserver.service
 
 ${scriptDir}/template-gen.sh ${genManifestsDir}
 
-declare -r -A k8s_create_secrets=(
+declare -r -A k8s_create_env_secrets=(
     [cml-ftp-login]="cml_ftp_login_data.sh"
     [webcam-login]="webcam_login_data.sh"
     [backblaze-info]="backblaze"
     [ddns-info]="ddns-info.txt"
 )
 
-for sname in ${!k8s_create_secrets[@]}
+declare -r -A k8s_create_file_secrets=(
+    [grafana-config]="grafana.ini"
+)
+
+for sname in ${!k8s_create_env_secrets[@]}
 do
-    sfpath="${secretsDir}/${k8s_create_secrets[${sname}]}"
-    echo "Checking and creating secret ${sname} -> ${sfpath}"
+    sfpath="${secretsDir}/${k8s_create_env_secrets[${sname}]}"
+    echo "Checking and creating env secret ${sname} -> ${sfpath}"
     # Do not do anything if secret already exists
     kubectl create secret generic ${sname} --from-env-file=${sfpath} \
+        --dry-run=client -o yaml | kubectl apply -f -
+done
+
+for sname in ${!k8s_create_file_secrets[@]}
+do
+    sfpath="${secretsDir}/${k8s_create_file_secrets[${sname}]}"
+    echo "Checking and creating file secret ${sname} -> ${sfpath}"
+    # Do not do anything if secret already exists
+    kubectl create secret generic ${sname} --from-file=${sfpath} \
         --dry-run=client -o yaml | kubectl apply -f -
 done
 

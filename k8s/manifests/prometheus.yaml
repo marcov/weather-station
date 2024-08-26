@@ -171,14 +171,15 @@ spec:
           #    cpu: 200m
           #    memory: 1000Mi
           volumeMounts:
-            - name: config-volume
-              mountPath: /etc/config
+            - name: config-file
+              mountPath: /etc/config/prometheus.yaml
+              subPath: prometheus.yaml
             - name: prometheus-data
               mountPath: /data
       terminationGracePeriodSeconds: 300
       volumes:
         # The Prometheus ConfigMap is mounted into the Pods as a volume at `/etc/config`
-        - name: config-volume
+        - name: config-file
           configMap:
             name: prometheus-config
         - name: prometheus-data
