@@ -1,4 +1,3 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -7,112 +6,86 @@ metadata:
     app: grafana
   name: grafana
   namespace: default
-
 spec:
   selector:
     matchLabels:
       app: grafana
-
   replicas: 1
-
   template:
     metadata:
       labels:
         app: grafana
-
     spec:
       containers:
         - name: grafana
           image: docker.io/grafana/grafana:latest
-
           env:
-          - name: GF_RENDERING_SERVER_URL
-            value: http://localhost:8081/render
-
-          - name: GF_RENDERING_CALLBACK_URL
-            value: http://localhost:3000/
-
+            - name: GF_RENDERING_SERVER_URL
+              value: http://localhost:8081/render
+            - name: GF_RENDERING_CALLBACK_URL
+              value: http://localhost:3000/
           #- name: GF_LOG_FILTERS
           #  value: rendering:debug
-
           ports:
-          - containerPort: 3000
-
+            - containerPort: 3000
           volumeMounts:
-          - name: grafana-data
-            mountPath: /var/lib/grafana
-
-          - name: ws-code
-            mountPath: /etc/grafana/grafana.ini
-            subPath: apps/grafana/grafana.ini
-            readOnly: true
-
-          - name: ws-data
-            mountPath: /wview-archive-fiobbio1.sdb
-            subPath: fiobbio1/archive/wview-archive.sdb
-            readOnly: true
-
-          - name: ws-data
-            mountPath: /wview-archive-fiobbio2.sdb
-            subPath: fiobbio2/archive/wview-archive.sdb
-            readOnly: true
-
-          - name: ws-data
-            mountPath: /wview-archive-misma.sdb
-            subPath: misma/archive/wview-archive.sdb
-            readOnly: true
-
+            - name: grafana-data
+              mountPath: /var/lib/grafana
+            - name: ws-code
+              mountPath: /etc/grafana/grafana.ini
+              subPath: apps/grafana/grafana.ini
+              readOnly: true
+            - name: ws-data
+              mountPath: /wview-archive-fiobbio1.sdb
+              subPath: fiobbio1/archive/wview-archive.sdb
+              readOnly: true
+            - name: ws-data
+              mountPath: /wview-archive-fiobbio2.sdb
+              subPath: fiobbio2/archive/wview-archive.sdb
+              readOnly: true
+            - name: ws-data
+              mountPath: /wview-archive-misma.sdb
+              subPath: misma/archive/wview-archive.sdb
+              readOnly: true
         - name: renderer
           image: docker.io/grafana/grafana-image-renderer:latest
-
           env:
-          #- name: ENABLE_METRICS
-          #  value: "true"
+            #- name: ENABLE_METRICS
+            #  value: "true"
 
-          #- name: LOG_LEVEL
-          # value: debug
+            #- name: LOG_LEVEL
+            # value: debug
+            - name: IGNORE_HTTPS_ERRORS
+              value: "true"
+            #- name: RENDERING_VERBOSE_LOGGING
+            #  value: "true"
 
-          - name: IGNORE_HTTPS_ERRORS
-            value: "true"
-
-          #- name: RENDERING_VERBOSE_LOGGING
-          #  value: "true"
-
-          #- name: RENDERING_DUMPIO
-          #  value: "true"
-
-          - name: RENDERING_ARGS
-            value: --no-sandbox,--disable-setuid-sandbox,--disable-dev-shm-usage,--disable-accelerated-2d-canvas,--disable-gpu,--window-size=1280x758
-
+            #- name: RENDERING_DUMPIO
+            #  value: "true"
+            - name: RENDERING_ARGS
+              value: --no-sandbox,--disable-setuid-sandbox,--disable-dev-shm-usage,--disable-accelerated-2d-canvas,--disable-gpu,--window-size=1280x758
           ports:
-          - containerPort: 8081
-
+            - containerPort: 8081
       volumes:
-      - name: ws-code
-        persistentVolumeClaim:
+        - name: ws-code
+          persistentVolumeClaim:
             claimName: ws-code-claim
-
-      - name: ws-data
-        persistentVolumeClaim:
+        - name: ws-data
+          persistentVolumeClaim:
             claimName: ws-data-claim
-
-      - name: grafana-data
-        persistentVolumeClaim:
+        - name: grafana-data
+          persistentVolumeClaim:
             claimName: grafana-data-claim
-
 ---
 apiVersion: v1
 kind: Service
-
 metadata:
   name: grafana
-
 spec:
   type: NodePort
   selector:
     app: grafana
   ports:
-      # By default and for convenience, the `targetPort` is set to the same value as the `port` field.
+    # By default and for convenience, the `targetPort` is set to the same value as the `port` field.
     - port: 3000
       nodePort: 3000
-

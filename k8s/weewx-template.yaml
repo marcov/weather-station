@@ -1,4 +1,3 @@
----
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -14,79 +13,65 @@ spec:
       labels:
         app: weewx-$WEEWX_INSTANCE_NAME # has to match .spec.selector.matchLabels
         station: $WEEWX_INSTANCE_NAME
-
     spec:
       terminationGracePeriodSeconds: 10
       containers:
-
-      - name: weewx
-        image: pullme/weewx:latest
-
-        command: [ "/bin/bash",  "-c" ]
-        args:
+        - name: weewx
+          image: pullme/weewx:latest
+          command: ["/bin/bash", "-c"]
+          args:
             - |
-                set -x
-                [ -e /var/lib/weewx/weewx.sdb ] || ln -s wview-archive.sdb /var/lib/weewx/weewx.sdb
-                cp -a /weewx/skins/Seasons/* /etc/weewx/skins/Seasons/
-                exec weewxd
-
-        startupProbe:
-          # Allow a 2 minutes startup
-          periodSeconds: 10
-          failureThreshold: 12
-          exec:
-            # fixme, this is a trueism :-)
-            command: ["/bin/bash", "-c", "[ -d /proc/1 ]"]
-
-        livenessProbe:
-          # Every 5m, check for liveness.
-          # If for 3 times liveness fails, set pod unhealthy.
-          # Unhealthy after 15 min
-          periodSeconds: 300
-          initialDelaySeconds: 600
-          timeoutSeconds: 10
-          #failureThreshold: 3
-          #successThreshold: 1
-          exec:
-            command: ["/bin/bash", "-c", "exec /weewx/scripts/health-check.sh /var/www/html/weewx"]
-
-        volumeMounts:
-        - name: ws-code
-          mountPath: /weewx
-          subPath: apps/weewx
-          readOnly: true
-
-        - name: ws-data
-          mountPath: /var/lib/weewx
-          subPath: $WEEWX_INSTANCE_NAME/archive
-
-        - name: ws-data
-          mountPath: /etc/weewx/weewx.conf
-          subPath: $WEEWX_INSTANCE_NAME/conf/weewx.conf
-          readOnly: true
-
-        - name: ws-shared
-          mountPath: /var/www/html/weewx
-          subPath: stations/$WEEWX_INSTANCE_NAME
-
-        - name: localtime
-          mountPath: /etc/localtime
-          subPath: etc-localtime
-          readOnly: true
-
+              set -x
+              [ -e /var/lib/weewx/weewx.sdb ] || ln -s wview-archive.sdb /var/lib/weewx/weewx.sdb
+              cp -a /weewx/skins/Seasons/* /etc/weewx/skins/Seasons/
+              exec weewxd
+          startupProbe:
+            # Allow a 2 minutes startup
+            periodSeconds: 10
+            failureThreshold: 12
+            exec:
+              # fixme, this is a trueism :-)
+              command: ["/bin/bash", "-c", "[ -d /proc/1 ]"]
+          livenessProbe:
+            # Every 5m, check for liveness.
+            # If for 3 times liveness fails, set pod unhealthy.
+            # Unhealthy after 15 min
+            periodSeconds: 300
+            initialDelaySeconds: 600
+            timeoutSeconds: 10
+            #failureThreshold: 3
+            #successThreshold: 1
+            exec:
+              command: ["/bin/bash", "-c", "exec /weewx/scripts/health-check.sh /var/www/html/weewx"]
+          volumeMounts:
+            - name: ws-code
+              mountPath: /weewx
+              subPath: apps/weewx
+              readOnly: true
+            - name: ws-data
+              mountPath: /var/lib/weewx
+              subPath: $WEEWX_INSTANCE_NAME/archive
+            - name: ws-data
+              mountPath: /etc/weewx/weewx.conf
+              subPath: $WEEWX_INSTANCE_NAME/conf/weewx.conf
+              readOnly: true
+            - name: ws-shared
+              mountPath: /var/www/html/weewx
+              subPath: stations/$WEEWX_INSTANCE_NAME
+            - name: localtime
+              mountPath: /etc/localtime
+              subPath: etc-localtime
+              readOnly: true
       volumes:
-      - name: ws-code
-        persistentVolumeClaim:
-          claimName: ws-code-claim
-
-      - name: ws-data
-        persistentVolumeClaim:
+        - name: ws-code
+          persistentVolumeClaim:
+            claimName: ws-code-claim
+        - name: ws-data
+          persistentVolumeClaim:
             claimName: ws-data-claim
-
-      - name: ws-shared
-        persistentVolumeClaim:
+        - name: ws-shared
+          persistentVolumeClaim:
             claimName: ws-shared-claim
-
-      - name: localtime
-        configMap:
-          name: config-localtime
+        - name: localtime
+          configMap:
+            name: config-localtime

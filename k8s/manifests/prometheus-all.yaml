@@ -1,4 +1,3 @@
----
 apiVersion: v1
 kind: Service
 metadata:
@@ -20,7 +19,6 @@ spec:
   sessionAffinity: ClientIP
   selector:
     app: prometheus
-
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -121,7 +119,6 @@ metadata:
     app: prometheus
     app.kubernetes.io/name: prometheus
     app.kubernetes.io/component: prometheus
-
 spec:
   serviceName: prometheus
   replicas: 1
@@ -130,24 +127,19 @@ spec:
   #  type: "RollingUpdate"
   selector:
     matchLabels: *Labels
-
   template:
     metadata:
       labels: *Labels
-
     spec:
       # `chown` the Prometheus  `/data` directory so that Prometheus can write to it
       initContainers:
-      - name: "init-chown-data"
-        image: debian:9
-        imagePullPolicy: Always
-        command: ["chown", "-R", "65534:65534", "/data"]
-
-        volumeMounts:
-
-        - name: prometheus-data
-          mountPath: /data
-
+        - name: "init-chown-data"
+          image: debian:9
+          imagePullPolicy: Always
+          command: ["chown", "-R", "65534:65534", "/data"]
+          volumeMounts:
+            - name: prometheus-data
+              mountPath: /data
       containers:
         - name: prometheus-server
           image: quay.io/prometheus/prometheus:latest
@@ -157,10 +149,8 @@ spec:
             - --storage.tsdb.path=/data
             # Serve under a sub-path via a reverse proxy: NOTE: you need to update the probes paths too
             #- --web.external-url=/prometheus/
-
           ports:
             - containerPort: 9090
-
           # Probe the `/-/ready` and `/-/healthy` endpoints
           readinessProbe:
             httpGet:
@@ -181,22 +171,16 @@ spec:
           #    cpu: 200m
           #    memory: 1000Mi
           volumeMounts:
-
             - name: config-volume
               mountPath: /etc/config
-
             - name: prometheus-data
               mountPath: /data
-
       terminationGracePeriodSeconds: 300
-
       volumes:
         # The Prometheus ConfigMap is mounted into the Pods as a volume at `/etc/config`
         - name: config-volume
           configMap:
             name: prometheus-config
-
         - name: prometheus-data
           persistentVolumeClaim:
-              claimName: prometheus-data-claim
-
+            claimName: prometheus-data-claim

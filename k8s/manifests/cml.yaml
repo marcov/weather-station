@@ -1,12 +1,9 @@
-
 # k create secret generic cml-ftp-login --from-env-file=/home/pi/secrets/cml_ftp_login_data.sh
 # k create secret generic webcam-login --from-env-file=/home/pi/secrets/webcam_login_data.sh
----
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: cml
-
 spec:
   schedule: "*/5 * * * *"
   concurrencyPolicy: Replace
@@ -33,57 +30,47 @@ spec:
                   export cml_ftp_user="${cml_ftp_user_misma}"
                   export cml_ftp_pwd="${cml_ftp_pwd_misma}"
                   /cml/main.sh /data/misma
-
               env:
                 - name: cml_ftp_user_fiobbio
                   valueFrom:
                     secretKeyRef:
                       name: cml-ftp-login
                       key: cml_ftp_user_fiobbio1
-
                 - name: cml_ftp_pwd_fiobbio
                   valueFrom:
                     secretKeyRef:
                       name: cml-ftp-login
                       key: cml_ftp_pwd_fiobbio1
-
                 - name: cml_ftp_user_misma
                   valueFrom:
                     secretKeyRef:
                       name: cml-ftp-login
                       key: cml_ftp_user_misma
-
                 - name: cml_ftp_pwd_misma
                   valueFrom:
                     secretKeyRef:
                       name: cml-ftp-login
                       key: cml_ftp_pwd_misma
-
               volumeMounts:
                 - name: ws-code
                   mountPath: /cml
                   subPath: apps/cml
                   readOnly: true
-
                 - name: ws-shared
                   mountPath: /data
                   subPath: stations
                   readOnly: false
-
                 - name: localtime
                   mountPath: /etc/localtime
                   subPath: etc-localtime
                   readOnly: true
-
           volumes:
             - name: ws-code
               persistentVolumeClaim:
-                  claimName: ws-code-claim
-
+                claimName: ws-code-claim
             - name: ws-shared
               persistentVolumeClaim:
-                  claimName: ws-shared-claim
-
+                claimName: ws-shared-claim
             - name: localtime
               configMap:
                 name: config-localtime

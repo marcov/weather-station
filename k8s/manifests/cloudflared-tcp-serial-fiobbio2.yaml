@@ -12,26 +12,22 @@ spec:
       app: cloudflared-tcp-serial
   replicas: 1
   template:
-
     metadata:
       labels:
         app: cloudflared-tcp-serial
-
     spec:
       containers:
-      - name: cloudflared
-        image: cloudflare/cloudflared:latest
-        args:
-        - access
-        - tcp
-        - --loglevel=info
-        - --hostname=vaisala.sba.lat
-        - --url=0.0.0.0:2323
-
-        ports:
-        - containerPort: 2323
-          name: tcp-2323
-
+        - name: cloudflared
+          image: cloudflare/cloudflared:latest
+          args:
+            - access
+            - tcp
+            - --loglevel=info
+            - --hostname=vaisala.sba.lat
+            - --url=0.0.0.0:2323
+          ports:
+            - containerPort: 2323
+              name: tcp-2323
 ---
 apiVersion: v1
 kind: Service
@@ -41,13 +37,11 @@ metadata:
     app: cloudflared-tcp-serial
     app.kubernetes.io/name: cloudflared-tcp-serial
     app.kubernetes.io/component: cloudflared-tcp-serial
-
 spec:
   selector:
     app: cloudflared-tcp-serial
-
   ports:
-  - name: tcp-2323
-    protocol: TCP
-    port: 2323
-    targetPort: 2323
+    - name: tcp-2323
+      protocol: TCP
+      port: 2323
+      targetPort: 2323

@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: webshot
   labels:
-      app: webshot
+    app: webshot
 spec:
   schedule: "17 * * * *"
   concurrencyPolicy: Replace
@@ -14,37 +14,31 @@ spec:
       template:
         spec:
           restartPolicy: OnFailure
-
           hostAliases:
-          - ip: "0.0.0.0"
-            hostnames:
-            - "cdn.privacy-mgmt.com"
-
+            - ip: "0.0.0.0"
+              hostnames:
+                - "cdn.privacy-mgmt.com"
           containers:
-          - name: webshot
-            image: pullme/x86_64-webshot:latest
-            imagePullPolicy: IfNotPresent
-            args:
-            - /webshot/run.sh
-            - /webshot-conf/config.json
-            - /destdir
-
-            volumeMounts:
-            - name: ws-code
-              mountPath: /webshot-conf
-              subPath: apps/webshot
-              readOnly: true
-
-            - name: ws-shared
-              mountPath: /destdir
-              subPath: webshot
-              readOnly: false
-
+            - name: webshot
+              image: pullme/x86_64-webshot:latest
+              imagePullPolicy: IfNotPresent
+              args:
+                - /webshot/run.sh
+                - /webshot-conf/config.json
+                - /destdir
+              volumeMounts:
+                - name: ws-code
+                  mountPath: /webshot-conf
+                  subPath: apps/webshot
+                  readOnly: true
+                - name: ws-shared
+                  mountPath: /destdir
+                  subPath: webshot
+                  readOnly: false
           volumes:
-          - name: ws-code
-            persistentVolumeClaim:
+            - name: ws-code
+              persistentVolumeClaim:
                 claimName: ws-code-claim
-
-          - name: ws-shared
-            persistentVolumeClaim:
+            - name: ws-shared
+              persistentVolumeClaim:
                 claimName: ws-shared-claim

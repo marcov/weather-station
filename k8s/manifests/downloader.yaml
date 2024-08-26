@@ -1,9 +1,7 @@
----
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: downloader
-
 spec:
   schedule: "*/15 * * * *"
   concurrencyPolicy: Replace
@@ -21,23 +19,19 @@ spec:
               image: docker.io/library/python:3.12
               imagePullPolicy: IfNotPresent
               command:
-              - /downloader/run.sh
-
+                - /downloader/run.sh
               volumeMounts:
                 - name: ws-code
                   mountPath: /downloader
                   subPath: apps/downloader
                   readOnly: true
-
                 - name: ws-shared
                   mountPath: /tmp/downloader
                   subPath: downloader
-
           volumes:
             - name: ws-code
               persistentVolumeClaim:
-                  claimName: ws-code-claim
-
+                claimName: ws-code-claim
             - name: ws-shared
               persistentVolumeClaim:
-                  claimName: ws-shared-claim
+                claimName: ws-shared-claim

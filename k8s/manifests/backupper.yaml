@@ -1,13 +1,13 @@
----
+
+
 # k create secret generic backblaze-info --from-env-file=/home/pi/secrets/backblaze
 ---
-
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: backupper
   labels:
-      app: backupper
+    app: backupper
 spec:
   schedule: "0 2 * * *"
   concurrencyPolicy: Replace
@@ -18,46 +18,36 @@ spec:
       template:
         spec:
           restartPolicy: OnFailure
-
           containers:
-          - name: backupper
-            image: pullme/x86_64-rclone:latest
-            imagePullPolicy: IfNotPresent
-
-            command: ["/bin/bash", "-c"]
-            args:
-            - ln -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime;
-              rclone config create backblaze b2 account $BACKBLAZE_ACCOUNT key $BACKBLAZE_KEY;
-              /backupper/run-backup
-
-            env:
-            - name: BACKBLAZE_ACCOUNT
-              valueFrom:
-                secretKeyRef:
-                  name: backblaze-info
-                  key: BACKBLAZE_ACCOUNT
-
-            - name: BACKBLAZE_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: backblaze-info
-                  key: BACKBLAZE_KEY
-
-            volumeMounts:
-            - name: ws-code
-              mountPath: /backupper
-              subPath: apps/backupper
-              readOnly: true
-
-            - name: ws-data
-              mountPath: /data
-              readOnly: true
-
+            - name: backupper
+              image: pullme/x86_64-rclone:latest
+              imagePullPolicy: IfNotPresent
+              command: ["/bin/bash", "-c"]
+              args:
+                - ln -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime; rclone config create backblaze b2 account $BACKBLAZE_ACCOUNT key $BACKBLAZE_KEY; /backupper/run-backup
+              env:
+                - name: BACKBLAZE_ACCOUNT
+                  valueFrom:
+                    secretKeyRef:
+                      name: backblaze-info
+                      key: BACKBLAZE_ACCOUNT
+                - name: BACKBLAZE_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: backblaze-info
+                      key: BACKBLAZE_KEY
+              volumeMounts:
+                - name: ws-code
+                  mountPath: /backupper
+                  subPath: apps/backupper
+                  readOnly: true
+                - name: ws-data
+                  mountPath: /data
+                  readOnly: true
           volumes:
-          - name: ws-code
-            persistentVolumeClaim:
+            - name: ws-code
+              persistentVolumeClaim:
                 claimName: ws-code-claim
-
-          - name: ws-data
-            persistentVolumeClaim:
+            - name: ws-data
+              persistentVolumeClaim:
                 claimName: ws-data-claim
