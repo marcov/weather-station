@@ -1,17 +1,28 @@
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: ws-code
   labels:
-    type: local
+    name: ws-code
 spec:
-  storageClassName: ""
   capacity:
     storage: 5Gi
+  volumeMode: Filesystem
   accessModes:
-    - ReadOnlyMany
-  hostPath:
-    path: "/home/pi/weather-station"
+  - ReadOnlyMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  local:
+    path: /home/pi/weather-station
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - meteo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -24,21 +35,37 @@ spec:
   resources:
     requests:
       storage: 4Gi
+  selector:
+    matchLabels:
+        name: ws-code
+
+
+
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: ws-data
   labels:
-    type: local
+    name: ws-data
 spec:
-  storageClassName: ""
   capacity:
     storage: 5Gi
+  volumeMode: Filesystem
   accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/home/pi/station-data"
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  local:
+    path: /home/pi/station-data
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - meteo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -51,21 +78,38 @@ spec:
   resources:
     requests:
       storage: 4Gi
+  selector:
+    matchLabels:
+        name: ws-data
+
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: ws-shared
   labels:
-    type: local
+    name: ws-shared
 spec:
-  storageClassName: ""
   capacity:
     storage: 5Gi
+  volumeMode: Filesystem
   accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/tmp/k8s-pv-shared"
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: ""
+  local:
+    path: /tmp/k8s-pv-shared
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - meteo
+
+
+
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -78,21 +122,35 @@ spec:
   resources:
     requests:
       storage: 4Gi
+  selector:
+    matchLabels:
+        name: ws-shared
+
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: grafana-data
   labels:
-    type: local
+    name: grafana-data
 spec:
-  storageClassName: ""
   capacity:
     storage: 5Gi
+  volumeMode: Filesystem
   accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/home/pi/k8s-pv/grafana-data"
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  local:
+    path: /home/pi/k8s-pv/grafana-data
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - meteo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -105,21 +163,34 @@ spec:
   resources:
     requests:
       storage: 4Gi
+  selector:
+    matchLabels:
+        name: grafana-data
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: prometheus-data
   labels:
-    type: local
+    name: prometheus-data
 spec:
-  storageClassName: ""
   capacity:
     storage: 5Gi
+  volumeMode: Filesystem
   accessModes:
-    - ReadWriteMany
-  hostPath:
-    path: "/home/pi/k8s-pv/prometheus-data"
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  local:
+    path: /home/pi/k8s-pv/prometheus-data
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - meteo
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -132,3 +203,6 @@ spec:
   resources:
     requests:
       storage: 4Gi
+  selector:
+    matchLabels:
+        name: prometheus-data
