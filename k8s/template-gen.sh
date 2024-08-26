@@ -26,7 +26,7 @@ for sta in "${!weewx_stations_map[@]}"; do
 #
 EOF
 
-    cat ${scriptDir}/weewx-template.yaml | \
+    cat ${scriptDir}/weewx-template.yaml.tmpl | \
         WEEWX_INSTANCE_NAME="${sta}" \
         WEEWX_STATION_TYPE="${weewx_stations_map[${sta}]}" \
         envsubst '$WEEWX_INSTANCE_NAME $WEEWX_STATION_TYPE' >> "${manifestsDir}/weewx-${sta}.yaml"
