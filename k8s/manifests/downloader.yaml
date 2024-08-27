@@ -12,6 +12,9 @@ spec:
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            app: downloader
         spec:
           restartPolicy: OnFailure
           containers:

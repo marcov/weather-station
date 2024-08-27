@@ -3,8 +3,6 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: ddns
-  labels:
-    app: ddns
 spec:
   schedule: "*/5 * * * *"
   concurrencyPolicy: Replace
@@ -15,6 +13,9 @@ spec:
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            app: ddns
         spec:
           restartPolicy: OnFailure
           containers:

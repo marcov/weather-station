@@ -43,7 +43,7 @@ metadata:
 rules:
 - apiGroups: [""]
   resources: ["pods"]
-  verbs: ["delete", "deletecollection", "get", "list", "watch"]
+  verbs: ["delete", "deletecollection", "get", "list"]
 
 ---
 apiVersion: v1

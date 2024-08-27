@@ -3,8 +3,6 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: backupper
-  labels:
-    app: backupper
 spec:
   schedule: "0 2 * * *"
   concurrencyPolicy: Replace
@@ -13,6 +11,9 @@ spec:
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            app: backupper
         spec:
           restartPolicy: OnFailure
           containers:

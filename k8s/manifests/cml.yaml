@@ -13,6 +13,9 @@ spec:
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            app: cml
         spec:
           restartPolicy: OnFailure
           containers:
