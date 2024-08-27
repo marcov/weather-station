@@ -1,0 +1,45 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: letsencrypt
+spec:
+  schedule: "0 3 * * 1"
+  concurrencyPolicy: Replace
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: letsencrypt
+        spec:
+          restartPolicy: OnFailure
+          serviceAccountName: service-controller
+          containers:
+            - name: letsencrypt
+              image: pullme/x86_64-letsencrypt:latest
+              imagePullPolicy: IfNotPresent
+              ports:
+                - containerPort: 80
+                - containerPort: 443
+              command: ["/bin/bash", "-c"]
+              args:
+                - ln -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime; /letsencrypt/letsencrypt-renew.sh
+              volumeMounts:
+                - name: ws-code
+                  mountPath: /letsencrypt
+                  subPath: apps/letsencrypt
+                  readOnly: true
+                - name: secrets-data
+                  mountPath: /certificates
+                  subPath: letsencrypt
+                  readOnly: false
+          volumes:
+            - name: ws-code
+              persistentVolumeClaim:
+                claimName: ws-code-claim
+            - name: secrets-data
+              persistentVolumeClaim:
+                claimName: all-secrets-claim
