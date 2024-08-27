@@ -1,0 +1,34 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: pod-deleter
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Replace
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: pod-deleter
+        spec:
+          restartPolicy: OnFailure
+          serviceAccountName: pod-deleter
+          containers:
+            - name: pod-deleter
+              image: pullme/x86_64-pod-deleter:latest
+              imagePullPolicy: IfNotPresent
+              command:
+                - /pod-deleter/pod-deleter.sh
+              volumeMounts:
+                - name: ws-code
+                  mountPath: /pod-deleter
+                  subPath: apps/pod-deleter
+                  readOnly: true
+          volumes:
+            - name: ws-code
+              persistentVolumeClaim:
+                claimName: ws-code-claim

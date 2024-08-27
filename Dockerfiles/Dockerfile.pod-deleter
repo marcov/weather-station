@@ -1,0 +1,23 @@
+#
+# get kubectl
+#
+FROM alpine:latest as BUILDER
+
+RUN apk add curl
+RUN curl -fL --output /tmp/kubectl "https://dl.k8s.io/release/v1.31.0/bin/linux/amd64/kubectl"
+
+################################################################################
+#
+# main container
+#
+FROM debian:12
+
+COPY --from=BUILDER /tmp/kubectl /usr/local/bin/kubectl
+
+RUN \
+    apt-get -y update; \
+    \
+    DEBIAN_FRONTEND=noninteractive apt-get -yq --no-install-recommends install \
+      jq
+
+RUN chmod +x /usr/local/bin/kubectl
