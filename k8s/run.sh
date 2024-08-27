@@ -10,15 +10,15 @@ declare -r scriptDir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P
 # Used to store data shared among pods
 declare -r k8s_pv_shared_path=/tmp/k8s-pv-shared
 
-declare -r scriptStarted="/tmp/run-sh-started"
-declare -r scriptCompleted="/tmp/run-sh-completed"
-declare -r secretsDir="/home/pi/secrets"
-declare -r genManifestsDir="/tmp/k8s_manifests"
+declare -r scriptStarted=/tmp/run-sh-started
+declare -r scriptCompleted=/tmp/run-sh-completed
+declare -r secretsDir=/home/pi/secrets
+declare -r genManifestsDir=/tmp/k8s_manifests
 declare removeEphemeral=
 declare -r -a stations=( \
-    fiobbio1 \
-    fiobbio2 \
-    misma \
+    fiobbio1
+    fiobbio2
+    misma
 )
 
 if [ "`id -u`" != 0 ]; then
@@ -79,13 +79,13 @@ do
         --dry-run=client -o yaml | kubectl apply -f -
 done
 
-${asRoot} chmod o+r /home/pi/secrets/letsencrypt/live/meteo.fiobbio.com/privkey.pem
+${asRoot} chmod o+r ${secretsDir}/letsencrypt/live/meteo.fiobbio.com/privkey.pem
 kubectl create secret tls tls-meteo-fiobbio-com \
-    --cert=/home/pi/secrets/letsencrypt/live/meteo.fiobbio.com/fullchain.pem \
-    --key=/home/pi/secrets/letsencrypt/live/meteo.fiobbio.com/privkey.pem \
+    --cert="${secretsDir}"/letsencrypt/live/meteo.fiobbio.com/fullchain.pem \
+    --key="${secretsDir}"/letsencrypt/live/meteo.fiobbio.com/privkey.pem \
      --dry-run=client -o yaml | kubectl apply -f -
 
-${asRoot} chmod o-r /home/pi/secrets/letsencrypt/live/meteo.fiobbio.com/privkey.pem
+${asRoot} chmod o-r ${secretsDir}/letsencrypt/live/meteo.fiobbio.com/privkey.pem
 
 kubectl create configmap config-localtime \
     --from-file=etc-localtime=/etc/localtime \
