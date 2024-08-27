@@ -2,58 +2,109 @@
 
 set -euo pipefail
 
-declare -r dataDir=/data
+declare -r sta_data_path=/station-data
+declare -r grafana_data_path=/grafana-data
+declare -r secrets_data_path=/secrets-data
+
 # Intermediate data dir collecting all files to sync
-declare -r tmpDir=/tmp/data
+declare -r rclone_sync_dir=/tmp/sync-src
 
 # This is in bytes/s, can use B|K|M|...
 declare -r upload_bw=100k
 declare -r download_bw=2M
 
 ################################################################################
+
 is_db_file() {
     local -r file=${1}
 
-    [[ ${file} =~ ^.+\.sdb$ ]]
+    [[ ${file} =~ ^.+\.s?db$ ]]
 }
 
-# We only need to backup
-# wview-archive
-# wview-conf.
-# weewx.conf.
-# All the other files are generated.
-declare -a filesList=(
-    $(find "${dataDir}" \
-        -maxdepth 3 \
-        -type f \
-        -wholename "*/archive/wview-archive.sdb" \
-        -or \
-        -wholename "*/conf/wview-conf.sdb" \
-        -or \
-        -wholename "*/conf/weewx.conf" \
-        )
-)
+backup_db_file() {
+    local src=
+    src="$1"
+    local dst=
+    dst="$2"
 
-rm -rf "${tmpDir}"
+    sqlite3 \
+        -cmd ".timeout 10000" \
+        "${src}" \
+        ".backup ${dst}"
+}
 
-set -x
-for f in "${filesList[@]}"; do
-    echo "INFO: backing up ${f}"
-    mkdir -p "${tmpDir}"/"$(dirname ${f})"
+prepare_files() {
+    local -a files_list=( $* )
 
-    if $(is_db_file "${f}"); then
-        sqlite3 \
-            -cmd ".timeout 10000" \
-            "${f}" \
-            ".backup ${tmpDir}/${f}"
-     else
-        install -D "${f}" "${tmpDir}/${f}"
-    fi
+    for f in "${files_list[@]}"; do
 
-    bzip2 -z "${tmpDir}/${f}"
-done
+        mkdir -p "${rclone_sync_dir}"/"$(dirname ${f})"
 
-echo "INFO: files to backup:\n"
-find ${tmpDir} -type f
+        if [[ -d ${f} ]]; then
+            echo "INFO: backing up directory ${f}"
+            tar cjvf "${rclone_sync_dir}/${f}".tar.bz2 -C "${f}" .
+        else
+            if $(is_db_file "${f}"); then
+                echo "INFO: backing up db ${f}"
+                backup_db_file "${f}" "${rclone_sync_dir}/${f}"
+            else
+                echo "INFO: backing up file ${f}"
+                install -D "${f}" "${rclone_sync_dir}/${f}"
+            fi
+            bzip2 -v -z "${rclone_sync_dir}/${f}"
+        fi
+    done
+}
 
-rclone --bwlimit "${upload_bw}":"${download_bw}" sync -P "${tmpDir}" backblaze:weather-station
+prepare_station_files() {
+    # We only need to backup
+    # - wview-archive.sdb
+    # - wview-conf.sdb
+    # - weewx.conf
+    # All the other files are generated, so no need to backup them
+    local -a sta_files=(
+        $(find "${sta_data_path}" \
+            -type f \
+            -wholename "*/archive/wview-archive.sdb" \
+            -or \
+            -type f \
+            -wholename "*/conf/wview-conf.sdb" \
+            -or \
+            -type f \
+            -wholename "*/conf/weewx.conf" \
+            )
+    )
+
+    prepare_files "${sta_files[@]}"
+}
+
+prepare_grafana_files() {
+    local -a grafana_files=(
+        $(find "${grafana_data_path}" \
+            -type f \
+            -wholename "*/grafana.db" \
+            -or \
+            -type d \
+            -wholename "*/plugins" \
+            )
+    )
+    prepare_files "${grafana_files[@]}"
+}
+
+prepare_secrets_files() {
+    local tgt_path=
+    tgt_path="${rclone_sync_dir}"/"$(basename ${secrets_data_path})"
+
+    mkdir -p "${tgt_path}"
+    tar cjvf ${tgt_path}/secrets-data.tar.bz2 -C ${secrets_data_path} .
+}
+
+rm -rf "${rclone_sync_dir}"
+prepare_station_files
+prepare_grafana_files
+prepare_secrets_files
+
+echo "INFO: files to backup:"
+find ${rclone_sync_dir} -type f
+
+rclone --bwlimit "${upload_bw}":"${download_bw}" sync -P "${rclone_sync_dir}" backblaze:weather-station

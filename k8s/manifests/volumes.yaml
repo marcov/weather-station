@@ -1,3 +1,4 @@
+################################################################################
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -38,9 +39,7 @@ spec:
   selector:
     matchLabels:
         name: ws-code
-
-
-
+################################################################################
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -81,7 +80,7 @@ spec:
   selector:
     matchLabels:
         name: ws-data
-
+################################################################################
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -107,9 +106,6 @@ spec:
           operator: In
           values:
           - meteo
-
-
-
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -126,6 +122,7 @@ spec:
     matchLabels:
         name: ws-shared
 
+################################################################################
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -166,6 +163,7 @@ spec:
   selector:
     matchLabels:
         name: grafana-data
+################################################################################
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -206,3 +204,45 @@ spec:
   selector:
     matchLabels:
         name: prometheus-data
+################################################################################
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: all-secrets
+  labels:
+    name: all-secrets
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadOnlyMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ""
+  local:
+    path: /home/pi/secrets
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - meteo
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: all-secrets-claim
+spec:
+  storageClassName: ""
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+        name: all-secrets
+################################################################################
