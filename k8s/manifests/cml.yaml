@@ -1,5 +1,4 @@
-# k create secret generic cml-ftp-login --from-env-file=/home/pi/secrets/cml_ftp_login_data.sh
-# k create secret generic webcam-login --from-env-file=/home/pi/secrets/webcam_login_data.sh
+---
 apiVersion: batch/v1
 kind: CronJob
 metadata:
