@@ -1,22 +1,24 @@
 #!/bin/bash
 
-# Don't set -e: the script should run to completion so that nginx is always
-# restarted, even on error.
-set +e
+# Don't set -e: the script should run to completion, so that the webserver
+# service is always restored, even on error.
+#
+# NOTE: POD_APP_LABEL must be exposed via the fieldRef downward API.
 
-declare -r le_certs_path=/certificates
+set +e
 set -x -u -o pipefail
 
-declare -r tmp_service_file=$(mktemp /tmp/k8s_service_nginx.XXXX)
+declare -r tls_certificates_path=/certificates
+declare -r webserver_svc=webserver
 
-# Redirect HTTP-80 traffic to this pod
-kubectl patch service nginx --patch '{"spec":{"selector": {"app": "letsencrypt"}}}'
+# Obtain default webserver app
+declare default_webserver_app=
+default_webserver_app="$(kubectl get service "${webserver_svc}" -o=json | jq -r ".metadata.name")"
 
-# dry run
-#certbot renew  --logs-dir /tmp --config-dir "${le_certs_path}" --work-dir /tmp --standalone --dry-run
+# Redirect webserver traffic to this pod
+kubectl patch service "${webserver_svc}" --patch '{"spec":{"selector": {"app": "'"${POD_APP_LABEL}"'"}}}'
 
-# actual run
-certbot renew  --logs-dir /tmp --config-dir "${le_certs_path}" --work-dir /tmp --standalone
+certbot renew --verbose --logs-dir /tmp --config-dir "${tls_certificates_path}" --work-dir /tmp --standalone
 
-# Restore HTTP-80 traffic to nginx
-kubectl patch service nginx --patch '{"spec":{"selector": {"app": "nginx"}}}'
+# Restore webserver traffic to default app
+kubectl patch service "${webserver_svc}" --patch '{"spec":{"selector": {"app": "'"${webserver_svc}"'"}}}'

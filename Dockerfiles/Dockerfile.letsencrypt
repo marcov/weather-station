@@ -18,6 +18,7 @@ RUN \
     apt-get -y update; \
     \
     DEBIAN_FRONTEND=noninteractive apt-get -yq --no-install-recommends install \
-      certbot
+      certbot \
+      jq
 
 RUN chmod +x /usr/local/bin/kubectl

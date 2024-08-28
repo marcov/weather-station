@@ -27,6 +27,12 @@ spec:
               command: ["/bin/bash", "-c"]
               args:
                 - ln -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime; /letsencrypt/letsencrypt-renew.sh
+              env:
+              - name: POD_APP_LABEL
+                valueFrom:
+                  fieldRef:
+                    apiVersion: v1
+                    fieldPath : metadata.labels['app']
               volumeMounts:
                 - name: ws-code
                   mountPath: /letsencrypt
