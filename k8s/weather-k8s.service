@@ -7,7 +7,7 @@ Wants=network-online.target
 User=pi
 Group=pi
 Type=oneshot
-ExecStart=/home/pi/weather-station/k8s/run.sh
+ExecStart=/mnt/disk/weather-station/k8s/run.sh
 ExecStop=/usr/local/bin/minikube stop
 RemainAfterExit=true
 

@@ -1,2 +1,3 @@
 /webshot/node_modules/
 /webshot/package-lock.json
+.ignore

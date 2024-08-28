@@ -12,7 +12,7 @@ declare -r k8s_pv_shared_path=/tmp/k8s-pv-shared
 
 declare -r scriptStarted=/tmp/run-sh-started
 declare -r scriptCompleted=/tmp/run-sh-completed
-declare -r secretsDir=/home/pi/secrets
+declare -r secretsDir=/mnt/disk/secrets
 declare -r genManifestsDir=/tmp/k8s_manifests
 declare removeEphemeral=
 declare -r -a stations=( \
