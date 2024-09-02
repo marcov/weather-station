@@ -50,3 +50,34 @@ spec:
     - hosts:
         - meteo.fiobbio.com
       secretName: tls-meteo-fiobbio-com
+
+---
+# NOTE: this setup needs prometheus to be started with args:
+# args:
+# - --web.external-url=https://prometheus:9090/prometheus
+# - --web.route-prefix=/
+#
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prometheus-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+
+spec:
+  rules:
+    - host: meteo.fiobbio.com
+      http:
+        paths:
+          - path: /prometheus(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: prometheus
+                port:
+                  number: 9090
+  tls:
+    - hosts:
+        - meteo.fiobbio.com
+      secretName: tls-meteo-fiobbio-com

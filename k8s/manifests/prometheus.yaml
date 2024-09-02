@@ -139,13 +139,16 @@ spec:
           args:
             - --config.file=/etc/config/prometheus.yaml
             - --storage.tsdb.path=/data
-            # NOTE: if changing these, you need to update the readiness /
-            # liveness probes path below
-            #- --web.external-url=http://prometheus:9090/prometheus/
-            #- --web.route-prefix=/prometheus/
+            #
+            # NOTE: This is only to make the ingress work.
+            # - From inside a pod, you must query directly /graph et al.
+            # - Same when configuring grafana data source, do NOT add the
+            # /prometheus prefix.
+            #
+            - --web.external-url=https://prometheus:9090/prometheus
+            - --web.route-prefix=/
           ports:
             - containerPort: 9090
-          # Probe the `/-/ready` and `/-/healthy` endpoints
           readinessProbe:
             httpGet:
               path: /-/ready
@@ -154,8 +157,8 @@ spec:
             timeoutSeconds: 30
           livenessProbe:
             httpGet:
-              path: /-/healthy
-              port: 9090
+             path: /-/healthy
+             port: 9090
             initialDelaySeconds: 30
             timeoutSeconds: 30
           # Based on 10 running nodes with 30 pods each
