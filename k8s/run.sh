@@ -46,6 +46,12 @@ for sta in ${stations[@]}; do
 done
 
 set -x
+
+#
+# "service-node-port-range" allows to allocate node ports to acess HTTP
+# applications from outside of the cluster.
+# That can be done using a "NodePort" kind of service.
+#
 minikube status || minikube start --driver none --extra-config=apiserver.service-node-port-range=1-65535
 
 ${scriptDir}/template-gen.sh ${genManifestsDir}
