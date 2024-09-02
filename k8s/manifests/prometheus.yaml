@@ -52,7 +52,7 @@ data:
       metrics_path: /fiobbio1/metrics.prom
       static_configs:
       # Name of k8s service
-      - targets: ['webserver.default.svc.cluster.local']
+      - targets: ['nginx.default.svc.cluster.local']
 
       scheme: https
       tls_config:
@@ -70,7 +70,7 @@ data:
       scrape_timeout: 10s
       metrics_path: /fiobbio2/metrics.prom
       static_configs:
-      - targets: ['webserver.default.svc.cluster.local']
+      - targets: ['nginx.default.svc.cluster.local']
 
       scheme: https
       tls_config:
@@ -88,7 +88,7 @@ data:
       scrape_timeout: 10s
       metrics_path: /misma/metrics.prom
       static_configs:
-      - targets: ['webserver.default.svc.cluster.local']
+      - targets: ['nginx.default.svc.cluster.local']
 
       scheme: https
       tls_config:

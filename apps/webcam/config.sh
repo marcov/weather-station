@@ -12,8 +12,7 @@ webcam_prefix="webcam"
 webcam_raw_prefix="${webcam_prefix}_raw"
 webcam_small_prefix="${webcam_prefix}_small"
 
-#httpServerHostname="192.168.1.200"
-httpServerHostname="nginx"
+httpServerHostname=nginx
 
 declare -r -A fiobbioCfg=( \
     [name]="fiobbio" \
@@ -45,4 +44,3 @@ declare -r -A mismaPanoCfg=( \
     [retries]=0 \
     [suffix]="_pano" \
 )
-

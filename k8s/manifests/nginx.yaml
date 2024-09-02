@@ -16,11 +16,6 @@ spec:
       labels:
         app: nginx
     spec:
-      hostAliases:
-        - ip: "192.168.1.200"
-          hostnames:
-            - "meteo.local"
-            - "meteo"
       containers:
         - name: nginx
           image: nginx:stable
@@ -42,7 +37,6 @@ spec:
 
           ports:
             - containerPort: 80
-            - containerPort: 443
           volumeMounts:
             - name: ws-code
               mountPath: /etc/nginx/conf.d/default.conf
@@ -88,3 +82,16 @@ spec:
         - name: localtime
           configMap:
             name: config-localtime
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  type: ClusterIP
+  selector:
+    app: nginx
+  ports:
+    - port: 80
+      name: http
+      targetPort: 80
