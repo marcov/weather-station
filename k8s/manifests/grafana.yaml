@@ -83,10 +83,10 @@ kind: Service
 metadata:
   name: grafana
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: grafana
   ports:
     # By default and for convenience, the `targetPort` is set to the same value as the `port` field.
     - port: 3000
-      nodePort: 3000
+      targetPort: 3000
