@@ -12,15 +12,20 @@ spec:
   selector:
     app: nginx
   ports:
-    # By default and for convenience, the `targetPort` is set to the same value as the `port` field.
-    # "targetPort" is the port used by the container process, to listen to connections inside the container.
     - port: 80
       name: http
-      # By default and for convenience, the Kubernetes control plane will allocate a port from a range (default: 30000-32767).
-      # This range is overridden with the --service-node-port-range flag passed to the k8s control plane (see minikube note above).
-      # "nodePort" exposes the Service on each Node's IP at a static port (the NodePort).
-      # A ClusterIP Service, to which the NodePort Service routes, is automatically created.
-      # You'll be able to contact the NodePort Service, from outside the cluster, by requesting <NodeIP>:<NodePort>.
+      # By default and for convenience, the Kubernetes control plane will
+      # allocate a port from a range (default: 30000-32767).  This range is
+      # overridden with the --service-node-port-range flag passed to the k8s
+      # control plane.
+      #
+      # "nodePort" exposes the Service on each Node's IP at a static port (the
+      # NodePort).  A ClusterIP Service, to which the NodePort Service routes,
+      # is automatically
+      # created.
+      #
+      # You'll be able to contact the NodePort Service, from outside
+      # the cluster, by requesting <NodeIP>:<NodePort>.
       nodePort: 80
     - port: 443
       name: https
