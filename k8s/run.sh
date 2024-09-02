@@ -2,6 +2,9 @@
 #
 # Start all the k8s weather stuff
 #
+# NOTE: make sure the addons are enabled
+# - minikube addons enable ingress
+
 set -euo pipefail
 
 set -x
@@ -48,11 +51,15 @@ done
 set -x
 
 #
-# "service-node-port-range" allows to allocate node ports to acess HTTP
-# applications from outside of the cluster.
-# That can be done using a "NodePort" kind of service.
+# NOTE: when NOT using a K8s ingress, you'll need to pass the extra start
+# option:
+# --extra-config=apiserver.service-node-port-range=1-65535
 #
-minikube status || minikube start --driver none --extra-config=apiserver.service-node-port-range=1-65535
+# service-node-port-range allows to allocate node ports to acess HTTP
+# applications from outside of the cluster.  That can be done using a
+# "NodePort" kind of service.
+#
+minikube status || minikube start --driver none
 
 ${scriptDir}/template-gen.sh ${genManifestsDir}
 
