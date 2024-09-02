@@ -52,12 +52,9 @@ data:
       metrics_path: /fiobbio1/metrics.prom
       static_configs:
       # Name of k8s service
-      - targets: ['nginx.default.svc.cluster.local']
+      - targets: ['nginx']
 
-      scheme: https
-      tls_config:
-        insecure_skip_verify: true
-
+      scheme: http
       relabel_configs:
       - source_labels: [__address__]
         regex: '.*'
@@ -70,12 +67,9 @@ data:
       scrape_timeout: 10s
       metrics_path: /fiobbio2/metrics.prom
       static_configs:
-      - targets: ['nginx.default.svc.cluster.local']
+      - targets: ['nginx']
 
-      scheme: https
-      tls_config:
-        insecure_skip_verify: true
-
+      scheme: http
       relabel_configs:
       - source_labels: [__address__]
         regex: '.*'
@@ -88,12 +82,9 @@ data:
       scrape_timeout: 10s
       metrics_path: /misma/metrics.prom
       static_configs:
-      - targets: ['nginx.default.svc.cluster.local']
+      - targets: ['nginx']
 
-      scheme: https
-      tls_config:
-        insecure_skip_verify: true
-
+      scheme: http
       relabel_configs:
       - source_labels: [__address__]
         regex: '.*'
@@ -105,12 +96,12 @@ data:
     # kubectl apply -f examples/standard
     - job_name: 'kube-state-metrics'
       static_configs:
-      - targets: ['kube-state-metrics.default.svc.cluster.local:8080']
+      - targets: ['kube-state-metrics:8080']
 
     - job_name: node
       scrape_interval: 15s
       static_configs:
-      - targets: ['prometheus-node-exporter.default.svc.cluster.local:9100']
+      - targets: ['prometheus-node-exporter:9100']
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -148,8 +139,10 @@ spec:
           args:
             - --config.file=/etc/config/prometheus.yaml
             - --storage.tsdb.path=/data
-            # Serve under a sub-path via a reverse proxy: NOTE: you need to update the probes paths too
-            #- --web.external-url=/prometheus/
+            # NOTE: if changing these, you need to update the readiness /
+            # liveness probes path below
+            #- --web.external-url=http://prometheus:9090/prometheus/
+            #- --web.route-prefix=/prometheus/
           ports:
             - containerPort: 9090
           # Probe the `/-/ready` and `/-/healthy` endpoints

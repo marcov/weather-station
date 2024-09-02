@@ -6,7 +6,7 @@
 set -euo pipefail
 
 declare -r destDir="/tmp/downloader"
-declare -r local_grafana_domain=webserver.default.svc.cluster.local
+declare -r local_grafana_domain=nginx
 declare -r grafana_all_stations_rain_panel="https://${local_grafana_domain}/grafana/render/d-solo/Ewu-ii3Mk/wview-all-stations?orgId=1&from=now&to=now&theme=dark&width=250&height=200&tz=Europe%2FRome&panelId="
 
 # Calculate the expected timestamp of the last sat image:

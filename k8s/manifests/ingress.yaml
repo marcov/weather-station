@@ -21,6 +21,11 @@ spec:
         - meteo.fiobbio.com
       secretName: tls-meteo-fiobbio-com
 ---
+#
+# NOTE: this setup needs this grafana.ini entry:
+#
+# root_url = https://grafana:3000/grafana
+#
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -30,12 +35,10 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 
 spec:
-  ingressClassName: nginx
   rules:
     - host: meteo.fiobbio.com
       http:
         paths:
-          #- path: /grafana/
           - path: /grafana(/|$)(.*)
             pathType: Prefix
             backend:
