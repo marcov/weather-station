@@ -16,6 +16,13 @@ spec:
                 name: nginx
                 port:
                   number: 80
+          - path: /.well-known
+            pathType: Prefix
+            backend:
+              service:
+                name: letsencrypt
+                port:
+                  number: 80
   tls:
     - hosts:
         - meteo.fiobbio.com

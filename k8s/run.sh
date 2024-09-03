@@ -117,6 +117,7 @@ helm repo update
 helm upgrade --install kube-state-metrics prometheus-community/kube-state-metrics
 helm upgrade --install prometheus-node-exporter prometheus-community/prometheus-node-exporter
 
+################################################################################
 set +x
 
 touch "$scriptCompleted"

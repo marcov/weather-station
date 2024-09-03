@@ -9,16 +9,10 @@ set +e
 set -x -u -o pipefail
 
 declare -r tls_certificates_path=/certificates
-declare -r webserver_svc=webserver
-
-# Obtain default webserver app
-declare default_webserver_app=
-default_webserver_app="$(kubectl get service "${webserver_svc}" -o=json | jq -r ".spec.selector.app")"
-
-# Redirect webserver traffic to this pod
-kubectl patch service "${webserver_svc}" --patch '{"spec":{"selector": {"app": "'"${POD_APP_LABEL}"'"}}}'
 
 certbot renew --verbose --logs-dir /tmp --config-dir "${tls_certificates_path}" --work-dir /tmp --standalone
+declare exitcode=$?
 
-# Restore webserver traffic to default app
-kubectl patch service "${webserver_svc}" --patch '{"spec": {"selector": {"app": "'"${default_webserver_app}"'"}}}'
+cat /tmp/letsencrypt.log
+
+exit "${exitcode}"
