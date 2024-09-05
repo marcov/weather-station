@@ -38,4 +38,4 @@ declare -i unhealthy=
 sed -E -i "s,^unhealthy [01]$,unhealthy ${unhealthy}," "${htmlDir}/metrics.prom"
 
 echo "INFO: expected files count = ${#expectedFiles[@]} - found = ${filesCount} - unhealthy = ${unhealthy}"
-(( ${unhealthy} == 1 )) && exit 1 || exit 0
+exit "${unhealthy}"
