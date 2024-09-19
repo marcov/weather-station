@@ -46,9 +46,6 @@ spec:
               mountPath: /usr/share/nginx/html
               subPath: html
               readOnly: true
-            - name: tls-secret
-              mountPath: /etc/tls
-              readOnly: true
             - name: ws-shared
               mountPath: /www/stations
               subPath: stations
@@ -76,9 +73,6 @@ spec:
         - name: ws-shared
           persistentVolumeClaim:
             claimName: ws-shared-claim
-        - name: tls-secret
-          secret:
-            secretName: tls-meteo-fiobbio-com
         - name: localtime
           configMap:
             name: config-localtime
