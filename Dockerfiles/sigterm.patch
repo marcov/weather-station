@@ -1,8 +1,8 @@
-diff --git a/bin/weewxd b/bin/weewxd
-index 62ad2a71..01510ede 100755
---- a/bin/weewxd
-+++ b/bin/weewxd
-@@ -212,7 +212,7 @@ def main():
+diff --git a/src/weewxd.py b/src/weewxd.py
+index 185625a6..8b1c8817 100644
+--- a/src/weewxd.py
++++ b/src/weewxd.py
+@@ -187,7 +187,7 @@ def main():
              log.info("Terminating weewx version %s", weewx.__version__)
              weeutil.logger.log_traceback(log.debug, "    ****  ")
              signal.signal(signal.SIGTERM, signal.SIG_DFL)
