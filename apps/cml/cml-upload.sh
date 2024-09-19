@@ -74,21 +74,21 @@ prepare_ftp_commands() {
     cat ${ftpBaseCmds} >> ${ftpSendCmds}
 
     # This assumes the script runs every 5 minutes ...
-    if (( $ore == 0 )) && (( $minuti > 10 )) && (( $minuti < 18 )); then
+    if (( 10#${ore} == 0 )) && (( 10#${minuti} > 10 )) && (( 10#${minuti} < 18 )); then
         echo "Daily NOAA data upload: $ore:$minuti"
 
         echo "cd private" >> ${ftpSendCmds}
 
         # On day 1, ALSO upload prev month NOAA data.
-        if (( $giorno == 1 )); then
+        if (( 10#$giorno == 1 )); then
 
             # Get prev month and prev year
-            if (( $mese == 1 )); then
+            if (( 10#$mese == 1 )); then
                 yesterday_month="12"
                 yesterday_year=`expr $anno - 1`
             else
                 yesterday_month=`expr $mese - 1`
-                if (( $yesterday_month < 10 )); then
+                if (( 10#$yesterday_month < 10 )); then
                     yesterday_month="0$yesterday_month"
                 fi
                 yesterday_year=$anno
