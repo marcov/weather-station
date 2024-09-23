@@ -17,6 +17,7 @@
   <!-- the following is needed for the media queries to work correctly -->
   <meta name="viewport" content="width=device-width">
   <link type="text/css" rel="stylesheet" href="css/layout.css" />
+  <!-- use https://codesalad.dev/blog/how-to-create-an-image-lightbox-in-pure-css-25 instead -->
   <link type="text/css" rel="stylesheet" href="css/featherlight.min.css" />
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Inconsolata|Major+Mono+Display|Share+Tech+Mono|Oxygen+Mono|Baloo+Tamma+2:wght@400;700;800">
@@ -229,7 +230,7 @@
 
     <div>
       <ul class="webcams-container">
-        <!-- CML does not use HTTPS :-O :-( :-X
+        <!-- CML does not support HTTPS :-O :-( :-X
         <li>
           <a href="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam.jpg" data-featherlight="image">
             <img class="webcam" alt="webcam_small" src="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam_small.jpg" />
@@ -242,11 +243,13 @@
         </li>
         -->
 
+        <!-- offline
         <li>
           <a href="/webcam/webcam_fiobbio.jpg" data-featherlight="image">
             <img class="webcam" alt="webcam_small" src="/webcam/webcam_small_fiobbio.jpg" />
           </a>
         </li>
+        -->
         <li>
           <a href="/webcam/webcam_misma.jpg" data-featherlight="image">
             <img class="webcam" alt="webcam_small" src="/webcam/webcam_small_misma.jpg" />
