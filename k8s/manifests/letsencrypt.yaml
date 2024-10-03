@@ -4,7 +4,7 @@ kind: CronJob
 metadata:
   name: letsencrypt
 spec:
-  schedule: "0 3 * * 1"
+  schedule: "0 3 * * *"
   concurrencyPolicy: Replace
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 1
