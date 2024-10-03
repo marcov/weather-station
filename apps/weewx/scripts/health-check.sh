@@ -34,8 +34,29 @@ done
 declare -i unhealthy=
 (( ${filesCount} == ${#expectedFiles[@]} )) && unhealthy=0 || unhealthy=1
 
-# Update health status
-sed -E -i "s,^unhealthy [01]$,unhealthy ${unhealthy}," "${htmlDir}/metrics.prom"
+read -r -d '' awk_program << 'EOF' || true
+{
+    if ($0 ~ /^#/) {
+        # Print commented lines as-is
+        print $0;
+    } else if ($1 == "unhealthy"){
+        # Set metric unhealthy to the passed field value
+        print $1" "unhealthy;
+    } else if (unhealthy == "1"){
+        # If the passed unhealthy value is 1, remove the old value of any other
+        # metrics (but unhealthy)
+        # This is to avoid prometheus to show stale constant data where no new
+        # data is being produced by the station.
+        $NF=""; print $0;
+    } else {
+        # Print everything else as is
+        print $0;
+    }
+}
+EOF
+
+awk -v unhealthy="${unhealthy}" "${awk_program}" "${htmlDir}/metrics.prom" > "${htmlDir}/metrics.prom.tmp"
+mv "${htmlDir}/metrics.prom.tmp" "${htmlDir}/metrics.prom"
 
 echo "INFO: expected files count = ${#expectedFiles[@]} - found = ${filesCount} - unhealthy = ${unhealthy}"
 exit "${unhealthy}"
