@@ -30,7 +30,7 @@
            "waitTime": 5000,
            "outFile":  "wz_meteogram.jpg",
            "viewSize": [800, 1400],
-           "topLeft":  [636, 0],
+           "topLeft":  [690, 0],
            "size":     [800, 505],
            "evalCode": "document.getElementById('sp_message_container_403677').style.display = 'none'; var collection = document.getElementsByClassName('adsbygoogle'); for (i = 1; i < collection.length; i++) {collection[0].parentNode.removeChild(collection[0]);}",
            "Enabled": true
@@ -41,7 +41,7 @@
            "waitTime": 5000,
            "outFile":  "wz_ensemble.jpg",
            "viewSize": [800, 1400],
-           "topLeft":  [665, 0],
+           "topLeft":  [710, 0],
            "size":     [800, 583],
            "evalCode": "document.getElementById('sp_message_container_403677').style.display = 'none'; var collection = document.getElementsByClassName('adsbygoogle'); for (i = 1; i < collection.length; i++) {collection[0].parentNode.removeChild(collection[0]);}",
            "Enabled": true
