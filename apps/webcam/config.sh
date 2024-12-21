@@ -14,9 +14,11 @@ webcam_small_prefix="${webcam_prefix}_small"
 
 httpServerHostname=nginx
 
+# [url]="http http://192.168.1.178/cgi-bin/snapshot.cgi?stream=0" \
+
 declare -r -A fiobbioCfg=( \
     [name]="fiobbio" \
-    [url]="http http://192.168.1.178/cgi-bin/snapshot.cgi?stream=0" \
+    [url]="http http://192.168.1.178:8081/tmpfs/auto.jpg" \
     [watermark]="Fiobbio" \
     [tsource]="http://${httpServerHostname}/fiobbio1/realtime.json" \
     [size]="800x600" \
