@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meteo Fiobbio</title>
+
+    <!-- Add React -->
+    <script src="https://unpkg.com/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.js"></script>
+
+    <!-- Add Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Add Lucide Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
+
+    <style>
+        .swipe-container {
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .swipe-container::-webkit-scrollbar {
+            display: none;
+        }
+        .swipe-item {
+            scroll-snap-align: start;
+            flex: 0 0 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-800 to-slate-900 text-gray-100 min-h-screen">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        const { createRoot } = ReactDOM;
+
+        function WeatherStation() {
+            const [stations, setStations] = useState({
+                fiobbio: null,
+                misma: null
+            });
+            const [error, setError] = useState(null);
+            const [currentStation, setCurrentStation] = useState('fiobbio');
+            const containerRef = useRef(null);
+
+            useEffect(() => {
+                const fetchData = async () => {
+                    try {
+                        const [fiobbioRes, mismaRes] = await Promise.all([
+                            fetch('/fiobbio1/realtime.json'),
+                            fetch('/misma/realtime.json')
+                        ]);
+                        const fiobbioData = await fiobbioRes.json();
+                        const mismaData = await mismaRes.json();
+                        setStations({
+                            fiobbio: fiobbioData,
+                            misma: mismaData
+                        });
+                    } catch (err) {
+                        setError('Failed to load weather data');
+                        console.error(err);
+                    }
+                };
+
+                fetchData();
+                const interval = setInterval(fetchData, 5 * 60 * 1000);
+                return () => clearInterval(interval);
+            }, []);
+
+            useEffect(() => {
+                lucide.createIcons();
+
+                // Add scroll event listener to update current station
+                const container = containerRef.current;
+                if (container) {
+                    const handleScroll = () => {
+                        const scrollPosition = container.scrollLeft;
+                        const width = container.clientWidth;
+                        setCurrentStation(scrollPosition > width / 2 ? 'misma' : 'fiobbio');
+                    };
+
+                    container.addEventListener('scroll', handleScroll);
+                    return () => container.removeEventListener('scroll', handleScroll);
+                }
+            }, []);
+
+            const WeatherCard = ({ stationData, name, webcamSrc }) => {
+                if (!stationData) return null;
+
+                return (
+                    <div className="swipe-item px-2">
+                        <div className="bg-slate-800/50 rounded-lg backdrop-blur-sm mb-4">
+                            <div className="flex justify-between items-center mb-2">
+                                <h2 className="text-lg font-semibold">{name}</h2>
+                                <span className="text-gray-400 text-sm">{stationData.stationTime}</span>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-2">
+                                {/* Temperature */}
+                                <div className="bg-slate-700/50 rounded-lg p-4">
+                                    <div className="flex items-center gap-2 text-yellow-400">
+                                        <svg data-lucide="thermometer" className="w-4 h-4"></svg>
+                                        <span className="text-sm">Temperatura</span>
+                                    </div>
+                                    <div className="text-xl font-bold mt-2">
+                                        {stationData.outsideTemp}°C
+                                    </div>
+                                    <div className="text-sm text-gray-400 mt-2">
+                                        Percepita: {stationData.apparentTemp}°C
+                                        <div className="flex justify-between mt-2">
+                                            <span className="text-blue-400">Min: {stationData.lowOutsideTemp}°C</span>
+                                            <span className="text-red-400">Max: {stationData.hiOutsideTemp}°C</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Wind */}
+                                <div className="bg-slate-700/50 rounded-lg p-4">
+                                    <div className="flex items-center gap-2 text-blue-400">
+                                        <svg data-lucide="wind" className="w-4 h-4"></svg>
+                                        <span className="text-sm">Vento</span>
+                                    </div>
+                                    <div className="text-xl font-bold mt-2">
+                                        {stationData.windSpeed} km/h
+                                    </div>
+                                    <div className="text-sm text-gray-400 mt-2">
+                                        Dir: {stationData.windDirection}
+                                        <div className="mt-2">
+                                            Raffica: {stationData.windGustSpeed} km/h
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Humidity */}
+                                <div className="bg-slate-700/50 rounded-lg p-4">
+                                    <div className="flex items-center gap-2 text-cyan-400">
+                                        <svg data-lucide="droplets" className="w-4 h-4"></svg>
+                                        <span className="text-sm">Umidità</span>
+                                    </div>
+                                    <div className="text-xl font-bold mt-2">
+                                        {stationData.outsideHumidity}%
+                                    </div>
+                                    <div className="text-sm text-gray-400 mt-2">
+                                        <div className="flex justify-between mt-2">
+                                            <span>Min: {stationData.lowHumidity}%</span>
+                                            <span>Max: {stationData.hiHumidity}%</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Rain */}
+                                <div className="bg-slate-700/50 rounded-lg p-4">
+                                    <div className="flex items-center gap-2 text-indigo-400">
+                                        <svg data-lucide="cloud" className="w-4 h-4"></svg>
+                                        <span className="text-sm">Pioggia</span>
+                                    </div>
+                                    <div className="text-xl font-bold mt-2">
+                                        {stationData.rainRate} mm/h
+                                    </div>
+                                    <div className="text-sm text-gray-400 mt-2">
+                                        <div className="flex justify-between mt-2">
+                                            <span>Giorno: {stationData.dailyRain}mm</span>
+                                            <span>Storm: {stationData.stormRain}mm</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Webcam */}
+                        <div className="bg-slate-800/50 rounded-lg overflow-hidden">
+                            <img src={webcamSrc}
+                                 alt={`Webcam ${name}`}
+                                 className="w-full h-auto object-contain" />
+                        </div>
+                    </div>
+                );
+            };
+
+            if (error) {
+                return <div className="p-4 text-red-400">{error}</div>;
+            }
+
+            return (
+                <div className="max-w-full mx-2 p-2">
+                    {/* Header */}
+                    <header className="mb-4">
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                            <h1 className="text-2xl font-bold tracking-wider">Meteo Fiobbio</h1>
+                            <nav className="flex gap-4 text-gray-300 text-sm">
+                                <a href="/grafana/d/Ewu-ii3Mk/wview-all-stations?orgId=1&kiosk=tv"
+                                   className="hover:text-white transition-colors">Dettagli</a>
+                                <a href="/grafana/d/-qh9KGzRk/wview-past-years-comparison--and-misma?orgId=1&kiosk=tv"
+                                   className="hover:text-white transition-colors">Serie Storiche</a>
+                                <a href="html/archive.html"
+                                   className="hover:text-white transition-colors">Archivio</a>
+                            </nav>
+                        </div>
+                    </header>
+
+                    {/* Station indicators */}
+                    <div className="flex justify-center gap-2 mb-4">
+                        <div className={`w-2 h-2 rounded-full transition-colors duration-300 ${currentStation === 'fiobbio' ? 'bg-white' : 'bg-gray-600'}`}></div>
+                        <div className={`w-2 h-2 rounded-full transition-colors duration-300 ${currentStation === 'misma' ? 'bg-white' : 'bg-gray-600'}`}></div>
+                    </div>
+
+                    {/* Swipeable container */}
+                    <div ref={containerRef} className="swipe-container">
+                        <div className="flex">
+                            <WeatherCard
+                                stationData={stations.fiobbio}
+                                name="Fiobbio 1"
+                                webcamSrc="/webcam/webcam_fiobbio.jpg"
+                            />
+                            <WeatherCard
+                                stationData={stations.misma}
+                                name="Misma"
+                                webcamSrc="/webcam/webcam_misma.jpg"
+                            />
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = createRoot(document.getElementById('root'));
+        root.render(<WeatherStation />);
+    </script>
+</body>
+</html>
