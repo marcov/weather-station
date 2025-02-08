@@ -1,59 +1,223 @@
-
 <!DOCTYPE html>
 <html>
+  <!-- Head section remains exactly the same until the script part -->
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta http-equiv="cache-control" content="no-cache" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Archivio Dati</title>
 
     <script type="text/javascript" src="../js/wview.js"></script>
-
-    <!-- the following is needed for the media queries to work correctly -->
-    <meta name="viewport" content="width=device-width">
     <link type="text/css" rel="stylesheet" href="../css/menu.css" />
     <link type="text/css" rel="stylesheet" href="../css/layout.css" />
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Inconsolata|Major+Mono+Display|Share+Tech+Mono|Oxygen+Mono|Baloo+Tamma+2:wght@400;700;800">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Major+Mono+Display|Share+Tech+Mono|Oxygen+Mono|Baloo+Tamma+2:wght@400;700;800">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+      .date-picker {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 16px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        margin: 20px auto;
+      }
+
+      .select-wrapper {
+        position: relative;
+        margin-bottom: 12px;
+      }
+
+      .select-wrapper select {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        appearance: none;
+        background-color: #f8fafc;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .select-wrapper::after {
+        content: "▼";
+        font-size: 12px;
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: #64748b;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 8px;
+        margin-top: 16px;
+      }
+
+      .button {
+        flex: 1;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      .button:hover {
+        background-color: #1d4ed8;
+      }
+
+      .data-container {
+        width: 100%;
+        overflow-x: auto;
+        margin-top: 20px;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+      }
+
+      .preformatted {
+        font-family: 'Inconsolata', monospace;
+        white-space: pre;
+        margin: 0;
+        padding: 20px;
+      }
+
+      /* Only new styles added for navigation buttons */
+      .nav-buttons {
+        margin-top: 12px;
+        display: flex;
+        gap: 8px;
+      }
+
+      .nav-buttons button {
+        flex: 1;
+        padding: 4px 8px;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        background-color: #f8fafc;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .nav-buttons button:hover {
+        background-color: #e2e8f0;
+      }
+    </style>
+
+    <script>
+      function createMonthOptions() {
+        const months = [
+          "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
+          "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"
+        ];
+        const select = document.getElementById('month');
+        months.forEach((month, index) => {
+          const option = document.createElement('option');
+          option.value = (index + 1).toString().padStart(2, '0');
+          option.textContent = month;
+          select.appendChild(option);
+        });
+        select.value = (new Date().getMonth() + 1).toString().padStart(2, '0');
+      }
+
+      function createYearOptions() {
+        const currentYear = new Date().getFullYear();
+        const startYear = 2009;
+        const select = document.getElementById('year');
+        for (let year = startYear; year <= currentYear; year++) {
+          const option = document.createElement('option');
+          option.value = year;
+          option.textContent = year;
+          select.appendChild(option);
+        }
+        select.value = currentYear;
+      }
+
+      function navigateMonth(delta) {
+        const monthSelect = document.getElementById('month');
+        const yearSelect = document.getElementById('year');
+        let currentMonth = parseInt(monthSelect.value);
+        let currentYear = parseInt(yearSelect.value);
+
+        currentMonth += delta;
+
+        if (currentMonth > 12) {
+          currentMonth = 1;
+          currentYear++;
+        } else if (currentMonth < 1) {
+          currentMonth = 12;
+          currentYear--;
+        }
+
+        // Check year bounds
+        if (currentYear >= 2009 && currentYear <= new Date().getFullYear()) {
+          monthSelect.value = currentMonth.toString().padStart(2, '0');
+          yearSelect.value = currentYear;
+          openNoaaFile(monthSelect.value, yearSelect.value);
+        }
+      }
+
+      function navigateYear(delta) {
+        const yearSelect = document.getElementById('year');
+        const newYear = parseInt(yearSelect.value) + delta;
+
+        if (newYear >= 2009 && newYear <= new Date().getFullYear()) {
+          yearSelect.value = newYear;
+          openNoaaFile('', yearSelect.value);
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        createMonthOptions();
+        createYearOptions();
+      });
+    </script>
   </head>
 
   <body>
-
     <div class="maincolumn">
-
-      <div style="margin: auto; border: 0px solid red;">
-
+      <div>
         <h3>Archivio Dati</h3>
-        <form action="#" method="post" style="font-size:120%;">
 
-          <p style="text-align: center;">
-            <script type="text/javascript">
-              createDaySelect("day");
-            </script>
-            <span> </span>
-            <script type="text/javascript">
-              createMonthlySelect("month");
-            </script>
-            <span> </span>
-            <script type="text/javascript">
-              createYearlySelect("year");
-            </script>
-          </p>
+        <form action="#" method="post">
+          <div class="date-picker">
+            <div class="select-wrapper">
+              <select id="month" name="month">
+                <!-- Filled by JavaScript -->
+              </select>
+            </div>
 
-          <p style="text-align: center;">
-              <input type="button" value="Mostra giorno" onclick="openARCFile(this.form.day.value, this.form.month.value, this.form.year.value)">
-              <input type="button" value="Mostra mese" onclick="openNoaaFile(this.form.month.value, this.form.year.value)">
-              <input type="button" value="Mostra anno" onclick="openNoaaFile('',this.form.year.value)">
-          </p>
+            <div class="select-wrapper">
+              <select id="year" name="year">
+                <!-- Filled by JavaScript -->
+              </select>
+            </div>
+
+            <div class="button-group">
+              <button type="button" class="button" onclick="openNoaaFile(this.form.month.value, this.form.year.value)">
+                Mostra mese
+              </button>
+              <button type="button" class="button" onclick="openNoaaFile('',this.form.year.value)">
+                Mostra anno
+              </button>
+            </div>
+
+            <div class="nav-buttons">
+              <button type="button" onclick="navigateYear(-1)">Anno &lt;&lt;</button>
+              <button type="button" onclick="navigateMonth(-1)">Mese &lt;&lt;</button>
+              <button type="button" onclick="navigateMonth(1)">Mese &gt;&gt;</button>
+              <button type="button" onclick="navigateYear(1)">Anno &gt;&gt;</button>
+            </div>
+          </div>
         </form>
 
-        <div style="display: flex; flex-flow: row; justify-content: center;">
-          <p id="noaatext" class="preformatted"> </p>
+        <div class="data-container">
+          <p id="noaatext" class="preformatted"></p>
         </div>
       </div>
-
     </div>
-
-    <script src="../js/jquery-3.7.1.min.js"></script>
   </body>
 </html>
