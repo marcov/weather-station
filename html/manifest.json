@@ -1,0 +1,16 @@
+{
+  "name": "Meteo Fiobbio",
+  "short_name": "Meteo",
+  "description": "Real-time weather information for Fiobbio and nearby areas.",
+  "icons": [
+    {
+      "src": "/apple-icon.png",
+      "sizes": "320x320",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/mobile.html",
+  "display": "standalone",
+  "background_color": "#1E293B",
+  "theme_color": "#0F172A"
+}
