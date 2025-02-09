@@ -43,7 +43,7 @@ spec:
               subPath: apps/nginx/nginx.conf
               readOnly: true
             - name: ws-code
-              mountPath: /usr/share/nginx/html
+              mountPath: /www/html
               subPath: html
               readOnly: true
             - name: ws-shared
