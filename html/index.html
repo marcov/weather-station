@@ -403,8 +403,6 @@
   </div>
   <!-- div..maincolumn -->
 
-  <script src="js/jquery-3.7.1.min.js"></script>
-
   <script src="js/featherlight.min.js"></script>
 
   <script>
@@ -414,21 +412,7 @@
   </script>
 
   <script>
-    $(() => {
-      function populateStationInfo() {
-          $.ajax({
-            url      : "/fiobbio1/stationinfo.json",
-            dataType : "json"
-          }).done( (jsonData) => {
-            // we map 1:1 json key value with id name,
-            // so that jsonData loading is trivial!
-            $.each(jsonData, (key, val) => {
-              $("#" + key).text(val);
-            });
-          });
-      }
-
-      function isToday(dateString) {
+    function isToday(dateString) {
         let today = new Date();
         let dateTokens = dateString.split('/');
 
@@ -439,63 +423,89 @@
         return (today.getDate() == dd &&
                 (today.getMonth() + 1) == mm &&
                 (today.getFullYear() % 100) == yy);
-      }
+    }
 
-      function populateMeasures(locs) {
+    function populateStationInfo() {
+        fetch('/fiobbio1/stationinfo.json')
+            .then(response => response.json())
+            .then(jsonData => {
+                // Loop through each property in the JSON data
+                Object.entries(jsonData).forEach(([key, value]) => {
+                    // Find element by ID and update its text content
+                    const element = document.getElementById(key);
+                    if (element) {
+                        element.textContent = value;
+                    }
+                });
+            })
+            .catch(error => console.error('Error loading station info:', error));
+    }
+
+    function populateMeasures(locs) {
         locs.forEach((loc) => {
-          $.ajax({
-            url      : loc.Path + "realtime.json",
-            dataType : "json"
-          }).done( (jsonData) => {
-            // Copy the HTML template into the actual element ID with the given tgtId
-            $("#" + loc.tgtId).html($("#measuresTemplate").html());
+            fetch(loc.Path + "realtime.json")
+                .then(response => response.json())
+                .then(jsonData => {
+                    // Get the target element and template
+                    const targetElement = document.getElementById(loc.tgtId);
+                    const template = document.getElementById('measuresTemplate');
 
-            $("#" + loc.tgtId + " .location").text(loc.location);
-            $("#" + loc.tgtId + " .location").attr('href', loc.Path);
+                    // Copy template content
+                    targetElement.innerHTML = template.innerHTML;
 
-            // Strip out seconds
-            jsonData.timestamp = jsonData.stationTime.split(':', 2).join(':');
+                    // Update location elements
+                    const locationElement = targetElement.querySelector('.location');
+                    locationElement.textContent = loc.location;
+                    locationElement.href = loc.Path;
 
-            // if not today, append full date
-            if (!isToday(jsonData.stationDate)) {
-              jsonData.timestamp += ' - ' + jsonData.stationDate;
-            }
+                    // Strip out seconds from timestamp
+                    jsonData.timestamp = jsonData.stationTime.split(':', 2).join(':');
 
-            // we map 1:1 json key value with id name,
-            // so that jsonData loading is trivial!
-            $.each(jsonData, (key, val) => {
-              $("#" + loc.tgtId + " ." + key).text(val);
-              if (key == 'timestamp') {
-                //$("#" + loc.tgtId + " ." + key).css("background-color","green");
-              }
-            });
-          }); // ajax..done
-        }); // forEach
+                    // if not today, append full date
+                    if (!isToday(jsonData.stationDate)) {
+                        jsonData.timestamp += ' - ' + jsonData.stationDate;
+                    }
+
+                    // Update all matching elements with JSON data
+                    // we map 1:1 json key value with id name,
+                    // so that jsonData loading is trivial
+                    Object.entries(jsonData).forEach(([key, val]) => {
+                        const element = targetElement.querySelector('.' + key);
+                        if (element) {
+                            element.textContent = val;
+                            // if (key === 'timestamp') {
+                            //     element.style.backgroundColor = 'green';
+                            // }
+                        }
+                    });
+                })
+                .catch(error => console.error('Error loading data for location:', loc.location, error));
+        });
+    }
+
+    const locations = [
+      {
+        Path   : "/fiobbio1/",
+        tgtId : "fiobbio1Measures",
+        location : "Fiobbio 1"
+      },
+      {
+        Path   : "/misma/",
+        tgtId : "mismaMeasures",
+        location : "Misma"
+      },
+      {
+        Path   : "/fiobbio2/",
+        tgtId : "fiobbio2Measures",
+        location : "Fiobbio 2"
       }
+    ];
 
-      $(document).ready(() => {
-        const locations = [
-          {
-            Path   : "/fiobbio1/",
-            tgtId : "fiobbio1Measures",
-            location : "Fiobbio 1"
-          },
-          {
-            Path   : "/misma/",
-            tgtId : "mismaMeasures",
-            location : "Misma"
-          },
-          {
-            Path   : "/fiobbio2/",
-            tgtId : "fiobbio2Measures",
-            location : "Fiobbio 2"
-          }
-        ];
-
+    document.addEventListener('DOMContentLoaded', () => {
         populateStationInfo();
         populateMeasures(locations);
-      });
-    });
+    }); /* document.addEventListener('DOMContentLoaded', () => { */
+
   </script>
 
 </body>
