@@ -265,25 +265,25 @@
     <div>
       <ul class="graph-container">
         <li>
-          <img class="wviewgraph" alt="wview image" src="daytempdew.png">
+          <img class="wviewgraph" alt="wview image" src="/fiobbio1/daytempdew.png">
         </li>
         <li>
-          <img alt="wview image" src="daywind.png">
+          <img alt="wview image" src="/fiobbio1/daywind.png">
         </li>
         <li>
-          <img alt="wview image" src="dayradiation.png ">
+          <img alt="wview image" src="/fiobbio1/dayradiation.png ">
         </li>
       </ul>
 
       <ul class="graph-container">
         <li>
-          <img alt="wview image" src="rainday.png">
+          <img alt="wview image" src="/fiobbio1/rainday.png">
         </li>
         <li>
-          <img alt="wview image" src="baromday.png">
+          <img alt="wview image" src="/fiobbio1/baromday.png">
         </li>
         <li>
-          <img alt="wview image" src="humidday.png">
+          <img alt="wview image" src="/fiobbio1/humidday.png">
         </li>
       </ul>
 
@@ -417,7 +417,7 @@
     $(() => {
       function populateStationInfo() {
           $.ajax({
-            url      : "stationinfo.json",
+            url      : "/fiobbio1/stationinfo.json",
             dataType : "json"
           }).done( (jsonData) => {
             // we map 1:1 json key value with id name,
