@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<t!DOCTYPE html>
 <html>
 
 <head>
@@ -16,9 +16,11 @@
 
   <!-- the following is needed for the media queries to work correctly -->
   <meta name="viewport" content="width=device-width">
+
   <link type="text/css" rel="stylesheet" href="css/layout.css" />
-  <!-- use https://codesalad.dev/blog/how-to-create-an-image-lightbox-in-pure-css-25 instead -->
-  <link type="text/css" rel="stylesheet" href="css/featherlight.min.css" />
+
+  <link type="text/css" rel="stylesheet" href="css/lightbox.css" />
+
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Inconsolata|Major+Mono+Display|Share+Tech+Mono|Oxygen+Mono|Baloo+Tamma+2:wght@400;700;800">
 
@@ -228,51 +230,32 @@
 
     </div> <!-- <div class="measures-container"> -->
 
-    <div>
-      <ul class="webcams-container">
-        <!-- CML does not support HTTPS :-O :-( :-X
-        <li>
-          <a href="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam.jpg" data-featherlight="image">
-            <img class="webcam" alt="webcam_small" src="http://rete.centrometeolombardo.com/bergamo/fiobbio/public/webcam_small.jpg" />
-          </a>
-        </li>
-        <li>
-          <a href="http://rete.centrometeolombardo.com/bergamo/montemisma/public/webcam.jpg" data-featherlight="image">
-            <img class="webcam" alt="webcam_small" src="http://rete.centrometeolombardo.com/bergamo/montemisma/public/webcam_small.jpg" />
-          </a>
-        </li>
-        -->
-
-        <li>
-          <a href="/webcam/webcam_fiobbio.jpg" data-featherlight="image">
-            <img class="webcam" alt="webcam_small" src="/webcam/webcam_small_fiobbio.jpg" />
-          </a>
-        </li>
-        <li>
-          <a href="/webcam/webcam_misma.jpg" data-featherlight="image">
-            <img class="webcam" alt="webcam_small" src="/webcam/webcam_small_misma.jpg" />
-          </a>
-        </li>
-      </ul>
+    <!-- Lightbox with zoom images -- NOTE: this is not visible -->
+    <div class="lightbox">
+      <div class="lightbox-content">
+        <button class="close-button">&times;</button>
+        <img class="zoom-img" src="" alt="Zoomed Image" />
+        <button class="nav-button prev-button">&lt;</button>
+        <button class="nav-button next-button">&gt;</button>
+      </div>
     </div>
 
-    <!-- credits: https://css-tricks.com/infinite-all-css-scrolling-slideshow/ -->
-    <div class="panorama-scroll" style="display:none;">
-      <!-- <div class="sliding-background"></div> -->
-      <div class="still-background"></div>
+    <div>
+      <ul class="webcams-container gallery">
+        <div class="gallery-item" data-full-img="/webcam/webcam_fiobbio.jpg">
+          <img class="preview-img" src="/webcam/webcam_small_fiobbio.jpg" alt="Sample 1" />
+        </div>
+        <div class="gallery-item" data-full-img="/webcam/webcam_misma.jpg">
+          <img class="preview-img" src="/webcam/webcam_small_misma.jpg" alt="Sample 2" />
+        </div>
+      </ul>
     </div>
 
     <div>
       <ul class="graph-container">
-        <li>
-          <img class="wviewgraph" alt="wview image" src="/fiobbio1/daytempdew.png">
-        </li>
-        <li>
-          <img alt="wview image" src="/fiobbio1/daywind.png">
-        </li>
-        <li>
-          <img alt="wview image" src="/fiobbio1/dayradiation.png ">
-        </li>
+        <li> <img class="wviewgraph" alt="wview image" src="/fiobbio1/daytempdew.png"> </li>
+        <li> <img alt="wview image" src="/fiobbio1/daywind.png"> </li>
+        <li> <img alt="wview image" src="/fiobbio1/dayradiation.png "> </li>
       </ul>
 
       <ul class="graph-container">
@@ -339,77 +322,32 @@
     </ul>
 
     <h3>Immagini Satellitari</h3>
-    <ul class="flex-container">
-      <li>
-        <a href="/downloader/sat_alps.jpg" title="Large image" data-featherlight="image">
-          <img alt="sat24.com" class="satellite" src="/downloader/sat_alps.jpg" title="Small image" />
-        </a>
-      </li>
-      <li>
-        <a href="https://eumetview.eumetsat.int/static-images/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg" title="Large image" data-featherlight="image">
-          <img class="satellite" alt="eumetsat.org" src="https://eumetview.eumetsat.int/static-images/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg" title="Small image" />
-        </a>
-      </li>
-      <li>
-        <!--
-        <a href="https://www.sat24.com/image.ashx?country=eu&type=zoom&format=640x480001001&sat=ir" title="Large image" data-featherlight="image">
-          <img class="satellite" alt="sat24.com" src="https://www.sat24.com/image.ashx?country=eu&type=zoom&format=640x480001001&sat=ir" title="Small image" />
-        </a>
-        -->
-      </li>
+    <ul class="flex-container gallery">
+
+      <div class="gallery-item" data-full-img="/downloader/sat_alps.jpg">
+        <img class="preview-img" src="/downloader/sat_alps.jpg" alt="sat24.com" />
+      </div>
+
+      <div class="gallery-item" data-full-img="https://eumetview.eumetsat.int/static-images/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg">
+        <img class="preview-img" src="https://eumetview.eumetsat.int/static-images/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg" alt="eumetsat.org" />
+      </div>
+
     </ul>
 
     <h3>Radar Meteo</h3>
-    <ul class="flex-container">
-      <li>
-        <!--
-        <a href="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" title="Large image" data-featherlight="image">
-          <img class="satellite" alt="arpa.piemonte.it" src="http://sc05.arpa.piemonte.it/previ/last_movie_compa.gif" title="EMCWF 500hPa" />
-        </a>
-        -->
-        <a href="/webshot/radar_lom.jpg" title="Large image" data-featherlight="image">
-          <img class="satellite" alt="radar cml" src="/webshot/radar_lom.jpg" title="radar cml" />
-        </a>
-      </li>
-      <!--
-      <li>
-        <a href="radar_ch.png" title="Large image" data-featherlight="image">
-          <img class="satellite" alt="radar met" src="radar_ch.png" title="radar met" />
-        </a>
-      </li>
-      <li>
-        <a href="radar_ch_detailed.png" title="Large image" data-featherlight="image">
-          <img class="satellite" alt="radar met zoomed" src="radar_ch_detailed.png" title="radar met zoomed" />
-        </a>
-      </li>
+    <ul class="flex-container gallery">
+
+      <div class="gallery-item" data-full-img="/webshot/radar_lom.jpg">
+        <img class="preview-img" src="/webshot/radar_lom.jpg" alt="Radar CML" />
+      </div>
+
+      <div class="gallery-item" data-full-img="https://www.astrogeo.va.it/fulmini/fulmini.jpg">
+        <img class="preview-img" src="https://www.astrogeo.va.it/fulmini/fulmini.jpg" alt="Mappa Fulmini" />
+      </div>
 
     </ul>
 
-    <ul class="flex-container">
-      -->
-      <!--
-      <li>
-        <a href="http://www.meteox.com/images.aspx?jaar=-3&voor=&soort=loop3uur" title="Large image" data-featherlight="image">
-          <img alt="clouds" class="satellite" src="http://www.meteox.com/images.aspx?jaar=-3&voor=&soort=loop3uur" title="Clouds" />
-        </a>
-      </li>
-      -->
-      <li>
-        <a href="https://www.astrogeo.va.it/fulmini/fulmini.jpg" title="Large image" data-featherlight="image">
-          <img alt="va.it" class="satellite" src="https://www.astrogeo.va.it/fulmini/fulmini.jpg" title="EMCWF 500hPa" />
-        </a>
-      </li>
-    </ul>
-  </div>
-  <!-- div..maincolumn -->
-
-  <script src="js/featherlight.min.js"></script>
-
-  <script>
-    $(function() {
-      $.featherlight.defaults.loading = "Caricamento immagine in corso...";
-    });
-  </script>
+  </div> <!-- div..maincolumn -->
 
   <script>
     function isToday(dateString) {
@@ -505,6 +443,104 @@
         populateStationInfo();
         populateMeasures(locations);
     }); /* document.addEventListener('DOMContentLoaded', () => { */
+
+    class Lightbox {
+      constructor() {
+        this.lightbox = document.querySelector('.lightbox');
+        this.zoomImg = this.lightbox.querySelector('.zoom-img');
+        this.galleries = document.querySelectorAll('.gallery');
+
+        this.currentGallery = null;
+        this.currentItems = [];
+        this.currentIndex = 0;
+
+        this.init();
+      }
+
+      init() {
+        // Initialize each gallery
+        this.galleries.forEach(gallery => {
+          const items = Array.from(gallery.querySelectorAll('.gallery-item'));
+
+          items.forEach((item, index) => {
+            item.addEventListener('click', () => {
+              // Set current gallery context
+              this.currentGallery = gallery;
+              this.currentItems = items;
+              this.currentIndex = index;
+
+              const fullImgSrc = item.getAttribute('data-full-img');
+              this.showLightbox(fullImgSrc);
+            });
+          });
+        });
+
+        // Close button
+        this.lightbox.querySelector('.close-button').addEventListener('click', () => {
+          this.hideLightbox();
+        });
+
+        // Navigation buttons
+        this.lightbox.querySelector('.prev-button').addEventListener('click', () => {
+          this.navigate(-1);
+        });
+
+        this.lightbox.querySelector('.next-button').addEventListener('click', () => {
+          this.navigate(1);
+        });
+
+        // Close on background click
+        this.lightbox.addEventListener('click', (e) => {
+          if (e.target === this.lightbox) {
+            this.hideLightbox();
+          }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+          if (!this.lightbox.classList.contains('active')) return;
+
+          switch(e.key) {
+            case 'Escape':
+              this.hideLightbox();
+              break;
+            case 'ArrowLeft':
+              this.navigate(-1);
+              break;
+            case 'ArrowRight':
+              this.navigate(1);
+              break;
+          }
+        });
+      }
+
+      showLightbox(src) {
+        // Preload the image
+        const img = new Image();
+        img.onload = () => {
+          this.zoomImg.src = src;
+          this.lightbox.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        };
+        img.src = src;
+      }
+
+      hideLightbox() {
+        this.lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      navigate(direction) {
+        this.currentIndex = (this.currentIndex + direction + this.currentItems.length) % this.currentItems.length;
+        const nextImgSrc = this.currentItems[this.currentIndex].getAttribute('data-full-img');
+        this.showLightbox(nextImgSrc);
+      }
+    }
+
+    // Initialize the lightbox
+    document.addEventListener('DOMContentLoaded', () => {
+      new Lightbox();
+    });
 
   </script>
 

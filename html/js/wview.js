@@ -84,25 +84,41 @@ function createYearlySelect(name) {
 }
 
 function openNoaaFile(month, year) {
-  var url = "/fiobbio1/NOAA/NOAA-";
-  url = url + year;
-  if (month != '') {
-    url = url + "-";
-    url = url + month;
+  let url = "/fiobbio1/NOAA/NOAA-" + year;
+  if (month !== '') {
+    url = url + "-" + month;
   }
-
   url = url + ".txt";
   //window.location=url;
 
-  $("#noaatext").text("Loading....");
-  $("#noaatext").load(url);
+  const noaaTextElement = document.getElementById("noaatext");
+  noaaTextElement.textContent = "Loading....";
+
+  fetch(url)
+    .then(response => response.text())
+    .then(data => {
+      noaaTextElement.textContent = data;
+    })
+    .catch(error => {
+      noaaTextElement.textContent = "Error loading file: " + error.message;
+    });
 }
 
 function openARCFile(day, month, year) {
-  var url = "/fiobbio1/Archive/ARC-" + year + "-" + month + "-" + day + ".txt";
+  const url = "/fiobbio1/Archive/ARC-" + year + "-" + month + "-" + day + ".txt";
   //window.location=url;
-  $("#noaatext").text("Loading....");
-  $("#noaatext").load(url);
+
+  const noaaTextElement = document.getElementById("noaatext");
+  noaaTextElement.textContent = "Loading....";
+
+  fetch(url)
+    .then(response => response.text())
+    .then(data => {
+      noaaTextElement.textContent = data;
+    })
+    .catch(error => {
+      noaaTextElement.textContent = "Error loading file: " + error.message;
+    });
 }
 
 function openURL(urlname) {
