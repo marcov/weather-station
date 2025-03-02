@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-  <!-- Head section remains exactly the same until the script part -->
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <meta http-equiv="cache-control" content="no-cache" />
@@ -8,7 +7,6 @@
 
     <title>Archivio Dati</title>
 
-    <script type="text/javascript" src="../js/wview.js"></script>
     <link type="text/css" rel="stylesheet" href="../css/menu.css" />
     <link type="text/css" rel="stylesheet" href="../css/layout.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Major+Mono+Display|Share+Tech+Mono|Oxygen+Mono|Baloo+Tamma+2:wght@400;700;800">
@@ -173,6 +171,31 @@
         createMonthOptions();
         createYearOptions();
       });
+
+      function openNoaaFile(month, year) {
+        let url = "/fiobbio1/NOAA/NOAA-" + year;
+        if (month !== '') {
+          url = url + "-" + month;
+        }
+        url = url + ".txt";
+
+        const noaaTextElement = document.getElementById("noaatext");
+        noaaTextElement.textContent = "Loading....";
+
+        fetch(url)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`HTTP error ${response.status}`);
+            }
+            return response.text();
+          })
+          .then(data => {
+            noaaTextElement.textContent = data;
+          })
+          .catch(error => {
+            noaaTextElement.textContent = "Error loading file: " + error.message;
+          });
+      }
     </script>
   </head>
 
@@ -214,6 +237,7 @@
         </form>
 
         <div class="data-container">
+          <!-- Filled by JavaScript -->
           <p id="noaatext" class="preformatted"></p>
         </div>
       </div>
