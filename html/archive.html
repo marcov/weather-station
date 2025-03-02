@@ -175,7 +175,11 @@
       });
 
       function openNoaaFile(month, year) {
-        let url = "/fiobbio1/NOAA/NOAA-" + year;
+        // Get the selected station
+        const selectedStation = document.getElementById("station");
+        const station = selectedStation.value;
+
+        let url = "/" + station + "/NOAA/NOAA-" + year;
         if (month !== '') {
           url = url + "-" + month;
         }
@@ -208,6 +212,14 @@
 
         <form action="#" method="post">
           <div class="date-picker">
+            <div class="select-wrapper">
+              <select id="station">
+                <option value="fiobbio1" selected>Fiobbio 1</option>
+                <option value="fiobbio2">Fiobbio 2</option>
+                <option value="misma">Misma</option>
+              </select>
+            </div>
+
             <div class="select-wrapper">
               <select id="month" name="month">
                 <!-- Filled by JavaScript -->
