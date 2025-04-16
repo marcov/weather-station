@@ -23,6 +23,7 @@
       .select-wrapper {
         position: relative;
         margin-bottom: 12px;
+        display: flex;
       }
 
       .select-wrapper select {
@@ -34,6 +35,7 @@
         background-color: #f8fafc;
         cursor: pointer;
         font-size: 16px;
+        margin: 5px;
       }
 
       .select-wrapper::after {
@@ -51,6 +53,7 @@
         display: flex;
         gap: 8px;
         margin-top: 16px;
+        margin-bottom: 16px;
       }
 
       .button {
@@ -104,9 +107,41 @@
       .nav-buttons button:hover {
         background-color: #e2e8f0;
       }
+
+      /* New styles for station buttons */
+      .station-buttons {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+
+      .station-button {
+        flex: 1;
+        padding: 8px 12px;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        background-color: #f8fafc;
+        cursor: pointer;
+        font-size: 16px;
+        transition: all 0.2s;
+      }
+
+      .station-button:hover {
+        background-color: #e2e8f0;
+      }
+
+      .station-button.active {
+        background-color: #3b82f6;
+        color: white;
+        border-color: #2563eb;
+      }
     </style>
 
     <script>
+      // Global variables to store the current selected station and view type
+      let currentStation = "fiobbio1";
+      let currentViewType = "month"; // "month" or "year"
+
       function createMonthOptions() {
         const months = [
           "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
@@ -155,7 +190,8 @@
         if (currentYear >= 2009 && currentYear <= new Date().getFullYear()) {
           monthSelect.value = currentMonth.toString().padStart(2, '0');
           yearSelect.value = currentYear;
-          openNoaaFile(monthSelect.value, yearSelect.value);
+
+          refreshData();
         }
       }
 
@@ -165,23 +201,64 @@
 
         if (newYear >= 2009 && newYear <= new Date().getFullYear()) {
           yearSelect.value = newYear;
-          openNoaaFile('', yearSelect.value);
+
+          refreshData();
+        }
+      }
+
+      function selectStation(station) {
+        // Update the current station
+        currentStation = station;
+
+        // Update button styling
+        const buttons = document.querySelectorAll('.station-button');
+        buttons.forEach(button => {
+          if (button.getAttribute('data-station') === station) {
+            button.classList.add('active');
+          } else {
+            button.classList.remove('active');
+          }
+        });
+
+        // Refresh data based on current view type
+        refreshData();
+      }
+
+      function setViewType(viewType) {
+        // Update the current view type
+        currentViewType = viewType;
+
+        // Refresh data display
+        refreshData();
+      }
+
+      function refreshData() {
+        const month = document.getElementById('month').value;
+        const year = document.getElementById('year').value;
+
+        if (currentViewType === "year") {
+          openNoaaFile('', year);
+        } else {
+          openNoaaFile(month, year);
         }
       }
 
       document.addEventListener('DOMContentLoaded', () => {
         createMonthOptions();
         createYearOptions();
+
+        // Set initial active station
+        selectStation("fiobbio1");
       });
 
       function openNoaaFile(month, year) {
-        // Get the selected station
-        const selectedStation = document.getElementById("station");
-        const station = selectedStation.value;
+        // Use the currentStation variable instead of reading from a select element
+        const station = currentStation;
 
         let url = "/" + station + "/NOAA/NOAA-" + year;
         if (month !== '') {
           url = url + "-" + month;
+        } else {
         }
         url = url + ".txt";
 
@@ -212,33 +289,30 @@
 
         <form action="#" method="post">
           <div class="date-picker">
-            <div class="select-wrapper">
-              <select id="station">
-                <option value="fiobbio1" selected>Fiobbio 1</option>
-                <option value="fiobbio2">Fiobbio 2</option>
-                <option value="misma">Misma</option>
-              </select>
+            <!-- Replace dropdown with buttons -->
+            <div class="station-buttons">
+              <button type="button" class="station-button active" data-station="fiobbio1" onclick="selectStation('fiobbio1')">Fiobbio 1</button>
+              <button type="button" class="station-button" data-station="fiobbio2" onclick="selectStation('fiobbio2')">Fiobbio 2</button>
+              <button type="button" class="station-button" data-station="misma" onclick="selectStation('misma')">Misma</button>
+            </div>
+
+            <div class="button-group">
+              <button type="button" class="button" onclick="setViewType('month')">
+                Mostra mese
+              </button>
+              <button type="button" class="button" onclick="setViewType('year')">
+                Mostra anno
+              </button>
             </div>
 
             <div class="select-wrapper">
               <select id="month" name="month">
                 <!-- Filled by JavaScript -->
               </select>
-            </div>
 
-            <div class="select-wrapper">
               <select id="year" name="year">
                 <!-- Filled by JavaScript -->
               </select>
-            </div>
-
-            <div class="button-group">
-              <button type="button" class="button" onclick="openNoaaFile(this.form.month.value, this.form.year.value)">
-                Mostra mese
-              </button>
-              <button type="button" class="button" onclick="openNoaaFile('',this.form.year.value)">
-                Mostra anno
-              </button>
             </div>
 
             <div class="nav-buttons">
