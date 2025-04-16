@@ -16,6 +16,7 @@ spec:
             app: letsencrypt
         spec:
           restartPolicy: OnFailure
+          serviceAccountName: secret-updater
           containers:
             - name: letsencrypt
               image: pullme/x86_64-letsencrypt:latest
