@@ -1,7 +1,11 @@
 @media screen and (max-width: 999px)
 {
-  body
-  {
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
     font-size: 90%;
   }
 
@@ -75,7 +79,8 @@
   }
 
   .maincolumn {
-      margin: 1vw;
+    margin: 1vw;
+    min-height: 100%;
   }
 
   .measure {
