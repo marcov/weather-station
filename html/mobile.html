@@ -150,7 +150,15 @@
                 setIsWebcamZoomed(!isWebcamZoomed);
             };
 
-            if (!data) return null;
+            if (!data) {
+                return (
+                    <div className="swipe-item px-2">
+                        <div className="bg-slate-800/50 rounded-lg backdrop-blur-sm mb-4 h-64 flex items-center justify-center animate-pulse">
+                            <span className="text-gray-400">Loading {name}...</span>
+                        </div>
+                    </div>
+                );
+            }
 
             return (
                 <div className="swipe-item px-2">
@@ -319,35 +327,27 @@
                 });
             }, []);
 
-            // Effect to run when all stations are loaded
+            // Initialize view immediately
             React.useEffect(() => {
-                if (loadedStations.size === 3) { // all three stations are loaded
-                    console.log('All stations loaded!');
-                    // Your callback logic here
-                    if (containerRef.current) {
-                        containerRef.current.classList.add('loaded');
-                        containerRef.current.scrollLeft = containerRef.current.clientWidth;
-                    }
+                if (containerRef.current) {
+                    containerRef.current.classList.add('loaded');
+                    containerRef.current.scrollLeft = containerRef.current.clientWidth;
                 }
-            }, [loadedStations]);
+            }, []);
 
-            const fetchWeatherData = async () => {
-                try {
-                    const [fiobbio1Data, fiobbio2Data, mismaData] = await Promise.all([
-                        fetch('/fiobbio1/realtime.json').then(res => res.json()),
-                        fetch('/fiobbio2/realtime.json').then(res => res.json()),
-                        fetch('/misma/realtime.json').then(res => res.json())
-                    ]);
+            const fetchWeatherData = () => {
+                const loadStation = (key, url) => {
+                    fetch(url)
+                        .then(res => res.json())
+                        .then(data => {
+                            setWeatherData(prev => ({ ...prev, [key]: data }));
+                        })
+                        .catch(err => console.error(`Failed to load ${key}:`, err));
+                };
 
-                    setWeatherData({
-                        fiobbio1: fiobbio1Data,
-                        fiobbio2: fiobbio2Data,
-                        misma: mismaData
-                    });
-
-                } catch (err) {
-                    console.error('Failed to load weather data:', err);
-                }
+                loadStation('fiobbio1', '/fiobbio1/realtime.json');
+                loadStation('fiobbio2', '/fiobbio2/realtime.json');
+                loadStation('misma', '/misma/realtime.json');
             };
 
             React.useEffect(() => {
