@@ -2,9 +2,6 @@
 #
 # Start all the k8s weather stuff
 #
-# NOTE: make sure the addons are enabled
-# - minikube addons enable ingress
-
 set -euo pipefail
 
 set -x
@@ -60,6 +57,9 @@ set -x
 # "NodePort" kind of service.
 #
 minikube status || minikube start --driver none
+
+# Enable the ingress controller. This is required for the ingress routes.
+minikube addons enable ingress
 
 ${scriptDir}/template-gen.sh ${genManifestsDir}
 
