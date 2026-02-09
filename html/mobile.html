@@ -336,11 +336,16 @@
                 });
             }, []);
 
-            // Initialize view immediately
+            // Initialize view immediately and center on Fiobbio 1
             React.useEffect(() => {
                 if (containerRef.current) {
                     containerRef.current.classList.add('loaded');
-                    containerRef.current.scrollLeft = containerRef.current.clientWidth;
+                    // Small delay to ensure browser has rendered layout for correct clientWidth
+                    setTimeout(() => {
+                        if (containerRef.current) {
+                            containerRef.current.scrollLeft = containerRef.current.clientWidth;
+                        }
+                    }, 100);
                 }
             }, []);
 
