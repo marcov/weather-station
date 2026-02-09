@@ -94,26 +94,6 @@
             object-fit: contain;
         }
 
-        /* Rotate box for clickable cue */
-        @keyframes rotate {
-            0%, 100% {
-                transform: rotate(0deg);
-            }
-            25% {
-                transform: rotate(-5deg);
-            }
-            50% {
-                transform: rotate(5deg);
-            }
-            75% {
-                transform: rotate(-5deg);
-            }
-        }
-
-        .rotate-once {
-            animation: rotate 0.6s ease-in-out;
-        }
-
     </style>
 </head>
 <body class="bg-gradient-to-br from-slate-800 to-slate-900 text-gray-100 min-h-screen">
@@ -122,19 +102,12 @@
     <script type="text/jsx">
         function WeatherStation({ data, name, webcamSrc, onLoad }) {
             const [activeChart, setActiveChart] = React.useState(null); // null, 'temp', 'wind', 'humidity', or 'rain'
-            /* Animate is used for bouncing the box */
-            const [animate, setAnimate] = React.useState(false);
             const [isWebcamZoomed, setIsWebcamZoomed] = React.useState(false);
 
             React.useEffect(() => {
                 if (data) {
                     lucide.createIcons();
                     onLoad && onLoad(name);
-
-                    // Trigger the animation after loading
-                    setTimeout(() => {
-                        setAnimate(true);
-                    }, 500); // Delay to ensure page has fully loaded
                 }
             }, [data, name, onLoad]);
 
@@ -213,7 +186,6 @@
                                             hover:bg-slate-600/50
                                             transition-colors
                                             duration-200
-                                            ${animate ? 'rotate-once' : ''}
                                 `}
                                 onClick={toggleChart('temp')}
                             >
