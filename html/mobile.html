@@ -294,7 +294,6 @@
         function App() {
             const [weatherData, setWeatherData] = React.useState({
                 fiobbio1: null,
-                fiobbio2: null,
                 misma: null
             });
             const [loadedStations, setLoadedStations] = React.useState(new Set());
@@ -308,16 +307,11 @@
                 });
             }, []);
 
-            // Initialize view immediately and center on Fiobbio 1
+            // Initialize the view on Fiobbio 1.
             React.useEffect(() => {
                 if (containerRef.current) {
                     containerRef.current.classList.add('loaded');
-                    // Small delay to ensure browser has rendered layout for correct clientWidth
-                    setTimeout(() => {
-                        if (containerRef.current) {
-                            containerRef.current.scrollLeft = containerRef.current.clientWidth;
-                        }
-                    }, 100);
+                    containerRef.current.scrollLeft = 0;
                 }
             }, []);
 
@@ -332,7 +326,6 @@
                 };
 
                 loadStation('fiobbio1', '/fiobbio1/realtime.json');
-                loadStation('fiobbio2', '/fiobbio2/realtime.json');
                 loadStation('misma', '/misma/realtime.json');
             };
 
@@ -373,18 +366,12 @@
                     </header>
 
                     <div className="flex justify-center gap-2 mb-4" id="dots">
-                        <div className="w-2 h-2 rounded-full transition-colors duration-300 bg-gray-600" data-station="fiobbio1"></div>
+                        <div className="w-2 h-2 rounded-full transition-colors duration-300 bg-white" data-station="fiobbio1"></div>
                         <div className="w-2 h-2 rounded-full transition-colors duration-300 bg-gray-600" data-station="misma"></div>
-                        <div className="w-2 h-2 rounded-full transition-colors duration-300 bg-gray-600" data-station="fiobbio2"></div>
                     </div>
 
                     <div className="swipe-container" ref={containerRef} onScroll={handleScroll}>
                         <div className="flex">
-                            <WeatherStation
-                                data={weatherData.fiobbio2}
-                                name="Fiobbio 2"
-                                onLoad={handleStationLoad}
-                            />
                             <WeatherStation
                                 data={weatherData.fiobbio1}
                                 name="Fiobbio 1"
