@@ -1,0 +1,8 @@
+# Local snapshots used by fetch-dev-assets.sh. Production provides these paths
+# from separate nginx roots and weather-station services.
+/downloader/
+/fiobbio1/
+/fiobbio2/
+/misma/
+/webcam/
+/webshot/
