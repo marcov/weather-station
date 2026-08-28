@@ -72,6 +72,24 @@
             visibility: visible;
         }
 
+        .station-arrow {
+            display: none;
+        }
+
+        @media (min-width: 640px) and (pointer: fine) {
+            .station-arrow {
+                display: flex;
+            }
+            .swipe-container {
+                cursor: grab;
+            }
+            .swipe-container.dragging {
+                cursor: grabbing;
+                scroll-snap-type: none;
+                user-select: none;
+            }
+        }
+
         .chart-overlay {
             position: fixed;
             top: 0;
@@ -443,7 +461,18 @@
                 misma: null
             });
             const [loadedStations, setLoadedStations] = React.useState(new Set());
+            const [stationIndex, setStationIndex] = React.useState(0);
+            const [isDraggingStations, setIsDraggingStations] = React.useState(false);
+            const [stationCarouselReady, setStationCarouselReady] = React.useState(false);
             const containerRef = React.useRef(null);
+            const stationDragRef = React.useRef({
+                active: false,
+                startX: 0,
+                scrollLeft: 0,
+                moved: false,
+                captured: false
+            });
+            const stationWheelRef = React.useRef({ locked: false, timeout: null });
 
             const handleStationLoad = React.useCallback((stationName) => {
                 setLoadedStations(prev => {
@@ -456,8 +485,8 @@
             // Initialize the view on Fiobbio 1.
             React.useEffect(() => {
                 if (containerRef.current) {
-                    containerRef.current.classList.add('loaded');
                     containerRef.current.scrollLeft = 0;
+                    setStationCarouselReady(true);
                 }
             }, []);
 
@@ -491,11 +520,12 @@
                 const container = e.target;
                 const scrollPosition = container.scrollLeft;
                 const containerWidth = container.clientWidth;
-                const stationIndex = Math.round(scrollPosition / containerWidth);
+                const nextStationIndex = Math.round(scrollPosition / containerWidth);
+                setStationIndex(nextStationIndex);
 
                 const dots = document.querySelectorAll('#dots div');
                 dots.forEach((dot, index) => {
-                    if (index === stationIndex) {
+                    if (index === nextStationIndex) {
                         dot.classList.remove('bg-gray-600');
                         dot.classList.add('bg-white');
                     } else {
@@ -503,6 +533,101 @@
                         dot.classList.add('bg-gray-600');
                     }
                 });
+            }, []);
+
+            const scrollToStation = React.useCallback((index) => {
+                const container = containerRef.current;
+                if (!container) return;
+
+                container.scrollTo({
+                    left: Math.max(0, Math.min(1, index)) * container.clientWidth,
+                    behavior: 'smooth'
+                });
+            }, []);
+
+            const handleStationWheel = React.useCallback((event) => {
+                if (!window.matchMedia('(min-width: 640px) and (pointer: fine)').matches) return;
+                if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+
+                const container = event.currentTarget;
+                const maxScrollLeft = container.scrollWidth - container.clientWidth;
+                const movingRight = event.deltaY > 0;
+                const canMove = movingRight
+                    ? container.scrollLeft < maxScrollLeft - 1
+                    : container.scrollLeft > 1;
+
+                if (canMove) {
+                    event.preventDefault();
+                    if (stationWheelRef.current.locked) return;
+
+                    stationWheelRef.current.locked = true;
+                    container.scrollTo({
+                        left: movingRight ? maxScrollLeft : 0,
+                        behavior: 'smooth'
+                    });
+                    stationWheelRef.current.timeout = window.setTimeout(() => {
+                        stationWheelRef.current.locked = false;
+                    }, 500);
+                }
+            }, []);
+
+            React.useEffect(() => {
+                const container = containerRef.current;
+                if (!container) return;
+
+                container.addEventListener('wheel', handleStationWheel, { passive: false });
+                return () => {
+                    container.removeEventListener('wheel', handleStationWheel);
+                    window.clearTimeout(stationWheelRef.current.timeout);
+                };
+            }, [handleStationWheel]);
+
+            const handleStationPointerDown = React.useCallback((event) => {
+                if (event.pointerType !== 'mouse' || event.button !== 0) return;
+
+                const container = event.currentTarget;
+                stationDragRef.current = {
+                    active: true,
+                    startX: event.clientX,
+                    scrollLeft: container.scrollLeft,
+                    moved: false,
+                    captured: false
+                };
+            }, []);
+
+            const handleStationPointerMove = React.useCallback((event) => {
+                const drag = stationDragRef.current;
+                if (!drag.active) return;
+
+                const distance = event.clientX - drag.startX;
+                if (!drag.moved && Math.abs(distance) > 4) {
+                    drag.moved = true;
+                    drag.captured = true;
+                    event.currentTarget.setPointerCapture(event.pointerId);
+                    setIsDraggingStations(true);
+                }
+                if (!drag.moved) return;
+                event.currentTarget.scrollLeft = drag.scrollLeft - distance;
+            }, []);
+
+            const finishStationDrag = React.useCallback((event) => {
+                const drag = stationDragRef.current;
+                if (!drag.active) return;
+
+                drag.active = false;
+                setIsDraggingStations(false);
+                if (drag.captured && event.currentTarget.hasPointerCapture(event.pointerId)) {
+                    event.currentTarget.releasePointerCapture(event.pointerId);
+                }
+                scrollToStation(Math.round(event.currentTarget.scrollLeft / event.currentTarget.clientWidth));
+            }, [scrollToStation]);
+
+            const preventClickAfterDrag = React.useCallback((event) => {
+                if (stationDragRef.current.moved) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    stationDragRef.current.moved = false;
+                }
             }, []);
 
             return (
@@ -634,20 +759,50 @@
                             <div className="w-2 h-2 rounded-full transition-colors duration-300 bg-gray-600" data-station="misma"></div>
                         </div>
 
-                        <div className="swipe-container" ref={containerRef} onScroll={handleScroll}>
-                            <div className="flex">
-                                <WeatherStation
-                                    data={weatherData.fiobbio1}
-                                    name="Fiobbio 1"
-                                    webcamSrc="/webcam/webcam_fiobbio.jpg"
-                                    onLoad={handleStationLoad}
-                                />
-                                <WeatherStation
-                                    data={weatherData.misma}
-                                    name="Misma"
-                                    webcamSrc="/webcam/webcam_misma.jpg"
-                                    onLoad={handleStationLoad}
-                                />
+                        <div className="relative">
+                            <button
+                                type="button"
+                                onClick={() => scrollToStation(stationIndex - 1)}
+                                disabled={stationIndex === 0}
+                                aria-label="Stazione precedente"
+                                className="station-arrow absolute left-2 top-1/2 -translate-y-1/2 z-20 h-10 w-10 items-center justify-center rounded-full bg-slate-900/75 text-white shadow-lg backdrop-blur-sm transition-opacity disabled:opacity-0"
+                            >
+                                <span aria-hidden="true" className="text-2xl leading-none">‹</span>
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => scrollToStation(stationIndex + 1)}
+                                disabled={stationIndex === 1}
+                                aria-label="Stazione successiva"
+                                className="station-arrow absolute right-2 top-1/2 -translate-y-1/2 z-20 h-10 w-10 items-center justify-center rounded-full bg-slate-900/75 text-white shadow-lg backdrop-blur-sm transition-opacity disabled:opacity-0"
+                            >
+                                <span aria-hidden="true" className="text-2xl leading-none">›</span>
+                            </button>
+
+                            <div
+                                className={`swipe-container ${stationCarouselReady ? 'loaded' : ''} ${isDraggingStations ? 'dragging' : ''}`}
+                                ref={containerRef}
+                                onScroll={handleScroll}
+                                onPointerDown={handleStationPointerDown}
+                                onPointerMove={handleStationPointerMove}
+                                onPointerUp={finishStationDrag}
+                                onPointerCancel={finishStationDrag}
+                                onClickCapture={preventClickAfterDrag}
+                            >
+                                <div className="flex">
+                                    <WeatherStation
+                                        data={weatherData.fiobbio1}
+                                        name="Fiobbio 1"
+                                        webcamSrc="/webcam/webcam_fiobbio.jpg"
+                                        onLoad={handleStationLoad}
+                                    />
+                                    <WeatherStation
+                                        data={weatherData.misma}
+                                        name="Misma"
+                                        webcamSrc="/webcam/webcam_misma.jpg"
+                                        onLoad={handleStationLoad}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </section>
