@@ -37,7 +37,7 @@
         }
 
         body {
-           touch-action:none;
+           touch-action: manipulation;
         }
 
         .swipe-container {
@@ -92,6 +92,14 @@
             max-width: 100%;
             max-height: 90vh;
             object-fit: contain;
+        }
+
+        .meteoblue-widget {
+            display: block;
+            width: 100%;
+            height: clamp(350px, 72vw, 420px);
+            border: 0;
+            overflow: hidden;
         }
 
     </style>
@@ -291,7 +299,47 @@
             );
         }
 
+        function MeteoblueForecast() {
+            const widgetUrl = "https://www.meteoblue.com/en/weather/widget/daily/albino_italy_3183316?geoloc=fixed&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&precipunit=MILLIMETER&days=7&coloured=coloured&pictoicon=1&maxtemperature=1&mintemperature=1&windspeed=0&windgust=0&winddirection=0&uv=1&humidity=0&precipitation=1&precipitationprobability=1&spot=1&pressure=0&layout=dark&user_key=3f9c31a7ed45c570&embed_key=73273ce7899e9fb2&sig=0ddc06c379b4d7b5572f9776133119a42210b3693697ac075dfc8276541d7502";
+
+            return (
+                <section aria-labelledby="forecast-title">
+                    <div className="flex items-end justify-between gap-3 mb-2 px-1">
+                        <div>
+                            <p className="text-xs font-semibold uppercase tracking-widest text-blue-300">
+                                Albino
+                            </p>
+                            <h2 id="forecast-title" className="text-lg font-semibold">
+                                Previsioni meteo
+                            </h2>
+                        </div>
+                        <a
+                            href="https://www.meteoblue.com/en/weather/week/albino_italy_3183316/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs font-semibold text-gray-400 hover:text-gray-200 transition-colors"
+                        >
+                            7 giorni ↗
+                        </a>
+                    </div>
+
+                    <div className="bg-slate-800/50 rounded-lg overflow-hidden shadow-lg">
+                        <iframe
+                            className="meteoblue-widget"
+                            src={widgetUrl}
+                            title="Previsioni Meteoblue per Albino"
+                            scrolling="no"
+                            allowTransparency="true"
+                            sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox"
+                            loading="lazy"
+                        ></iframe>
+                    </div>
+                </section>
+            );
+        }
+
         function App() {
+            const [activeView, setActiveView] = React.useState('stations');
             const [weatherData, setWeatherData] = React.useState({
                 fiobbio1: null,
                 misma: null
@@ -365,26 +413,69 @@
                         </div>
                     </header>
 
-                    <div className="flex justify-center gap-2 mb-4" id="dots">
-                        <div className="w-2 h-2 rounded-full transition-colors duration-300 bg-white" data-station="fiobbio1"></div>
-                        <div className="w-2 h-2 rounded-full transition-colors duration-300 bg-gray-600" data-station="misma"></div>
-                    </div>
+                    <nav
+                        className="grid grid-cols-2 gap-1 rounded-lg bg-slate-800/70 p-1 mb-4"
+                        aria-label="Contenuto meteo"
+                    >
+                        <button
+                            type="button"
+                            onClick={() => setActiveView('stations')}
+                            aria-pressed={activeView === 'stations'}
+                            className={`rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
+                                activeView === 'stations'
+                                    ? 'bg-slate-600 text-white shadow-sm'
+                                    : 'text-gray-400 hover:text-gray-200'
+                            }`}
+                        >
+                            Stazioni
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setActiveView('forecasts')}
+                            aria-pressed={activeView === 'forecasts'}
+                            className={`rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
+                                activeView === 'forecasts'
+                                    ? 'bg-slate-600 text-white shadow-sm'
+                                    : 'text-gray-400 hover:text-gray-200'
+                            }`}
+                        >
+                            Previsioni
+                        </button>
+                    </nav>
 
-                    <div className="swipe-container" ref={containerRef} onScroll={handleScroll}>
-                        <div className="flex">
-                            <WeatherStation
-                                data={weatherData.fiobbio1}
-                                name="Fiobbio 1"
-                                webcamSrc="/webcam/webcam_fiobbio.jpg"
-                                onLoad={handleStationLoad}
-                            />
-                            <WeatherStation
-                                data={weatherData.misma}
-                                name="Misma"
-                                webcamSrc="/webcam/webcam_misma.jpg"
-                                onLoad={handleStationLoad}
-                            />
+                    <section
+                        className={activeView === 'stations' ? '' : 'hidden'}
+                        aria-label="Stazioni meteo"
+                        aria-hidden={activeView !== 'stations'}
+                    >
+                        <div className="flex justify-center gap-2 mb-4" id="dots">
+                            <div className="w-2 h-2 rounded-full transition-colors duration-300 bg-white" data-station="fiobbio1"></div>
+                            <div className="w-2 h-2 rounded-full transition-colors duration-300 bg-gray-600" data-station="misma"></div>
                         </div>
+
+                        <div className="swipe-container" ref={containerRef} onScroll={handleScroll}>
+                            <div className="flex">
+                                <WeatherStation
+                                    data={weatherData.fiobbio1}
+                                    name="Fiobbio 1"
+                                    webcamSrc="/webcam/webcam_fiobbio.jpg"
+                                    onLoad={handleStationLoad}
+                                />
+                                <WeatherStation
+                                    data={weatherData.misma}
+                                    name="Misma"
+                                    webcamSrc="/webcam/webcam_misma.jpg"
+                                    onLoad={handleStationLoad}
+                                />
+                            </div>
+                        </div>
+                    </section>
+
+                    <div
+                        className={activeView === 'forecasts' ? '' : 'hidden'}
+                        aria-hidden={activeView !== 'forecasts'}
+                    >
+                        <MeteoblueForecast />
                     </div>
                 </div>
             );
