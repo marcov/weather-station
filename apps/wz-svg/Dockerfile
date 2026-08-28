@@ -8,4 +8,4 @@ RUN npm ci --omit=dev --no-audit --no-fund
 COPY apps/wz-svg/extract.mjs ./
 
 ENTRYPOINT ["node", "/wz-svg/extract.mjs"]
-CMD ["/destdir/wz_meteogram.svg"]
+CMD ["/destdir"]

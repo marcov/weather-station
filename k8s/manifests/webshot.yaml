@@ -3,6 +3,7 @@ kind: CronJob
 metadata:
   name: webshot
 spec:
+  suspend: true
   schedule: "17 * * * *"
   concurrencyPolicy: Replace
   successfulJobsHistoryLimit: 1

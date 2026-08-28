@@ -24,7 +24,7 @@ spec:
               image: pullme/x86_64-wz-svg:latest
               imagePullPolicy: IfNotPresent
               args:
-                - /destdir/wz_meteogram.svg
+                - /destdir
               volumeMounts:
                 - name: ws-shared
                   mountPath: /destdir

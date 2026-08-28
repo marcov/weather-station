@@ -1,8 +1,8 @@
 # Wetterzentrale SVG extractor
 
-This is intentionally separate from the existing PhantomJS-based webshot
-image. It extracts the rendered ECMWF Highcharts diagram as a self-contained
-SVG and atomically replaces `wz_meteogram.svg` in the shared webshot volume.
+Extract the rendered ECMWF Highcharts diagrams as self-contained SVGs and
+atomically replace `wz_meteogram.svg` and `wz_ensemble.svg` in the shared
+webshot volume.
 
 Build from the repository root:
 
@@ -17,5 +17,5 @@ Run locally after installing the browser once:
 cd apps/wz-svg
 npm ci
 npx playwright install chromium
-node extract.mjs /tmp/wz_meteogram.svg
+node extract.mjs /tmp/wz-svg
 ```
