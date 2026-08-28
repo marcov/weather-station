@@ -1,551 +1,671 @@
-<t!DOCTYPE html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Meteo, Webcam e Previsioni Fiobbio di Albino</title>
-  <meta name="description"
-     content="Dati in tempo reale delle stazioni meteo di Fiobbio di Albino e
-              del Monte Misma.
-              Immagini in diretta webcam Fiobbio di Albino.
-              Immagini in diretta webcam Monte Misma.
-              Previsioni meteo per Albino (BG).
-              Archivio dati meteo di Albino.
-              Fiobbio è un paese situato nella Valle del Lujo,
-              nella media Val Seriana, in provincia di Bergamo, Lombardia. ">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Meteo Fiobbio">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description"
+       content="Dati in tempo reale delle stazioni meteo di Fiobbio di Albino e
+                del Monte Misma.
+                Immagini in diretta webcam Fiobbio di Albino.
+                Immagini in diretta webcam Monte Misma.
+                Previsioni meteo per Albino (BG).
+                Archivio dati meteo di Albino.
+                Fiobbio è un paese situato nella Valle del Lujo,
+                nella media Val Seriana, in provincia di Bergamo, Lombardia. ">
 
-  <!-- the following is needed for the media queries to work correctly -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/icons/apple-icon.png">
+    <title>Meteo, Webcam e Previsioni Fiobbio di Albino</title>
 
-  <link type="text/css" rel="stylesheet" href="css/layout.css" />
-
-  <link type="text/css" rel="stylesheet" href="css/lightbox.css" />
-
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Inconsolata|Major+Mono+Display|Share+Tech+Mono|Oxygen+Mono|Baloo+Tamma+2:wght@400;700;800">
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KCSTMYF26E"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-KCSTMYF26E');
-  </script>
-
-  <!-- AdSense
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8303716244658891"
-     crossorigin="anonymous"></script>
-  -->
-</head>
-
-<body>
-  <div class="maincolumn">
-
-    <div class="heading">
-      <ul>
-          <li class="title"> <h1>Meteo Fiobbio </h1></li>
-      </ul>
-
-      <p class="heading-separator"> | </p>
-
-      <ul class="links">
-        <li>
-        <a href="/grafana/d/Ewu-ii3Mk/wview-all-stations?orgId=1&kiosk=tv">Dettagli</a>
-        </li>
-        <li> &nbsp;&#8211;&nbsp; </li>
-        <li>
-        <a href="/grafana/d/-qh9KGzRk/wview-past-years-comparison--and-misma?orgId=1&kiosk=tv">Serie Storiche</a>
-        </li>
-        <li> &nbsp;&#8211;&nbsp; </li>
-        <a href="archive.html" class="indented">Archivio</a>
-        </li>
-        <li> &nbsp;&#8211;&nbsp; </li>
-        <li>
-        <a href="mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com">Contatti</a>
-        </li>
-        <!--
-        <a href="/fiobbio2">Fiobbio 2</a>
-        &nbsp;&#8211;&nbsp;
-        <a href="/misma">Mt. Misma</a>
-        &nbsp;&#8211;&nbsp;
-        <a href="almanac.htm" class="indented">Almanacco</a>
-        &nbsp;&#8211;&nbsp;
-        <a href="Daily.htm" class="indented">24h</a>
-        &nbsp;&#8211;&nbsp;
-        <a href="Monthly.htm" class="indented">Mese in corso</a>
-        &nbsp;&#8211;&nbsp;
-        <a href="Yearly.htm" class="indented">Anno in corso</a>
-        &nbsp;&#8211;&nbsp;
-        -->
-      </ul>
-
-      <p class="heading-separator"> | </p>
-
-      <ul class="stationData">
-        <li> &#9650; <span id="stationElevation"></span> </li>
-        <li> &nbsp;&#8211;&nbsp; </li>
-
-        <li>
-          <span id="stationLatitude"></span>&#8210;<span id="stationLongitude"></span>
-        </li>
-        <li> &nbsp;&#8211;&nbsp; </li>
-
-        <li>
-          &UpperRightArrow;<span id="sunriseTime"></span>&nbsp;&LowerRightArrow;<span id="sunsetTime"></span>
-        </li>
-        <li> &nbsp;&#8211;&nbsp; </li>
-
-        <li>
-            &#9789; <span id="moonPhase"></span>
-        </li>
-      </ul>
-
-    </div>
-
-    <div class="measures-container">
-      <!-- NOTE: this is actually just a template, being used for the 2 containers below -->
-      <ul id="measuresTemplate" class="measures-group" style="display: none;">
-
-        <li class="" style="min-width: 10rem;">
-          <!-- placeholder label to a correct flex layout -->
-          <label class="emptyLabel">&nbsp;</label>
-          <div>
-              <a class="location"></a>&nbsp;-&nbsp;<label class="timestamp"></label>
-          </div>
-        </li>
-
-        <li class="measure">
-          <label>Temperatura (&deg;C)</label>
-          <div>
-            <div class="min">
-              <div><span class="lowOutsideTemp"></span></div>
-              <div class="sub"><span class="lowOutsideTempTime"></span></div>
-            </div>
-            <div class="curr tempCurr">
-              <span class="outsideTemp"></span>
-              <span style="font-size: 50%;"> Feels&nbsp;</span><span style="font-size: 60%;" class="apparentTemp"></span>
-            </div>
-            <div class="max">
-              <div><span class="hiOutsideTemp"></span></div>
-              <div class="sub"><span class="hiOutsideTempTime"></span></div>
-            </div>
-          </div>
-        </li>
-
-        <li class="measure">
-          <label>Vento (km/h)</label>
-          <div>
-            <div class="other">
-              <div><span class="windGustSpeed"></span></div>
-              <div class="sub">
-                Raff
-              </div>
-            </div>
-            <div class="curr">
-              <span class="windSpeed"></span>
-              <div class="sub" style="font-size:50%">
-              Dir <span class="windDirection"></span>
-              </div>
-            </div>
-            <div class="max">
-              <div><span class="hiWindSpeed"></span></div>
-              <div class="sub"><span class="hiWindSpeedTime"></span></div>
-            </div>
-          </div>
-        </li>
-
-        <li class="measure">
-          <label>Umidit&agrave; (%)</label>
-          <div>
-            <div class="min">
-              <div><span class="lowHumidity"></span></div>
-              <div class="sub"><span class="lowHumTime"></span></div>
-            </div>
-            <div class="curr narrow">
-              <span class="outsideHumidity"></span>
-              <div style="font-size: 50%">&nbsp;</div>
-            </div>
-            <div class="max">
-              <div><span class="hiHumidity"></span></div>
-              <div class="sub"><span class="hiHumTime"></span></div>
-            </div>
-          </div>
-        </li>
-
-    <!--
-        <li class="measure">
-          <label>Pressione</label>
-          <div>
-            <div class="min">
-              <div><span class="lowBarometer"></span></div>
-              <div class="sub"><span class="lowBarometerTime"></span></div>
-            </div>
-            <div class="curr">
-              <span class="barometer"></span><label class="unit"><span class="barUnit"></span></label>
-              <div style="font-size:50%">
-                Tendenza&nbsp;<span class="baromtrend"></span>
-              </div>
-            </div>
-            <div class="max">
-              <div><span class="hiBarometer"></span></div>
-              <div class="sub"><span class="hiBarometerTime"></span></div>
-            </div>
-          </div>
-        </li>
+    <!-- Google Analytics disabled for now.
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KCSTMYF26E"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-KCSTMYF26E');
+    </script>
     -->
 
-        <li class="measure">
-          <label>Pioggia (mm/h)</label>
-          <div>
-            <div class="other">
-              <div>
-                <span class="dailyRain"></span>
-              </div>
-              <div class="sub">
-                Giorn
-              </div>
-            </div>
-            <div class="curr">
-              <span class="rainRate"></span>
-              <div style="font-size:50%">
-              </div>
-            </div>
-            <div class="max">
-              <div>
-                <span class="stormRain"></span>
-              </div>
-              <div class="sub">
-                Max Int
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul> <!-- measures-group -->
+    <!-- React and Babel from CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
-      <ul id="fiobbio1Measures" class="measures-group"></ul>
-      <ul id="fiobbio2Measures" class="measures-group"></ul>
-      <ul id="mismaMeasures" class="measures-group"></ul>
+    <!-- Other dependencies -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
 
-    </div> <!-- <div class="measures-container"> -->
+    <style>
+        /* Padding for PWA */
+        html {
+            min-height: calc(100% + env(safe-area-inset-top));
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+        }
 
-    <!-- Lightbox with zoom images -- NOTE: this is not visible -->
-    <div class="lightbox">
-      <div class="lightbox-content">
-        <button class="close-button">&times;</button>
-        <img class="zoom-img" src="" alt="Zoomed Image" />
-        <button class="nav-button prev-button">&lt;</button>
-        <button class="nav-button next-button">&gt;</button>
-      </div>
-    </div>
+        body {
+           touch-action: manipulation;
+        }
 
-    <div>
-      <ul class="webcams-container gallery">
-        <div class="gallery-item" data-full-img="/webcam/webcam_fiobbio.jpg">
-          <img class="preview-img" src="/webcam/webcam_small_fiobbio.jpg" alt="Sample 1" />
-        </div>
-        <div class="gallery-item" data-full-img="/webcam/webcam_misma.jpg">
-          <img class="preview-img" src="/webcam/webcam_small_misma.jpg" alt="Sample 2" />
-        </div>
-      </ul>
-    </div>
+        .swipe-container {
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .swipe-container::-webkit-scrollbar {
+            display: none;
+        }
+        .swipe-item {
+            scroll-snap-align: start;
+            flex: 0 0 100%;
+            width: 100%;
+        }
+        .swipe-container {
+            visibility: hidden;
+        }
+        .swipe-container.loaded {
+            visibility: visible;
+        }
 
-    <div>
-      <ul class="graph-container">
-        <li> <img class="wviewgraph" alt="wview image" src="/fiobbio1/daytempdew.png"> </li>
-        <li> <img alt="wview image" src="/fiobbio1/daywind.png"> </li>
-        <li> <img alt="wview image" src="/fiobbio1/dayradiation.png "> </li>
-      </ul>
+        .chart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+            padding: 1rem;
+            animation: fadeIn 0.2s ease-in;
+        }
 
-      <ul class="graph-container">
-        <li>
-          <img alt="wview image" src="/fiobbio1/rainday.png">
-        </li>
-        <li>
-          <img alt="wview image" src="/fiobbio1/baromday.png">
-        </li>
-        <li>
-          <img alt="wview image" src="/fiobbio1/humidday.png">
-        </li>
-      </ul>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
-      <!-- Wind / rain mix -->
-      <ul class="graph-container">
-        <li>
-          <img class="wviewbar" alt="wview image" src="/downloader/rain_day.png">
-        </li>
+        .chart-container {
+            max-width: 100%;
+            max-height: 90vh;
+            position: relative;
+        }
 
-        <li>
-          <img class="wviewbar" alt="wview image" src="/downloader/rain_month.png">
-        </li>
+        .chart-container img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
 
-        <li>
-          <img class="wviewbar" alt="wview image" src="/downloader/rain_year.png">
-        </li>
+        .meteoblue-widget {
+            display: block;
+            width: 100%;
+            height: clamp(350px, 72vw, 420px);
+            border: 0;
+            overflow: hidden;
+        }
 
-      </ul>
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-800 to-slate-900 text-gray-100 min-h-screen">
+    <div id="root"></div>
 
-    </div>
-    <!-- WEATHER IMAGES END -->
+    <script type="text/jsx">
+        function WeatherStation({ data, name, webcamSrc, onLoad }) {
+            const [activeChart, setActiveChart] = React.useState(null); // null, 'temp', 'wind', 'humidity', or 'rain'
+            const [isWebcamZoomed, setIsWebcamZoomed] = React.useState(false);
 
-    <div>
-        <div class="bottombanner">
-          <span style="font-weight: bold;">Marcello Alborghetti</span>
-          <span style="font-size:80%;">&nbsp;(HW)&nbsp; - &nbsp;</span>
-          <span style="font-weight: bold; font-size:102%; letter-spacing:.15rem;">Marco Vedovati</span>
-          <span style="font-size:80%;">&nbsp;(SW)</span>
-        </div>
-    </div>
+            React.useEffect(() => {
+                if (data) {
+                    lucide.createIcons();
+                    onLoad && onLoad(name);
+                }
+            }, [data, name, onLoad]);
 
-    <h3>Previsioni Meteo</h3>
-    <ul class="flex-container">
-      <li>
-        <!--
-        <a href="https://www.meteoblue.com/en/weather/week/albino_italy_3183316/" title="Large image">
-          <img style="height: 15em;" src="/webshot/meteoblue.jpg" alt="Meteoblue 7 days" title="Meteoblue 7 days" />
-        </a> -->
-        <iframe src="https://www.meteoblue.com/en/weather/widget/daily/albino_italy_3183316?geoloc=fixed&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&precipunit=MILLIMETER&days=7&coloured=coloured&pictoicon=1&maxtemperature=1&mintemperature=1&windspeed=0&windgust=0&winddirection=0&uv=1&humidity=0&precipitation=1&precipitationprobability=1&spot=1&pressure=0&layout=dark&user_key=3f9c31a7ed45c570&embed_key=73273ce7899e9fb2&sig=0ddc06c379b4d7b5572f9776133119a42210b3693697ac075dfc8276541d7502" frameborder="0" scrolling="NO" allowtransparency="true" sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox" style="width: 378px;height: 350px;border: 0;overflow: hidden;"></iframe><div><!-- DO NOT REMOVE THIS LINK --><a style="visibility: hidden; display: none;" href="https://www.meteoblue.com/en/weather/week/index" target="_blank" rel="noopener">meteoblue</a></div>
-      </li>
-    </ul>
+            const getChartUrl = (type) => {
+                const stationId = name.toLowerCase().replace(' ', '');
+                const chartTypes = {
+                    temp: 'daytempdew.png',
+                    humidity: 'dayhum.png',
+                    wind: 'daywind.png',
+                    rain: 'dayrain.png'
+                };
+                return `/${stationId}/${chartTypes[type]}`;
+            };
 
-    <ul class="flex-container">
-      <li>
-        <a href="https://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=ecm&var=93&run=0&lid=OP&bw=" title="Large image">
-          <img class="forecast-img" src="/webshot/wz_meteogram.jpg" alt="Meteogram 10d wetterzentrale" title="Meteogram 10d" />
-        </a>
-      </li>
+            const toggleChart = (type) => (e) => {
+                e.preventDefault();
+                setActiveChart(activeChart === type ? null : type);
+            };
 
-      <li>
-        <a href="https://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=ecm&var=201&run=12&lid=ENS&bw=" title="Large image">
-          <img class="forecast-img" src="/webshot/wz_ensemble.jpg" alt="Meteogram 10d wetterzentrale" title="Ensemble 10d" />
-        </a>
-      </li>
-    </ul>
+            const toggleWebcamZoom = (e) => {
+                e.preventDefault();
+                setIsWebcamZoomed(!isWebcamZoomed);
+            };
 
-    <h3>Immagini Satellitari</h3>
-    <ul class="flex-container gallery">
+            if (!data) {
+                return (
+                    <div className="swipe-item px-2">
+                        <div className="bg-slate-800/50 rounded-lg backdrop-blur-sm mb-4 h-64 flex items-center justify-center animate-pulse">
+                            <span className="text-gray-400">Loading {name}...</span>
+                        </div>
+                    </div>
+                );
+            }
 
-      <div class="gallery-item" data-full-img="/downloader/sat_alps.jpg">
-        <img class="preview-img" src="/downloader/sat_alps.jpg" alt="sat24.com" />
-      </div>
+            return (
+                <div className="swipe-item px-2">
+                    {activeChart && (
+                        <div className="chart-overlay" onClick={() => setActiveChart(null)}>
+                            <div className="chart-container">
+                                <img
+                                    src={getChartUrl(activeChart)}
+                                    alt={`${activeChart.charAt(0).toUpperCase() + activeChart.slice(1)} Chart for ${name}`}
+                                    className="rounded-lg shadow-lg"
+                                />
+                            </div>
+                        </div>
+                    )}
 
-      <div class="gallery-item" data-full-img="https://eumetview.eumetsat.int/static-images/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg">
-        <img class="preview-img" src="https://eumetview.eumetsat.int/static-images/latestImages/EUMETSAT_MSG_RGBNatColour_CentralEurope.jpg" alt="eumetsat.org" />
-      </div>
+                    {isWebcamZoomed && webcamSrc && (
+                        <div className="chart-overlay" onClick={toggleWebcamZoom}>
+                            <div className="chart-container">
+                                <img
+                                    src={webcamSrc}
+                                    alt={`Webcam ${name}`}
+                                    className="rounded-lg shadow-lg"
+                                />
+                            </div>
+                        </div>
+                    )}
 
-    </ul>
+                    <div className="bg-slate-800/50 rounded-lg backdrop-blur-sm mb-4">
+                        <div className="flex justify-between items-center mb-2">
+                            <h2 className="text-lg font-semibold">{name}</h2>
+                            <span className="text-gray-400 text-sm">
+                                {data.stationTime.split(':').slice(0,2).join(':')}
+                            </span>
+                        </div>
 
-    <h3>Radar Meteo</h3>
-    <ul class="flex-container gallery">
+                        <div className="grid grid-cols-2 gap-2">
+                            {/* Temperature Box */}
+                            <div
+                                className={`bg-slate-700/50
+                                            rounded-lg
+                                            p-4
+                                            cursor-pointer
+                                            hover:bg-slate-600/50
+                                            transition-colors
+                                            duration-200
+                                `}
+                                onClick={toggleChart('temp')}
+                            >
+                                <div className="flex items-center gap-2 text-yellow-400">
+                                    <i data-lucide="thermometer" className="w-4 h-4"></i>
+                                    <span className="text-sm">Temperatura</span>
+                                </div>
+                                <div className="text-2xl font-bold mt-2">
+                                    {data.outsideTemp}°C
+                                </div>
+                                <div className="flex justify-between mt-2 text-sm">
+                                    <div className="text-blue-400">
+                                        <div className="flex items-center gap-1">
+                                            <i data-lucide="arrow-down" className="w-3 h-3"></i>
+                                            {data.lowOutsideTemp}°C
+                                        </div>
+                                        <div className="text-xs opacity-75 mt-0.5 text-left">
+                                            {data.lowOutsideTempTime.split(':').slice(0,2).join(':')}
+                                        </div>
+                                    </div>
+                                    <div className="text-red-400">
+                                        <div className="flex items-center gap-1">
+                                            <i data-lucide="arrow-up" className="w-3 h-3"></i>
+                                            {data.hiOutsideTemp}°C
+                                        </div>
+                                        <div className="text-xs opacity-75 mt-0.5 text-right">
+                                            {data.hiOutsideTempTime.split(':').slice(0,2).join(':')}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-      <div class="gallery-item" data-full-img="/webshot/radar_lom.jpg">
-        <img class="preview-img" src="/webshot/radar_lom.jpg" alt="Radar CML" />
-      </div>
+                            {/* Wind Box */}
+                            <div
+                                className="bg-slate-700/50 rounded-lg p-4 cursor-pointer hover:bg-slate-600/50 transition-colors duration-200"
+                                onClick={toggleChart('wind')}
+                            >
+                                <div className="flex items-center gap-2 text-blue-400">
+                                    <i data-lucide="wind" className="w-4 h-4"></i>
+                                    <span className="text-sm">Vento</span>
+                                </div>
+                                <span className="text-2xl font-bold mt-2"> {data.windSpeed} km/h </span>
+                                <span className="text-md font-bold mt-2">
+                                    {data.windDirection}
+                                </span>
+                                <div className="text-sm text-gray-400 mt-2">
+                                    <div className="flex justify-between mt-2">
+                                        <span className="text-left">Raffica: {data.windGustSpeed}km/h</span>
+                                        <span className="text-right">Max: {data.hiWindSpeed}km/h</span>
+                                    </div>
+                                </div>
+                            </div>
 
-      <div class="gallery-item" data-full-img="https://www.astrogeo.va.it/fulmini/fulmini.jpg">
-        <img class="preview-img" src="https://www.astrogeo.va.it/fulmini/fulmini.jpg" alt="Mappa Fulmini" />
-      </div>
+                            {/* Humidity Box */}
+                            <div
+                                className="bg-slate-700/50 rounded-lg p-4 cursor-pointer hover:bg-slate-600/50 transition-colors duration-200"
+                                onClick={toggleChart('humidity')}
+                            >
+                                <div className="flex items-center gap-2 text-cyan-400">
+                                    <i data-lucide="droplets" className="w-4 h-4"></i>
+                                    <span className="text-sm">Umidità</span>
+                                </div>
+                                <div className="text-2xl font-bold mt-2">
+                                    {data.outsideHumidity}%
+                                </div>
+                                <div className="text-sm text-gray-400 mt-2">
+                                    <div className="flex justify-between mt-2">
+                                        <span>Min: {data.lowHumidity}%</span>
+                                        <span>Max: {data.hiHumidity}%</span>
+                                    </div>
+                                </div>
+                            </div>
 
-    </ul>
+                            {/* Rain Box */}
+                            <div
+                                className="bg-slate-700/50 rounded-lg p-4 cursor-pointer hover:bg-slate-600/50 transition-colors duration-200"
+                                onClick={toggleChart('rain')}
+                            >
+                                <div className="flex items-center gap-2 text-indigo-400">
+                                    <i data-lucide="cloud" className="w-4 h-4"></i>
+                                    <span className="text-sm">Pioggia</span>
+                                </div>
+                                <div className="text-2xl font-bold mt-2">
+                                    {data.rainRate} mm/h
+                                </div>
+                                <div className="text-sm text-gray-400 mt-2">
+                                    <div className="flex justify-between mt-2">
+                                        <span className="text-left">Giorno: {data.dailyRain}mm</span>
+                                        <span className="text-right">Storm: {data.stormRain}mm</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {webcamSrc && (
+                        <div className="bg-slate-800/50 rounded-lg overflow-hidden cursor-pointer" onClick={toggleWebcamZoom}>
+                            <img src={webcamSrc}
+                                 alt={`Webcam ${name}`}
+                                 className="w-full h-auto object-contain" />
+                        </div>
+                    )}
+                </div>
+            );
+        }
 
-  </div> <!-- div..maincolumn -->
+        function MeteoblueForecast() {
+            const widgetUrl = "https://www.meteoblue.com/en/weather/widget/daily/albino_italy_3183316?geoloc=fixed&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&precipunit=MILLIMETER&days=7&coloured=coloured&pictoicon=1&maxtemperature=1&mintemperature=1&windspeed=0&windgust=0&winddirection=0&uv=1&humidity=0&precipitation=1&precipitationprobability=1&spot=1&pressure=0&layout=dark&user_key=3f9c31a7ed45c570&embed_key=73273ce7899e9fb2&sig=0ddc06c379b4d7b5572f9776133119a42210b3693697ac075dfc8276541d7502";
 
-  <script>
-    function isToday(dateString) {
-        let today = new Date();
-        let dateTokens = dateString.split('/');
+            return (
+                <section aria-labelledby="forecast-title">
+                    <div className="flex items-end justify-between gap-3 mb-2 px-1">
+                        <div>
+                            <p className="text-xs font-semibold uppercase tracking-widest text-blue-300">
+                                Albino
+                            </p>
+                            <h2 id="forecast-title" className="text-lg font-semibold">
+                                Previsioni meteo
+                            </h2>
+                        </div>
+                        <a
+                            href="https://www.meteoblue.com/en/weather/week/albino_italy_3183316/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs font-semibold text-gray-400 hover:text-gray-200 transition-colors"
+                        >
+                            7 giorni ↗
+                        </a>
+                    </div>
 
-        let dd = parseInt(dateTokens[0]);
-        let mm = parseInt(dateTokens[1]);
-        let yy = parseInt(dateTokens[2]);
+                    <div className="bg-slate-800/50 rounded-lg overflow-hidden shadow-lg">
+                        <iframe
+                            className="meteoblue-widget"
+                            src={widgetUrl}
+                            title="Previsioni Meteoblue per Albino"
+                            scrolling="no"
+                            allowTransparency="true"
+                            sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox"
+                            loading="lazy"
+                        ></iframe>
+                    </div>
+                </section>
+            );
+        }
 
-        return (today.getDate() == dd &&
-                (today.getMonth() + 1) == mm &&
-                (today.getFullYear() % 100) == yy);
-    }
+        function WetterzentraleForecast() {
+            const diagramUrl = "/webshot/wz_meteogram.svg";
+            const sourceUrl = "https://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=ecm&var=93&run=0&lid=OP&bw=";
 
-    function populateStationInfo() {
-        fetch('/fiobbio1/stationinfo.json')
-            .then(response => response.json())
-            .then(jsonData => {
-                // Loop through each property in the JSON data
-                Object.entries(jsonData).forEach(([key, value]) => {
-                    // Find element by ID and update its text content
-                    const element = document.getElementById(key);
-                    if (element) {
-                        element.textContent = value;
+            return (
+                <section className="mt-6" aria-labelledby="wz-forecast-title">
+                    <div className="flex items-end justify-between gap-3 mb-2 px-1">
+                        <div>
+                            <p className="text-xs font-semibold uppercase tracking-widest text-blue-300">
+                                ECMWF · Albino
+                            </p>
+                            <h2 id="wz-forecast-title" className="text-lg font-semibold">
+                                Meteogramma 10 giorni
+                            </h2>
+                        </div>
+                        <a
+                            href={sourceUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs font-semibold text-gray-400 hover:text-gray-200 transition-colors"
+                        >
+                            Wetterzentrale ↗
+                        </a>
+                    </div>
+
+                    <a
+                        href={diagramUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block bg-white rounded-lg overflow-hidden shadow-lg"
+                        title="Apri il meteogramma a grandezza intera"
+                    >
+                        <img
+                            src={diagramUrl}
+                            alt="Meteogramma ECMWF a 10 giorni per Albino"
+                            className="block w-full h-auto"
+                            loading="lazy"
+                        />
+                    </a>
+                </section>
+            );
+        }
+
+        function WetterzentraleEnsembleForecast() {
+            const diagramUrl = "/webshot/wz_ensemble.jpg";
+            const sourceUrl = "https://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=ecm&var=201&run=12&lid=ENS&bw=";
+
+            return (
+                <section className="mt-6" aria-labelledby="wz-ensemble-title">
+                    <div className="flex items-end justify-between gap-3 mb-2 px-1">
+                        <div>
+                            <p className="text-xs font-semibold uppercase tracking-widest text-blue-300">
+                                ECMWF Ensemble · Albino
+                            </p>
+                            <h2 id="wz-ensemble-title" className="text-lg font-semibold">
+                                Tendenza ensemble
+                            </h2>
+                        </div>
+                        <a
+                            href={sourceUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs font-semibold text-gray-400 hover:text-gray-200 transition-colors"
+                        >
+                            Wetterzentrale ↗
+                        </a>
+                    </div>
+
+                    <a
+                        href={diagramUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block bg-white rounded-lg overflow-hidden shadow-lg"
+                        title="Apri il diagramma ensemble a grandezza intera"
+                    >
+                        <img
+                            src={diagramUrl}
+                            alt="Diagramma ensemble ECMWF per Albino"
+                            className="block w-full h-auto"
+                            loading="lazy"
+                        />
+                    </a>
+                </section>
+            );
+        }
+
+        function App() {
+            const [activeView, setActiveView] = React.useState('stations');
+            const [menuOpen, setMenuOpen] = React.useState(false);
+            const [stationInfo, setStationInfo] = React.useState(null);
+            const [weatherData, setWeatherData] = React.useState({
+                fiobbio1: null,
+                misma: null
+            });
+            const [loadedStations, setLoadedStations] = React.useState(new Set());
+            const containerRef = React.useRef(null);
+
+            const handleStationLoad = React.useCallback((stationName) => {
+                setLoadedStations(prev => {
+                    const newSet = new Set(prev);
+                    newSet.add(stationName);
+                    return newSet;
+                });
+            }, []);
+
+            // Initialize the view on Fiobbio 1.
+            React.useEffect(() => {
+                if (containerRef.current) {
+                    containerRef.current.classList.add('loaded');
+                    containerRef.current.scrollLeft = 0;
+                }
+            }, []);
+
+            const fetchWeatherData = () => {
+                const loadStation = (key, url) => {
+                    fetch(url)
+                        .then(res => res.json())
+                        .then(data => {
+                            setWeatherData(prev => ({ ...prev, [key]: data }));
+                        })
+                        .catch(err => console.error(`Failed to load ${key}:`, err));
+                };
+
+                loadStation('fiobbio1', '/fiobbio1/realtime.json');
+                loadStation('misma', '/misma/realtime.json');
+
+                fetch('/fiobbio1/stationinfo.json')
+                    .then(res => res.json())
+                    .then(setStationInfo)
+                    .catch(err => console.error('Failed to load station info:', err));
+            };
+
+            React.useEffect(() => {
+                fetchWeatherData();
+
+                const interval = setInterval(fetchWeatherData, 5 * 60 * 1000);
+                return () => clearInterval(interval);
+            }, []);
+
+            const handleScroll = React.useCallback((e) => {
+                const container = e.target;
+                const scrollPosition = container.scrollLeft;
+                const containerWidth = container.clientWidth;
+                const stationIndex = Math.round(scrollPosition / containerWidth);
+
+                const dots = document.querySelectorAll('#dots div');
+                dots.forEach((dot, index) => {
+                    if (index === stationIndex) {
+                        dot.classList.remove('bg-gray-600');
+                        dot.classList.add('bg-white');
+                    } else {
+                        dot.classList.remove('bg-white');
+                        dot.classList.add('bg-gray-600');
                     }
                 });
-            })
-            .catch(error => console.error('Error loading station info:', error));
-    }
+            }, []);
 
-    function populateMeasures(locs) {
-        locs.forEach((loc) => {
-            fetch(loc.Path + "realtime.json")
-                .then(response => response.json())
-                .then(jsonData => {
-                    // Get the target element and template
-                    const targetElement = document.getElementById(loc.tgtId);
-                    const template = document.getElementById('measuresTemplate');
+            return (
+                <div className="max-w-full mx-2 p-2 sm:max-w-xl sm:mx-auto sm:px-4">
+                    <header className="mb-4">
+                        <div className="relative flex items-start justify-between gap-2">
+                            <div>
+                                <h1 className="text-2xl font-bold tracking-wider">Meteo Fiobbio</h1>
+                                {stationInfo && (
+                                    <p
+                                        className="mt-0 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs leading-tight text-gray-400"
+                                        aria-label="Informazioni sulla stazione"
+                                    >
+                                        <span title="Altitudine">▲ {stationInfo.stationElevation}</span>
+                                        <span aria-hidden="true">·</span>
+                                        <span title="Alba">↗ {stationInfo.sunriseTime}</span>
+                                        <span title="Tramonto">↘ {stationInfo.sunsetTime}</span>
+                                        <span aria-hidden="true">·</span>
+                                        <span title="Fase lunare">☽ {stationInfo.moonPhase}</span>
+                                    </p>
+                                )}
+                            </div>
+                            <div className="relative">
+                                <button
+                                    type="button"
+                                    onClick={() => setMenuOpen(open => !open)}
+                                    aria-label="Apri menu"
+                                    aria-expanded={menuOpen}
+                                    aria-controls="main-menu"
+                                    className="rounded-md p-2 text-gray-400 hover:bg-slate-700/60 hover:text-gray-200 transition-colors"
+                                >
+                                    <svg
+                                        aria-hidden="true"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        className="h-5 w-5"
+                                    >
+                                        <path d="M4 6h16M4 12h16M4 18h16"></path>
+                                    </svg>
+                                </button>
 
-                    // Copy template content
-                    targetElement.innerHTML = template.innerHTML;
+                                {menuOpen && (
+                                    <nav
+                                        id="main-menu"
+                                        aria-label="Menu principale"
+                                        className="absolute right-0 z-40 mt-1 w-48 overflow-hidden rounded-lg border border-slate-700 bg-slate-800 shadow-xl"
+                                    >
+                                        <a
+                                            href="/grafana/d/Ewu-ii3Mk/wview-all-stations?orgId=1&kiosk=tv"
+                                            onClick={() => setMenuOpen(false)}
+                                            className="block px-4 py-3 text-sm font-semibold text-gray-200 hover:bg-slate-700"
+                                        >
+                                            Dettagli
+                                        </a>
+                                        <a
+                                            href="/grafana/d/-qh9KGzRk/wview-past-years-comparison--and-misma?orgId=1&kiosk=tv"
+                                            onClick={() => setMenuOpen(false)}
+                                            className="block border-t border-slate-700 px-4 py-3 text-sm font-semibold text-gray-200 hover:bg-slate-700"
+                                        >
+                                            Serie Storiche
+                                        </a>
+                                        <a
+                                            href="/archive.html"
+                                            onClick={() => setMenuOpen(false)}
+                                            className="block border-t border-slate-700 px-4 py-3 text-sm font-semibold text-gray-200 hover:bg-slate-700"
+                                        >
+                                            Archivio
+                                        </a>
+                                        <a
+                                            href="/legacy.html"
+                                            onClick={() => setMenuOpen(false)}
+                                            className="block border-t border-slate-700 px-4 py-3 text-sm font-semibold text-gray-200 hover:bg-slate-700"
+                                        >
+                                            Vista classica
+                                        </a>
+                                        <a
+                                            href="mailto:marcelloalborghetti@gmail.com,marco.vedovati@gmail.com"
+                                            onClick={() => setMenuOpen(false)}
+                                            className="block border-t border-slate-700 px-4 py-3 text-sm font-semibold text-gray-200 hover:bg-slate-700"
+                                        >
+                                            Contatti
+                                        </a>
+                                    </nav>
+                                )}
+                            </div>
+                        </div>
+                    </header>
 
-                    // Update location elements
-                    const locationElement = targetElement.querySelector('.location');
-                    locationElement.textContent = loc.location;
-                    locationElement.href = loc.Path;
+                    <nav
+                        className="grid grid-cols-2 gap-1 rounded-lg bg-slate-800/70 p-1 mb-4"
+                        aria-label="Contenuto meteo"
+                    >
+                        <button
+                            type="button"
+                            onClick={() => setActiveView('stations')}
+                            aria-pressed={activeView === 'stations'}
+                            className={`rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
+                                activeView === 'stations'
+                                    ? 'bg-slate-600 text-white shadow-sm'
+                                    : 'text-gray-400 hover:text-gray-200'
+                            }`}
+                        >
+                            Stazioni
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setActiveView('forecasts')}
+                            aria-pressed={activeView === 'forecasts'}
+                            className={`rounded-md px-3 py-2 text-sm font-semibold transition-colors ${
+                                activeView === 'forecasts'
+                                    ? 'bg-slate-600 text-white shadow-sm'
+                                    : 'text-gray-400 hover:text-gray-200'
+                            }`}
+                        >
+                            Previsioni
+                        </button>
+                    </nav>
 
-                    // Strip out seconds from timestamp
-                    jsonData.timestamp = jsonData.stationTime.split(':', 2).join(':');
+                    <section
+                        className={activeView === 'stations' ? '' : 'hidden'}
+                        aria-label="Stazioni meteo"
+                        aria-hidden={activeView !== 'stations'}
+                    >
+                        <div className="flex justify-center gap-2 mb-4" id="dots">
+                            <div className="w-2 h-2 rounded-full transition-colors duration-300 bg-white" data-station="fiobbio1"></div>
+                            <div className="w-2 h-2 rounded-full transition-colors duration-300 bg-gray-600" data-station="misma"></div>
+                        </div>
 
-                    // if not today, append full date
-                    if (!isToday(jsonData.stationDate)) {
-                        jsonData.timestamp += ' - ' + jsonData.stationDate;
-                    }
+                        <div className="swipe-container" ref={containerRef} onScroll={handleScroll}>
+                            <div className="flex">
+                                <WeatherStation
+                                    data={weatherData.fiobbio1}
+                                    name="Fiobbio 1"
+                                    webcamSrc="/webcam/webcam_fiobbio.jpg"
+                                    onLoad={handleStationLoad}
+                                />
+                                <WeatherStation
+                                    data={weatherData.misma}
+                                    name="Misma"
+                                    webcamSrc="/webcam/webcam_misma.jpg"
+                                    onLoad={handleStationLoad}
+                                />
+                            </div>
+                        </div>
+                    </section>
 
-                    // Update all matching elements with JSON data
-                    // we map 1:1 json key value with id name,
-                    // so that jsonData loading is trivial
-                    Object.entries(jsonData).forEach(([key, val]) => {
-                        const element = targetElement.querySelector('.' + key);
-                        if (element) {
-                            element.textContent = val;
-                            // if (key === 'timestamp') {
-                            //     element.style.backgroundColor = 'green';
-                            // }
-                        }
-                    });
-                })
-                .catch(error => console.error('Error loading data for location:', loc.location, error));
-        });
-    }
+                    <div
+                        className={activeView === 'forecasts' ? '' : 'hidden'}
+                        aria-hidden={activeView !== 'forecasts'}
+                    >
+                        <MeteoblueForecast />
+                        <WetterzentraleForecast />
+                        <WetterzentraleEnsembleForecast />
+                    </div>
+                </div>
+            );
+        }
 
-    const locations = [
-      {
-        Path   : "/fiobbio1/",
-        tgtId : "fiobbio1Measures",
-        location : "Fiobbio 1"
-      },
-      {
-        Path   : "/misma/",
-        tgtId : "mismaMeasures",
-        location : "Misma"
-      },
-      {
-        Path   : "/fiobbio2/",
-        tgtId : "fiobbio2Measures",
-        location : "Fiobbio 2"
-      }
-    ];
-
-    document.addEventListener('DOMContentLoaded', () => {
-        populateStationInfo();
-        populateMeasures(locations);
-    }); /* document.addEventListener('DOMContentLoaded', () => { */
-
-    class Lightbox {
-      constructor() {
-        this.lightbox = document.querySelector('.lightbox');
-        this.zoomImg = this.lightbox.querySelector('.zoom-img');
-        this.galleries = document.querySelectorAll('.gallery');
-
-        this.currentGallery = null;
-        this.currentItems = [];
-        this.currentIndex = 0;
-
-        this.init();
-      }
-
-      init() {
-        // Initialize each gallery
-        this.galleries.forEach(gallery => {
-          const items = Array.from(gallery.querySelectorAll('.gallery-item'));
-
-          items.forEach((item, index) => {
-            item.addEventListener('click', () => {
-              // Set current gallery context
-              this.currentGallery = gallery;
-              this.currentItems = items;
-              this.currentIndex = index;
-
-              const fullImgSrc = item.getAttribute('data-full-img');
-              this.showLightbox(fullImgSrc);
-            });
-          });
-        });
-
-        // Close button
-        this.lightbox.querySelector('.close-button').addEventListener('click', () => {
-          this.hideLightbox();
-        });
-
-        // Navigation buttons
-        this.lightbox.querySelector('.prev-button').addEventListener('click', () => {
-          this.navigate(-1);
-        });
-
-        this.lightbox.querySelector('.next-button').addEventListener('click', () => {
-          this.navigate(1);
-        });
-
-        // Close on background click
-        this.lightbox.addEventListener('click', (e) => {
-          if (e.target === this.lightbox) {
-            this.hideLightbox();
-          }
-        });
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-          if (!this.lightbox.classList.contains('active')) return;
-
-          switch(e.key) {
-            case 'Escape':
-              this.hideLightbox();
-              break;
-            case 'ArrowLeft':
-              this.navigate(-1);
-              break;
-            case 'ArrowRight':
-              this.navigate(1);
-              break;
-          }
-        });
-      }
-
-      showLightbox(src) {
-        // Preload the image
-        const img = new Image();
-        img.onload = () => {
-          this.zoomImg.src = src;
-          this.lightbox.classList.add('active');
-          document.body.style.overflow = 'hidden';
-        };
-        img.src = src;
-      }
-
-      hideLightbox() {
-        this.lightbox.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-
-      navigate(direction) {
-        this.currentIndex = (this.currentIndex + direction + this.currentItems.length) % this.currentItems.length;
-        const nextImgSrc = this.currentItems[this.currentIndex].getAttribute('data-full-img');
-        this.showLightbox(nextImgSrc);
-      }
-    }
-
-    // Initialize the lightbox
-    document.addEventListener('DOMContentLoaded', () => {
-      new Lightbox();
-    });
-
-  </script>
-
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
 </body>
-
 </html>
