@@ -338,6 +338,92 @@
             );
         }
 
+        function WetterzentraleForecast() {
+            const diagramUrl = "/webshot/wz_meteogram.svg";
+            const sourceUrl = "https://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=ecm&var=93&run=0&lid=OP&bw=";
+
+            return (
+                <section className="mt-6" aria-labelledby="wz-forecast-title">
+                    <div className="flex items-end justify-between gap-3 mb-2 px-1">
+                        <div>
+                            <p className="text-xs font-semibold uppercase tracking-widest text-blue-300">
+                                ECMWF · Albino
+                            </p>
+                            <h2 id="wz-forecast-title" className="text-lg font-semibold">
+                                Meteogramma 10 giorni
+                            </h2>
+                        </div>
+                        <a
+                            href={sourceUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs font-semibold text-gray-400 hover:text-gray-200 transition-colors"
+                        >
+                            Wetterzentrale ↗
+                        </a>
+                    </div>
+
+                    <a
+                        href={diagramUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block bg-white rounded-lg overflow-hidden shadow-lg"
+                        title="Apri il meteogramma a grandezza intera"
+                    >
+                        <img
+                            src={diagramUrl}
+                            alt="Meteogramma ECMWF a 10 giorni per Albino"
+                            className="block w-full h-auto"
+                            loading="lazy"
+                        />
+                    </a>
+                </section>
+            );
+        }
+
+        function WetterzentraleEnsembleForecast() {
+            const diagramUrl = "/webshot/wz_ensemble.jpg";
+            const sourceUrl = "https://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=ecm&var=201&run=12&lid=ENS&bw=";
+
+            return (
+                <section className="mt-6" aria-labelledby="wz-ensemble-title">
+                    <div className="flex items-end justify-between gap-3 mb-2 px-1">
+                        <div>
+                            <p className="text-xs font-semibold uppercase tracking-widest text-blue-300">
+                                ECMWF Ensemble · Albino
+                            </p>
+                            <h2 id="wz-ensemble-title" className="text-lg font-semibold">
+                                Tendenza ensemble
+                            </h2>
+                        </div>
+                        <a
+                            href={sourceUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs font-semibold text-gray-400 hover:text-gray-200 transition-colors"
+                        >
+                            Wetterzentrale ↗
+                        </a>
+                    </div>
+
+                    <a
+                        href={diagramUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block bg-white rounded-lg overflow-hidden shadow-lg"
+                        title="Apri il diagramma ensemble a grandezza intera"
+                    >
+                        <img
+                            src={diagramUrl}
+                            alt="Diagramma ensemble ECMWF per Albino"
+                            className="block w-full h-auto"
+                            loading="lazy"
+                        />
+                    </a>
+                </section>
+            );
+        }
+
         function App() {
             const [activeView, setActiveView] = React.useState('stations');
             const [weatherData, setWeatherData] = React.useState({
@@ -476,6 +562,8 @@
                         aria-hidden={activeView !== 'forecasts'}
                     >
                         <MeteoblueForecast />
+                        <WetterzentraleForecast />
+                        <WetterzentraleEnsembleForecast />
                     </div>
                 </div>
             );

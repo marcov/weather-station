@@ -59,6 +59,7 @@ assets=(
     downloader/sat_alps.jpg
     webshot/meteoblue.jpg
     webshot/wz_meteogram.jpg
+    webshot/wz_meteogram.svg
     webshot/wz_ensemble.jpg
     webshot/radar_lom.jpg
     "fiobbio1/NOAA/NOAA-${current_year}-${current_month}.txt"

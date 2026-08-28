@@ -1,0 +1,10 @@
+{
+  "name": "weather-station-wz-svg",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "highcharts": "10.3.3",
+    "playwright": "1.62.1"
+  }
+}
