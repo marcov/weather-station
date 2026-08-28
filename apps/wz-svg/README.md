@@ -1,8 +1,8 @@
 # Wetterzentrale SVG extractor
 
-Extract the rendered ECMWF Highcharts diagrams as self-contained SVGs and
-atomically replace `wz_meteogram.svg` and `wz_ensemble.svg` in the shared
-webshot volume.
+Extract the rendered ECMWF meteogram as a self-contained SVG and download the
+Wetterzentrale ensemble PNG directly. Atomically replace `wz_meteogram.svg`
+and `wz_ensemble.png` in the shared webshot volume.
 
 Build from the repository root:
 

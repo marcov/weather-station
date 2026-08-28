@@ -9,10 +9,12 @@ const diagrams = [
     {
         url: 'https://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=ecm&var=93&run=0&lid=OP&bw=',
         filename: 'wz_meteogram.svg',
+        format: 'highcharts-svg',
     },
     {
         url: 'https://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=ecm&var=201&run=12&lid=ENS&bw=',
-        filename: 'wz_ensemble.svg',
+        filename: 'wz_ensemble.png',
+        format: 'image',
     },
 ];
 const highchartsSource = await readFile(
@@ -43,21 +45,39 @@ try {
 
         console.log(`loading ${diagram.url}`);
         await page.goto(diagram.url, { waitUntil: 'domcontentloaded', timeout: 60_000 });
-        await page.waitForSelector('.highcharts-root', {
-            state: 'attached',
-            timeout: 30_000,
-        });
-        await page.waitForTimeout(renderWaitMs);
 
-        const svg = await page.locator('.highcharts-root').first().evaluate((element) => {
-            const clone = element.cloneNode(true);
-            if (!clone.hasAttribute('xmlns')) {
-                clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+        if (diagram.format === 'highcharts-svg') {
+            await page.waitForSelector('.highcharts-root', {
+                state: 'attached',
+                timeout: 30_000,
+            });
+            await page.waitForTimeout(renderWaitMs);
+
+            const svg = await page.locator('.highcharts-root').first().evaluate((element) => {
+                const clone = element.cloneNode(true);
+                if (!clone.hasAttribute('xmlns')) {
+                    clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+                }
+                return clone.outerHTML;
+            });
+
+            await writeFile(temporary, `<?xml version="1.0" encoding="UTF-8"?>\n${svg}\n`);
+        } else {
+            const image = page.locator('img[src*="ens_image.php"]').first();
+            await image.waitFor({ state: 'attached', timeout: 30_000 });
+
+            const imageUrl = new URL(await image.getAttribute('src'), page.url()).href;
+            const response = await page.request.get(imageUrl);
+            if (!response.ok()) {
+                throw new Error(`failed to download ${imageUrl}: HTTP ${response.status()}`);
             }
-            return clone.outerHTML;
-        });
+            const contentType = response.headers()['content-type'] || '';
+            if (!contentType.startsWith('image/png')) {
+                throw new Error(`unexpected content type for ${imageUrl}: ${contentType}`);
+            }
+            await writeFile(temporary, await response.body());
+        }
 
-        await writeFile(temporary, `<?xml version="1.0" encoding="UTF-8"?>\n${svg}\n`);
         await rename(temporary, destination);
         console.log(`saved ${destination}`);
         await page.close();
