@@ -7,6 +7,7 @@ readonly base_url="${METEO_BASE_URL:-https://meteo.fiobbio.com}"
 readonly script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 readonly current_year="$(date +%Y)"
 readonly current_month="$(date +%m)"
+readonly refresh_id="$(date +%s)"
 
 download() {
     local relative_path="$1"
@@ -17,7 +18,10 @@ download() {
     temporary_file="$(mktemp "${destination}.tmp.XXXXXX")"
 
     if curl --fail --location --silent --show-error \
-        "${base_url}/${relative_path}" --output "${temporary_file}"; then
+        --header 'Cache-Control: no-cache' \
+        --header 'Pragma: no-cache' \
+        "${base_url}/${relative_path}?dev-refresh=${refresh_id}" \
+        --output "${temporary_file}"; then
         mv -- "${temporary_file}" "${destination}"
         printf 'updated  %s\n' "${relative_path}"
         return 0
@@ -58,9 +62,8 @@ assets=(
     downloader/rain_year.png
     downloader/sat_alps.jpg
     webshot/meteoblue.jpg
-    webshot/wz_meteogram.jpg
     webshot/wz_meteogram.svg
-    webshot/wz_ensemble.jpg
+    webshot/wz_ensemble.png
     webshot/radar_lom.jpg
     "fiobbio1/NOAA/NOAA-${current_year}-${current_month}.txt"
     "fiobbio1/NOAA/NOAA-${current_year}.txt"

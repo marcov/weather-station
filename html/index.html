@@ -366,6 +366,36 @@
             );
         }
 
+        function ZoomableForecastImage({ src, alt, title }) {
+            const [isZoomed, setIsZoomed] = React.useState(false);
+
+            return (
+                <React.Fragment>
+                    {isZoomed && (
+                        <div className="chart-overlay" onClick={() => setIsZoomed(false)}>
+                            <div className="chart-container w-full">
+                                <img src={src} alt={alt} className="w-full h-auto rounded-lg shadow-lg" />
+                            </div>
+                        </div>
+                    )}
+
+                    <button
+                        type="button"
+                        onClick={() => setIsZoomed(true)}
+                        className="block w-full bg-white rounded-lg overflow-hidden shadow-lg cursor-zoom-in"
+                        title={title}
+                    >
+                        <img
+                            src={src}
+                            alt={alt}
+                            className="block w-full h-auto"
+                            loading="lazy"
+                        />
+                    </button>
+                </React.Fragment>
+            );
+        }
+
         function WetterzentraleForecast() {
             const diagramUrl = "/webshot/wz_meteogram.svg";
             const sourceUrl = "https://www.wetterzentrale.de/en/show_diagrams.php?geoid=76406&model=ecm&var=93&run=0&lid=OP&bw=";
@@ -391,20 +421,11 @@
                         </a>
                     </div>
 
-                    <a
-                        href={diagramUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block bg-white rounded-lg overflow-hidden shadow-lg"
-                        title="Apri il meteogramma a grandezza intera"
-                    >
-                        <img
-                            src={diagramUrl}
-                            alt="Meteogramma ECMWF a 10 giorni per Albino"
-                            className="block w-full h-auto"
-                            loading="lazy"
-                        />
-                    </a>
+                    <ZoomableForecastImage
+                        src={diagramUrl}
+                        alt="Meteogramma ECMWF a 10 giorni per Albino"
+                        title="Ingrandisci il meteogramma"
+                    />
                 </section>
             );
         }
@@ -434,20 +455,11 @@
                         </a>
                     </div>
 
-                    <a
-                        href={diagramUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block bg-white rounded-lg overflow-hidden shadow-lg"
-                        title="Apri il diagramma ensemble a grandezza intera"
-                    >
-                        <img
-                            src={diagramUrl}
-                            alt="Diagramma ensemble ECMWF per Albino"
-                            className="block w-full h-auto"
-                            loading="lazy"
-                        />
-                    </a>
+                    <ZoomableForecastImage
+                        src={diagramUrl}
+                        alt="Diagramma ensemble ECMWF per Albino"
+                        title="Ingrandisci il diagramma ensemble"
+                    />
                 </section>
             );
         }
