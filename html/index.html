@@ -151,11 +151,28 @@
         }
 
         @media (max-width: 639px) {
+            html.map-view-active {
+                box-sizing: border-box;
+                width: 100%;
+                height: 100dvh;
+                min-height: 100dvh;
+                overflow: hidden;
+            }
+
+            html.map-view-active body,
+            body.map-view-active #root {
+                height: 100%;
+                min-height: 0;
+                overflow: hidden;
+            }
+
             .map-active-layout.map-active-layout {
                 display: flex;
                 flex-direction: column;
-                min-height: 100dvh;
+                height: 100%;
+                min-height: 0;
                 padding-bottom: 0;
+                overflow: hidden;
             }
 
             .map-active-layout header {
@@ -710,6 +727,17 @@
                 setMapLoaded(true);
                 setActiveView('map');
             }, []);
+
+            React.useEffect(() => {
+                const mapActive = activeView === 'map';
+                document.documentElement.classList.toggle('map-view-active', mapActive);
+                document.body.classList.toggle('map-view-active', mapActive);
+
+                return () => {
+                    document.documentElement.classList.remove('map-view-active');
+                    document.body.classList.remove('map-view-active');
+                };
+            }, [activeView]);
 
             return (
                 <div className={`max-w-full mx-2 p-2 sm:max-w-xl sm:mx-auto sm:px-4 ${activeView === 'map' ? 'map-active-layout' : ''}`}>
