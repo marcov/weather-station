@@ -201,6 +201,7 @@
                 display: flex;
                 flex: 1;
                 min-height: 0;
+                border: 4px solid rgba(100, 116, 139, 0.8);
             }
 
             .map-frame {
@@ -941,20 +942,20 @@
                             aria-label="Mappa meteo CML"
                             aria-hidden={activeView !== 'map'}
                         >
-                            <div className="mb-2 hidden justify-end px-1 sm:flex">
+                            <div className="mb-2 flex justify-end pl-1 pr-3">
                                 <a
                                     href="https://cml-map.pages.dev/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-xs font-semibold text-gray-400 hover:text-gray-200 transition-colors"
                                 >
-                                    Apri a schermo intero ↗
+                                    Visita Mappa ↗
                                 </a>
                             </div>
                             <div className="map-frame-shell overflow-hidden rounded-none bg-slate-800/50 shadow-lg sm:rounded-lg">
                                 <iframe
                                     className="map-frame"
-                                    src="https://cml-map.pages.dev/"
+                                    src="https://cml-map.pages.dev/?simplified=1"
                                     title="Mappa meteo in tempo reale CML"
                                     loading="lazy"
                                 ></iframe>
