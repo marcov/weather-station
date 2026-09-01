@@ -220,6 +220,7 @@
         function WeatherStation({ data, name, webcamSrc, onLoad }) {
             const [activeChart, setActiveChart] = React.useState(null); // null, 'temp', 'wind', 'humidity', or 'rain'
             const [isWebcamZoomed, setIsWebcamZoomed] = React.useState(false);
+            const stationId = name.toLowerCase().replace(' ', '');
 
             React.useEffect(() => {
                 if (data) {
@@ -229,7 +230,6 @@
             }, [data, name, onLoad]);
 
             const getChartUrl = (type) => {
-                const stationId = name.toLowerCase().replace(' ', '');
                 const chartTypes = {
                     temp: 'daytempdew.png',
                     humidity: 'dayhum.png',
@@ -287,7 +287,16 @@
 
                     <div className="bg-slate-800/50 rounded-lg backdrop-blur-sm mb-4">
                         <div className="flex justify-between items-center mb-2">
-                            <h2 className="text-lg font-semibold">{name}</h2>
+                            <div className="flex items-center gap-2">
+                                <h2 className="text-lg font-semibold">{name}</h2>
+                                <a
+                                    href={`/${stationId}/`}
+                                    aria-label={`Apri la pagina di ${name}`}
+                                    className="text-sm font-semibold text-gray-400 hover:text-gray-200 transition-colors"
+                                >
+                                    ↗
+                                </a>
+                            </div>
                             <span className="text-gray-400 text-sm">
                                 {data.stationTime.split(':').slice(0,2).join(':')}
                             </span>
