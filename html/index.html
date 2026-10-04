@@ -6,6 +6,15 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Meteo Fiobbio">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <script>
+        // Apply before first paint; keep older iOS and ordinary browser tabs unchanged.
+        // Prefer Safari's version because newer iOS releases can freeze the OS UA token.
+        const iosPwaVersion = navigator.userAgent.match(/Version\/(\d+)/)
+            || navigator.userAgent.match(/(?:iPhone OS|CPU OS) (\d+)[_.]/);
+        if (navigator.standalone === true && iosPwaVersion && Number(iosPwaVersion[1]) === 27) {
+            document.documentElement.classList.add('ios-27-pwa');
+        }
+    </script>
     <meta name="description"
        content="Dati in tempo reale delle stazioni meteo di Fiobbio di Albino e
                 del Monte Misma.
@@ -44,6 +53,12 @@
         html {
             min-height: calc(100% + env(safe-area-inset-top));
             padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+        }
+
+        html.ios-27-pwa {
+            /* Leave the system blur over empty space, and omit the gap in landscape. */
+            --status-bar-blur-gap: min(20px, calc(env(safe-area-inset-top, 0px) * 1000));
+            padding-top: calc(env(safe-area-inset-top, 0px) + var(--status-bar-blur-gap));
         }
 
         body {
