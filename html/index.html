@@ -5,14 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Meteo Fiobbio">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <script>
-        // Apply before first paint; keep older iOS and ordinary browser tabs unchanged.
-        // Prefer Safari's version because newer iOS releases can freeze the OS UA token.
-        const iosPwaVersion = navigator.userAgent.match(/Version\/(\d+)/)
-            || navigator.userAgent.match(/(?:iPhone OS|CPU OS) (\d+)[_.]/);
-        if (navigator.standalone === true && iosPwaVersion && Number(iosPwaVersion[1]) === 27) {
-            document.documentElement.classList.add('ios-27-pwa');
+        // iOS Home Screen apps may omit both the OS version and standalone media query.
+        if (navigator.standalone === true) {
+            document.documentElement.setAttribute('data-ios-standalone', '');
         }
     </script>
     <meta name="description"
@@ -55,10 +51,34 @@
             padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
         }
 
-        html.ios-27-pwa {
-            /* Leave the system blur over empty space, and omit the gap in landscape. */
-            --status-bar-blur-gap: min(20px, calc(env(safe-area-inset-top, 0px) * 1000));
-            padding-top: calc(env(safe-area-inset-top, 0px) + var(--status-bar-blur-gap));
+        .ios-status-strip {
+            display: none;
+        }
+
+        /* Experimental WebKit status-bar colour sampling; the empty strip paints nothing.
+           Requires the default status-bar mode, without black-translucent.
+           https://zenn.dev/uakihir0/articles/260920-ios27-pwa-blur */
+        @supports (-webkit-touch-callout: none) {
+            html[data-ios-standalone] {
+                --ios-top-color: #1e293b;
+                background-color: var(--ios-top-color);
+            }
+
+            html[data-ios-standalone] body {
+                background-image: linear-gradient(to bottom, var(--ios-top-color), #0f172a);
+            }
+
+            html[data-ios-standalone] .ios-status-strip {
+                display: block;
+                position: fixed;
+                inset: 0 0 auto;
+                height: 11px;
+                z-index: 2147483647;
+                pointer-events: none;
+                background-color: var(--ios-top-color);
+                -webkit-background-clip: text;
+                background-clip: text;
+            }
         }
 
         body {
@@ -166,6 +186,10 @@
         }
 
         @media (max-width: 639px) {
+            html[data-ios-standalone] .page-layout {
+                padding-top: 0.25rem;
+            }
+
             html.map-view-active {
                 box-sizing: border-box;
                 width: 100%;
@@ -230,6 +254,7 @@
     </style>
 </head>
 <body class="bg-gradient-to-br from-slate-800 to-slate-900 text-gray-100 min-h-screen">
+    <div class="ios-status-strip" aria-hidden="true"></div>
     <div id="root"></div>
 
     <script type="text/jsx">
@@ -766,7 +791,7 @@
             }, [activeView]);
 
             return (
-                <div className={`max-w-full mx-2 p-2 sm:max-w-xl sm:mx-auto sm:px-4 ${activeView === 'map' ? 'map-active-layout' : ''}`}>
+                <div className={`page-layout max-w-full mx-2 p-2 sm:max-w-xl sm:mx-auto sm:px-4 ${activeView === 'map' ? 'map-active-layout' : ''}`}>
                     <header className="mb-4">
                         <div className="relative flex items-start justify-between gap-2">
                             <div>
