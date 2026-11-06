@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "dependencies": {
-    "highcharts": "10.3.3",
+    "highcharts": "11.4.9",
     "playwright": "1.62.1"
   }
 }
